@@ -160,15 +160,6 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 </div>
 </section>
 <section class="wrap bloque">
-<h2 class="titulo-seccion">Accesos</h2>
-<div class="grilla-tarjetas">
-) . tarjeta($p, 'redes', 'Redes Sociales', 'Te invitamos a participar e interactuar con nosotros mediante las redes sociales: Facebook, Instagram, Twitter y YouTube.', 'redes-sociales/', 'Ingresar')
-  . tarjeta($p, 'birrete', 'Formación', 'Aula virtual, convocatorias y material de estudio de la Academia Nacional de Bomberos.', 'formacion/', 'Ver más')
-  . tarjeta($p, 'sisab', 'Plataforma de Registro y Control', 'Ingreso a la plataforma de administración y gestión interna de bomberos SISAB.', 'http://www.sisab.cl', 'Ingresar')
-  . tarjeta($p, 'correo', 'Webmail', 'Ingreso al correo electrónico institucional mediante la plataforma de Google.', $WEBMAIL, 'Ir al webmail')
-  . qq(</div>
-</section>
-<section class="wrap bloque">
 <h2 class="titulo-seccion">La Quinta</h2>
 <div class="grilla-tarjetas tres">
 ) . tarjeta($p, 'camion', 'Nuestras unidades', 'Conoce nuestras máquinas BX-5 y B-5 y sus especificaciones.', 'material-mayor/', 'Ver más')
