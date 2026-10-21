@@ -20,7 +20,9 @@ binmode STDOUT, ':utf8';
 
 my $ORIGEN = 'http://www.funfte.cl/sitio/';
 my $RAIZ   = "$FindBin::Bin/..";
-my $CACHE  = "$RAIZ/.cache-importacion";
+# Copia del HTML del sitio antiguo: permite regenerar sin que funfte.cl siga en linea.
+# Para volver a descargar una pagina, borra su archivo de esta carpeta.
+my $CACHE  = "$FindBin::Bin/origen";
 make_path($CACHE, "$RAIZ/assets/img");
 
 my %paginas = rutas_paginas();
