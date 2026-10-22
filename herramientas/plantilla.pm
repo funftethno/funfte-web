@@ -289,7 +289,8 @@ sub pagina {
                : $a{clave} eq 'acceso'      ? $cabecera . acceso_personal($p)
                : $a{clave} eq 'archivo'     ? $cabecera . archivo($p)
                : $cabecera . qq(<article class="wrap contenido">\n$a{contenido}\n</article>);
-    my $menu = menu($p, $a{ruta}, $a{seccion});
+    # en la 404 ningun item del menu queda marcado como actual
+    my $menu = menu($p, $a{clave} eq 'error404' ? '-' : $a{ruta}, $a{seccion});
     my $acceso_actual = $a{clave} eq 'acceso' ? ' aria-current="page"' : '';
     my $candado = icono('candado');
     my $anio = (localtime)[5] + 1900;
