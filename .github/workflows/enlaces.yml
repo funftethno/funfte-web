@@ -1,0 +1,46 @@
+# Prueba una vez al mes los enlaces a otros sitios. Si alguno esta caido, abre (o
+# actualiza) un issue con la lista. No bloquea publicaciones.
+name: Enlaces externos
+
+on:
+  schedule:
+    - cron: '0 12 1 * *'   # dia 1 de cada mes, 09:00 en Chile
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  enlaces:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probar enlaces externos
+        id: revisar
+        run: |
+          set +e
+          perl herramientas/revisar.pl --externos > resultado.txt 2>&1
+          echo "codigo=$?" >> "$GITHUB_OUTPUT"
+          sed -n '/^Enlaces externos/,$p' resultado.txt
+      - name: Avisar en un issue
+        if: steps.revisar.outputs.codigo != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          titulo='Enlaces externos caídos'
+          {
+            echo "La revisión mensual encontró enlaces a otros sitios que no responden. Corrígelos en \`herramientas/contenido/\` o \`herramientas/plantilla.pm\`."
+            echo
+            echo '```'
+            sed -n '/^Enlaces externos/,$p' resultado.txt
+            echo '```'
+            echo
+            echo "Ejecución: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } > cuerpo.md
+          numero=$(gh issue list --state open --search "in:title \"$titulo\"" --json number --jq '.[0].number')
+          if [ -n "$numero" ]; then
+            gh issue comment "$numero" --body-file cuerpo.md
+          else
+            gh issue create --title "$titulo" --body-file cuerpo.md
+          fi

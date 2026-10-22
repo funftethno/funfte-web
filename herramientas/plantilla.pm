@@ -23,6 +23,15 @@ my $V_JS  = huella('assets/js/menu.js');
 # Direccion publica del sitio (enlaces canonicos, Open Graph y sitemap)
 our $SITIO = 'https://funfte.cl/';
 
+# Datos publicos de la compania: el pie y los datos estructurados para Google los usan
+my $FUNDACION = '1908-01-29';
+my $CORREO    = 'correo@funfte.cl';
+my %DIRECCION = (calle => 'Río Maule 5383, Villa Independencia', comuna => 'Talcahuano',
+                 region => 'Región del Biobío', pais => 'CL');
+my @COORDENADAS = (-36.763267, -73.092603);   # las mismas del mapa de Contacto
+my @REDES = (['Instagram', 'https://www.instagram.com/funfte'],
+             ['Facebook',  'https://www.facebook.com/funfte']);
+
 # Texto para buscadores y para la vista previa al compartir un enlace (WhatsApp,
 # Facebook). Las paginas sin descripcion propia usan $DESCRIPCION.
 my $DESCRIPCION = 'Quinta Compañía de Bomberos «Bomba Chile» de Talcahuano, fundada en 1908. Fünfte Deutsche Feuerwehrkompanie Talcahuano.';
@@ -41,7 +50,7 @@ my %DESCRIPCIONES = (
     bx5           => 'Unidad BX-5: Iveco Magirus FF150E30W 4x4 de 2012, unidad mixta de incendio y rescate de la Quinta Compañía de Talcahuano.',
     b5            => 'Unidad B-5: Iveco Magirus FF150E30 de 2018, unidad de control de incendios de la Quinta Compañía de Talcahuano.',
     harbor        => 'Unidad Harbor 28: embarcación de rescate medioambiental para descontaminación de aguas de la Quinta Compañía de Talcahuano.',
-    contacto      => 'Contacto de la Quinta Compañía de Bomberos de Talcahuano: Av. Río Maule 5383, Villa Independencia. Correo, teléfono y mapa.',
+    contacto      => 'Contacto de la Quinta Compañía de Bomberos de Talcahuano: Río Maule 5383, Villa Independencia. Correo, formulario de contacto y mapa.',
     error404      => 'La página que buscas no existe o cambió de dirección.',
 );
 
@@ -345,7 +354,60 @@ sub meta_compartir {
 <meta property="og:description" content="$a{descripcion}">
 <meta property="og:url" content="$url">
 <meta property="og:image" content="$imagen">
+<meta property="og:image:alt" content="$titulo">
 <meta name="twitter:card" content="summary_large_image">);
+}
+
+# JSON sin modulos externos; claves ordenadas para que la salida no cambie entre generaciones
+sub json {
+    my ($v) = @_;
+    return '{' . join(',', map { json_texto($_) . ':' . json($v->{$_}) } sort keys %$v) . '}' if ref $v eq 'HASH';
+    return '[' . join(',', map { json($_) } @$v) . ']' if ref $v eq 'ARRAY';
+    return $v =~ /^-?\d+(?:\.\d+)?$/ ? $v : json_texto($v);
+}
+sub json_texto { my $t = shift; $t =~ s/(["\\])/\\$1/g; $t =~ s{</}{<\\/}g; return qq("$t") }
+
+# Datos estructurados (schema.org) para Google: la compania en portada y Contacto, y la
+# ruta de migas (Inicio > La Quinta > Historia) en el resto de las paginas publicas.
+sub datos_estructurados {
+    my %a = @_;
+    my $org = "${SITIO}#organizacion";
+    my @datos;
+    if ($a{clave} eq 'inicio' || $a{clave} eq 'contacto') {
+        push @datos, {
+            '@type' => 'FireStation', '@id' => $org, name => $NOMBRE,
+            alternateName => ['Bomba Chile', 'Fünfte Deutsche Feuerwehrkompanie Talcahuano'],
+            url => $SITIO, logo => "${SITIO}assets/img/confe-talcahuano-5.png",
+            image => "${SITIO}assets/img/2011-12-DSC0103-1030x688.jpg",
+            description => $DESCRIPCIONES{inicio}, foundingDate => $FUNDACION, email => $CORREO,
+            address => { '@type' => 'PostalAddress', streetAddress => $DIRECCION{calle},
+                         addressLocality => $DIRECCION{comuna}, addressRegion => $DIRECCION{region},
+                         addressCountry => $DIRECCION{pais} },
+            geo => { '@type' => 'GeoCoordinates', latitude => $COORDENADAS[0], longitude => $COORDENADAS[1] },
+            sameAs => [map { $_->[1] } @REDES],
+            parentOrganization => { '@type' => 'Organization', name => 'Cuerpo de Bomberos de Talcahuano', url => 'https://cbt.cl' },
+            memberOf => { '@type' => 'Organization', name => 'Confederación de Compañías Chileno-Alemanas de Bomberos',
+                          url => "${SITIO}confederacion/" },
+        };
+    }
+    if ($a{clave} eq 'inicio') {
+        push @datos, { '@type' => 'WebSite', name => $NOMBRE, url => $SITIO, inLanguage => 'es-CL',
+                       publisher => { '@id' => $org } };
+    } else {
+        # migas: la seccion del menu y cada carpeta de la ruta que sea una pagina
+        my %pg = rutas_paginas();
+        my %por_ruta = map { $_->{ruta} => $_ } values %pg;
+        my ($seccion) = grep { $_->{titulo} eq ($a{seccion} // '') } values %pg;
+        my @rutas = ('', $seccion ? $seccion->{ruta} : ());
+        my $acumulada = '';
+        push @rutas, $acumulada .= $_ for $a{ruta} =~ m{([^/]+/)}g;
+        my %visto;
+        my @migas = grep { !$visto{$_->{ruta}}++ } map { $por_ruta{$_} // () } @rutas;
+        my $n = 0;
+        push @datos, { '@type' => 'BreadcrumbList', itemListElement => [ map { {
+            '@type' => 'ListItem', position => ++$n, name => $_->{titulo}, item => $SITIO . $_->{ruta} } } @migas ] };
+    }
+    return join '', map { qq(\n<script type="application/ld+json">) . json({ '@context' => 'https://schema.org', %$_ }) . '</script>' } @datos;
 }
 
 sub pagina {
@@ -373,11 +435,12 @@ sub pagina {
     my $descripcion = $a{descripcion} // $DESCRIPCION;
     # el archivo y la pagina 404 no deben aparecer en buscadores
     my $indexable = $a{ruta} !~ m{^archivo/} && $a{clave} !~ /^(?:error404|gracias|enviado)$/;
-    my $meta = $indexable ? meta_compartir(%a, titulo_completo => $titulo, descripcion => $descripcion)
+    my $meta = $indexable ? meta_compartir(%a, titulo_completo => $titulo, descripcion => $descripcion) . datos_estructurados(%a)
                           : qq(\n<meta name="robots" content="noindex">);
+    my $redes = join "\n", map { qq(<li><a href="$_->[1]" target="_blank" rel="noopener">$_->[0]</a></li>) } @REDES;
     return <<"HTML";
 <!doctype html>
-<html lang="es">
+<html lang="es-CL">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -412,10 +475,9 @@ $cuerpo
 </div>
 <div>
 <h2>Comunícate</h2>
-<p><a href="mailto:correo\@funfte.cl">correo\@funfte.cl</a></p>
+<p><a href="mailto:$CORREO">$CORREO</a></p>
 <ul class="pie-enlaces">
-<li><a href="https://www.instagram.com/funfte" target="_blank" rel="noopener">Instagram</a></li>
-<li><a href="https://www.facebook.com/funfte" target="_blank" rel="noopener">Facebook</a></li>
+$redes
 </ul>
 </div>
 <div>

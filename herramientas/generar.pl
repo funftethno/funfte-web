@@ -76,6 +76,11 @@ sub con_dimensiones {
         }
         "<img$atr>";
     }ge;
+    # tamano de la imagen al compartir: Facebook y WhatsApp la muestran sin esperar a descargarla
+    $html =~ s{(<meta property="og:image" content="\Q$plantilla::SITIO\E([^"]+)">)}{
+        my @d = dimensiones("$RAIZ/$2");
+        @d ? qq($1\n<meta property="og:image:width" content="$d[0]">\n<meta property="og:image:height" content="$d[1]">) : $1;
+    }e;
     return $html;
 }
 

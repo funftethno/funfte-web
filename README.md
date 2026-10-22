@@ -43,6 +43,7 @@ Las páginas (`index.html` de cada carpeta) **se generan**. No se editan a mano:
 | Menú en celular | `assets/js/menu.js` |
 | Imágenes (máximo 1600 px de ancho, con texto `alt`) | `assets/img/` |
 | Descripción de cada página para Google y redes sociales | `%DESCRIPCIONES` en `herramientas/plantilla.pm` |
+| Datos de la compañía para Google (dirección, coordenadas, correo, redes, fundación) | constantes al inicio de `herramientas/plantilla.pm` |
 
 Para regenerar todas las páginas:
 
@@ -78,7 +79,7 @@ El contenido se extrajo una sola vez del sitio antiguo (WordPress), ya limpio y 
    perl herramientas/revisar.pl
    ```
 
-   `revisar.pl` avisa si quedaron páginas sin regenerar o enlaces internos rotos.
+   `revisar.pl` avisa si quedaron páginas sin regenerar o enlaces internos rotos. Con `perl herramientas/revisar.pl --externos` también prueba los enlaces a otros sitios (tarda un par de minutos); GitHub lo hace solo el día 1 de cada mes y abre un issue si alguno está caído.
 
 3. **Sube tu rama y pruébala** en su vista previa, que se actualiza en uno o dos minutos (en el ejemplo, `https://delgado-funfte-web.funfteit.workers.dev/`). GitHub también corre la revisión automática; mira que salga ✅.
 

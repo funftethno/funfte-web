@@ -39,6 +39,7 @@ Es HTML estático generado con Perl. No hay WordPress, base de datos, Node ni fr
 
 - Las claves de página y sus rutas están en `rutas_paginas()` de `herramientas/plantilla.pm`. El menú está en `@MENU` y los accesos de Acceso Quintino en `@ACCESOS`.
 - Cada página pública tiene una descripción para buscadores y para la vista previa al compartir (WhatsApp, Facebook) en `%DESCRIPCIONES` de `plantilla.pm`. Si creas una página nueva, agrégale su descripción (una o dos frases).
+- Los datos públicos de la compañía (fundación, correo, dirección, coordenadas, redes sociales) son constantes al inicio de `plantilla.pm`. Los usan el pie y los datos estructurados para Google (JSON-LD, en `datos_estructurados()`): cámbialos ahí y no en el HTML.
 - Los formularios (Postula a la Quinta y Contacto) están en `plantilla.pm` (`postula()`, `formulario_contacto()`) y se envían por FormSubmit. En `herramientas/contenido/contacto.html`, la marca `<!--FORMULARIO_CONTACTO-->` indica dónde va el formulario: no la borres.
 - `generar.pl` también produce `404.html`, `robots.txt` y `sitemap.xml`, y agrega `width`/`height` a cada imagen. No los edites a mano.
 - **Imágenes nuevas**: JPEG o PNG de máximo 1600 px de ancho y, en lo posible, menos de 300 KB. Nombre en minúsculas, sin espacios ni tildes. Toda imagen de contenido lleva un `alt` que describa lo que muestra; `revisar.pl` falla si falta y avisa si una imagen no se usa.
@@ -51,7 +52,7 @@ perl herramientas/generar.pl    # regenera todas las páginas
 perl herramientas/revisar.pl    # verifica páginas al día y enlaces internos
 ```
 
-Sube los archivos fuente **y** las páginas regeneradas en el mismo commit. Si `revisar.pl` falla, corrige antes de subir. Si puedes, revisa el resultado en el navegador con `perl herramientas/servidor.pl` (http://localhost:8080).
+Sube los archivos fuente **y** las páginas regeneradas en el mismo commit. Si `revisar.pl` falla, corrige antes de subir. Si agregaste o cambiaste enlaces a otros sitios, prueba también `perl herramientas/revisar.pl --externos` (tarda un par de minutos). Si puedes, revisa el resultado en el navegador con `perl herramientas/servidor.pl` (http://localhost:8080).
 
 ## Ramas y publicación
 
