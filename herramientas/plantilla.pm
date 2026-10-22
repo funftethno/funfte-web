@@ -7,33 +7,33 @@ use Exporter 'import';
 our @EXPORT_OK = qw(pagina rutas_paginas);
 
 my $NOMBRE  = 'Quinta Compañía de Bomberos de Talcahuano';
-my $SUBUPLOADS = 'http://www.funfte.cl/sitio/wp-content/uploads';
 
-# clave => origen (consulta en el sitio antiguo), ruta nueva, titulo, seccion del menu.
-# Las paginas sin origen tienen contenido propio definido en este archivo.
+# clave => ruta, titulo, seccion del menu.
+# El contenido de cada pagina esta en herramientas/contenido/<clave>.html; portada,
+# formacion y acceso quintino tienen su contenido en este archivo.
 sub rutas_paginas {
     my %p = (
-        inicio        => [undef,                        '',                          'Inicio',              ''],
-        laquinta      => ['?page_id=1195',              'la-quinta/',                'La Quinta',           'La Quinta'],
-        historia      => ['?page_id=1670',              'historia/',                 'Historia',            'La Quinta'],
-        cuartel       => ['?page_id=1792',              'cuartel/',                  'Cuartel',             'La Quinta'],
-        confederacion => ['?page_id=1738',              'confederacion/',            'Confederación',       'La Quinta'],
-        socios        => ['?page_id=1826',              'socios-colaboradores/',     'Socios Colaboradores','La Quinta'],
-        dotacion      => ['?page_id=1899',              'dotacion/',                 'Dotación',            'Dotación'],
-        directorio    => ['?page_id=1911',              'directorio/',               'Directorio',          'Dotación'],
-        trabajo       => ['?page_id=1928',              'nuestro-trabajo/',          'Nuestro Trabajo',     'Nuestro Trabajo'],
-        capacitacion  => ['?page_id=1940',              'capacitacion/',             'Capacitación',        'Nuestro Trabajo'],
-        guardia       => ['?page_id=1946',              'guardia-nocturna/',         'Guardia Nocturna',    'Nuestro Trabajo'],
-        formacion     => [undef,                        'formacion/',                'Formación',           'Nuestro Trabajo'],
-        acceso        => [undef,                        'acceso-quintino/',          'Acceso Quintino',     ''],
-        material      => ['?page_id=1097',              'material-mayor/',           'Material Mayor',      'Material Mayor'],
-        bx5           => ['?portfolio=lorem-ipsum',     'material-mayor/bx-5/',      'Unidad BX-5',         'Material Mayor'],
-        b5            => ['?portfolio=unidad-br-5',     'material-mayor/b-5/',       'Unidad B-5',          'Material Mayor'],
-        harbor        => ['?portfolio=unidad-harbor-28','material-mayor/harbor-28/', 'Unidad Harbor 28',    'Material Mayor'],
-        contacto      => ['?page_id=1167',              'contacto/',                 'Contacto',            'Contacto'],
-        redes         => ['?page_id=1962',              'redes-sociales/',           'Redes Sociales',      'Contacto'],
+        inicio        => ['',                          'Inicio',              ''],
+        laquinta      => ['la-quinta/',                'La Quinta',           'La Quinta'],
+        historia      => ['historia/',                 'Historia',            'La Quinta'],
+        cuartel       => ['cuartel/',                  'Cuartel',             'La Quinta'],
+        confederacion => ['confederacion/',            'Confederación',       'La Quinta'],
+        socios        => ['socios-colaboradores/',     'Socios Colaboradores','La Quinta'],
+        dotacion      => ['dotacion/',                 'Dotación',            'Dotación'],
+        directorio    => ['directorio/',               'Directorio',          'Dotación'],
+        trabajo       => ['nuestro-trabajo/',          'Nuestro Trabajo',     'Nuestro Trabajo'],
+        capacitacion  => ['capacitacion/',             'Capacitación',        'Nuestro Trabajo'],
+        guardia       => ['guardia-nocturna/',         'Guardia Nocturna',    'Nuestro Trabajo'],
+        formacion     => ['formacion/',                'Formación',           'Nuestro Trabajo'],
+        acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
+        material      => ['material-mayor/',           'Material Mayor',      'Material Mayor'],
+        bx5           => ['material-mayor/bx-5/',      'Unidad BX-5',         'Material Mayor'],
+        b5            => ['material-mayor/b-5/',       'Unidad B-5',          'Material Mayor'],
+        harbor        => ['material-mayor/harbor-28/', 'Unidad Harbor 28',    'Material Mayor'],
+        contacto      => ['contacto/',                 'Contacto',            'Contacto'],
+        redes         => ['redes-sociales/',           'Redes Sociales',      'Contacto'],
     );
-    return map { $_ => { origen => $p{$_}[0], ruta => $p{$_}[1], titulo => $p{$_}[2], seccion => $p{$_}[3] } } keys %p;
+    return map { $_ => { ruta => $p{$_}[0], titulo => $p{$_}[1], seccion => $p{$_}[2] } } keys %p;
 }
 
 my $WEBMAIL = 'https://mail.google.com/a/funfte.cl/';
@@ -147,9 +147,9 @@ sub acceso_personal {
 }
 
 sub inicio {
-    my ($p, $imagen) = @_;
-    my $portada = $imagen->("$SUBUPLOADS/2011/12/DSC0103-1030x688.jpg");
-    my $escudo  = $imagen->("$SUBUPLOADS/2013/04/Sin-t%C3%ADtulo-3.png");
+    my ($p) = @_;
+    my $portada = '2011-12-DSC0103-1030x688.jpg';
+    my $escudo  = '2013-04-Sin-titulo-3.png';
     return
 qq(<section class="portada" style="background-image:url('${p}assets/img/$portada')">
 <div class="wrap">
@@ -219,7 +219,7 @@ sub pagina {
     my $cabecera = qq(<section class="cabecera-pagina"><div class="wrap">)
         . ($a{seccion} && $a{seccion} ne $a{titulo} ? qq(<p class="antetitulo">$a{seccion}</p>) : '')
         . qq(<h1>$a{titulo}</h1></div></section>\n);
-    my $cuerpo = $es_inicio                 ? inicio($p, $a{imagen})
+    my $cuerpo = $es_inicio                 ? inicio($p)
                : $a{clave} eq 'formacion'   ? $cabecera . formacion($p)
                : $a{clave} eq 'acceso'      ? $cabecera . acceso_personal($p)
                : $cabecera . qq(<article class="wrap contenido">\n$a{contenido}\n</article>);

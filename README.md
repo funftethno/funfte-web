@@ -37,19 +37,19 @@ Las páginas (`index.html` de cada carpeta) **se generan**. No se editan a mano:
 
 | Qué cambiar | Archivo |
 |---|---|
+| Texto de cada página (La Quinta, Historia, Contacto, etc.) | `herramientas/contenido/<página>.html` |
 | Menú, cabecera, pie, portada, páginas Formación y Acceso Quintino, accesos y enlaces | `herramientas/plantilla.pm` |
 | Colores, tipografía y diseño | `assets/css/estilos.css` |
 | Menú en celular | `assets/js/menu.js` |
-| Contenido traído del sitio antiguo y ajustes por página | `herramientas/importar.pl` |
 | Imágenes | `assets/img/` |
 
 Para regenerar todas las páginas:
 
 ```bash
-perl herramientas/importar.pl
+perl herramientas/generar.pl
 ```
 
-El contenido del sitio antiguo (WordPress) está guardado en `herramientas/origen/`, así que se puede regenerar aunque funfte.cl ya no esté en línea.
+El contenido se extrajo una sola vez del sitio antiguo (WordPress), ya limpio y sin Noticias. El sitio no depende de funfte.cl antiguo ni guarda copia de él.
 
 ### 5. Publicar
 
@@ -59,7 +59,7 @@ git commit -m "Describe el cambio"
 git push
 ```
 
-Cuando Cloudflare Pages esté conectado al repositorio, cada `push` a la rama `master` se publica solo en uno o dos minutos.
+Con Cloudflare conectado al repositorio, cada `push` a la rama `master` se publica solo en uno o dos minutos.
 
 ### Usarlo con Claude Code
 Abre la carpeta del proyecto en Claude Code y pídele que lea este README para retomar el contexto.
@@ -77,5 +77,7 @@ material-mayor/ (b-5/, bx-5/, harbor-28/)
 contacto/ redes-sociales/
 acceso-quintino/           Ingreso a la intranet (placeholder) y accesos internos
 assets/css, assets/js, assets/img
-herramientas/              Generador (Perl), servidor local y copia del sitio antiguo
+herramientas/              Generador (Perl), contenido de las páginas y servidor local
+wrangler.jsonc             Configuración de Cloudflare (qué se publica)
+.assetsignore              Archivos del repositorio que no se publican
 ```
