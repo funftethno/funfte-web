@@ -505,6 +505,8 @@ a.saludo:hover { border-color: var(--dorado); }
 
 .contenido .cifras .cifra-total { background: var(--rojo); border-color: var(--rojo); color: #fff; }
 .contenido .cifras .cifra-total strong { color: #fff; }
+/* en celular (dos columnas) el total ocupa la fila completa */
+@media (max-width: 560px) { .contenido .cifras .cifra-total { grid-column: 1 / -1; } }
 .contenido .nomina {
   list-style: none;
   margin: 0 0 8px;

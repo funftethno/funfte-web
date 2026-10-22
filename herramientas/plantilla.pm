@@ -469,8 +469,8 @@ sub archivo {
 }
 
 # Resumen de la dotacion en cifras: cuenta los nombres de cada lista "Voluntarios ..."
-# de la pagina, y la dotacion total (sin confederados), asi el resumen nunca queda desactualizado
-# al agregar o quitar voluntarios.
+# de la pagina y la dotacion total, asi el resumen nunca queda desactualizado al agregar o
+# quitar voluntarios. contar_dotacion() da ademas el total sin confederados (la portada).
 sub contar_dotacion {
     my ($html) = @_;
     my (@tipos, $total);
@@ -484,11 +484,16 @@ sub contar_dotacion {
     return ($total // 0, @tipos);
 }
 
+# En Dotacion el total cuenta a toda la nomina, confederados incluidos, y va a la derecha.
 sub cifras_dotacion {
-    my ($total, @tipos) = contar_dotacion($_[0]);
+    my (undef, @tipos) = contar_dotacion($_[0]);
+    my $total = 0;
     my $h = qq(<ul class="cifras">\n);
-    $h .= qq(<li><strong>$_->[1]</strong>$_->[0]</li>\n) for @tipos;
-    return $h . qq(</ul>\n<ul class="cifras">\n<li class="cifra-total"><strong>$total</strong>Dotación total</li>\n</ul>);
+    for (@tipos) {
+        $h .= qq(<li><strong>$_->[1]</strong>$_->[0]</li>\n);
+        $total += $_->[1];
+    }
+    return $h . qq(<li class="cifra-total"><strong>$total</strong>Dotación total</li>\n</ul>);
 }
 
 # Tarjetas de acceso a las subsecciones de una pagina del menu (por ejemplo La Quinta), donde
