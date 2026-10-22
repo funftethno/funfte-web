@@ -56,7 +56,7 @@ my @ACCESOS = (
 
 my @MENU = (
     ['Inicio', ''],
-    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Confederación','confederacion/'], ['Material Mayor','material-mayor/']]],
+    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Material Mayor','material-mayor/'], ['Confederación','confederacion/']]],
     ['Dotación', 'dotacion/', [['Directorio','directorio/']]],
     ['Formación', 'formacion/'],
     ['Contacto', 'contacto/', [['Redes Sociales','redes-sociales/'], ['Webmail', $WEBMAIL]]],
@@ -170,7 +170,7 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 <div class="wrap">
 <img src="${p}assets/img/$escudo" alt="" loading="lazy">
 <blockquote><p lang="de">«Gott zur Ehr, dem Nächsten zur Wehr»</p><p>«En honor a Dios y ayuda del prójimo»</p></blockquote>
-<p class="anios">1908 – 2020</p>
+<p class="anios">29 - 01 - 1908</p>
 </div>
 </section>);
 }
