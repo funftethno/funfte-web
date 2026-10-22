@@ -554,6 +554,8 @@ a:hover { color: var(--rojo-oscuro); }
 }
 .contenido .cia p { margin: 0; font-size: .92rem; color: var(--texto-suave); }
 .contenido .cia a { margin-top: 8px; font-size: .92rem; font-weight: 600; }
+.contenido .cia-enlaces { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; margin-top: auto; padding-top: 8px; }
+.contenido .cia-enlaces a { margin-top: 0; }
 
 /* Material mayor */
 .grilla-unidades {
