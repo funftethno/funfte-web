@@ -557,11 +557,6 @@ a:hover { color: var(--rojo-oscuro); }
 .pie p { margin: 0 0 12px; }
 .pie-enlaces { list-style: none; margin: 0; padding: 0; }
 .pie-enlaces li { margin-bottom: 6px; }
-/* enlace discreto al archivo de paginas retiradas */
-.pie-enlaces .pie-archivo { margin-top: 14px; font-size: .7rem; letter-spacing: .12em; }
-.pie-enlaces .pie-archivo a { color: rgba(255,255,255,.35); text-decoration: none; }
-.pie-enlaces .pie-archivo a:hover,
-.pie-enlaces .pie-archivo a:focus-visible { color: #fff; }
 .emergencia { color: #fff; font-weight: 600; }
 .emergencia a { color: var(--dorado); }
 .derechos {

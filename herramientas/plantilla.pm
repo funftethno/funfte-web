@@ -282,13 +282,9 @@ $cuerpo
 <div>
 <h2>Enlaces</h2>
 <ul class="pie-enlaces">
-<li><a href="${p}historia/">Historia</a></li>
-<li><a href="${p}material-mayor/">Material Mayor</a></li>
-<li><a href="${p}formacion/">Formación</a></li>
-<li><a href="${p}socios-colaboradores/">Socios Colaboradores</a></li>
 <li><a href="${p}contacto/">Contacto</a></li>
 <li><a href="https://cbt.cl" target="_blank" rel="noopener">Cuerpo de Bomberos de Talcahuano</a></li>
-<li class="pie-archivo"><a href="${p}archivo/">ARCHIVO</a></li>
+<li><a href="${p}archivo/">Archivo</a></li>
 </ul>
 </div>
 </div>

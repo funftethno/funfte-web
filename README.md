@@ -76,7 +76,7 @@ la-quinta/ historia/ cuartel/ confederacion/ socios-colaboradores/
 dotacion/ directorio/
 formacion/
 material-mayor/ (b-5/, bx-5/, harbor-28/)
-archivo/                   Páginas retiradas (Nuestro Trabajo, Capacitación, Guardia Nocturna); enlace discreto «ARCHIVO» en el pie
+archivo/                   Páginas retiradas (Nuestro Trabajo, Capacitación, Guardia Nocturna); enlace «Archivo» en el pie
 contacto/ redes-sociales/
 acceso-quintino/           Ingreso a la intranet (placeholder) y accesos internos
 assets/css, assets/js, assets/img
