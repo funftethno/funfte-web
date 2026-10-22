@@ -519,6 +519,28 @@ a.saludo:hover { border-color: var(--dorado); }
 }
 .contenido .nomina.fotos span { min-width: 0; font-size: .78rem; letter-spacing: .06em; }
 .contenido .nomina.fotos small { font-size: .82rem; font-weight: 400; }
+.contenido .nomina.fotos .privados {
+  width: 100%;
+  margin: auto 0 0;
+  padding-top: 10px;
+}
+.contenido .nomina.fotos .privados div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px;
+  padding: 5px 2px 0;
+  border-top: 1px solid var(--borde);
+}
+.contenido .nomina.fotos .privados div + div { margin-top: 5px; }
+.contenido .nomina.fotos .privados dt {
+  font-size: .66rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--texto-suave);
+}
+.contenido .nomina.fotos .privados dd { margin: 0; font-size: .9rem; font-weight: 700; color: var(--rojo); font-variant-numeric: tabular-nums; }
 .desbloqueo { margin: 0 0 32px; padding: 16px 18px; border: 1px solid var(--borde); border-radius: var(--radio); background: var(--fondo-suave); }
 .desbloqueo[hidden] { display: none; }
 .desbloqueo label { display: block; font-size: .9rem; font-weight: 600; margin-bottom: 6px; }

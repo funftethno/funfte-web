@@ -26,19 +26,26 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(function (claro) { return JSON.parse(new TextDecoder().decode(claro)); });
   }
 
-  // agrega debajo del nombre de cada tarjeta su generacion y su numero de registro
+  // agrega al pie de cada tarjeta su generacion y su numero de registro
   function mostrar(voluntarios) {
     document.querySelectorAll('.nomina.fotos li').forEach(function (li) {
       var nombre = Array.prototype.filter.call(li.childNodes, function (n) { return n.nodeType === 3; })
         .map(function (n) { return n.textContent; }).join('').trim();
       var v = voluntarios[nombre];
       if (!v) return;
-      [['generacion', 'Generación '], ['registro', 'Registro N° ']].forEach(function (dato) {
+      var dl = document.createElement('dl');
+      dl.className = 'privados';
+      [['generacion', 'Generación'], ['registro', 'Registro']].forEach(function (dato) {
         if (!v[dato[0]]) return;
-        var s = document.createElement('small');
-        s.textContent = dato[1] + v[dato[0]];
-        li.appendChild(s);
+        var div = document.createElement('div');
+        var dt = document.createElement('dt');
+        var dd = document.createElement('dd');
+        dt.textContent = dato[1];
+        dd.textContent = (dato[0] === 'registro' ? 'N° ' : '') + v[dato[0]];
+        div.append(dt, dd);
+        dl.appendChild(div);
       });
+      li.appendChild(dl);
     });
     form.hidden = true;
   }
