@@ -1,8 +1,8 @@
-// Dotacion con fotos (Archivo): la generacion de cada voluntario viene cifrada y se muestra
-// al ingresar la contraseña. El cifrado es el de "openssl enc -aes-256-cbc -pbkdf2 -md sha256"
-// (ver herramientas/cifrar_generaciones.pl): "Salted__", 8 bytes de sal y el texto cifrado.
+// Dotacion con fotos (Archivo): la generacion y el numero de registro de cada voluntario vienen
+// cifrados y se muestran al ingresar la contraseña. El cifrado es el de "openssl enc -aes-256-cbc
+// -pbkdf2 -md sha256" (ver herramientas/cifrar_privados.pl): "Salted__", 8 bytes de sal y el texto.
 document.addEventListener('DOMContentLoaded', function () {
-  var datos = document.getElementById('generaciones');
+  var datos = document.getElementById('privados');
   var form = document.getElementById('desbloqueo');
   if (!datos || !form) return;
   if (!window.crypto || !crypto.subtle) { form.hidden = true; return; }
@@ -26,17 +26,19 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(function (claro) { return JSON.parse(new TextDecoder().decode(claro)); });
   }
 
-  // agrega a cada tarjeta su numero de registro (sobre el nombre) y su generacion (debajo)
-  function mostrar(generaciones) {
-    document.querySelectorAll('.nomina.fotos li[data-registro]').forEach(function (li) {
-      var registro = li.getAttribute('data-registro');
-      var span = document.createElement('span');
-      span.textContent = registro;
-      li.querySelector('.foto').after(span);
-      if (!generaciones[registro]) return;
-      var s = document.createElement('small');
-      s.textContent = 'Generación ' + generaciones[registro];
-      li.appendChild(s);
+  // agrega debajo del nombre de cada tarjeta su generacion y su numero de registro
+  function mostrar(voluntarios) {
+    document.querySelectorAll('.nomina.fotos li').forEach(function (li) {
+      var nombre = Array.prototype.filter.call(li.childNodes, function (n) { return n.nodeType === 3; })
+        .map(function (n) { return n.textContent; }).join('').trim();
+      var v = voluntarios[nombre];
+      if (!v) return;
+      [['generacion', 'Generación '], ['registro', 'Registro N° ']].forEach(function (dato) {
+        if (!v[dato[0]]) return;
+        var s = document.createElement('small');
+        s.textContent = dato[1] + v[dato[0]];
+        li.appendChild(s);
+      });
     });
     form.hidden = true;
   }
