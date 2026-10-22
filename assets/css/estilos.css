@@ -650,8 +650,6 @@ a.saludo:hover { border-color: var(--dorado); }
 .contenido .cia img { width: auto; max-width: 190px; height: 96px; object-fit: contain; margin: 0 0 8px; border-radius: 0; float: none; max-width: none; }
 .contenido .cia h4 { margin: 0; font-size: 1.05rem; }
 /* Logo de la Confederacion, centrado */
-.contenido .logo-confe { width: 150px; margin: 0 auto 1.6em; }
-.contenido .logo-confe img { width: 100%; height: auto; margin: 0; border-radius: 50%; }
 
 /* compañia sin escudo disponible: su numero en un circulo */
 .contenido .cia-num {
