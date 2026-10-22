@@ -1,0 +1,11 @@
+# Archivos del repositorio que no se publican en el sitio
+.git
+.gitignore
+.nojekyll
+.assetsignore
+.claude
+.wrangler
+node_modules
+wrangler.jsonc
+README.md
+herramientas

@@ -1,0 +1,8 @@
+{
+  // Sitio estático servido por Cloudflare Workers (sin código de servidor).
+  "name": "funfte-web",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": "."
+  }
+}
