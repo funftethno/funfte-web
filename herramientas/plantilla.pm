@@ -278,7 +278,8 @@ sub postula {
 <label for="correo">Correo electrónico</label>
 <input id="correo" name="email" type="email" autocomplete="email" required>
 <label for="telefono">Teléfono</label>
-<input id="telefono" name="Teléfono" type="tel" autocomplete="tel" placeholder="+56 9 1234 5678" required>
+<div class="telefono"><span aria-hidden="true">+56</span><input id="telefono" name="Teléfono (+56)" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="9" pattern="[0-9]{9}" placeholder="912345678" title="9 dígitos, sin el +56. Por ejemplo: 912345678" data-solo-numeros aria-describedby="telefono-ayuda" required></div>
+<p id="telefono-ayuda" class="campo-ayuda">9 dígitos, sin espacios.</p>
 <label for="referencia">¿Cómo conociste a la Quinta? ¿Alguien te recomendó?</label>
 <textarea id="referencia" name="Cómo conoció a la Quinta / referencia" rows="3" placeholder="Por ejemplo: un amigo voluntario, redes sociales, un evento de la compañía…" required></textarea>
 <button class="boton" type="submit">Enviar postulación</button>
