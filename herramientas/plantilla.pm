@@ -47,8 +47,6 @@ my @ACCESOS = (
     ['Webmail',                          'Correo electrónico institucional @funfte.cl mediante la plataforma de Google.', $WEBMAIL, 'correo'],
     ['Plataforma de Registro y Control', 'Plataforma de administración y gestión interna de bomberos SISPAR.', 'https://sispar.sisparnovenacbt.com/login.php', 'sisab'],
     ['Registro Nacional de Bomberos',    'Acceso RNB a los sistemas de la Junta Nacional de Bomberos.', 'https://www.bomberos.cl/sist/escritorio_virtual/', 'documento'],
-    ['Academia Nacional de Bomberos',   'Sitio oficial de la Academia Nacional de Bomberos (ANB).', $ANB, 'birrete'],
-    ['Convocatorias para Bomberos',      'Cursos abiertos y fechas de postulación de la ANB.', "$ANB/convocatorias-para-bomberos", 'convoca'],
     ['Cuerpo de Bomberos de Talcahuano', 'Sitio oficial del Cuerpo de Bomberos de Talcahuano.', 'https://cbt.cl', 'web'],
     ['Bomberos de Chile',                'Sitio de la Junta Nacional de Cuerpos de Bomberos de Chile.', 'https://www.bomberos.cl', 'web'],
     ['Biblioteca Virtual',               'Material de trabajo interno, oficios y manuales operativos.', undef, 'libro'],
