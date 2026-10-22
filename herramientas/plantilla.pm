@@ -4,9 +4,21 @@ use strict;
 use warnings;
 use utf8;
 use Exporter 'import';
+use Digest::MD5 qw(md5_hex);
+use FindBin;
 our @EXPORT_OK = qw(pagina rutas_paginas);
 
 my $NOMBRE  = 'Quinta Compañía de Bomberos de Talcahuano';
+
+# Huella del contenido de CSS y JS: cambia la URL cuando cambia el archivo, para que
+# el navegador no use una version vieja guardada en cache (ver _headers).
+sub huella {
+    open my $fh, '<:raw', "$FindBin::Bin/../$_[0]" or return '';
+    local $/;
+    return '?v=' . substr(md5_hex(<$fh>), 0, 8);
+}
+my $V_CSS = huella('assets/css/estilos.css');
+my $V_JS  = huella('assets/js/menu.js');
 
 # clave => ruta, titulo, seccion del menu.
 # El contenido de cada pagina esta en herramientas/contenido/<clave>.html; portada,
@@ -247,8 +259,8 @@ sub pagina {
 <title>$titulo</title>$robots
 <meta name="description" content="Quinta Compañía de Bomberos «Bomba Chile» de Talcahuano, fundada en 1908. Fünfte Deutsche Feuerwehrkompanie Talcahuano.">
 <link rel="icon" href="${p}favicon.ico">
-<link rel="stylesheet" href="${p}assets/css/estilos.css">
-<script src="${p}assets/js/menu.js" defer></script>
+<link rel="stylesheet" href="${p}assets/css/estilos.css$V_CSS">
+<script src="${p}assets/js/menu.js$V_JS" defer></script>
 </head>
 <body>
 <a class="saltar" href="#principal">Saltar al contenido</a>

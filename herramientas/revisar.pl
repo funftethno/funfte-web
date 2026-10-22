@@ -39,8 +39,15 @@ if (@distintas) {
     $errores++;
 }
 
+my %usadas;
 for my $pagina (paginas()) {
     my $html = leer($pagina);
+    $usadas{$1}++ while $html =~ m{assets/img/([^"')\s]+)}g;
+    while ($html =~ /(<img\b[^>]*>)/g) {
+        next if $1 =~ /\balt="/;
+        print "Imagen sin texto alternativo (alt) en $pagina: $1\n";
+        $errores++;
+    }
     my %vistos;
     while ($html =~ /\b(?:href|src)="([^"]*)"/g) {
         my $url = $1;
@@ -54,6 +61,14 @@ for my $pagina (paginas()) {
         $errores++;
     }
 }
+
+# Solo aviso: una imagen sin uso no rompe el sitio, pero pesa en el repositorio.
+$usadas{$_}++ for leer('assets/css/estilos.css') =~ m{img/([^"')\s]+)}g;
+opendir my $dir, 'assets/img' or die "assets/img: $!";
+for my $img (sort grep { !/^\./ } readdir $dir) {
+    print "Aviso: assets/img/$img no se usa en ninguna pagina; si sobra, borrala.\n" unless $usadas{$img};
+}
+closedir $dir;
 
 print $errores ? "Revision con $errores problema(s).\n" : "Revision correcta.\n";
 exit($errores ? 1 : 0);

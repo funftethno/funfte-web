@@ -32,8 +32,56 @@ sub leer_utf8 {
     return $t;
 }
 
+# Ancho y alto de una imagen JPEG, PNG o GIF leyendo su cabecera (sin modulos externos).
+my %dimensiones;
+sub dimensiones {
+    my ($archivo) = @_;
+    return @{ $dimensiones{$archivo} } if $dimensiones{$archivo};
+    open my $fh, '<:raw', $archivo or return;
+    read $fh, my $cab, 26;
+    my @d;
+    if ($cab =~ /^\x89PNG/) {
+        @d = unpack 'NN', substr($cab, 16, 8);
+    } elsif ($cab =~ /^GIF8/) {
+        @d = unpack 'vv', substr($cab, 6, 4);
+    } elsif ($cab =~ /^\xFF\xD8/) {
+        seek $fh, 2, 0;
+        while (read($fh, my $marca, 4) == 4) {
+            my ($ff, $tipo, $largo) = unpack 'CCn', $marca;
+            last if $ff != 0xFF;
+            if ($tipo >= 0xC0 && $tipo <= 0xCF && $tipo != 0xC4 && $tipo != 0xC8 && $tipo != 0xCC) {
+                read $fh, my $sof, 5;
+                my ($alto, $ancho) = unpack 'xnn', $sof;
+                @d = ($ancho, $alto);
+                last;
+            }
+            seek $fh, $largo - 2, 1;
+        }
+    }
+    close $fh;
+    return unless @d == 2 && $d[0] && $d[1];
+    $dimensiones{$archivo} = \@d;
+    return @d;
+}
+
+# Agrega width y height a las imagenes locales que no los tengan: evita que la
+# pagina salte mientras cargan las fotos (el CSS mantiene la proporcion).
+sub con_dimensiones {
+    my ($ruta, $html) = @_;
+    $html =~ s{<img\b([^>]*)>}{
+        my $atr = $1;
+        if ($atr !~ /\bwidth=/ && $atr =~ /\bsrc="([^":]+)"/) {
+            my @d = dimensiones("$RAIZ/$ruta$1");
+            $atr =~ s{\bsrc="[^"]*"\K}{ width="$d[0]" height="$d[1]"} if @d;
+        }
+        "<img$atr>";
+    }ge;
+    return $html;
+}
+
 sub escribir {
     my ($ruta, $html) = @_;
+    $html = con_dimensiones($ruta, $html);
     my $archivo = "$RAIZ/${ruta}index.html";
     make_path(dirname($archivo));
     open my $fh, '>:encoding(UTF-8)', $archivo or die "$archivo: $!";
