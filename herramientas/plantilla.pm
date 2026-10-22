@@ -21,10 +21,12 @@ sub rutas_paginas {
         socios        => ['socios-colaboradores/',     'Socios Colaboradores','La Quinta'],
         dotacion      => ['dotacion/',                 'Dotación',            'Dotación'],
         directorio    => ['directorio/',               'Directorio',          'Dotación'],
-        trabajo       => ['nuestro-trabajo/',          'Nuestro Trabajo',     'Nuestro Trabajo'],
-        capacitacion  => ['capacitacion/',             'Capacitación',        'Nuestro Trabajo'],
-        guardia       => ['guardia-nocturna/',         'Guardia Nocturna',    'Nuestro Trabajo'],
         formacion     => ['formacion/',                'Formación',           'Formación'],
+        # Paginas retiradas del sitio: solo se llega a ellas desde el enlace ARCHIVO del pie
+        archivo       => ['archivo/',                  'Archivo',             ''],
+        trabajo       => ['archivo/nuestro-trabajo/',  'Nuestro Trabajo',     'Archivo'],
+        capacitacion  => ['archivo/capacitacion/',     'Capacitación',        'Archivo'],
+        guardia       => ['archivo/guardia-nocturna/', 'Guardia Nocturna',    'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         material      => ['material-mayor/',           'Material Mayor',      'La Quinta'],
         bx5           => ['material-mayor/bx-5/',      'Unidad BX-5',         'La Quinta'],
@@ -203,11 +205,19 @@ qq(<section class="wrap bloque">
 <section class="wrap bloque">
 <h2 class="titulo-seccion">Más recursos</h2>
 <div class="grilla-tarjetas tres">
-) . tarjeta($p, 'sisab', 'Capacitación en la Quinta', 'Cómo se organiza la instrucción de cadetes, brigadieres y voluntarios en nuestra compañía.', 'capacitacion/', 'Ver más')
-  . tarjeta($p, 'libro', 'Bibliotecas de Bomberos de Chile', 'Publicaciones, revistas y documentos de la Junta Nacional de Bomberos.', 'https://www.bomberos.cl/bibliotecas', 'Ir a bibliotecas')
+) . tarjeta($p, 'libro', 'Bibliotecas de Bomberos de Chile', 'Publicaciones, revistas y documentos de la Junta Nacional de Bomberos.', 'https://www.bomberos.cl/bibliotecas', 'Ir a bibliotecas')
   . tarjeta($p, 'candado', 'Biblioteca Virtual de la Quinta', 'Material de trabajo interno, oficios y manuales operativos de la compañía.')
   . qq(</div>
 </section>);
+}
+
+sub archivo {
+    my ($p) = @_;
+    my %pg = rutas_paginas();
+    my @retiradas = sort { $a->{titulo} cmp $b->{titulo} } grep { $_->{seccion} eq 'Archivo' } values %pg;
+    my $h = qq(<article class="wrap contenido">\n<p>Páginas retiradas del sitio. Se conservan aquí como referencia.</p>\n<ul>\n);
+    $h .= qq(<li><a href="$p$_->{ruta}">$_->{titulo}</a></li>\n) for @retiradas;
+    return $h . "</ul>\n</article>";
 }
 
 sub pagina {
@@ -221,18 +231,21 @@ sub pagina {
     my $cuerpo = $es_inicio                 ? inicio($p)
                : $a{clave} eq 'formacion'   ? $cabecera . formacion($p)
                : $a{clave} eq 'acceso'      ? $cabecera . acceso_personal($p)
+               : $a{clave} eq 'archivo'     ? $cabecera . archivo($p)
                : $cabecera . qq(<article class="wrap contenido">\n$a{contenido}\n</article>);
     my $menu = menu($p, $a{ruta}, $a{seccion});
     my $acceso_actual = $a{clave} eq 'acceso' ? ' aria-current="page"' : '';
     my $candado = icono('candado');
     my $anio = (localtime)[5] + 1900;
+    # el archivo no debe aparecer en buscadores
+    my $robots = $a{ruta} =~ m{^archivo/} ? qq(\n<meta name="robots" content="noindex">) : '';
     return <<"HTML";
 <!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>$titulo</title>
+<title>$titulo</title>$robots
 <meta name="description" content="Quinta Compañía de Bomberos «Bomba Chile» de Talcahuano, fundada en 1908. Fünfte Deutsche Feuerwehrkompanie Talcahuano.">
 <link rel="icon" href="${p}favicon.ico">
 <link rel="stylesheet" href="${p}assets/css/estilos.css">
@@ -275,6 +288,7 @@ $cuerpo
 <li><a href="${p}socios-colaboradores/">Socios Colaboradores</a></li>
 <li><a href="${p}contacto/">Contacto</a></li>
 <li><a href="https://cbt.cl" target="_blank" rel="noopener">Cuerpo de Bomberos de Talcahuano</a></li>
+<li class="pie-archivo"><a href="${p}archivo/">ARCHIVO</a></li>
 </ul>
 </div>
 </div>
