@@ -4,6 +4,24 @@ Este archivo explica cómo funciona el repositorio del sitio `funfte.cl` (Quinta
 
 Responde y escribe en **español de Chile**: textos del sitio, mensajes de commit, Pull Requests y comentarios de código.
 
+## Procedimiento obligatorio: antes de empezar cualquier tarea
+
+Hazlo **siempre como primer paso**, antes de leer o cambiar archivos, aunque la tarea parezca pequeña. Otras personas suben cambios a diario y trabajar sobre una copia vieja genera conflictos.
+
+```bash
+git fetch origin
+git status                     # si hay cambios sin guardar, avisa y no sigas
+git checkout <rama>            # la rama personal (apellido en minúsculas)
+git pull                       # trae lo último de tu rama
+git merge origin/desarrollo    # trae lo que otros ya llevaron a desarrollo
+perl herramientas/generar.pl
+```
+
+- Si `git status` muestra cambios sin commit que no hiciste tú, pregunta qué hacer con ellos antes de seguir.
+- Si `git merge` tiene conflictos en páginas `index.html`, quédate con cualquiera de las dos versiones y vuelve a ejecutar `perl herramientas/generar.pl`. Si los conflictos están en `herramientas/` o `assets/`, muéstraselos a la persona y no los resuelvas por tu cuenta.
+- Si no sabes cuál es la rama personal, pregunta. No trabajes directo en `master` ni en `desarrollo`.
+- Repite `git fetch origin` y `git merge origin/desarrollo` antes de llevar tu rama a `desarrollo`.
+
 ## Cómo está hecho el sitio
 
 Es HTML estático generado con Perl. No hay WordPress, base de datos, Node ni frameworks.

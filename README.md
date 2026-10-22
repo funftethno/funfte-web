@@ -61,12 +61,14 @@ El contenido se extrajo una sola vez del sitio antiguo (WordPress), ya limpio y 
 | `desarrollo` | Cualquier colaborador, cuando su rama está probada | `https://desarrollo-funfte-web.funfteit.workers.dev/` |
 | `master` | Solo el owner, por Pull Request desde `desarrollo` | Sitio oficial `https://funfte.cl` |
 
-1. **Ponte en tu rama personal y actualízala** con lo último de `desarrollo`. Cada colaborador tiene una rama con su apellido en minúsculas, creada por el owner (por ejemplo `delgado`):
+1. **Siempre antes de empezar: ponte en tu rama personal y actualízala** con lo último de `desarrollo`. No te saltes este paso aunque el cambio sea pequeño: otros suben cambios a diario. Cada colaborador tiene una rama con su apellido en minúsculas, creada por el owner (por ejemplo `delgado`):
 
    ```bash
+   git fetch origin
    git checkout delgado
    git pull
    git merge origin/desarrollo
+   perl herramientas/generar.pl
    ```
 
 2. **Haz el cambio, regenera y revisa:**
