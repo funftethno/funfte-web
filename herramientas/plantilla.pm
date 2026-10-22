@@ -253,11 +253,11 @@ qq(<section class="wrap bloque">
 }
 
 # Formulario de postulacion. El sitio es estatico: FormSubmit (formsubmit.co) recibe
-# los datos y los envia por correo a correo@ con copia a secretario@. El primer envio
+# los datos y los envia por correo a correo@funfte.cl. El primer envio
 # llega como correo de activacion a correo@funfte.cl y hay que confirmarlo.
 my $POSTULACION_PARA = 'correo@funfte.cl';
 # funfteit@gmail.com: copia temporal para pruebas; quitar cuando el formulario este probado
-my $POSTULACION_CC   = 'secretario@funfte.cl,funfteit@gmail.com';
+my $POSTULACION_CC   = 'funfteit@gmail.com';
 
 sub postula {
     my ($p) = @_;
