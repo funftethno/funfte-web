@@ -1,0 +1,3 @@
+# Rutas del sitio antiguo (WordPress en /sitio/) -> portada nueva
+/sitio    /  301
+/sitio/*  /  301
