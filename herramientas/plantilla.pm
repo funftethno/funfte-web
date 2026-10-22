@@ -22,6 +22,7 @@ my $V_CSS = huella('assets/css/estilos.css');
 my $V_JS  = huella('assets/js/menu.js');
 my $V_CAL = huella('assets/js/calendario.js');
 my $V_PRIV = huella('assets/js/privados.js');
+my $V_ICO = huella('favicon.ico');
 
 # Direccion publica del sitio (enlaces canonicos, Open Graph y sitemap)
 our $SITIO = 'https://funfte.cl/';
@@ -580,7 +581,8 @@ sub pagina {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>$titulo</title>
 <meta name="description" content="$descripcion">$meta
-<link rel="icon" href="${p}favicon.ico">
+<link rel="icon" href="${p}favicon.ico$V_ICO">
+<link rel="apple-touch-icon" href="${p}assets/img/icono-180.png">
 <link rel="stylesheet" href="${p}assets/css/estilos.css$V_CSS">
 <script src="${p}assets/js/menu.js$V_JS" defer></script>
 </head>
@@ -588,7 +590,7 @@ sub pagina {
 <a class="saltar" href="#principal">Saltar al contenido</a>
 <header class="cabecera">
 <div class="wrap cabecera-fila">
-<a class="marca" href="$p"><img src="${p}assets/img/logo.png" alt="Fünfte – Quinta Compañía de Bomberos de Talcahuano"></a>
+<a class="marca" href="$p"><img src="${p}assets/img/escudo-quinta.png" alt="Escudo de la Fünfte – Quinta Compañía de Bomberos de Talcahuano"></a>
 <nav aria-label="Principal">
 <ul class="menu" id="menu-principal">
 $menu</ul>
