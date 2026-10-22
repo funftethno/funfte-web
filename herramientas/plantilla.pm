@@ -217,7 +217,7 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 <div class="grilla-tarjetas tres">
 ) . tarjeta($p, 'sisab', 'Postula a la Quinta', '¿Quieres ser bombero voluntario? Únete a la Quinta y sirve a Talcahuano. Completa el formulario y te contactaremos.', 'postula/', 'Postular')
   . tarjeta($p, 'corazon', 'Hazte socio', 'Colabora con la Quinta y hazte socio cooperador. Con tu ayuda continuaremos salvando vidas.', $COOPERADORES, 'Inscríbete')
-  . tarjeta($p, 'auto', 'Compra tu SOAP', 'Compra tu SOAP 2026 con Bomberos de Chile y elige a la Quinta: tu donación va directamente a nuestra compañía.', $SOAP, 'Comprar SOAP')
+  . tarjeta($p, 'auto', 'Compra tu SOAP', 'Compra tu SOAP con Bomberos de Chile y elige a la Quinta: tu donación va directamente a nuestra compañía.', $SOAP, 'Comprar SOAP')
   . qq(</div>
 </section>
 <section class="lema">
