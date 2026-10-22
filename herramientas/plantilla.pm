@@ -18,7 +18,6 @@ sub rutas_paginas {
         historia      => ['historia/',                 'Historia',            'La Quinta'],
         cuartel       => ['cuartel/',                  'Cuartel',             'La Quinta'],
         confederacion => ['confederacion/',            'Confederación',       'La Quinta'],
-        socios        => ['socios-colaboradores/',     'Socios Colaboradores',''],
         dotacion      => ['dotacion/',                 'Dotación',            'Dotación'],
         formacion     => ['formacion/',                'Formación',           'Formación'],
         # Paginas retiradas del sitio: solo se llega a ellas desde el enlace ARCHIVO del pie
@@ -28,6 +27,7 @@ sub rutas_paginas {
         guardia       => ['archivo/guardia-nocturna/', 'Guardia Nocturna',    'Archivo'],
         redes         => ['archivo/redes-sociales/',   'Redes Sociales',      'Archivo'],
         directorio    => ['archivo/directorio/',       'Directorio',          'Archivo'],
+        socios        => ['archivo/socios-colaboradores/', 'Socios Colaboradores', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         material      => ['material-mayor/',           'Material Mayor',      'La Quinta'],
         bx5           => ['material-mayor/bx-5/',      'Unidad BX-5',         'La Quinta'],
@@ -39,6 +39,7 @@ sub rutas_paginas {
 }
 
 my $WEBMAIL = 'https://mail.google.com/a/funfte.cl/';
+my $COOPERADORES = 'https://5thno.cooperadores.cl/enrolamiento';
 my $AULA    = 'https://aula.anb.cl/moodle/login/index.php';
 my $ANB     = 'https://www.anb.cl';
 
@@ -156,14 +157,14 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 <p class="antetitulo">Fünfte Deutsche Feuerwehrkompanie Talcahuano</p>
 <h1><span>Quinta Compañía de Bomberos</span> <span>«Bomba Chile» de Talcahuano</span></h1>
 <p class="bajada">Fundada el 29 de enero de 1908. Especialidad en agua y rescate integral al servicio de Talcahuano.</p>
-<div class="acciones"><a class="boton" href="${p}la-quinta/">Conoce la Quinta</a><a class="boton secundario" href="${p}socios-colaboradores/">Hazte socio</a></div>
+<div class="acciones"><a class="boton" href="${p}la-quinta/">Conoce la Quinta</a><a class="boton secundario" href="$COOPERADORES" target="_blank" rel="noopener">Hazte socio</a></div>
 </div>
 </section>
 <section class="wrap bloque">
 <h2 class="titulo-seccion">La Quinta</h2>
 <div class="grilla-tarjetas tres">
 ) . tarjeta($p, 'sisab', 'Postula a la Quinta', '¿Quieres ser bombero voluntario? Únete a la Quinta y sirve a Talcahuano. Escríbenos y te contamos cómo postular.', 'mailto:correo@funfte.cl?subject=Quiero%20postular%20a%20la%20Quinta', 'Postular')
-  . tarjeta($p, 'corazon', 'Hazte socio', 'Colabora con la Quinta y hazte socio cooperador. Con tu ayuda continuaremos salvando vidas.', 'socios-colaboradores/', 'Ver más')
+  . tarjeta($p, 'corazon', 'Hazte socio', 'Colabora con la Quinta y hazte socio cooperador. Con tu ayuda continuaremos salvando vidas.', $COOPERADORES, 'Inscríbete')
   . tarjeta($p, 'reloj', 'Sitio centenario', 'Navega a través de la historia de nuestra compañía en el especial del centenario.')
   . qq(</div>
 </section>
