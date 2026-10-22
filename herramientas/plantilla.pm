@@ -45,7 +45,7 @@ my $ANB     = 'https://www.anb.cl';
 # Pagina "Acceso Quintino":[titulo, detalle, enlace, icono] (sin enlace = pronto)
 my @ACCESOS = (
     ['Webmail',                          'Correo electrónico institucional @funfte.cl mediante la plataforma de Google.', $WEBMAIL, 'correo'],
-    ['Plataforma de Registro y Control', 'Plataforma de administración y gestión interna de bomberos SISAB.', 'http://www.sisab.cl', 'sisab'],
+    ['Plataforma de Registro y Control', 'Plataforma de administración y gestión interna de bomberos SISPAR.', 'https://sispar.sisparnovenacbt.com/login.php', 'sisab'],
     ['Registro Nacional de Bomberos',    'Acceso RNB a los sistemas de la Junta Nacional de Bomberos.', 'https://www.bomberos.cl/sist/escritorio_virtual/', 'documento'],
     ['Academia Nacional de Bomberos',   'Sitio oficial de la Academia Nacional de Bomberos (ANB).', $ANB, 'birrete'],
     ['Convocatorias para Bomberos',      'Cursos abiertos y fechas de postulación de la ANB.', "$ANB/convocatorias-para-bomberos", 'convoca'],
