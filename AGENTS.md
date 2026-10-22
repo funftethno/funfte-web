@@ -13,14 +13,14 @@ git fetch origin
 git status                     # si hay cambios sin guardar, avisa y no sigas
 git checkout <rama>            # la rama personal (apellido en minúsculas)
 git pull                       # trae lo último de tu rama
-git merge origin/desarrollo    # trae lo que otros ya llevaron a desarrollo
+git merge origin/master        # trae lo que ya está publicado
 perl herramientas/generar.pl
 ```
 
 - Si `git status` muestra cambios sin commit que no hiciste tú, pregunta qué hacer con ellos antes de seguir.
 - Si `git merge` tiene conflictos en páginas `index.html`, quédate con cualquiera de las dos versiones y vuelve a ejecutar `perl herramientas/generar.pl`. Si los conflictos están en `herramientas/` o `assets/`, muéstraselos a la persona y no los resuelvas por tu cuenta.
-- Si no sabes cuál es la rama personal, pregunta. No trabajes directo en `master` ni en `desarrollo`.
-- Repite `git fetch origin` y `git merge origin/desarrollo` antes de llevar tu rama a `desarrollo`.
+- Si no sabes cuál es la rama personal, pregunta. No trabajes directo en `master`.
+- Repite `git fetch origin` y `git merge origin/master` antes de avisar que tu rama está lista.
 
 ## Cómo está hecho el sitio
 
@@ -57,20 +57,18 @@ Sube los archivos fuente **y** las páginas regeneradas en el mismo commit. Si `
 
 Flujo obligatorio, en este orden:
 
-1. **Cada persona trabaja en su propia rama**, que lleva su apellido en minúsculas (por ejemplo `delgado` o `molina`) y que crea el owner. Antes de empezar, ponla al día con `desarrollo`:
+1. **Cada persona trabaja en su propia rama**, que lleva su apellido en minúsculas (por ejemplo `delgado` o `molina`) y que crea el owner. Antes de empezar, ponla al día con `master`:
    ```bash
    git checkout <rama>
    git pull
-   git merge origin/desarrollo
+   git merge origin/master
    ```
-   Si necesitas una rama nueva para algo puntual, créala desde `desarrollo` con un nombre corto, en minúsculas, con guiones y sin `/` ni tildes, porque forma parte de la dirección de la vista previa.
+   Si necesitas una rama nueva para algo puntual, créala desde `master` con un nombre corto, en minúsculas, con guiones y sin `/` ni tildes, porque forma parte de la dirección de la vista previa.
 2. **Se prueba en esa rama.** Cada push se publica en `https://<rama>-funfte-web.funfteit.workers.dev/` en uno o dos minutos, y GitHub Actions ejecuta `revisar.pl`. No sigas al paso 3 si la revisión falla o la vista previa se ve mal.
-3. **Cuando está probada, se lleva a `desarrollo`** (merge de la rama en `desarrollo` y push, o un Pull Request hacia `desarrollo`). La vista previa de `desarrollo` es `https://desarrollo-funfte-web.funfteit.workers.dev/` y debe mostrar todo lo aprobado hasta el momento.
-4. **Solo el owner pasa `desarrollo` a producción**, con un Pull Request de `desarrollo` hacia `master`. Al aceptarlo, Cloudflare publica en `https://funfte.cl` en uno o dos minutos.
+3. **Cuando está probada, avisa al owner** (o abre un Pull Request de tu rama hacia `master`). El owner revisa la vista previa y junta la rama con `master`; Cloudflare publica en `https://funfte.cl` en uno o dos minutos.
 
-- **`master` está protegida**: nunca hagas push directo, force push ni Pull Requests desde otra rama que no sea `desarrollo`. Abrir el Pull Request a `master` le corresponde al owner, salvo que te lo pida.
-- No hagas force push a `desarrollo`: es compartida.
-- No borres las ramas personales: son fijas. Las ramas puntuales sí se borran cuando ya están en `desarrollo`.
+- **`master` está protegida**: nunca hagas push directo ni force push a `master`. Solo el owner junta ramas en `master`.
+- No borres las ramas personales: son fijas. Las ramas puntuales sí se borran cuando ya están en `master`.
 - No cambies `wrangler.jsonc`, `.assetsignore`, `_redirects`, `_headers` (cabeceras de caché y seguridad) ni `.github/workflows/` salvo que te lo pidan expresamente: controlan el despliegue.
 
 ## Convenciones del contenido

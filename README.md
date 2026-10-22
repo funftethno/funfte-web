@@ -59,16 +59,15 @@ El contenido se extrajo una sola vez del sitio antiguo (WordPress), ya limpio y 
 | Rama | Quién sube | Dónde se ve |
 |---|---|---|
 | Tu rama personal (tu apellido en minúsculas) | Tú | `https://<rama>-funfte-web.funfteit.workers.dev/` |
-| `desarrollo` | Cualquier colaborador, cuando su rama está probada | `https://desarrollo-funfte-web.funfteit.workers.dev/` |
-| `master` | Solo el owner, por Pull Request desde `desarrollo` | Sitio oficial `https://funfte.cl` |
+| `master` | Solo el owner, juntando las ramas ya probadas | Sitio oficial `https://funfte.cl` |
 
-1. **Siempre antes de empezar: ponte en tu rama personal y actualízala** con lo último de `desarrollo`. No te saltes este paso aunque el cambio sea pequeño: otros suben cambios a diario. Cada colaborador tiene una rama con su apellido en minúsculas, creada por el owner (por ejemplo `delgado`):
+1. **Siempre antes de empezar: ponte en tu rama personal y actualízala** con lo último de `master`. No te saltes este paso aunque el cambio sea pequeño: otros suben cambios a diario. Cada colaborador tiene una rama con su apellido en minúsculas, creada por el owner (por ejemplo `delgado`):
 
    ```bash
    git fetch origin
    git checkout delgado
    git pull
-   git merge origin/desarrollo
+   git merge origin/master
    perl herramientas/generar.pl
    ```
 
@@ -89,22 +88,11 @@ El contenido se extrajo una sola vez del sitio antiguo (WordPress), ya limpio y 
    git push -u origin delgado
    ```
 
-4. **Cuando esté probada, llévala a `desarrollo`** (tu rama personal no se borra):
+4. **Cuando esté probada, avisa al owner** (o abre un Pull Request de tu rama hacia `master`). El owner la junta con `master` y queda en `funfte.cl` en uno o dos minutos.
 
-   ```bash
-   git checkout desarrollo
-   git pull
-   git merge delgado
-   perl herramientas/generar.pl && perl herramientas/revisar.pl
-   git push
-   git checkout delgado
-   ```
+   Si al actualizar tu rama `git merge` avisa de conflictos en páginas `index.html`, no los resuelvas a mano: quédate con cualquiera de las dos versiones, ejecuta `perl herramientas/generar.pl` y termina el merge.
 
-   Si `git merge` avisa de conflictos en páginas `index.html`, no los resuelvas a mano: quédate con cualquiera de las dos versiones, ejecuta `perl herramientas/generar.pl` y termina el merge.
-
-5. **El owner pasa `desarrollo` a producción** con un Pull Request de `desarrollo` hacia `master`. Al aceptarlo, el cambio queda en `funfte.cl` en uno o dos minutos.
-
-No hagas push directo ni force push a `master`, ni force push a `desarrollo`.
+No hagas push directo ni force push a `master`.
 
 ### Usarlo con asistentes de IA
 Las reglas para asistentes de IA (Codex, Cursor, Copilot, Gemini, Claude Code, etc.) están en `AGENTS.md`. Si tu asistente no lo lee solo, pídele que lo lea antes de empezar. Si cambian las convenciones del sitio, actualiza `AGENTS.md`.
