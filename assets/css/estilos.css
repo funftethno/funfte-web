@@ -481,6 +481,21 @@ a:hover { color: var(--rojo-oscuro); }
 }
 .contenido .cia img { width: 96px; height: 96px; object-fit: contain; margin: 0 0 8px; border-radius: 0; float: none; max-width: none; }
 .contenido .cia h4 { margin: 0; font-size: 1.05rem; }
+/* compañia sin escudo disponible: su numero en un circulo */
+.contenido .cia-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  margin: 0 0 8px;
+  border-radius: 50%;
+  background: var(--rojo);
+  color: #fff;
+  font-family: var(--fuente-titulos);
+  font-size: 2.6rem;
+  font-weight: 700;
+}
 .contenido .cia p { margin: 0; font-size: .92rem; color: var(--texto-suave); }
 .contenido .cia a { margin-top: 8px; font-size: .92rem; font-weight: 600; }
 

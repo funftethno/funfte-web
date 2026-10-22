@@ -31,6 +31,7 @@ my %DESCRIPCIONES = (
     laquinta      => 'Quiénes somos: la Quinta Compañía «Bomba Chile» del Cuerpo de Bomberos de Talcahuano, fundada en 1908 por inmigrantes alemanes.',
     historia      => 'La historia de la Quinta Compañía de Bomberos de Talcahuano desde su fundación en 1908 por la colonia alemana del puerto.',
     cuartel       => 'Nuestro cuartel en Villa Independencia, ingreso sur de Talcahuano: instalaciones, guardia nocturna y área de acción.',
+    cbt           => 'El Cuerpo de Bomberos de Talcahuano y sus diez compañías: nombres, fundación, especialidad y sector de cada una.',
     confederacion => 'La Confederación de Compañías Chileno-Alemanas de Bomberos: directorio y las compañías confederadas de todo Chile.',
     dotacion      => 'Oficialidad 2026–2028 y nómina de voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
     formacion     => 'Formación de voluntarios: convocatorias, Aula Virtual, malla curricular y material de la Academia Nacional de Bomberos.',
@@ -52,6 +53,7 @@ sub rutas_paginas {
         laquinta      => ['la-quinta/',                'La Quinta',           'La Quinta'],
         historia      => ['historia/',                 'Historia',            'La Quinta'],
         cuartel       => ['cuartel/',                  'Cuartel',             'La Quinta'],
+        cbt           => ['cuerpo-de-bomberos/',        'Cuerpo de Bomberos',  'La Quinta'],
         confederacion => ['confederacion/',            'Confederación',       'La Quinta'],
         dotacion      => ['dotacion/',                 'Dotación',            'Dotación'],
         formacion     => ['formacion/',                'Formación',           'Formación'],
@@ -91,7 +93,7 @@ my @ACCESOS = (
 
 my @MENU = (
     ['Inicio', ''],
-    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Material Mayor','material-mayor/'], ['Confederación','confederacion/']]],
+    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Material Mayor','material-mayor/'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
     ['Dotación', 'dotacion/', [['Oficialidad','dotacion/#oficialidad'], ['Voluntarios','dotacion/#voluntarios']]],
     ['Formación', 'formacion/'],
     ['Contacto', 'contacto/'],
