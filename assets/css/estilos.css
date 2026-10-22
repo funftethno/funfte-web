@@ -494,23 +494,9 @@ a:hover { color: var(--rojo-oscuro); }
 }
 .contenido .cia img { width: auto; max-width: 190px; height: 96px; object-fit: contain; margin: 0 0 8px; border-radius: 0; float: none; max-width: none; }
 .contenido .cia h4 { margin: 0; font-size: 1.05rem; }
-/* Logo de la Confederacion: el nuevo cambia al antiguo al pasar el mouse (o al enfocarlo) */
-.contenido .logo-confe { position: relative; width: 150px; height: 150px; margin: 0 auto 1.6em; border-radius: 50%; }
-.contenido .logo-confe img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  border-radius: 50%;
-  object-fit: contain;
-  transition: opacity .4s ease;
-}
-.contenido .logo-confe-antiguo { opacity: 0; }
-.contenido .logo-confe:hover .logo-confe-antiguo,
-.contenido .logo-confe:focus-visible .logo-confe-antiguo { opacity: 1; }
-.contenido .logo-confe:hover .logo-confe-nuevo,
-.contenido .logo-confe:focus-visible .logo-confe-nuevo { opacity: 0; }
+/* Logo de la Confederacion, centrado */
+.contenido .logo-confe { width: 150px; margin: 0 auto 1.6em; }
+.contenido .logo-confe img { width: 100%; height: auto; margin: 0; border-radius: 50%; }
 
 /* compañia sin escudo disponible: su numero en un circulo */
 .contenido .cia-num {
