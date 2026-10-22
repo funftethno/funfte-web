@@ -227,9 +227,9 @@ a:hover { color: var(--rojo-oscuro); }
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(20,20,24,.88) 0%, rgba(20,20,24,.55) 60%, rgba(20,20,24,.25) 100%);
+  background: radial-gradient(ellipse at center, rgba(20,20,24,.62) 0%, rgba(20,20,24,.78) 100%);
 }
-.portada .wrap { position: relative; }
+.portada .wrap { position: relative; text-align: center; }
 
 .antetitulo {
   text-transform: uppercase;
@@ -242,15 +242,18 @@ a:hover { color: var(--rojo-oscuro); }
 
 .portada h1 {
   font-family: var(--fuente-titulos);
-  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-size: clamp(1.9rem, 4.6vw, 3.4rem);
   line-height: 1.15;
-  margin: 0 0 18px;
-  max-width: 760px;
+  margin: 0 auto 18px;
+  max-width: 980px;
+  text-wrap: balance;
 }
+.portada h1 span { display: block; }
 
-.bajada { font-size: 1.15rem; max-width: 560px; margin: 0 0 28px; opacity: .92; }
+.bajada { font-size: 1.15rem; max-width: 600px; margin: 0 auto 28px; opacity: .92; text-wrap: balance; }
 
 .acciones { display: flex; flex-wrap: wrap; gap: 12px; }
+.portada .acciones { justify-content: center; }
 
 .boton {
   display: inline-block;

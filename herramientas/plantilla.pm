@@ -156,7 +156,7 @@ sub inicio {
 qq(<section class="portada" style="background-image:url('${p}assets/img/$portada')">
 <div class="wrap">
 <p class="antetitulo">Fünfte Deutsche Feuerwehrkompanie Talcahuano</p>
-<h1>Quinta Compañía de Bomberos<br>«Bomba Chile» de Talcahuano</h1>
+<h1><span>Quinta Compañía de Bomberos</span> <span>«Bomba Chile» de Talcahuano</span></h1>
 <p class="bajada">Fundada el 29 de enero de 1908. Especialidad en agua y rescate integral al servicio de Talcahuano.</p>
 <div class="acciones"><a class="boton" href="${p}la-quinta/">Conoce la Quinta</a><a class="boton secundario" href="${p}socios-colaboradores/">Hazte socio</a></div>
 </div>
