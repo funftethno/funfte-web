@@ -20,7 +20,6 @@ sub rutas_paginas {
         confederacion => ['confederacion/',            'Confederación',       'La Quinta'],
         socios        => ['socios-colaboradores/',     'Socios Colaboradores',''],
         dotacion      => ['dotacion/',                 'Dotación',            'Dotación'],
-        directorio    => ['directorio/',               'Directorio',          'Dotación'],
         formacion     => ['formacion/',                'Formación',           'Formación'],
         # Paginas retiradas del sitio: solo se llega a ellas desde el enlace ARCHIVO del pie
         archivo       => ['archivo/',                  'Archivo',             ''],
@@ -28,6 +27,7 @@ sub rutas_paginas {
         capacitacion  => ['archivo/capacitacion/',     'Capacitación',        'Archivo'],
         guardia       => ['archivo/guardia-nocturna/', 'Guardia Nocturna',    'Archivo'],
         redes         => ['archivo/redes-sociales/',   'Redes Sociales',      'Archivo'],
+        directorio    => ['archivo/directorio/',       'Directorio',          'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         material      => ['material-mayor/',           'Material Mayor',      'La Quinta'],
         bx5           => ['material-mayor/bx-5/',      'Unidad BX-5',         'La Quinta'],
@@ -57,7 +57,7 @@ my @ACCESOS = (
 my @MENU = (
     ['Inicio', ''],
     ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Material Mayor','material-mayor/'], ['Confederación','confederacion/']]],
-    ['Dotación', 'dotacion/', [['Directorio','directorio/']]],
+    ['Dotación', 'dotacion/', [['Oficialidad','dotacion/#oficialidad'], ['Voluntarios','dotacion/#voluntarios']]],
     ['Formación', 'formacion/'],
     ['Contacto', 'contacto/'],
 );

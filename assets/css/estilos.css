@@ -377,6 +377,35 @@ a:hover { color: var(--rojo-oscuro); }
 .contenido h3 { font-size: 1.45rem; }
 .contenido h4 { font-size: 1.2rem; }
 .contenido > :first-child { margin-top: 0; }
+.contenido [id] { scroll-margin-top: 96px; }
+
+/* Dotacion: oficiales en tarjetas cargo + nombre */
+.contenido .oficiales {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px;
+}
+.contenido .oficiales li {
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--borde);
+  border-left: 4px solid var(--rojo);
+  border-radius: var(--radio);
+  background: var(--fondo-suave);
+  font-weight: 600;
+}
+.contenido .oficiales span {
+  display: block;
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--texto-suave);
+  margin-bottom: 2px;
+}
 
 .contenido img {
   border-radius: 8px;

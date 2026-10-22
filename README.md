@@ -73,10 +73,10 @@ Abre la carpeta del proyecto en Claude Code y pídele que lea este README para r
 ```
 index.html                 Portada
 la-quinta/ historia/ cuartel/ confederacion/ socios-colaboradores/
-dotacion/ directorio/
+dotacion/                  Oficialidad y Voluntarios
 formacion/
 material-mayor/ (b-5/, bx-5/, harbor-28/)
-archivo/                   Páginas retiradas (Nuestro Trabajo, Capacitación, Guardia Nocturna, Redes Sociales); enlace «Archivo» en el pie
+archivo/                   Páginas retiradas (Nuestro Trabajo, Capacitación, Guardia Nocturna, Redes Sociales, Directorio); enlace «Archivo» en el pie
 contacto/
 acceso-quintino/           Ingreso a la intranet (placeholder) y accesos internos
 assets/css, assets/js, assets/img
