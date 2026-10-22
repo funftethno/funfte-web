@@ -410,6 +410,14 @@ a:hover { color: var(--rojo-oscuro); }
   background: var(--fondo-suave);
   font-weight: 600;
 }
+/* Oficiales por jerarquia: cada fila centrada (Capitan solo, abajo tenientes, luego ayudantes) */
+.contenido .oficiales.fila {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.contenido .oficiales.fila li { flex: 0 1 200px; text-align: center; }
 .contenido .nomina {
   list-style: none;
   margin: 0 0 8px;
@@ -661,6 +669,8 @@ a:hover { color: var(--rojo-oscuro); }
   .contenido .cias { grid-template-columns: 1fr; }
   .contenido .oficiales { grid-template-columns: 1fr 1fr; gap: 8px; }
   .contenido .oficiales li { padding: 10px 12px; font-size: .92rem; }
+  .contenido .oficiales.fila { margin-bottom: 8px; }
+  .contenido .oficiales.fila li { flex-basis: calc(50% - 4px); }
   .grilla-unidades { grid-template-columns: 1fr; }
   .contenido td, .contenido th { padding: 10px; }
 }
