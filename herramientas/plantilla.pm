@@ -256,7 +256,7 @@ qq(<section class="wrap bloque">
 # los datos y los envia por correo a correo@funfte.cl. El primer envio
 # llega como correo de activacion a correo@funfte.cl y hay que confirmarlo.
 my $POSTULACION_PARA = 'correo@funfte.cl';
-# funfteit@gmail.com: copia temporal para pruebas; quitar cuando el formulario este probado
+# funfteit@gmail.com: copia permanente para monitorear el uso del formulario y probarlo
 my $POSTULACION_CC   = 'funfteit@gmail.com';
 
 sub postula {
@@ -297,7 +297,7 @@ sub gracias {
 
 # Formulario de Contacto: tambien por FormSubmit, a correo@ (ver $POSTULACION_PARA).
 # Se inserta en herramientas/contenido/contacto.html donde esta <!--FORMULARIO_CONTACTO-->.
-# funfteit@gmail.com: copia temporal para pruebas; quitar cuando el formulario este probado
+# funfteit@gmail.com: copia permanente para monitorear el uso del formulario y probarlo
 my $CONTACTO_CC = 'funfteit@gmail.com';
 
 sub formulario_contacto {
