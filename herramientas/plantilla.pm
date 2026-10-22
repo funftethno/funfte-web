@@ -76,6 +76,7 @@ sub rutas_paginas {
         redes         => ['archivo/redes-sociales/',   'Redes Sociales',      'Archivo'],
         directorio    => ['archivo/directorio/',       'Directorio',          'Archivo'],
         socios        => ['archivo/socios-colaboradores/', 'Socios Colaboradores', 'Archivo'],
+        fotos         => ['archivo/dotacion-con-fotos/', 'Dotación con fotos',  'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         calendario    => ['acceso-quintino/calendario/', 'Calendario de cumpleaños', 'Acceso Quintino'],
         postula       => ['postula/',                   'Postula a la Quinta', ''],
@@ -419,15 +420,24 @@ sub cifras_dotacion {
     return $h . '</ul>';
 }
 
-# Nomina de la Dotacion: agrega la foto de cada voluntario, assets/img/voluntario-<registro>.jpg
-# (por ejemplo voluntario-063.jpg); si aun no hay foto, una silueta.
-sub fotos_nomina {
-    my ($p, $lista) = @_;
-    $lista =~ s{<li>(?:<span>([^<]+)</span>)?}{
-        my $foto = defined $1 && -e "$FindBin::Bin/../assets/img/voluntario-$1.jpg" ? "voluntario-$1.jpg" : 'voluntario-sin-foto.svg';
-        qq(<li><img class="foto" src="${p}assets/img/$foto" alt="" width="120" height="120" loading="lazy">) . (defined $1 ? "<span>$1</span>" : '');
-    }ge;
-    return $lista;
+# Dotacion con fotos (Archivo): la misma nomina de dotacion.html en tarjetas con la foto de
+# cada voluntario, assets/img/voluntario-<registro>.jpg (por ejemplo voluntario-063.jpg; si
+# aun no hay, una silueta) y su generacion. En la pagina Dotacion la generacion no se muestra.
+sub dotacion_fotos {
+    my ($p) = @_;
+    open my $fh, '<:utf8', "$FindBin::Bin/contenido/dotacion.html" or return '';
+    local $/;
+    my $html = <$fh>;
+    my $h = qq(<article class="wrap contenido">\n);
+    while ($html =~ m{(<h3>[^<]+</h3>)\s*<ol class="nomina">(.*?)</ol>}gs) {
+        my ($titulo, $lista) = ($1, $2);
+        $lista =~ s{<li>(?:<span>([^<]+)</span>)?}{
+            my $foto = defined $1 && -e "$FindBin::Bin/../assets/img/voluntario-$1.jpg" ? "voluntario-$1.jpg" : 'voluntario-sin-foto.svg';
+            qq(<li><img class="foto" src="${p}assets/img/$foto" alt="" width="120" height="120" loading="lazy">) . (defined $1 ? "<span>$1</span>" : '');
+        }ge;
+        $h .= qq($titulo\n<ol class="nomina fotos">$lista</ol>\n);
+    }
+    return $h . '</article>';
 }
 
 # Enlace canonico, Open Graph y Twitter Card: titulo, texto e imagen que muestran
@@ -517,12 +527,13 @@ sub pagina {
                : $a{clave} eq 'acceso'      ? $cabecera . acceso_personal($p)
                : $a{clave} eq 'calendario'  ? $cabecera . calendario($p)
                : $a{clave} eq 'archivo'     ? $cabecera . archivo($p)
+               : $a{clave} eq 'fotos'       ? $cabecera . dotacion_fotos($p)
                : $a{clave} eq 'postula'     ? $cabecera . postula($p)
                : $a{clave} eq 'gracias'     ? $cabecera . gracias($p, 'Recibimos tu postulación. La Quinta se pondrá en contacto contigo por correo o teléfono.')
                : $a{clave} eq 'enviado'     ? $cabecera . gracias($p, 'Recibimos tu mensaje. Te responderemos a la brevedad por correo.')
                : $cabecera . qq(<article class="wrap contenido">\n) . ($a{contenido} =~ s/<!--FORMULARIO_CONTACTO-->/formulario_contacto()/er
                                                                         =~ s/<!--CIFRAS_DOTACION-->/cifras_dotacion($a{contenido})/er
-                                                                        =~ s{<ol class="nomina">.*?</ol>}{fotos_nomina($p, $&)}gser) . qq(\n</article>);
+                                                                        =~ s{ ?<small>Generación \d{4}</small>}{}gr) . qq(\n</article>);
     # en la 404 ningun item del menu queda marcado como actual
     my $menu = menu($p, $a{clave} eq 'error404' ? '-' : $a{ruta}, $a{seccion});
     my $acceso_actual = $a{clave} eq 'acceso' ? ' aria-current="page"' : '';
