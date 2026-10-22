@@ -379,7 +379,7 @@ $cuerpo
 <div>
 <h2>Contacto</h2>
 <p><strong>Quinta Compañía de Bomberos de Talcahuano</strong><br>Fünfte Deutsche Feuerwehrkompanie Stadt Talcahuano</p>
-<p>Avenida Río Maule 5383, Villa Independencia<br>Sector Denavi Sur, Talcahuano, Chile</p>
+<p>Río Maule 5383, Villa Independencia<br>Sector Denavi Sur, Talcahuano, Chile</p>
 </div>
 <div>
 <h2>Comunícate</h2>
