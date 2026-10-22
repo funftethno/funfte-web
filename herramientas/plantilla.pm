@@ -20,6 +20,7 @@ sub huella {
 my $V_CSS = huella('assets/css/estilos.css');
 my $V_JS  = huella('assets/js/menu.js');
 my $V_CAL = huella('assets/js/calendario.js');
+my $V_GEN = huella('assets/js/generaciones.js');
 
 # Direccion publica del sitio (enlaces canonicos, Open Graph y sitemap)
 our $SITIO = 'https://funfte.cl/';
@@ -422,18 +423,32 @@ sub cifras_dotacion {
 
 # Dotacion con fotos (Archivo): la misma nomina de dotacion.html en tarjetas con la foto de
 # cada voluntario, assets/img/voluntario-<registro>.jpg (por ejemplo voluntario-063.jpg; si
-# aun no hay, una silueta) y su generacion. En la pagina Dotacion la generacion no se muestra.
+# aun no hay, una silueta). El registro y la generacion se ven solo con contraseña: la
+# generacion va cifrada en contenido/generaciones.cifrado (ver cifrar_generaciones.pl) y
+# generaciones.js muestra ambos al ingresar la contraseña.
 sub dotacion_fotos {
     my ($p) = @_;
     open my $fh, '<:utf8', "$FindBin::Bin/contenido/dotacion.html" or return '';
     local $/;
     my $html = <$fh>;
     my $h = qq(<article class="wrap contenido">\n);
+    if (open my $c, '<', "$FindBin::Bin/contenido/generaciones.cifrado") {
+        chomp(my $cifrado = <$c>);
+        $h .= qq(<form class="desbloqueo" id="desbloqueo">
+<label for="clave-generacion">Contraseña para ver el registro y la generación</label>
+<div><input id="clave-generacion" name="clave" type="password" autocomplete="off" required>
+<button class="boton" type="submit">Desbloquear</button></div>
+<p id="desbloqueo-aviso" class="desbloqueo-aviso" aria-live="polite"></p>
+</form>
+<script type="application/json" id="generaciones">$cifrado</script>
+<script src="${p}assets/js/generaciones.js$V_GEN" defer></script>
+);
+    }
     while ($html =~ m{(<h3>[^<]+</h3>)\s*<ol class="nomina">(.*?)</ol>}gs) {
         my ($titulo, $lista) = ($1, $2);
         $lista =~ s{<li>(?:<span>([^<]+)</span>)?}{
             my $foto = defined $1 && -e "$FindBin::Bin/../assets/img/voluntario-$1.jpg" ? "voluntario-$1.jpg" : 'voluntario-sin-foto.svg';
-            qq(<li><img class="foto" src="${p}assets/img/$foto" alt="" width="120" height="120" loading="lazy">) . (defined $1 ? "<span>$1</span>" : '');
+            (defined $1 ? qq(<li data-registro="$1">) : '<li>') . qq(<img class="foto" src="${p}assets/img/$foto" alt="" width="120" height="120" loading="lazy">);
         }ge;
         $h .= qq($titulo\n<ol class="nomina fotos">$lista</ol>\n);
     }
@@ -532,8 +547,7 @@ sub pagina {
                : $a{clave} eq 'gracias'     ? $cabecera . gracias($p, 'Recibimos tu postulación. La Quinta se pondrá en contacto contigo por correo o teléfono.')
                : $a{clave} eq 'enviado'     ? $cabecera . gracias($p, 'Recibimos tu mensaje. Te responderemos a la brevedad por correo.')
                : $cabecera . qq(<article class="wrap contenido">\n) . ($a{contenido} =~ s/<!--FORMULARIO_CONTACTO-->/formulario_contacto()/er
-                                                                        =~ s/<!--CIFRAS_DOTACION-->/cifras_dotacion($a{contenido})/er
-                                                                        =~ s{ ?<small>Generación \d{4}</small>}{}gr) . qq(\n</article>);
+                                                                        =~ s/<!--CIFRAS_DOTACION-->/cifras_dotacion($a{contenido})/er) . qq(\n</article>);
     # en la 404 ningun item del menu queda marcado como actual
     my $menu = menu($p, $a{clave} eq 'error404' ? '-' : $a{ruta}, $a{seccion});
     my $acceso_actual = $a{clave} eq 'acceso' ? ' aria-current="page"' : '';

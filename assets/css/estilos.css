@@ -519,6 +519,14 @@ a.saludo:hover { border-color: var(--dorado); }
 }
 .contenido .nomina.fotos span { min-width: 0; font-size: .78rem; letter-spacing: .06em; }
 .contenido .nomina.fotos small { font-size: .82rem; font-weight: 400; }
+.desbloqueo { margin: 0 0 32px; padding: 16px 18px; border: 1px solid var(--borde); border-radius: var(--radio); background: var(--fondo-suave); }
+.desbloqueo[hidden] { display: none; }
+.desbloqueo label { display: block; font-size: .9rem; font-weight: 600; margin-bottom: 6px; }
+.desbloqueo div { display: flex; flex-wrap: wrap; gap: 8px; }
+.desbloqueo input { flex: 1 1 180px; max-width: 280px; padding: 10px 12px; font: inherit; border: 1px solid var(--borde); border-radius: 6px; background: #fff; }
+.desbloqueo .boton { cursor: pointer; font: inherit; font-weight: 600; border: 0; }
+.desbloqueo-aviso { margin: 8px 0 0; font-size: .85rem; color: var(--texto-suave); }
+.desbloqueo-aviso:empty { display: none; }
 .contenido .oficiales span {
   display: block;
   font-size: .78rem;
