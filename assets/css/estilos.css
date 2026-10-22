@@ -649,6 +649,23 @@ a.saludo:hover { border-color: var(--dorado); }
 .tarjeta-texto span { font-size: .9rem; color: var(--texto-suave); line-height: 1.5; }
 .contenido h2.otras { margin-top: 2.4em; }
 
+
+/* Flota actual: fotografías aisladas y presentación uniforme */
+.grilla-unidades--actuales .tarjeta-unidad img {
+  aspect-ratio: 4 / 3; object-fit: contain; background: #f3f4f6;
+}
+/* Archivo histórico: encuadre y tratamiento homogéneos */
+.grilla-unidades--historicas .tarjeta-unidad img {
+  aspect-ratio: 4 / 3; object-fit: contain; padding: 6px; box-sizing: border-box;
+  background: #eeeae5; filter: grayscale(100%) contrast(1.07);
+}
+.grilla-unidades--historicas .tarjeta-unidad:hover img {
+  filter: grayscale(100%) contrast(1.12);
+}
+.foto-unidad-principal { display:block; width:100%; max-width:760px; height:auto;
+  margin:0 auto 1.5rem; border-radius:var(--radio); background:#f3f4f6;
+  border:1px solid var(--borde); object-fit:contain; }
+
 /* Formacion */
 .intro { font-size: 1.15rem; max-width: 780px; color: var(--texto-suave); margin: 0 0 28px; }
 .destacado {
