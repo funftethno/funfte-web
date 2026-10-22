@@ -41,7 +41,8 @@ Las páginas (`index.html` de cada carpeta) **se generan**. No se editan a mano:
 | Menú, cabecera, pie, portada, páginas Formación y Acceso Quintino, accesos y enlaces | `herramientas/plantilla.pm` |
 | Colores, tipografía y diseño | `assets/css/estilos.css` |
 | Menú en celular | `assets/js/menu.js` |
-| Imágenes | `assets/img/` |
+| Imágenes (máximo 1600 px de ancho, con texto `alt`) | `assets/img/` |
+| Descripción de cada página para Google y redes sociales | `%DESCRIPCIONES` en `herramientas/plantilla.pm` |
 
 Para regenerar todas las páginas:
 
@@ -125,6 +126,8 @@ assets/css, assets/js, assets/img
 herramientas/              Generador (Perl), contenido de las páginas, revisor y servidor local
 .github/workflows/         Revisión automática de cada Pull Request
 wrangler.jsonc             Configuración de Cloudflare (qué se publica)
+_headers / _redirects       Cabeceras de caché y seguridad / redirecciones del sitio antiguo
+404.html robots.txt sitemap.xml   Generados por herramientas/generar.pl
 .assetsignore              Archivos del repositorio que no se publican
 ```
 

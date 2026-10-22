@@ -38,6 +38,9 @@ Es HTML estático generado con Perl. No hay WordPress, base de datos, Node ni fr
 | Imágenes | `assets/img/` |
 
 - Las claves de página y sus rutas están en `rutas_paginas()` de `herramientas/plantilla.pm`. El menú está en `@MENU` y los accesos de Acceso Quintino en `@ACCESOS`.
+- Cada página pública tiene una descripción para buscadores y para la vista previa al compartir (WhatsApp, Facebook) en `%DESCRIPCIONES` de `plantilla.pm`. Si creas una página nueva, agrégale su descripción (una o dos frases).
+- `generar.pl` también produce `404.html`, `robots.txt` y `sitemap.xml`, y agrega `width`/`height` a cada imagen. No los edites a mano.
+- **Imágenes nuevas**: JPEG o PNG de máximo 1600 px de ancho y, en lo posible, menos de 300 KB. Nombre en minúsculas, sin espacios ni tildes. Toda imagen de contenido lleva un `alt` que describa lo que muestra; `revisar.pl` falla si falta y avisa si una imagen no se usa.
 - Las rutas dentro de `herramientas/contenido/*.html` son **relativas a la página publicada**: `../assets/img/...` para una página de primer nivel, `../../assets/img/...` para una de segundo nivel (por ejemplo `material-mayor/b-5/` o `archivo/...`).
 
 ## Pasos obligatorios después de cualquier cambio
@@ -67,7 +70,7 @@ Flujo obligatorio, en este orden:
 - **`master` está protegida**: nunca hagas push directo, force push ni Pull Requests desde otra rama que no sea `desarrollo`. Abrir el Pull Request a `master` le corresponde al owner, salvo que te lo pida.
 - No hagas force push a `desarrollo`: es compartida.
 - No borres las ramas personales: son fijas. Las ramas puntuales sí se borran cuando ya están en `desarrollo`.
-- No cambies `wrangler.jsonc`, `.assetsignore`, `_redirects` ni `.github/workflows/` salvo que te lo pidan expresamente: controlan el despliegue.
+- No cambies `wrangler.jsonc`, `.assetsignore`, `_redirects`, `_headers` (cabeceras de caché y seguridad) ni `.github/workflows/` salvo que te lo pidan expresamente: controlan el despliegue.
 
 ## Convenciones del contenido
 
