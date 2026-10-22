@@ -395,7 +395,7 @@ sub datos_estructurados {
         push @datos, {
             '@type' => 'FireStation', '@id' => $org, name => $NOMBRE,
             alternateName => ['Bomba Chile', 'Fünfte Deutsche Feuerwehrkompanie Talcahuano'],
-            url => $SITIO, logo => "${SITIO}assets/img/confe-talcahuano-5.png",
+            url => $SITIO, logo => "${SITIO}assets/img/escudo-quinta.png",
             image => "${SITIO}assets/img/2011-12-DSC0103-1030x688.jpg",
             description => $DESCRIPCIONES{inicio}, foundingDate => $FUNDACION, email => $CORREO,
             address => { '@type' => 'PostalAddress', streetAddress => $DIRECCION{calle},
