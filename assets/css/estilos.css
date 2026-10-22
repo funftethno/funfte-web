@@ -397,6 +397,28 @@ a:hover { color: var(--rojo-oscuro); }
   background: var(--fondo-suave);
   font-weight: 600;
 }
+.contenido .nomina {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  columns: 3 220px;
+  column-gap: 32px;
+}
+.contenido .nomina li {
+  break-inside: avoid;
+  display: flex;
+  gap: .6em;
+  margin: 0;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--borde);
+}
+.contenido .nomina span {
+  flex: none;
+  min-width: 2.6em;
+  font-variant-numeric: tabular-nums;
+  color: var(--texto-suave);
+}
+.contenido .nomina small { color: var(--texto-suave); }
 .contenido .oficiales span {
   display: block;
   font-size: .78rem;
@@ -562,6 +584,8 @@ a:hover { color: var(--rojo-oscuro); }
 @media (max-width: 720px) {
   .contenido p > img:first-child { float: none; max-width: 100%; margin: 0 0 1em; }
   .contenido .cias { grid-template-columns: 1fr; }
+  .contenido .oficiales { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .contenido .oficiales li { padding: 10px 12px; font-size: .92rem; }
   .grilla-unidades { grid-template-columns: 1fr; }
   .contenido td, .contenido th { padding: 10px; }
 }
