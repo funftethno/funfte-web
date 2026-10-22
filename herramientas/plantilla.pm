@@ -29,7 +29,7 @@ my $CORREO    = 'correo@funfte.cl';
 my %DIRECCION = (calle => 'Río Maule 5383, Villa Independencia', comuna => 'Talcahuano',
                  region => 'Región del Biobío', pais => 'CL');
 my @COORDENADAS = (-36.763267, -73.092603);   # las mismas del mapa de Contacto
-my @REDES = (['Instagram', 'https://www.instagram.com/funfte'],
+my @REDES = (['Instagram', 'https://www.instagram.com/funftetalcahuano/'],
              ['Facebook',  'https://www.facebook.com/funfte']);
 
 # Texto para buscadores y para la vista previa al compartir un enlace (WhatsApp,
