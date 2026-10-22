@@ -6,6 +6,7 @@ use utf8;
 use Exporter 'import';
 use Digest::MD5 qw(md5_hex);
 use FindBin;
+use Unicode::Normalize qw(NFD);
 our @EXPORT_OK = qw(pagina rutas_paginas);
 
 my $NOMBRE  = 'Quinta Compañía de Bomberos de Talcahuano';
@@ -20,6 +21,8 @@ sub huella {
 my $V_CSS = huella('assets/css/estilos.css');
 my $V_JS  = huella('assets/js/menu.js');
 my $V_CAL = huella('assets/js/calendario.js');
+my $V_PRIV = huella('assets/js/privados.js');
+my $V_ICO = huella('favicon.ico');
 
 # Direccion publica del sitio (enlaces canonicos, Open Graph y sitemap)
 our $SITIO = 'https://funfte.cl/';
@@ -47,21 +50,21 @@ my %DESCRIPCIONES = (
     formacion     => 'Formación de voluntarios: convocatorias, Aula Virtual, malla curricular y material de la Academia Nacional de Bomberos.',
     postula       => 'Postula como bombero voluntario de la Quinta Compañía de Bomberos de Talcahuano. Completa el formulario y te contactaremos.',
     acceso        => 'Acceso Quintino: intranet y plataformas internas para voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
-    material      => 'Material mayor de la Quinta: unidades B-5, MX-5 y RX-5 en servicio y archivo histórico desde 1908.',
+    material      => 'Material mayor de la Quinta: unidades B-5, MX-5 y RX-5 en servicio, además de sus vehículos históricos.',
     bx5           => 'Unidad BX-5: Iveco Magirus FF150E30W 4x4 de 2012, unidad mixta de incendio y rescate de la Quinta Compañía de Talcahuano.',
     b5            => 'Unidad B-5: Iveco Magirus FF150E30 de 2018, unidad de control de incendios de la Quinta Compañía de Talcahuano.',
-    mx5           => 'Unidad MX-5: Scania-Ziegler/Cela TLF 40/12 + ALP 330X, P410. Plataforma aérea para rescate y control de incendios en edificios.',
-    rx5           => 'Unidad RX-5: MAN-Magirus LF 30/20 (2024), TGM 18.320. Rescate técnico pesado y control de incendios.'
-    harbor        => 'Mauricio II / Harbor 28: embarcación histórica para rescate medioambiental y descontaminación de aguas de la Quinta Compañía.'
-    gallo         => 'Gallo, 1908: fotografías del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    mx5           => 'Unidad MX-5: Scania-Ziegler/Cela TLF 40/12 + ALP 330X, Scania P410. Plataforma aérea para rescate de difícil acceso y control de incendios en edificios.',
+    rx5           => 'Unidad RX-5: MAN-Magirus LF 30/20 de 2024, sobre chasis MAN TGM 18.320. Rescate técnico pesado y control de incendios.',
+    harbor        => 'Unidad Mauricio II / Harbor 28: embarcación de rescate medioambiental para descontaminación de aguas de la Quinta Compañía de Talcahuano.',
+    gallo         => 'Gallo, 1908: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
     beduwe        => 'Usines Beduwé «Bomba Chile», 1911: fotografías del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    hansa         => 'Hansa Lloyd Bomba Flanders, 1927: fotografías del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    ford          => 'Ford Bomba Champion, 1941: fotografías del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    berliet       => 'Berliet-Camiva, 1973: fotografías del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    magirus       => 'Magirus Deutz, 1954: fotografías del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    s170          => 'Renault Camiva S-170, 1990: fotografías del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    b110          => 'Renault Camiva B-110, 1994: fotografías del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    s150          => 'Renault Camiva S-150, 1999: fotografías del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    hansa         => 'Hansa Lloyd «Bomba Flanders», 1927: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    ford          => 'Ford «Bomba Champion», 1941: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    magirus       => 'Magirus Deutz, 1954: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    berliet       => 'Berliet-Camiva, 1973: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    s170          => 'Renault Camiva S-170, 1990: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    b110          => 'Renault Camiva B-110, 1994: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    s150          => 'Renault Camiva S-150, 1999: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
     contacto      => 'Contacto de la Quinta Compañía de Bomberos de Talcahuano: Río Maule 5383, Villa Independencia. Correo, formulario de contacto y mapa.',
     error404      => 'La página que buscas no existe o cambió de dirección.',
 );
@@ -87,6 +90,7 @@ sub rutas_paginas {
         redes         => ['archivo/redes-sociales/',   'Redes Sociales',      'Archivo'],
         directorio    => ['archivo/directorio/',       'Directorio',          'Archivo'],
         socios        => ['archivo/socios-colaboradores/', 'Socios Colaboradores', 'Archivo'],
+        fotos         => ['archivo/dotacion-con-fotos/', 'Dotación con fotos',  'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         calendario    => ['acceso-quintino/calendario/', 'Calendario de cumpleaños', 'Acceso Quintino'],
         postula       => ['postula/',                   'Postula a la Quinta', ''],
@@ -97,13 +101,13 @@ sub rutas_paginas {
         b5            => ['material-mayor/b-5/',       'Unidad B-5',          'La Quinta'],
         mx5           => ['material-mayor/mx-5/',      'Unidad MX-5',         'La Quinta'],
         rx5           => ['material-mayor/rx-5/',      'Unidad RX-5',         'La Quinta'],
-        harbor        => ['material-mayor/harbor-28/', 'Mauricio II / Harbor 28', 'La Quinta'],
+        harbor        => ['material-mayor/harbor-28/', 'Unidad Mauricio II / Harbor 28', 'La Quinta'],
         gallo         => ['material-mayor/gallo-1908/', 'Gallo, 1908', 'La Quinta'],
         beduwe        => ['material-mayor/usines-beduwe-1911/', 'Usines Beduwé «Bomba Chile», 1911', 'La Quinta'],
-        hansa         => ['material-mayor/hansa-lloyd-1927/', 'Hansa Lloyd Bomba Flanders, 1927', 'La Quinta'],
-        ford          => ['material-mayor/ford-champion-1941/', 'Ford Bomba Champion, 1941', 'La Quinta'],
-        berliet       => ['material-mayor/berliet-camiva-1973/', 'Berliet-Camiva, 1973', 'La Quinta'],
+        hansa         => ['material-mayor/hansa-lloyd-1927/', 'Hansa Lloyd «Bomba Flanders», 1927', 'La Quinta'],
+        ford          => ['material-mayor/ford-champion-1941/', 'Ford «Bomba Champion», 1941', 'La Quinta'],
         magirus       => ['material-mayor/magirus-deutz-1954/', 'Magirus Deutz, 1954', 'La Quinta'],
+        berliet       => ['material-mayor/berliet-camiva-1973/', 'Berliet-Camiva, 1973', 'La Quinta'],
         s170          => ['material-mayor/renault-camiva-s-170-1990/', 'Renault Camiva S-170, 1990', 'La Quinta'],
         b110          => ['material-mayor/renault-camiva-b-110-1994/', 'Renault Camiva B-110, 1994', 'La Quinta'],
         s150          => ['material-mayor/renault-camiva-s-150-1999/', 'Renault Camiva S-150, 1999', 'La Quinta'],
@@ -125,6 +129,7 @@ my @ACCESOS = (
     ['Webmail',                          'Correo electrónico institucional @funfte.cl mediante la plataforma de Google.', $WEBMAIL, 'correo'],
     ['SISPAR',                           'Plataforma de registro y control: administración y gestión interna de bomberos.', 'https://sispar.sisparnovenacbt.com/login.php', 'sisab'],
     ['Registro Nacional de Bomberos',    'Acceso RNB a los sistemas de la Junta Nacional de Bomberos.', 'https://www.bomberos.cl/sist/escritorio_virtual/', 'documento'],
+    ['Calendario de cumpleaños',         'Aniversarios de las compañías, para mostrar en pantalla completa en el cuartel.', 'acceso-quintino/calendario/', 'torta'],
 );
 my @SITIOS = (
     ['Cuerpo de Bomberos de Talcahuano', 'Sitio oficial del Cuerpo de Bomberos de Talcahuano.', 'https://cbt.cl', 'web'],
@@ -219,18 +224,8 @@ sub acceso_personal {
 </div>
 </section>
 <section class="wrap bloque">
-<div class="destacado">
-) . icono('torta') . qq(
-<div>
-<h2>Calendario de cumpleaños</h2>
-<p>Aniversarios de las compañías del Cuerpo y de la Confederación, listo para mostrar en pantalla completa en el cuartel.</p>
-</div>
-<a class="boton" href="${p}acceso-quintino/calendario/">Ver calendario</a>
-</div>
-</section>
-<section class="wrap bloque">
 <h2 class="titulo-seccion">Accesos administrativos</h2>
-<div class="grilla-tarjetas tres">
+<div class="grilla-tarjetas">
 );
     $h .= tarjeta($p, $_->[3], $_->[0], $_->[1], $_->[2], 'Ingresar') for @ACCESOS;
     $h .= qq(</div>\n</section>\n<section class="wrap bloque">\n<h2 class="titulo-seccion">Sitios de interés</h2>\n<div class="grilla-tarjetas tres">\n);
@@ -450,6 +445,48 @@ sub cifras_dotacion {
     return $h . '</ul>';
 }
 
+# Dotacion con fotos (Archivo): la misma nomina de dotacion.html en tarjetas con el numero de
+# antiguedad, el nombre y la foto de cada voluntario: assets/img/voluntario-<nombre>.jpg, en
+# minusculas, sin tildes y con guiones (por ejemplo voluntario-fernando-vera-torres.jpg); si aun
+# no hay, una silueta. La generacion y el numero de registro son privados: van cifrados en
+# contenido/privados.cifrado (ver cifrar_privados.pl) y privados.js los muestra con la contraseña.
+sub foto_voluntario {
+    my ($nombre) = @_;
+    (my $archivo = lc NFD($nombre)) =~ s/\p{Mn}//g;
+    $archivo =~ s/[^a-z0-9]+/-/g;
+    $archivo =~ s/^-|-$//g;
+    return -e "$FindBin::Bin/../assets/img/voluntario-$archivo.jpg" ? "voluntario-$archivo.jpg" : 'voluntario-sin-foto.svg';
+}
+
+sub dotacion_fotos {
+    my ($p) = @_;
+    open my $fh, '<:utf8', "$FindBin::Bin/contenido/dotacion.html" or return '';
+    local $/;
+    my $html = <$fh>;
+    my $h = qq(<article class="wrap contenido">\n);
+    if (open my $c, '<', "$FindBin::Bin/contenido/privados.cifrado") {
+        chomp(my $cifrado = <$c>);
+        $h .= qq(<form class="desbloqueo" id="desbloqueo">
+<label for="clave-privados">Contraseña para ver la generación y el número de registro</label>
+<div><input id="clave-privados" name="clave" type="password" autocomplete="off" required>
+<button class="boton" type="submit">Desbloquear</button></div>
+<p id="desbloqueo-aviso" class="desbloqueo-aviso" aria-live="polite"></p>
+</form>
+<script type="application/json" id="privados">$cifrado</script>
+<script src="${p}assets/js/privados.js$V_PRIV" defer></script>
+);
+    }
+    while ($html =~ m{(<h3>[^<]+</h3>)\s*<ol class="nomina">(.*?)</ol>}gs) {
+        my ($titulo, $lista) = ($1, $2);
+        $lista =~ s{<li>((?:<span>[^<]+</span>)?)([^<]+)}{
+            my ($antiguedad, $nombre) = ($1, $2);
+            qq(<li><img class="foto" src="${p}assets/img/) . foto_voluntario($nombre =~ s/\s+$//r) . qq(" alt="" width="120" height="120" loading="lazy">$antiguedad$nombre);
+        }ge;
+        $h .= qq($titulo\n<ol class="nomina fotos">$lista</ol>\n);
+    }
+    return $h . '</article>';
+}
+
 # Enlace canonico, Open Graph y Twitter Card: titulo, texto e imagen que muestran
 # Google, WhatsApp y Facebook. La imagen es la primera foto del contenido o la portada.
 sub meta_compartir {
@@ -537,6 +574,7 @@ sub pagina {
                : $a{clave} eq 'acceso'      ? $cabecera . acceso_personal($p)
                : $a{clave} eq 'calendario'  ? $cabecera . calendario($p)
                : $a{clave} eq 'archivo'     ? $cabecera . archivo($p)
+               : $a{clave} eq 'fotos'       ? $cabecera . dotacion_fotos($p)
                : $a{clave} eq 'postula'     ? $cabecera . postula($p)
                : $a{clave} eq 'gracias'     ? $cabecera . gracias($p, 'Recibimos tu postulación. La Quinta se pondrá en contacto contigo por correo o teléfono.')
                : $a{clave} eq 'enviado'     ? $cabecera . gracias($p, 'Recibimos tu mensaje. Te responderemos a la brevedad por correo.')
@@ -561,7 +599,8 @@ sub pagina {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>$titulo</title>
 <meta name="description" content="$descripcion">$meta
-<link rel="icon" href="${p}favicon.ico">
+<link rel="icon" href="${p}favicon.ico$V_ICO">
+<link rel="apple-touch-icon" href="${p}assets/img/icono-180.png">
 <link rel="stylesheet" href="${p}assets/css/estilos.css$V_CSS">
 <script src="${p}assets/js/menu.js$V_JS" defer></script>
 </head>
@@ -569,7 +608,7 @@ sub pagina {
 <a class="saltar" href="#principal">Saltar al contenido</a>
 <header class="cabecera">
 <div class="wrap cabecera-fila">
-<a class="marca" href="$p"><img src="${p}assets/img/logo.png" alt="Fünfte – Quinta Compañía de Bomberos de Talcahuano"></a>
+<a class="marca" href="$p"><img src="${p}assets/img/escudo-quinta.png" alt="Escudo de la Fünfte – Quinta Compañía de Bomberos de Talcahuano"></a>
 <nav aria-label="Principal">
 <ul class="menu" id="menu-principal">
 $menu</ul>
