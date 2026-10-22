@@ -55,4 +55,41 @@ document.addEventListener('DOMContentLoaded', function () {
       boton.parentElement.classList.toggle('sub-abierto', !abierto);
     });
   });
+
+  // Portada: saludo a las compañias que estan de aniversario hoy.
+  // Para probar otro dia: ?fecha=MM-DD (por ejemplo ?fecha=11-08).
+  var datos = document.getElementById('aniversarios');
+  var saludos = document.getElementById('saludos');
+  if (datos && saludos) {
+    var hoy = new Date();
+    var prueba = /[?&]fecha=(\d{2})-(\d{2})/.exec(location.search);
+    var mes = prueba ? +prueba[1] : hoy.getMonth() + 1;
+    var dia = prueba ? +prueba[2] : hoy.getDate();
+    JSON.parse(datos.textContent).forEach(function (c) {
+      if (c.mes !== mes || c.dia !== dia) return;
+      var anios = hoy.getFullYear() - c.anio;
+      var tarjeta = document.createElement(c.enlace ? 'a' : 'div');
+      tarjeta.className = 'saludo';
+      if (c.enlace) { tarjeta.href = c.enlace; tarjeta.target = '_blank'; tarjeta.rel = 'noopener'; }
+      if (c.escudo) {
+        var img = document.createElement('img');
+        img.src = c.escudo;
+        img.alt = '';
+        tarjeta.appendChild(img);
+      }
+      var texto = document.createElement('p');
+      if (c.propia) {
+        texto.innerHTML = '<strong>¡Hoy la Quinta está de aniversario!</strong> Cumplimos ' + anios + ' años al servicio de Talcahuano.';
+      } else {
+        texto.appendChild(document.createTextNode('Hoy saludamos a la '));
+        var nombre = document.createElement('strong');
+        nombre.textContent = c.nombre;
+        texto.appendChild(nombre);
+        texto.appendChild(document.createTextNode(' por su aniversario de ' + anios + ' años.'));
+      }
+      tarjeta.appendChild(texto);
+      saludos.appendChild(tarjeta);
+      saludos.hidden = false;
+    });
+  }
 });

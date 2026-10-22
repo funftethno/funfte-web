@@ -203,8 +203,40 @@ sub acceso_personal {
     return $h . "</div>\n</section>";
 }
 
+# Aniversarios de las companias del Cuerpo y de la Confederacion, sacados de sus tarjetas
+# (h4, «Fundada el ...» y escudo). La portada los incluye y menu.js muestra el saludo del dia.
+my %MESES = (enero => 1, febrero => 2, marzo => 3, abril => 4, mayo => 5, junio => 6, julio => 7,
+             agosto => 8, septiembre => 9, octubre => 10, noviembre => 11, diciembre => 12);
+sub aniversarios {
+    my ($p) = @_;
+    my (@lista, %visto);
+    for my $archivo ('cbt', 'confederacion') {
+        open my $fh, '<:utf8', "$FindBin::Bin/contenido/$archivo.html" or next;
+        local $/;
+        my $html = <$fh>;
+        while ($html =~ m{<article class="cia">(.*?)</article>}gs) {
+            my $t = $1;
+            my ($nombre) = $t =~ m{<h4>(.*?)</h4>} or next;
+            my ($dia, $mes, $anio) = $t =~ /Fundada el (\d+) de (\w+) de (\d{4})/ or next;
+            next if $nombre =~ /«Bomba Chile»/ || $visto{$nombre}++;    # la Quinta: es nuestro propio aniversario
+            $nombre =~ s/^(\d+ª) /$1 Compañía /;
+            $nombre .= ' de Talcahuano' if $archivo eq 'cbt';
+            my ($escudo) = $t =~ m{<img src="\.\./(assets/img/[^"]+)"};
+            my ($enlace) = $t =~ m{<a href="(https://www\.instagram\.com/[^"]+)"};
+            ($enlace) = $t =~ m{<a href="(https?://[^"]+)"} unless $enlace;
+            push @lista, { nombre => $nombre, dia => $dia, mes => $MESES{$mes}, anio => $anio,
+                           ($escudo ? (escudo => "$p$escudo") : ()), ($enlace ? (enlace => $enlace) : ()) };
+        }
+    }
+    my @quinta = (1908, 1, 29);
+    push @lista, { nombre => 'la Quinta', propia => 1, anio => $quinta[0], mes => $quinta[1], dia => $quinta[2],
+                   escudo => "${p}assets/img/escudo-quinta.png" };
+    return json([ sort { $a->{mes} <=> $b->{mes} || $a->{dia} <=> $b->{dia} } @lista ]);
+}
+
 sub inicio {
     my ($p) = @_;
+    my $aniversarios = aniversarios($p);
     my $portada = '2011-12-DSC0103-1030x688.jpg';
     my $escudo  = '2013-04-Sin-titulo-3.png';
     return
@@ -224,6 +256,8 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
   . tarjeta($p, 'auto', 'Compra tu SOAP', 'Compra tu SOAP con Bomberos de Chile y elige a la Quinta: tu donación va directamente a nuestra compañía.', $SOAP, 'Comprar SOAP')
   . qq(</div>
 </section>
+<section class="wrap saludos" id="saludos" hidden></section>
+<script type="application/json" id="aniversarios">$aniversarios</script>
 <section class="lema">
 <div class="wrap">
 <img src="${p}assets/img/$escudo" alt="" loading="lazy">

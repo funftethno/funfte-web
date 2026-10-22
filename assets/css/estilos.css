@@ -337,6 +337,26 @@ a:hover { color: var(--rojo-oscuro); }
   padding: 6px 14px;
 }
 
+/* Portada: saludo de aniversario (lo muestra menu.js solo el dia que corresponde) */
+.saludos { display: grid; gap: 12px; margin-top: 56px; }
+.saludo {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 22px;
+  border: 1px solid var(--borde);
+  border-left: 4px solid var(--dorado);
+  border-radius: var(--radio);
+  background: var(--fondo-suave);
+  color: inherit;
+  text-decoration: none;
+}
+a.saludo:hover { border-color: var(--dorado); }
+.saludo img { width: 64px; height: 64px; object-fit: contain; flex-shrink: 0; }
+.saludo p { margin: 0; font-size: 1.05rem; }
+.saludos[hidden] { display: none; }
+.saludos:not([hidden]) + script + .lema { margin-top: 40px; }
+
 .lema {
   background: var(--carbon);
   color: #fff;
