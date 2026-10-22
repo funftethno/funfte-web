@@ -490,17 +490,21 @@ sub cifras_dotacion {
 # Tarjetas de acceso a las subsecciones de una pagina del menu (por ejemplo La Quinta), donde
 # su contenido tiene <!--SECCIONES-->. Salen del submenu de @MENU, con la descripcion de cada
 # pagina y la primera imagen de su contenido; un logo (PNG) se muestra entero y una pagina sin
-# imagen lleva el escudo de la Quinta.
+# imagen lleva el escudo de la Quinta. %SECCIONES_EXTRA agrega al comienzo paginas que no estan
+# en ese submenu, con una foto elegida si su contenido no tiene.
+my %SECCIONES_EXTRA = (
+    'la-quinta/' => [['Dotación', 'dotacion/', '2013-06-P9270023.jpg']],
+);
 sub secciones {
     my ($p, $ruta) = @_;
     my %rutas = rutas_paginas();
     my %clave = map { $rutas{$_}{ruta} => $_ } keys %rutas;
     my ($menu) = grep { $_->[1] eq $ruta && $_->[2] } @MENU or return '';
     my $h = qq(<div class="grilla-unidades grilla-secciones">\n);
-    for my $s (@{ $menu->[2] }) {
-        my ($titulo, $destino) = @$s;
+    for my $s (@{ $SECCIONES_EXTRA{$ruta} // [] }, @{ $menu->[2] }) {
+        my ($titulo, $destino, $foto) = @$s;
         my $c = $clave{$destino} // next;
-        my ($foto) = leer_contenido($c) =~ m{assets/img/([^"']+\.(?:jpe?g|png))}i;
+        ($foto) = leer_contenido($c) =~ m{assets/img/([^"']+\.(?:jpe?g|png))}i unless $foto;
         my $clase = !$foto || $foto =~ /\.png$/i ? ' class="logo"' : '';
         $foto //= 'escudo-quinta.png';
         $h .= qq(<a class="tarjeta-unidad" href="$p$destino"><img$clase src="${p}assets/img/$foto" alt="" loading="lazy">)
