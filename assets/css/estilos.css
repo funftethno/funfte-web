@@ -418,6 +418,37 @@ a:hover { color: var(--rojo-oscuro); }
   margin-bottom: 12px;
 }
 .contenido .oficiales.fila li { flex: 0 1 200px; text-align: center; }
+/* Resumen de la dotacion: numero grande y tipo de voluntario */
+.contenido .cifras {
+  list-style: none;
+  margin: 0 0 1.6em;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+}
+.contenido .cifras li {
+  margin: 0;
+  padding: 16px 12px 14px;
+  text-align: center;
+  border: 1px solid var(--borde);
+  border-top: 4px solid var(--rojo);
+  border-radius: var(--radio);
+  background: var(--fondo-suave);
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--texto-suave);
+}
+.contenido .cifras strong {
+  display: block;
+  font-size: 2.2rem;
+  line-height: 1.1;
+  letter-spacing: 0;
+  color: var(--texto);
+  margin-bottom: 4px;
+}
 .contenido .nomina {
   list-style: none;
   margin: 0 0 8px;

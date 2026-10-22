@@ -107,7 +107,7 @@ my @ACCESOS = (
 my @MENU = (
     ['Inicio', ''],
     ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Material Mayor','material-mayor/'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
-    ['Dotación', 'dotacion/', [['Oficialidad','dotacion/#oficialidad'], ['Voluntarios','dotacion/#voluntarios']]],
+    ['Dotación', 'dotacion/', [['Oficialidad','dotacion/#oficialidad'], ['Dotación completa','dotacion/#dotacion-completa']]],
     ['Formación', 'formacion/'],
     ['Contacto', 'contacto/'],
 );
@@ -337,6 +337,19 @@ sub archivo {
     return $h . "</ul>\n</article>";
 }
 
+# Resumen de la dotacion en cifras: cuenta los nombres de cada lista "Voluntarios ..."
+# de la pagina, asi el resumen nunca queda desactualizado al agregar o quitar voluntarios.
+sub cifras_dotacion {
+    my ($html) = @_;
+    my $h = qq(<ul class="cifras">\n);
+    while ($html =~ m{<h3>Voluntarios (\w+)</h3>\s*<ol[^>]*>(.*?)</ol>}gs) {
+        my ($tipo, $lista) = (ucfirst $1, $2);
+        my $n = () = $lista =~ /<li\b/g;
+        $h .= qq(<li><strong>$n</strong>$tipo</li>\n);
+    }
+    return $h . '</ul>';
+}
+
 # Enlace canonico, Open Graph y Twitter Card: titulo, texto e imagen que muestran
 # Google, WhatsApp y Facebook. La imagen es la primera foto del contenido o la portada.
 sub meta_compartir {
@@ -426,7 +439,8 @@ sub pagina {
                : $a{clave} eq 'postula'     ? $cabecera . postula($p)
                : $a{clave} eq 'gracias'     ? $cabecera . gracias($p, 'Recibimos tu postulación. La Quinta se pondrá en contacto contigo por correo o teléfono.')
                : $a{clave} eq 'enviado'     ? $cabecera . gracias($p, 'Recibimos tu mensaje. Te responderemos a la brevedad por correo.')
-               : $cabecera . qq(<article class="wrap contenido">\n) . ($a{contenido} =~ s/<!--FORMULARIO_CONTACTO-->/formulario_contacto()/er) . qq(\n</article>);
+               : $cabecera . qq(<article class="wrap contenido">\n) . ($a{contenido} =~ s/<!--FORMULARIO_CONTACTO-->/formulario_contacto()/er
+                                                                        =~ s/<!--CIFRAS_DOTACION-->/cifras_dotacion($a{contenido})/er) . qq(\n</article>);
     # en la 404 ningun item del menu queda marcado como actual
     my $menu = menu($p, $a{clave} eq 'error404' ? '-' : $a{ruta}, $a{seccion});
     my $acceso_actual = $a{clave} eq 'acceso' ? ' aria-current="page"' : '';
