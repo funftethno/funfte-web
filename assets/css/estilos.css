@@ -664,6 +664,20 @@ a.saludo:hover { border-color: var(--dorado); }
 .tarjeta-texto span { font-size: .9rem; color: var(--texto-suave); line-height: 1.5; }
 .contenido h2.otras { margin-top: 2.4em; }
 
+
+/* Galería de Material Mayor: formato fotográfico coherente */
+.grilla-unidades .tarjeta-unidad { min-width: 0; }
+.grilla-unidades .tarjeta-unidad > img,
+.grilla-unidades .tarjeta-unidad > .imagen-sin-foto { width: 100%; aspect-ratio: 4 / 3; height: auto; box-sizing: border-box; }
+.grilla-servicio .tarjeta-unidad > img { object-fit: cover; background: #eef0f2; }
+.grilla-historica .tarjeta-unidad > img { object-fit: contain; background: #f1f0ec; padding: 8px; filter: grayscale(100%) contrast(1.06); }
+.grilla-historica .tarjeta-unidad { background: #fcfbf8; }
+.grilla-historica .tarjeta-unidad:hover img { filter: grayscale(25%) contrast(1.06); }
+.grilla-historica .tarjeta-texto strong { color: var(--rojo); }
+.imagen-sin-foto { display: grid; place-items: center; background: linear-gradient(145deg,#353b40,#697079); color: #fff; }
+.imagen-sin-foto span { font-family: var(--fuente-titulos); font-size: 2.2rem; font-weight: 700; }
+.contenido .grilla-unidades { margin-top: 1.2em; }
+
 /* Formacion */
 .intro { font-size: 1.15rem; max-width: 780px; color: var(--texto-suave); margin: 0 0 28px; }
 .destacado {
