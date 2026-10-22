@@ -91,6 +91,7 @@ sub rutas_paginas {
 
 my $WEBMAIL = 'https://mail.google.com/a/funfte.cl/';
 my $COOPERADORES = 'https://5thno.cooperadores.cl/enrolamiento';
+my $SOAP    = 'https://soapbomberos.cl/donacion/5-cia-talcahuano';
 my $AULA    = 'https://aula.anb.cl/moodle/login/index.php';
 my $ANB     = 'https://www.anb.cl';
 
@@ -118,7 +119,7 @@ my %ICONOS = (
     correo   => 'M3 5h18v14H3V5zm2 2v.5l7 4.5 7-4.5V7H5zm14 2.9-7 4.5-7-4.5V17h14V9.9z',
     libro    => 'M5 3h11a3 3 0 0 1 3 3v15H7a2 2 0 0 1-2-2V3zm2 14v2h10v-2H7zm0-12v10h10V6a1 1 0 0 0-1-1H7z',
     corazon  => 'M12 21s-7.5-4.6-9.5-9.3C1.2 8.6 3.2 5 6.7 5c2 0 3.4 1 4.3 2.4h2C13.9 6 15.3 5 17.3 5c3.5 0 5.5 3.6 4.2 6.7C19.5 16.4 12 21 12 21z',
-    reloj    => 'M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm1 3v5.4l3.5 2.1-1 1.7L11 13.5V7h2z',
+    auto     => 'M18.9 6c-.2-.6-.8-1-1.4-1h-11c-.7 0-1.2.4-1.4 1L3 12v8c0 .6.4 1 1 1h1c.6 0 1-.4 1-1v-1h12v1c0 .6.4 1 1 1h1c.6 0 1-.4 1-1v-8l-2.1-6zM6.5 16c-.8 0-1.5-.7-1.5-1.5S5.7 13 6.5 13s1.5.7 1.5 1.5S7.3 16 6.5 16zm11 0c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z',
     birrete  => 'M12 3 1 9l11 6 9-4.9V17h2V9L12 3zM5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8-7-3.8z',
     convoca  => 'M7 2h2v2h6V2h2v2h3v18H4V4h3V2zm-1 8v10h12V10H6zm2 2h3v3H8v-3z',
     documento=> 'M6 2h8l6 6v14H6V2zm7 1.5V9h5.5L13 3.5zM8 12v2h8v-2H8zm0 4v2h8v-2H8z',
@@ -216,7 +217,7 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 <div class="grilla-tarjetas tres">
 ) . tarjeta($p, 'sisab', 'Postula a la Quinta', '¿Quieres ser bombero voluntario? Únete a la Quinta y sirve a Talcahuano. Completa el formulario y te contactaremos.', 'postula/', 'Postular')
   . tarjeta($p, 'corazon', 'Hazte socio', 'Colabora con la Quinta y hazte socio cooperador. Con tu ayuda continuaremos salvando vidas.', $COOPERADORES, 'Inscríbete')
-  . tarjeta($p, 'reloj', 'Sitio centenario', 'Navega a través de la historia de nuestra compañía en el especial del centenario.')
+  . tarjeta($p, 'auto', 'Compra tu SOAP', 'Compra tu SOAP 2026 con Bomberos de Chile y elige a la Quinta: tu donación va directamente a nuestra compañía.', $SOAP, 'Comprar SOAP')
   . qq(</div>
 </section>
 <section class="lema">
