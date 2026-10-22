@@ -470,13 +470,15 @@ a.saludo:hover { border-color: var(--dorado); }
   margin-bottom: 4px;
 }
 
-.contenido .cifras .cifra-total {
+.contenido ul.cifras li.cifra-total {
   background: var(--rojo);
-  border-color: var(--rojo);
-  color: #fff;
+  background-color: var(--rojo);
+  border: 2px solid var(--rojo);
+  border-top: 4px solid var(--rojo);
+  color: #fff !important;
 }
-.contenido .cifras .cifra-total strong {
-  color: #fff;
+.contenido ul.cifras li.cifra-total strong {
+  color: #fff !important;
 }
 
 .contenido .nomina {
