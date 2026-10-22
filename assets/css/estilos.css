@@ -492,7 +492,7 @@ a:hover { color: var(--rojo-oscuro); }
   border-radius: var(--radio);
   background: var(--fondo-suave);
 }
-.contenido .cia img { width: 96px; height: 96px; object-fit: contain; margin: 0 0 8px; border-radius: 0; float: none; max-width: none; }
+.contenido .cia img { width: auto; max-width: 190px; height: 96px; object-fit: contain; margin: 0 0 8px; border-radius: 0; float: none; max-width: none; }
 .contenido .cia h4 { margin: 0; font-size: 1.05rem; }
 /* compañia sin escudo disponible: su numero en un circulo */
 .contenido .cia-num {
