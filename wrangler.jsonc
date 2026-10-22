@@ -4,5 +4,8 @@
   "compatibility_date": "2025-09-01",
   "assets": {
     "directory": "."
-  }
+  },
+  // Cada rama distinta de master se publica en una URL de vista previa:
+  // https://<rama>-funfte-web.<cuenta>.workers.dev
+  "preview_urls": true
 }

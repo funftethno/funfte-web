@@ -1,0 +1,20 @@
+# Revisa que las paginas esten regeneradas y sin enlaces internos rotos.
+# Es obligatoria para aceptar un Pull Request hacia master.
+name: Revisar sitio
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [desarrollo]
+
+permissions:
+  contents: read
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Regenerar páginas y revisar enlaces
+        run: perl herramientas/revisar.pl
