@@ -577,6 +577,53 @@ a.saludo:hover { border-color: var(--dorado); }
 .contenido .cia-enlaces { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; margin-top: auto; padding-top: 8px; }
 .contenido .cia-enlaces a { margin-top: 0; }
 
+/* Calendario de cumpleaños (Acceso Quintino): vista para pantalla completa en el cuartel.
+   Las medidas usan --u, que en pantalla completa crece con el tamaño del televisor. */
+.pantalla {
+  --u: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 2.4);
+  padding: calc(var(--u) * 3);
+  border-radius: var(--radio);
+  background: var(--carbon);
+  color: #fff;
+  overflow: hidden;
+}
+.pantalla:fullscreen { --u: min(.62vw, 1.05vh); cursor: none; border-radius: 0; padding: calc(var(--u) * 4); }
+.pantalla p, .pantalla h2, .pantalla ol { margin: 0; }
+.pantalla-cabecera { display: flex; align-items: center; gap: calc(var(--u) * 2); padding-bottom: calc(var(--u) * 2); border-bottom: 2px solid var(--rojo); }
+.pantalla-cabecera img { height: calc(var(--u) * 7); width: auto; margin: 0; }
+.pantalla-cabecera > div { flex: 1; }
+.pantalla-titulo { font-family: var(--fuente-titulos); font-size: calc(var(--u) * 3.6); font-weight: 700; line-height: 1.1; }
+.pantalla-fecha { font-size: calc(var(--u) * 2); color: var(--dorado); }
+.pantalla-fecha::first-letter { text-transform: uppercase; }
+.pantalla-hora { font-size: calc(var(--u) * 5); font-weight: 700; font-variant-numeric: tabular-nums; }
+.pantalla-cuerpo { flex: 1; display: grid; grid-template-columns: 1.15fr 1fr; gap: calc(var(--u) * 3); min-height: 0; }
+.pantalla-etiqueta { font-size: calc(var(--u) * 2); letter-spacing: .15em; text-transform: uppercase; color: var(--dorado); font-weight: 700; margin-bottom: calc(var(--u) * 1.5) !important; }
+.pantalla-hoy { display: flex; flex-direction: column; justify-content: center; gap: calc(var(--u) * 2); }
+.pantalla-destacado { display: flex; align-items: center; gap: calc(var(--u) * 3); padding: calc(var(--u) * 2.5); border-radius: var(--radio); background: var(--carbon-2); border-left: calc(var(--u) * .6) solid var(--dorado); }
+.pantalla-escudo { width: calc(var(--u) * 16); height: calc(var(--u) * 16); object-fit: contain; flex-shrink: 0; margin: 0; }
+.pantalla-nombre { font-family: var(--fuente-titulos); font-size: calc(var(--u) * 3.2); font-weight: 700; line-height: 1.2; }
+.pantalla-anios { font-size: calc(var(--u) * 5.5); font-weight: 700; color: var(--dorado); line-height: 1.1; margin-top: calc(var(--u) * 1) !important; }
+.pantalla-cuando { font-size: calc(var(--u) * 2.2); opacity: .85; }
+.pantalla-proximos h2 { font-size: calc(var(--u) * 2); letter-spacing: .15em; text-transform: uppercase; color: var(--dorado); margin-bottom: calc(var(--u) * 1.5); }
+.pantalla-proximos ol { list-style: none; padding: 0; display: grid; gap: calc(var(--u) * 1); }
+.pantalla-proximos li { display: flex; align-items: center; gap: calc(var(--u) * 1.6); padding: calc(var(--u) * .9) calc(var(--u) * 1.4); border-radius: var(--radio); background: var(--carbon-2); }
+.pantalla-dia { display: flex; flex-direction: column; align-items: center; width: calc(var(--u) * 5.5); flex-shrink: 0; line-height: 1; }
+.pantalla-dia strong { font-size: calc(var(--u) * 2.8); }
+.pantalla-dia span { font-size: calc(var(--u) * 1.4); text-transform: uppercase; color: var(--dorado); letter-spacing: .1em; }
+.pantalla-mini { width: calc(var(--u) * 4.6); height: calc(var(--u) * 4.6); object-fit: contain; flex-shrink: 0; margin: 0; }
+.pantalla-mini-nombre { font-size: calc(var(--u) * 1.8); font-weight: 600; line-height: 1.25; }
+.pantalla-mini-detalle { font-size: calc(var(--u) * 1.5); opacity: .75; }
+.pantalla .sin-escudo { display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--rojo); font-family: var(--fuente-titulos); font-weight: 700; color: #fff; }
+.pantalla-escudo.sin-escudo { font-size: calc(var(--u) * 6); }
+.pantalla-mini.sin-escudo { font-size: calc(var(--u) * 2); }
+@media (max-width: 720px) {
+  .pantalla:not(:fullscreen) { --u: 6px; padding: 16px; }
+  .pantalla:not(:fullscreen) .pantalla-cuerpo { grid-template-columns: 1fr; }
+}
+
 /* Material mayor */
 .grilla-unidades {
   display: grid;

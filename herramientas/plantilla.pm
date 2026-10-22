@@ -19,6 +19,7 @@ sub huella {
 }
 my $V_CSS = huella('assets/css/estilos.css');
 my $V_JS  = huella('assets/js/menu.js');
+my $V_CAL = huella('assets/js/calendario.js');
 
 # Direccion publica del sitio (enlaces canonicos, Open Graph y sitemap)
 our $SITIO = 'https://funfte.cl/';
@@ -76,6 +77,7 @@ sub rutas_paginas {
         directorio    => ['archivo/directorio/',       'Directorio',          'Archivo'],
         socios        => ['archivo/socios-colaboradores/', 'Socios Colaboradores', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
+        calendario    => ['acceso-quintino/calendario/', 'Calendario de cumpleaños', 'Acceso Quintino'],
         postula       => ['postula/',                   'Postula a la Quinta', ''],
         gracias       => ['postula/gracias/',           '¡Gracias por postular!', ''],
         enviado       => ['contacto/gracias/',          '¡Mensaje enviado!',  ''],
@@ -126,6 +128,7 @@ my %ICONOS = (
     convoca  => 'M7 2h2v2h6V2h2v2h3v18H4V4h3V2zm-1 8v10h12V10H6zm2 2h3v3H8v-3z',
     documento=> 'M6 2h8l6 6v14H6V2zm7 1.5V9h5.5L13 3.5zM8 12v2h8v-2H8zm0 4v2h8v-2H8z',
     web      => 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-3a15 15 0 0 0-1.3-3.9A8 8 0 0 1 18.9 8zM12 4c.8 1.1 1.5 2.5 1.9 4h-3.8c.4-1.5 1.1-2.9 1.9-4zM4.3 14a8 8 0 0 1 0-4h3.4a16 16 0 0 0 0 4H4.3zm.8 2h3a15 15 0 0 0 1.3 3.9A8 8 0 0 1 5.1 16zm3-8h-3a8 8 0 0 1 4.3-3.9C8.7 5.3 8.3 6.6 8.1 8zM12 20c-.8-1.1-1.5-2.5-1.9-4h3.8c-.4 1.5-1.1 2.9-1.9 4zm2.3-6H9.7a14 14 0 0 1 0-4h4.6a14 14 0 0 1 0 4zm.3 5.9a15 15 0 0 0 1.3-3.9h3a8 8 0 0 1-4.3 3.9zM16.3 14a16 16 0 0 0 0-4h3.4a8 8 0 0 1 0 4h-3.4z',
+    torta    => 'M12 2c1 1.3 1.5 2.3 1.5 3a1.5 1.5 0 0 1-3 0c0-.7.5-1.7 1.5-3zm-1 5h2v3h5a2 2 0 0 1 2 2v2.5c-1 0-1.5-.8-2.5-.8s-1.5.8-2.5.8-1.5-.8-2.5-.8-1.5.8-2.5.8-1.5-.8-2.5-.8-1.5.8-2.5.8V12a2 2 0 0 1 2-2h5V7zm-7 9c1 0 1.5-.8 2.5-.8s1.5.8 2.5.8 1.5-.8 2.5-.8 1.5.8 2.5.8 1.5-.8 2.5-.8 1.5.8 2.5.8V22H4v-6z',
     candado  =>'M12 2a5 5 0 0 1 5 5v3h2v12H5V10h2V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v3h6V7a3 3 0 0 0-3-3zm0 9a2 2 0 0 0-1 3.7V19h2v-2.3A2 2 0 0 0 12 13z',
 );
 
@@ -191,6 +194,16 @@ sub acceso_personal {
 <p id="intranet-aviso" class="intranet-ayuda">¿Problemas para ingresar? Escribe a <a href="mailto:correo\@funfte.cl">correo\@funfte.cl</a>.</p>
 </fieldset>
 </form>
+</div>
+</section>
+<section class="wrap bloque">
+<div class="destacado">
+) . icono('torta') . qq(
+<div>
+<h2>Calendario de cumpleaños</h2>
+<p>Aniversarios de las compañías del Cuerpo y de la Confederación, listo para mostrar en pantalla completa en el cuartel.</p>
+</div>
+<a class="boton" href="${p}acceso-quintino/calendario/">Ver calendario</a>
 </div>
 </section>
 <section class="wrap bloque">
@@ -265,6 +278,32 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 <p class="anios">29 - 01 - 1908</p>
 </div>
 </section>);
+}
+
+# Calendario de cumpleaños para la pantalla del cuartel (Acceso Quintino). calendario.js
+# lo arma con los mismos datos del saludo de la portada y lo actualiza solo cada minuto.
+sub calendario {
+    my ($p) = @_;
+    my $aniversarios = aniversarios($p);
+    return qq(<section class="wrap bloque">
+<p class="intro">Aniversarios de las compañías del Cuerpo de Bomberos de Talcahuano y de la Confederación. Para mostrarlo en una pantalla del cuartel, presiona <strong>Pantalla completa</strong>; se actualiza solo cada día.</p>
+<p><button class="boton" type="button" id="pantalla-completa">Pantalla completa</button></p>
+</section>
+<section class="wrap bloque">
+<div class="pantalla" id="pantalla">
+<header class="pantalla-cabecera">
+<img src="${p}assets/img/escudo-quinta.png" alt="">
+<div><p class="pantalla-titulo">Cumpleaños</p><p class="pantalla-fecha" id="pantalla-fecha"></p></div>
+<p class="pantalla-hora" id="pantalla-hora"></p>
+</header>
+<div class="pantalla-cuerpo">
+<section class="pantalla-hoy" id="pantalla-hoy" aria-live="polite"></section>
+<section class="pantalla-proximos"><h2>Próximos</h2><ol id="pantalla-proximos"></ol></section>
+</div>
+</div>
+</section>
+<script type="application/json" id="aniversarios">$aniversarios</script>
+<script src="${p}assets/js/calendario.js$V_CAL" defer></script>);
 }
 
 sub formacion {
@@ -474,6 +513,7 @@ sub pagina {
     my $cuerpo = $es_inicio                 ? inicio($p)
                : $a{clave} eq 'formacion'   ? $cabecera . formacion($p)
                : $a{clave} eq 'acceso'      ? $cabecera . acceso_personal($p)
+               : $a{clave} eq 'calendario'  ? $cabecera . calendario($p)
                : $a{clave} eq 'archivo'     ? $cabecera . archivo($p)
                : $a{clave} eq 'postula'     ? $cabecera . postula($p)
                : $a{clave} eq 'gracias'     ? $cabecera . gracias($p, 'Recibimos tu postulación. La Quinta se pondrá en contacto contigo por correo o teléfono.')
@@ -487,7 +527,7 @@ sub pagina {
     my $anio = (localtime)[5] + 1900;
     my $descripcion = $a{descripcion} // $DESCRIPCION;
     # el archivo y la pagina 404 no deben aparecer en buscadores
-    my $indexable = $a{ruta} !~ m{^archivo/} && $a{clave} !~ /^(?:error404|gracias|enviado)$/;
+    my $indexable = $a{ruta} !~ m{^archivo/} && $a{clave} !~ /^(?:error404|gracias|enviado|calendario)$/;
     my $meta = $indexable ? meta_compartir(%a, titulo_completo => $titulo, descripcion => $descripcion) . datos_estructurados(%a)
                           : qq(\n<meta name="robots" content="noindex">);
     my $redes = join "\n", map { qq(<li><a href="$_->[1]" target="_blank" rel="noopener">$_->[0]</a></li>) } @REDES;
