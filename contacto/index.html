@@ -15,8 +15,8 @@
 <meta property="og:image" content="https://funfte.cl/assets/img/2011-12-DSC0103-1030x688.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../favicon.ico">
-<link rel="stylesheet" href="../assets/css/estilos.css?v=278da0e4">
-<script src="../assets/js/menu.js?v=1654b0b6" defer></script>
+<link rel="stylesheet" href="../assets/css/estilos.css?v=4f9045c6">
+<script src="../assets/js/menu.js?v=9d637050" defer></script>
 </head>
 <body>
 <a class="saltar" href="#principal">Saltar al contenido</a>
@@ -63,7 +63,8 @@
 <label for="c-correo">Correo electrónico</label>
 <input id="c-correo" name="email" type="email" autocomplete="email" required>
 <label for="c-telefono">Teléfono</label>
-<input id="c-telefono" name="Teléfono" type="tel" autocomplete="tel" placeholder="+56 9 1234 5678">
+<div class="telefono"><span aria-hidden="true">+56</span><input id="c-telefono" name="Teléfono (+56)" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="9" pattern="[0-9]{9}" placeholder="912345678" title="9 dígitos, sin el +56. Por ejemplo: 912345678" data-solo-numeros aria-describedby="c-telefono-ayuda"></div>
+<p id="c-telefono-ayuda" class="campo-ayuda">9 dígitos, sin espacios.</p>
 <label for="c-mensaje">Mensaje</label>
 <textarea id="c-mensaje" name="Mensaje" rows="5" required></textarea>
 <button class="boton" type="submit">Enviar mensaje</button>

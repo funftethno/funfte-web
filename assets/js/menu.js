@@ -9,6 +9,14 @@ document.addEventListener('DOMContentLoaded', function () {
     menu.classList.toggle('abierto', !abierto);
   });
 
+  // Campos de formulario que solo aceptan digitos (por ejemplo, el telefono de Contacto)
+  document.querySelectorAll('[data-solo-numeros]').forEach(function (campo) {
+    campo.addEventListener('input', function () {
+      var limpio = campo.value.replace(/\D/g, '');
+      if (limpio !== campo.value) campo.value = limpio;
+    });
+  });
+
   document.querySelectorAll('.abrir-sub').forEach(function (boton) {
     boton.addEventListener('click', function () {
       var abierto = boton.getAttribute('aria-expanded') === 'true';
