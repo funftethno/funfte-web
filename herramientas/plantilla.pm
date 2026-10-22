@@ -235,7 +235,7 @@ sub pagina {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>$titulo</title>
 <meta name="description" content="Quinta Compañía de Bomberos «Bomba Chile» de Talcahuano, fundada en 1908. Fünfte Deutsche Feuerwehrkompanie Talcahuano.">
-<link rel="icon" href="${p}assets/img/logo.png">
+<link rel="icon" href="${p}favicon.ico">
 <link rel="stylesheet" href="${p}assets/css/estilos.css">
 <script src="${p}assets/js/menu.js" defer></script>
 </head>
