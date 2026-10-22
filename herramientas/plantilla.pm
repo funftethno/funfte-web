@@ -433,16 +433,20 @@ sub archivo {
 }
 
 # Resumen de la dotacion en cifras: cuenta los nombres de cada lista "Voluntarios ..."
-# de la pagina, asi el resumen nunca queda desactualizado al agregar o quitar voluntarios.
+# de la pagina, y la dotacion total (sin confederados), asi el resumen nunca queda desactualizado
+# al agregar o quitar voluntarios.
 sub cifras_dotacion {
     my ($html) = @_;
     my $h = qq(<ul class="cifras">\n);
+    my $total = 0;
     while ($html =~ m{<h3>Voluntarios (\w+)</h3>\s*<ol[^>]*>(.*?)</ol>}gs) {
         my ($tipo, $lista) = (ucfirst $1, $2);
         my $n = () = $lista =~ /<li\b/g;
         $h .= qq(<li><strong>$n</strong>$tipo</li>\n);
+        # los confederados son de otras compañías: no suman a la dotación de la Quinta
+        $total += $n unless $tipo eq 'Confederados';
     }
-    return $h . '</ul>';
+    return $h . qq(</ul>\n<ul class="cifras">\n<li class="cifra-total"><strong>$total</strong>Dotación total</li>\n</ul>);
 }
 
 # Dotacion con fotos (Archivo): la misma nomina de dotacion.html en tarjetas con el numero de
