@@ -253,11 +253,10 @@ qq(<section class="wrap bloque">
 }
 
 # Formulario de postulacion. El sitio es estatico: FormSubmit (formsubmit.co) recibe
-# los datos y los envia por correo a correo@funfte.cl. El primer envio
-# llega como correo de activacion a correo@funfte.cl y hay que confirmarlo.
-my $POSTULACION_PARA = 'correo@funfte.cl';
-# funfteit@gmail.com: copia permanente para monitorear el uso del formulario y probarlo
-my $POSTULACION_CC   = 'funfteit@gmail.com';
+# los datos y los envia por correo a funfteit@gmail.com con copia a correo@funfte.cl.
+# FormSubmit pide activar una vez la direccion principal (correo a funfteit@gmail.com).
+my $POSTULACION_PARA = 'funfteit@gmail.com';
+my $POSTULACION_CC   = 'correo@funfte.cl';
 
 sub postula {
     my ($p) = @_;
@@ -296,10 +295,9 @@ sub gracias {
 </section>);
 }
 
-# Formulario de Contacto: tambien por FormSubmit, a correo@ (ver $POSTULACION_PARA).
+# Formulario de Contacto: tambien por FormSubmit, a la misma direccion principal ($POSTULACION_PARA).
 # Se inserta en herramientas/contenido/contacto.html donde esta <!--FORMULARIO_CONTACTO-->.
-# funfteit@gmail.com: copia permanente para monitorear el uso del formulario y probarlo
-my $CONTACTO_CC = 'funfteit@gmail.com';
+my $CONTACTO_CC = 'correo@funfte.cl';
 
 sub formulario_contacto {
     return qq(<form class="formulario" action="https://formsubmit.co/$POSTULACION_PARA" method="POST">
