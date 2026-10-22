@@ -27,13 +27,13 @@ sub rutas_paginas {
         trabajo       => ['archivo/nuestro-trabajo/',  'Nuestro Trabajo',     'Archivo'],
         capacitacion  => ['archivo/capacitacion/',     'Capacitación',        'Archivo'],
         guardia       => ['archivo/guardia-nocturna/', 'Guardia Nocturna',    'Archivo'],
+        redes         => ['archivo/redes-sociales/',   'Redes Sociales',      'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         material      => ['material-mayor/',           'Material Mayor',      'La Quinta'],
         bx5           => ['material-mayor/bx-5/',      'Unidad BX-5',         'La Quinta'],
         b5            => ['material-mayor/b-5/',       'Unidad B-5',          'La Quinta'],
         harbor        => ['material-mayor/harbor-28/', 'Unidad Harbor 28',    'La Quinta'],
         contacto      => ['contacto/',                 'Contacto',            'Contacto'],
-        redes         => ['redes-sociales/',           'Redes Sociales',      'Contacto'],
     );
     return map { $_ => { ruta => $p{$_}[0], titulo => $p{$_}[1], seccion => $p{$_}[2] } } keys %p;
 }
@@ -59,7 +59,7 @@ my @MENU = (
     ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Material Mayor','material-mayor/'], ['Confederación','confederacion/']]],
     ['Dotación', 'dotacion/', [['Directorio','directorio/']]],
     ['Formación', 'formacion/'],
-    ['Contacto', 'contacto/', [['Redes Sociales','redes-sociales/'], ['Webmail', $WEBMAIL]]],
+    ['Contacto', 'contacto/'],
 );
 
 my %ICONOS = (
@@ -82,7 +82,9 @@ sub externo { $_[0] =~ /^https?:/ }
 
 sub enlace {
     my ($p, $ruta) = @_;
-    return externo($ruta) ? qq(href="$ruta" target="_blank" rel="noopener") : qq(href="$p$ruta");
+    return externo($ruta)        ? qq(href="$ruta" target="_blank" rel="noopener")
+         : $ruta =~ /^mailto:/   ? qq(href="$ruta")
+         :                         qq(href="$p$ruta");
 }
 
 # Tarjeta con icono; sin enlace muestra "Pronto"
@@ -162,7 +164,8 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 <section class="wrap bloque">
 <h2 class="titulo-seccion">La Quinta</h2>
 <div class="grilla-tarjetas tres">
-) . tarjeta($p, 'corazon', 'Hazte socio', 'Colabora con la Quinta y hazte socio cooperador. Con tu ayuda continuaremos salvando vidas.', 'socios-colaboradores/', 'Ver más')
+) . tarjeta($p, 'sisab', 'Postula a la Quinta', '¿Quieres ser bombero voluntario? Únete a la Quinta y sirve a Talcahuano. Escríbenos y te contamos cómo postular.', 'mailto:correo@funfte.cl?subject=Quiero%20postular%20a%20la%20Quinta', 'Postular')
+  . tarjeta($p, 'corazon', 'Hazte socio', 'Colabora con la Quinta y hazte socio cooperador. Con tu ayuda continuaremos salvando vidas.', 'socios-colaboradores/', 'Ver más')
   . tarjeta($p, 'reloj', 'Sitio centenario', 'Navega a través de la historia de nuestra compañía en el especial del centenario.')
   . qq(</div>
 </section>
