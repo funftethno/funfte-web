@@ -364,19 +364,10 @@ sub formacion {
     return
 qq(<section class="wrap bloque">
 <p class="intro">La formación permanente es uno de los pilares de la Quinta. Aquí reunimos los accesos a las plataformas de capacitación de la Academia Nacional de Bomberos (ANB) y otros recursos de estudio para nuestros voluntarios.</p>
-<div class="destacado">
-) . icono('convoca') . qq(
-<div>
-<h2>Convocatorias para Bomberos</h2>
-<p>Cursos abiertos y fechas de postulación de la Academia Nacional de Bomberos.</p>
-</div>
-<a class="boton" href="$ANB/convocatorias-para-bomberos" target="_blank" rel="noopener">Ver convocatorias</a>
-</div>
-</section>
-<section class="wrap bloque">
 <h2 class="titulo-seccion">Academia Nacional de Bomberos</h2>
 <div class="grilla-tarjetas tres">
-) . tarjeta($p, 'web', 'Aula Virtual ANB', 'Plataforma de cursos en línea. Ingresa con tu usuario del Registro Nacional de Bomberos.', $AULA, 'Entrar al aula virtual')
+) . tarjeta($p, 'convoca', 'Convocatorias para Bomberos', 'Cursos abiertos y fechas de postulación de la Academia Nacional de Bomberos.', "$ANB/convocatorias-para-bomberos", 'Ver convocatorias')
+  . tarjeta($p, 'web', 'Aula Virtual ANB', 'Plataforma de cursos en línea. Ingresa con tu usuario del Registro Nacional de Bomberos.', $AULA, 'Entrar al aula virtual')
   . tarjeta($p, 'birrete', 'Malla curricular', 'Malla curricular 2025–2028 de la Academia Nacional de Bomberos (PDF).', "$ANB/documentos_sitio/43775_Malla_curricular_2025_2028.pdf", 'Ver malla')
   . tarjeta($p, 'documento', 'Material académico', 'Manuales y material de apoyo para los cursos de la Academia.', "$ANB/material-academico", 'Ver material')
   . tarjeta($p, 'libro', 'Guías de autoinstrucción', 'Guías para estudiar de forma autónoma antes de cada curso.', "$ANB/guias-de-autoinstruccion", 'Ver guías')
