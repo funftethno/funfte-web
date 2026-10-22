@@ -88,8 +88,8 @@ El contenido se extrajo una sola vez del sitio antiguo (WordPress), ya limpio y 
 
 Si trabajas en paralelo con otra persona, puedes crear tu propia rama (`git checkout -b mi-cambio`); también tendrá su vista previa en `https://mi-cambio-funfte-web.funfteit.workers.dev`.
 
-### Usarlo con Claude Code
-Abre la carpeta del proyecto en Claude Code y pídele que lea este README para retomar el contexto.
+### Usarlo con asistentes de IA
+Las reglas para asistentes de IA (Codex, Cursor, Copilot, Gemini, Claude Code, etc.) están en `AGENTS.md`. Si tu asistente no lo lee solo, pídele que lo lea antes de empezar. Si cambian las convenciones del sitio, actualiza `AGENTS.md`.
 
 ---
 
