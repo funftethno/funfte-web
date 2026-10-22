@@ -18,7 +18,7 @@ sub rutas_paginas {
         historia      => ['historia/',                 'Historia',            'La Quinta'],
         cuartel       => ['cuartel/',                  'Cuartel',             'La Quinta'],
         confederacion => ['confederacion/',            'Confederación',       'La Quinta'],
-        socios        => ['socios-colaboradores/',     'Socios Colaboradores','La Quinta'],
+        socios        => ['socios-colaboradores/',     'Socios Colaboradores',''],
         dotacion      => ['dotacion/',                 'Dotación',            'Dotación'],
         directorio    => ['directorio/',               'Directorio',          'Dotación'],
         formacion     => ['formacion/',                'Formación',           'Formación'],
@@ -56,7 +56,7 @@ my @ACCESOS = (
 
 my @MENU = (
     ['Inicio', ''],
-    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Confederación','confederacion/'], ['Socios Colaboradores','socios-colaboradores/'], ['Material Mayor','material-mayor/']]],
+    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Confederación','confederacion/'], ['Material Mayor','material-mayor/']]],
     ['Dotación', 'dotacion/', [['Directorio','directorio/']]],
     ['Formación', 'formacion/'],
     ['Contacto', 'contacto/', [['Redes Sociales','redes-sociales/'], ['Webmail', $WEBMAIL]]],
