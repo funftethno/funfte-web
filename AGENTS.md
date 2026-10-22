@@ -35,19 +35,20 @@ Sube los archivos fuente **y** las páginas regeneradas en el mismo commit. Si `
 
 Flujo obligatorio, en este orden:
 
-1. **Cada persona trabaja en su propia rama**, creada desde `desarrollo` actualizado:
+1. **Cada persona trabaja en su propia rama**, que lleva su usuario de GitHub en minúsculas (por ejemplo `nachoodc` o `wh1t3b0x`) y que crea el owner. Antes de empezar, ponla al día con `desarrollo`:
    ```bash
-   git checkout desarrollo && git pull
-   git checkout -b <rama>
+   git checkout <rama>
+   git pull
+   git merge origin/desarrollo
    ```
-   Usa nombres cortos en minúsculas, con guiones y sin `/` ni tildes (por ejemplo `nomina-mayo` o `fotos-cuartel`), porque el nombre forma parte de la dirección de la vista previa.
+   Si necesitas una rama nueva para algo puntual, créala desde `desarrollo` con un nombre corto, en minúsculas, con guiones y sin `/` ni tildes, porque forma parte de la dirección de la vista previa.
 2. **Se prueba en esa rama.** Cada push se publica en `https://<rama>-funfte-web.funfteit.workers.dev/` en uno o dos minutos, y GitHub Actions ejecuta `revisar.pl`. No sigas al paso 3 si la revisión falla o la vista previa se ve mal.
 3. **Cuando está probada, se lleva a `desarrollo`** (merge de la rama en `desarrollo` y push, o un Pull Request hacia `desarrollo`). La vista previa de `desarrollo` es `https://desarrollo-funfte-web.funfteit.workers.dev/` y debe mostrar todo lo aprobado hasta el momento.
 4. **Solo el owner pasa `desarrollo` a producción**, con un Pull Request de `desarrollo` hacia `master`. Al aceptarlo, Cloudflare publica en `https://funfte.cl` en uno o dos minutos.
 
 - **`master` está protegida**: nunca hagas push directo, force push ni Pull Requests desde otra rama que no sea `desarrollo`. Abrir el Pull Request a `master` le corresponde al owner, salvo que te lo pida.
 - No hagas force push a `desarrollo`: es compartida.
-- Borra tu rama cuando ya esté en `desarrollo`.
+- No borres las ramas personales: son fijas. Las ramas puntuales sí se borran cuando ya están en `desarrollo`.
 - No cambies `wrangler.jsonc`, `.assetsignore`, `_redirects` ni `.github/workflows/` salvo que te lo pidan expresamente: controlan el despliegue.
 
 ## Convenciones del contenido

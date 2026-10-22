@@ -57,16 +57,16 @@ El contenido se extrajo una sola vez del sitio antiguo (WordPress), ya limpio y 
 
 | Rama | Quién sube | Dónde se ve |
 |---|---|---|
-| Tu rama (`<rama>`) | Tú | `https://<rama>-funfte-web.funfteit.workers.dev/` |
+| Tu rama personal (tu usuario de GitHub en minúsculas) | Tú | `https://<rama>-funfte-web.funfteit.workers.dev/` |
 | `desarrollo` | Cualquier colaborador, cuando su rama está probada | `https://desarrollo-funfte-web.funfteit.workers.dev/` |
 | `master` | Solo el owner, por Pull Request desde `desarrollo` | Sitio oficial `https://funfte.cl` |
 
-1. **Crea tu rama** desde `desarrollo` actualizado. Usa un nombre corto, en minúsculas, con guiones y sin `/` ni tildes, porque forma parte de la dirección de la vista previa:
+1. **Ponte en tu rama personal y actualízala** con lo último de `desarrollo`. Cada colaborador tiene una rama con su usuario de GitHub en minúsculas, creada por el owner (por ejemplo `nachoodc`):
 
    ```bash
-   git checkout desarrollo
+   git checkout nachoodc
    git pull
-   git checkout -b nomina-mayo
+   git merge origin/desarrollo
    ```
 
 2. **Haz el cambio, regenera y revisa:**
@@ -78,24 +78,23 @@ El contenido se extrajo una sola vez del sitio antiguo (WordPress), ya limpio y 
 
    `revisar.pl` avisa si quedaron páginas sin regenerar o enlaces internos rotos.
 
-3. **Sube tu rama y pruébala** en su vista previa, que se actualiza en uno o dos minutos (en el ejemplo, `https://nomina-mayo-funfte-web.funfteit.workers.dev/`). GitHub también corre la revisión automática; mira que salga ✅.
+3. **Sube tu rama y pruébala** en su vista previa, que se actualiza en uno o dos minutos (en el ejemplo, `https://nachoodc-funfte-web.funfteit.workers.dev/`). GitHub también corre la revisión automática; mira que salga ✅.
 
    ```bash
    git add -A
    git commit -m "Describe el cambio"
-   git push -u origin nomina-mayo
+   git push -u origin nachoodc
    ```
 
-4. **Cuando esté probada, llévala a `desarrollo`** y bórrala:
+4. **Cuando esté probada, llévala a `desarrollo`** (tu rama personal no se borra):
 
    ```bash
    git checkout desarrollo
    git pull
-   git merge nomina-mayo
+   git merge nachoodc
    perl herramientas/generar.pl && perl herramientas/revisar.pl
    git push
-   git branch -d nomina-mayo
-   git push origin --delete nomina-mayo
+   git checkout nachoodc
    ```
 
    Si `git merge` avisa de conflictos en páginas `index.html`, no los resuelvas a mano: quédate con cualquiera de las dos versiones, ejecuta `perl herramientas/generar.pl` y termina el merge.
