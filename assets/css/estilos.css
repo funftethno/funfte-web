@@ -605,7 +605,8 @@ a:hover { color: var(--rojo-oscuro); }
   background: #fff;
 }
 .formulario label { font-size: .9rem; font-weight: 600; margin-bottom: 4px; }
-.formulario input {
+.formulario input,
+.formulario textarea {
   font: inherit;
   padding: 10px 12px;
   border: 1px solid var(--borde);
@@ -613,7 +614,9 @@ a:hover { color: var(--rojo-oscuro); }
   margin-bottom: 16px;
   background: var(--fondo-suave);
 }
-.formulario input:focus-visible { outline: 2px solid var(--rojo); outline-offset: 1px; }
+.formulario textarea { resize: vertical; min-height: 84px; }
+.formulario input:focus-visible,
+.formulario textarea:focus-visible { outline: 2px solid var(--rojo); outline-offset: 1px; }
 .formulario .boton { align-self: flex-start; cursor: pointer; font: inherit; font-weight: 600; border: 0; }
 .formulario-ayuda { font-size: .85rem; color: var(--texto-suave); margin: 16px 0 0; }
 .formulario .oculto { position: absolute; left: -9999px; width: 1px; height: 1px; }

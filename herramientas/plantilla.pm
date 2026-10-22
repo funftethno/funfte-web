@@ -278,6 +278,8 @@ sub postula {
 <input id="correo" name="email" type="email" autocomplete="email" required>
 <label for="telefono">Teléfono</label>
 <input id="telefono" name="Teléfono" type="tel" autocomplete="tel" placeholder="+56 9 1234 5678" required>
+<label for="referencia">¿Cómo conociste a la Quinta? ¿Alguien te recomendó?</label>
+<textarea id="referencia" name="Cómo conoció a la Quinta / referencia" rows="3" placeholder="Por ejemplo: un amigo voluntario, redes sociales, un evento de la compañía…" required></textarea>
 <button class="boton" type="submit">Enviar postulación</button>
 <p class="formulario-ayuda">Usaremos tus datos solo para contactarte por tu postulación. ¿Dudas? Escríbenos a <a href="mailto:correo\@funfte.cl">correo\@funfte.cl</a>.</p>
 </form>
