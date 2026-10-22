@@ -3,7 +3,9 @@
   "name": "funfte-web",
   "compatibility_date": "2025-09-01",
   "assets": {
-    "directory": "."
+    "directory": ".",
+    // direcciones inexistentes muestran 404.html (generada por herramientas/generar.pl)
+    "not_found_handling": "404-page"
   },
   // Vistas previas (Worker Previews): cada rama distinta de master se publica
   // aparte con `npx wrangler preview`, sin tocar funfte.cl.

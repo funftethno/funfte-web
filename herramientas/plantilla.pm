@@ -20,6 +20,29 @@ sub huella {
 my $V_CSS = huella('assets/css/estilos.css');
 my $V_JS  = huella('assets/js/menu.js');
 
+# Direccion publica del sitio (enlaces canonicos, Open Graph y sitemap)
+our $SITIO = 'https://funfte.cl/';
+
+# Texto para buscadores y para la vista previa al compartir un enlace (WhatsApp,
+# Facebook). Las paginas sin descripcion propia usan $DESCRIPCION.
+my $DESCRIPCION = 'Quinta Compañía de Bomberos «Bomba Chile» de Talcahuano, fundada en 1908. Fünfte Deutsche Feuerwehrkompanie Talcahuano.';
+my %DESCRIPCIONES = (
+    inicio        => 'Sitio oficial de la Quinta Compañía de Bomberos «Bomba Chile» de Talcahuano, fundada el 29 de enero de 1908. Especialidad en agua y rescate integral.',
+    laquinta      => 'Quiénes somos: la Quinta Compañía «Bomba Chile» del Cuerpo de Bomberos de Talcahuano, fundada en 1908 por inmigrantes alemanes.',
+    historia      => 'La historia de la Quinta Compañía de Bomberos de Talcahuano desde su fundación en 1908 por la colonia alemana del puerto.',
+    cuartel       => 'Nuestro cuartel en Villa Independencia, ingreso sur de Talcahuano: instalaciones, guardia nocturna y área de acción.',
+    confederacion => 'La Confederación de Compañías Chileno-Alemanas de Bomberos: directorio y las compañías confederadas de todo Chile.',
+    dotacion      => 'Oficialidad 2026–2028 y nómina de voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
+    formacion     => 'Formación de voluntarios: convocatorias, Aula Virtual, malla curricular y material de la Academia Nacional de Bomberos.',
+    acceso        => 'Acceso Quintino: intranet y plataformas internas para voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
+    material      => 'Material mayor de la Quinta: las unidades BX-5, B-5 y la embarcación Harbor 28.',
+    bx5           => 'Unidad BX-5: Iveco Magirus FF150E30W 4x4 de 2012, unidad mixta de incendio y rescate de la Quinta Compañía de Talcahuano.',
+    b5            => 'Unidad B-5: Iveco Magirus FF150E30 de 2018, unidad de control de incendios de la Quinta Compañía de Talcahuano.',
+    harbor        => 'Unidad Harbor 28: embarcación de rescate medioambiental para descontaminación de aguas de la Quinta Compañía de Talcahuano.',
+    contacto      => 'Contacto de la Quinta Compañía de Bomberos de Talcahuano: Av. Río Maule 5383, Villa Independencia. Correo, teléfono y mapa.',
+    error404      => 'La página que buscas no existe o cambió de dirección.',
+);
+
 # clave => ruta, titulo, seccion del menu.
 # El contenido de cada pagina esta en herramientas/contenido/<clave>.html; portada,
 # formacion y acceso quintino tienen su contenido en este archivo.
@@ -47,7 +70,8 @@ sub rutas_paginas {
         harbor        => ['material-mayor/harbor-28/', 'Unidad Harbor 28',    'La Quinta'],
         contacto      => ['contacto/',                 'Contacto',            'Contacto'],
     );
-    return map { $_ => { ruta => $p{$_}[0], titulo => $p{$_}[1], seccion => $p{$_}[2] } } keys %p;
+    return map { $_ => { ruta => $p{$_}[0], titulo => $p{$_}[1], seccion => $p{$_}[2],
+                         descripcion => $DESCRIPCIONES{$_} // $DESCRIPCION } } keys %p;
 }
 
 my $WEBMAIL = 'https://mail.google.com/a/funfte.cl/';
@@ -231,9 +255,30 @@ sub archivo {
     return $h . "</ul>\n</article>";
 }
 
+# Enlace canonico, Open Graph y Twitter Card: titulo, texto e imagen que muestran
+# Google, WhatsApp y Facebook. La imagen es la primera foto del contenido o la portada.
+sub meta_compartir {
+    my %a = @_;
+    my $url = $SITIO . $a{ruta};
+    my ($foto) = ($a{contenido} // '') =~ m{assets/img/([^"']+\.(?:jpe?g|png))}i;
+    my $imagen = $SITIO . 'assets/img/' . ($foto // '2011-12-DSC0103-1030x688.jpg');
+    my $titulo = $a{clave} eq 'inicio' ? $NOMBRE : $a{titulo_completo};
+    return qq(
+<link rel="canonical" href="$url">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="$NOMBRE">
+<meta property="og:locale" content="es_CL">
+<meta property="og:title" content="$titulo">
+<meta property="og:description" content="$a{descripcion}">
+<meta property="og:url" content="$url">
+<meta property="og:image" content="$imagen">
+<meta name="twitter:card" content="summary_large_image">);
+}
+
 sub pagina {
     my %a = @_;
-    my $p = '../' x ($a{ruta} =~ tr{/}{});
+    # la pagina 404 se sirve en cualquier direccion: usa rutas absolutas
+    my $p = $a{prefijo} // '../' x ($a{ruta} =~ tr{/}{});
     my $es_inicio = $a{clave} eq 'inicio';
     my $titulo = $es_inicio ? "$NOMBRE | Fünfte Deutsche Feuerwehrkompanie" : "$a{titulo} | $NOMBRE";
     my $cabecera = qq(<section class="cabecera-pagina"><div class="wrap">)
@@ -248,16 +293,19 @@ sub pagina {
     my $acceso_actual = $a{clave} eq 'acceso' ? ' aria-current="page"' : '';
     my $candado = icono('candado');
     my $anio = (localtime)[5] + 1900;
-    # el archivo no debe aparecer en buscadores
-    my $robots = $a{ruta} =~ m{^archivo/} ? qq(\n<meta name="robots" content="noindex">) : '';
+    my $descripcion = $a{descripcion} // $DESCRIPCION;
+    # el archivo y la pagina 404 no deben aparecer en buscadores
+    my $indexable = $a{ruta} !~ m{^archivo/} && $a{clave} ne 'error404';
+    my $meta = $indexable ? meta_compartir(%a, titulo_completo => $titulo, descripcion => $descripcion)
+                          : qq(\n<meta name="robots" content="noindex">);
     return <<"HTML";
 <!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>$titulo</title>$robots
-<meta name="description" content="Quinta Compañía de Bomberos «Bomba Chile» de Talcahuano, fundada en 1908. Fünfte Deutsche Feuerwehrkompanie Talcahuano.">
+<title>$titulo</title>
+<meta name="description" content="$descripcion">$meta
 <link rel="icon" href="${p}favicon.ico">
 <link rel="stylesheet" href="${p}assets/css/estilos.css$V_CSS">
 <script src="${p}assets/js/menu.js$V_JS" defer></script>

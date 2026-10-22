@@ -31,9 +31,11 @@ sub leer {
     return scalar <$fh>;
 }
 
-my %antes = map { $_ => leer($_) } paginas();
+# archivos que genera generar.pl ademas de las paginas index.html
+my @otros = grep { -e } qw(404.html robots.txt sitemap.xml);
+my %antes = map { $_ => leer($_) } paginas(), @otros;
 system($^X, 'herramientas/generar.pl') == 0 or die "fallo generar.pl\n";
-my @distintas = grep { !exists $antes{$_} || $antes{$_} ne leer($_) } paginas();
+my @distintas = grep { !exists $antes{$_} || $antes{$_} ne leer($_) } paginas(), qw(404.html robots.txt sitemap.xml);
 if (@distintas) {
     print "Paginas desactualizadas (ya quedaron regeneradas, falta subirlas):\n", map { "  $_\n" } @distintas;
     $errores++;

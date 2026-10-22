@@ -79,6 +79,14 @@ sub con_dimensiones {
     return $html;
 }
 
+sub escribir_archivo {
+    my ($nombre, $texto) = @_;
+    open my $fh, '>:encoding(UTF-8)', "$RAIZ/$nombre" or die "$nombre: $!";
+    print $fh $texto;
+    close $fh;
+    print "  -> $nombre\n";
+}
+
 sub escribir {
     my ($ruta, $html) = @_;
     $html = con_dimensiones($ruta, $html);
@@ -98,4 +106,19 @@ for my $clave (sort keys %paginas) {
     my $contenido = -e $archivo ? leer_utf8($archivo) : '';
     escribir($pg->{ruta}, pagina(%$pg, clave => $clave, contenido => $contenido));
 }
+
+# Pagina 404: Cloudflare la sirve en cualquier direccion inexistente (wrangler.jsonc),
+# por eso usa rutas absolutas (prefijo "/").
+print "Página no encontrada\n";
+escribir_archivo('404.html', con_dimensiones('', pagina(
+    clave => 'error404', ruta => '', prefijo => '/', titulo => 'Página no encontrada', seccion => '',
+    descripcion => 'La página que buscas no existe o cambió de dirección.',
+    contenido => qq(<p>La página que buscas no existe o cambió de dirección.</p>\n<p><a href="/">Volver a la portada</a> · <a href="/contacto/">Contacto</a></p>),
+)));
+
+# robots.txt y sitemap.xml: solo las paginas publicas (el Archivo queda fuera)
+my @publicas = sort grep { $_ !~ m{^archivo/} } map { $_->{ruta} } values %paginas;
+escribir_archivo('sitemap.xml', qq(<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n)
+    . join('', map { "  <url><loc>$plantilla::SITIO$_</loc></url>\n" } @publicas) . "</urlset>\n");
+escribir_archivo('robots.txt', "User-agent: *\nAllow: /\n\nSitemap: ${plantilla::SITIO}sitemap.xml\n");
 print "Listo.\n";
