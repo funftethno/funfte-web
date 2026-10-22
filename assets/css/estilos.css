@@ -656,8 +656,6 @@ a:hover { color: var(--rojo-oscuro); }
 .pie p { margin: 0 0 12px; }
 .pie-enlaces { list-style: none; margin: 0; padding: 0; }
 .pie-enlaces li { margin-bottom: 6px; }
-.emergencia { color: #fff; font-weight: 600; }
-.emergencia a { color: var(--dorado); }
 .derechos {
   margin-top: 32px !important;
   padding-top: 18px;

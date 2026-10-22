@@ -383,8 +383,7 @@ $cuerpo
 </div>
 <div>
 <h2>Comunícate</h2>
-<p>Fono-fax: <a href="tel:+56412588000">+56 41 258 8000</a><br><a href="mailto:correo\@funfte.cl">correo\@funfte.cl</a></p>
-<p class="emergencia">Emergencias: <a href="tel:132">132</a></p>
+<p><a href="mailto:correo\@funfte.cl">correo\@funfte.cl</a></p>
 </div>
 <div>
 <h2>Enlaces</h2>
