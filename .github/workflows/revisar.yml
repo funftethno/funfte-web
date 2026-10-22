@@ -1,12 +1,12 @@
 # Revisa que las paginas esten regeneradas y sin enlaces internos rotos.
-# Es obligatoria para aceptar un Pull Request hacia master.
+# Corre en cada push a cualquier rama y es obligatoria para aceptar un Pull Request hacia master.
 name: Revisar sitio
 
 on:
   pull_request:
-    branches: [master]
+    branches: [master, desarrollo]
   push:
-    branches: [desarrollo]
+    branches-ignore: [master]
 
 permissions:
   contents: read
