@@ -469,6 +469,9 @@ a.saludo:hover { border-color: var(--dorado); }
   color: var(--texto);
   margin-bottom: 4px;
 }
+
+.contenido .cifras .cifra-total { background: var(--rojo); border-color: var(--rojo); color: #fff; }
+.contenido .cifras .cifra-total strong { color: #fff; }
 .contenido .nomina {
   list-style: none;
   margin: 0 0 8px;
