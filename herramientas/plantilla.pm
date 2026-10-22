@@ -491,6 +491,28 @@ sub cifras_dotacion {
     return $h . qq(</ul>\n<ul class="cifras">\n<li class="cifra-total"><strong>$total</strong>Dotación total</li>\n</ul>);
 }
 
+# Tarjetas de acceso a las subsecciones de una pagina del menu (por ejemplo La Quinta), donde
+# su contenido tiene <!--SECCIONES-->. Salen del submenu de @MENU, con la descripcion de cada
+# pagina y la primera imagen de su contenido; un logo (PNG) se muestra entero y una pagina sin
+# imagen lleva el escudo de la Quinta.
+sub secciones {
+    my ($p, $ruta) = @_;
+    my %rutas = rutas_paginas();
+    my %clave = map { $rutas{$_}{ruta} => $_ } keys %rutas;
+    my ($menu) = grep { $_->[1] eq $ruta && $_->[2] } @MENU or return '';
+    my $h = qq(<div class="grilla-unidades grilla-secciones">\n);
+    for my $s (@{ $menu->[2] }) {
+        my ($titulo, $destino) = @$s;
+        my $c = $clave{$destino} // next;
+        my ($foto) = leer_contenido($c) =~ m{assets/img/([^"']+\.(?:jpe?g|png))}i;
+        my $clase = !$foto || $foto =~ /\.png$/i ? ' class="logo"' : '';
+        $foto //= 'escudo-quinta.png';
+        $h .= qq(<a class="tarjeta-unidad" href="$p$destino"><img$clase src="${p}assets/img/$foto" alt="" loading="lazy">)
+            . qq(<span class="tarjeta-texto"><strong>$titulo</strong><span>$DESCRIPCIONES{$c}</span></span></a>\n);
+    }
+    return $h . '</div>';
+}
+
 # Dotacion con fotos (Archivo): la misma nomina de dotacion.html en tarjetas con el numero de
 # antiguedad, el nombre y la foto de cada voluntario: assets/img/voluntario-<nombre>.jpg, en
 # minusculas, sin tildes y con guiones (por ejemplo voluntario-fernando-vera-torres.jpg); si aun
@@ -625,7 +647,8 @@ sub pagina {
                : $a{clave} eq 'gracias'     ? $cabecera . gracias($p, 'Recibimos tu postulación. La Quinta se pondrá en contacto contigo por correo o teléfono.')
                : $a{clave} eq 'enviado'     ? $cabecera . gracias($p, 'Recibimos tu mensaje. Te responderemos a la brevedad por correo.')
                : $cabecera . qq(<article class="wrap contenido">\n) . ($a{contenido} =~ s/<!--FORMULARIO_CONTACTO-->/formulario_contacto()/er
-                                                                        =~ s/<!--CIFRAS_DOTACION-->/cifras_dotacion($a{contenido})/er) . qq(\n</article>);
+                                                                        =~ s/<!--CIFRAS_DOTACION-->/cifras_dotacion($a{contenido})/er
+                                                                        =~ s/<!--SECCIONES-->/secciones($p, $a{ruta})/er) . qq(\n</article>);
     # en la 404 ningun item del menu queda marcado como actual
     my $menu = menu($p, $a{clave} eq 'error404' ? '-' : $a{ruta}, $a{seccion});
     my $acceso_actual = $a{clave} eq 'acceso' ? ' aria-current="page"' : '';
