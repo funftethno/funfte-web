@@ -69,6 +69,7 @@ sub rutas_paginas {
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         postula       => ['postula/',                   'Postula a la Quinta', ''],
         gracias       => ['postula/gracias/',           '¡Gracias por postular!', ''],
+        enviado       => ['contacto/gracias/',          '¡Mensaje enviado!',  ''],
         material      => ['material-mayor/',           'Material Mayor',      'La Quinta'],
         bx5           => ['material-mayor/bx-5/',      'Unidad BX-5',         'La Quinta'],
         b5            => ['material-mayor/b-5/',       'Unidad B-5',          'La Quinta'],
@@ -287,11 +288,35 @@ sub postula {
 }
 
 sub gracias {
-    my ($p) = @_;
+    my ($p, $texto) = @_;
     return qq(<section class="wrap bloque">
-<p class="intro">Recibimos tu postulación. La Quinta se pondrá en contacto contigo por correo o teléfono.</p>
+<p class="intro">$texto</p>
 <p><a class="boton" href="$p">Volver a la portada</a></p>
 </section>);
+}
+
+# Formulario de Contacto: tambien por FormSubmit, a correo@ (ver $POSTULACION_PARA).
+# Se inserta en herramientas/contenido/contacto.html donde esta <!--FORMULARIO_CONTACTO-->.
+# funfteit@gmail.com: copia temporal para pruebas; quitar cuando el formulario este probado
+my $CONTACTO_CC = 'funfteit@gmail.com';
+
+sub formulario_contacto {
+    return qq(<form class="formulario" action="https://formsubmit.co/$POSTULACION_PARA" method="POST">
+<input type="hidden" name="_subject" value="Nuevo mensaje desde funfte.cl">
+<input type="hidden" name="_cc" value="$CONTACTO_CC">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="${SITIO}contacto/gracias/">
+<input type="text" name="_honey" class="oculto" tabindex="-1" autocomplete="off" aria-hidden="true">
+<label for="c-nombre">Nombre</label>
+<input id="c-nombre" name="Nombre" type="text" autocomplete="name" required>
+<label for="c-correo">Correo electrónico</label>
+<input id="c-correo" name="email" type="email" autocomplete="email" required>
+<label for="c-telefono">Teléfono</label>
+<input id="c-telefono" name="Teléfono" type="tel" autocomplete="tel" placeholder="+56 9 1234 5678">
+<label for="c-mensaje">Mensaje</label>
+<textarea id="c-mensaje" name="Mensaje" rows="5" required></textarea>
+<button class="boton" type="submit">Enviar mensaje</button>
+</form>);
 }
 
 sub archivo {
@@ -337,8 +362,9 @@ sub pagina {
                : $a{clave} eq 'acceso'      ? $cabecera . acceso_personal($p)
                : $a{clave} eq 'archivo'     ? $cabecera . archivo($p)
                : $a{clave} eq 'postula'     ? $cabecera . postula($p)
-               : $a{clave} eq 'gracias'     ? $cabecera . gracias($p)
-               : $cabecera . qq(<article class="wrap contenido">\n$a{contenido}\n</article>);
+               : $a{clave} eq 'gracias'     ? $cabecera . gracias($p, 'Recibimos tu postulación. La Quinta se pondrá en contacto contigo por correo o teléfono.')
+               : $a{clave} eq 'enviado'     ? $cabecera . gracias($p, 'Recibimos tu mensaje. Te responderemos a la brevedad por correo.')
+               : $cabecera . qq(<article class="wrap contenido">\n) . ($a{contenido} =~ s/<!--FORMULARIO_CONTACTO-->/formulario_contacto()/er) . qq(\n</article>);
     # en la 404 ningun item del menu queda marcado como actual
     my $menu = menu($p, $a{clave} eq 'error404' ? '-' : $a{ruta}, $a{seccion});
     my $acceso_actual = $a{clave} eq 'acceso' ? ' aria-current="page"' : '';
@@ -346,7 +372,7 @@ sub pagina {
     my $anio = (localtime)[5] + 1900;
     my $descripcion = $a{descripcion} // $DESCRIPCION;
     # el archivo y la pagina 404 no deben aparecer en buscadores
-    my $indexable = $a{ruta} !~ m{^archivo/} && $a{clave} !~ /^(?:error404|gracias)$/;
+    my $indexable = $a{ruta} !~ m{^archivo/} && $a{clave} !~ /^(?:error404|gracias|enviado)$/;
     my $meta = $indexable ? meta_compartir(%a, titulo_completo => $titulo, descripcion => $descripcion)
                           : qq(\n<meta name="robots" content="noindex">);
     return <<"HTML";

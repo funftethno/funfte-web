@@ -51,7 +51,23 @@
 <section class="cabecera-pagina"><div class="wrap"><h1>Contacto</h1></div></section>
 <article class="wrap contenido">
 <h3>Contáctate con nosotros</h3>
-<p>Escríbenos a <a href="mailto:correo@funfte.cl">correo@funfte.cl</a>.</p>
+<p>Escríbenos a <a href="mailto:correo@funfte.cl">correo@funfte.cl</a> o déjanos un mensaje:</p>
+<form class="formulario" action="https://formsubmit.co/correo@funfte.cl" method="POST">
+<input type="hidden" name="_subject" value="Nuevo mensaje desde funfte.cl">
+<input type="hidden" name="_cc" value="funfteit@gmail.com">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="https://funfte.cl/contacto/gracias/">
+<input type="text" name="_honey" class="oculto" tabindex="-1" autocomplete="off" aria-hidden="true">
+<label for="c-nombre">Nombre</label>
+<input id="c-nombre" name="Nombre" type="text" autocomplete="name" required>
+<label for="c-correo">Correo electrónico</label>
+<input id="c-correo" name="email" type="email" autocomplete="email" required>
+<label for="c-telefono">Teléfono</label>
+<input id="c-telefono" name="Teléfono" type="tel" autocomplete="tel" placeholder="+56 9 1234 5678">
+<label for="c-mensaje">Mensaje</label>
+<textarea id="c-mensaje" name="Mensaje" rows="5" required></textarea>
+<button class="boton" type="submit">Enviar mensaje</button>
+</form>
 <h3>Redes sociales</h3>
 <p>Síguenos en <a href="https://www.instagram.com/funfte" target="_blank" rel="noopener">Instagram</a> y <a href="https://www.facebook.com/funfte" target="_blank" rel="noopener">Facebook</a>.</p>
 <h3>Nuestra información de contacto</h3>
