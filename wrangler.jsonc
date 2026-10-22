@@ -5,7 +5,7 @@
   "assets": {
     "directory": "."
   },
-  // Cada rama distinta de master se publica en una URL de vista previa:
-  // https://<rama>-funfte-web.<cuenta>.workers.dev
-  "preview_urls": true
+  // Vistas previas (Worker Previews): cada rama distinta de master se publica
+  // aparte con `npx wrangler preview`, sin tocar funfte.cl.
+  "previews": {}
 }
