@@ -103,6 +103,7 @@ my @ACCESOS = (
     ['Webmail',                          'Correo electrónico institucional @funfte.cl mediante la plataforma de Google.', $WEBMAIL, 'correo'],
     ['SISPAR',                           'Plataforma de registro y control: administración y gestión interna de bomberos.', 'https://sispar.sisparnovenacbt.com/login.php', 'sisab'],
     ['Registro Nacional de Bomberos',    'Acceso RNB a los sistemas de la Junta Nacional de Bomberos.', 'https://www.bomberos.cl/sist/escritorio_virtual/', 'documento'],
+    ['Calendario de cumpleaños',         'Aniversarios de las compañías, para mostrar en pantalla completa en el cuartel.', 'acceso-quintino/calendario/', 'torta'],
 );
 my @SITIOS = (
     ['Cuerpo de Bomberos de Talcahuano', 'Sitio oficial del Cuerpo de Bomberos de Talcahuano.', 'https://cbt.cl', 'web'],
@@ -197,18 +198,8 @@ sub acceso_personal {
 </div>
 </section>
 <section class="wrap bloque">
-<div class="destacado">
-) . icono('torta') . qq(
-<div>
-<h2>Calendario de cumpleaños</h2>
-<p>Aniversarios de las compañías del Cuerpo y de la Confederación, listo para mostrar en pantalla completa en el cuartel.</p>
-</div>
-<a class="boton" href="${p}acceso-quintino/calendario/">Ver calendario</a>
-</div>
-</section>
-<section class="wrap bloque">
 <h2 class="titulo-seccion">Accesos administrativos</h2>
-<div class="grilla-tarjetas tres">
+<div class="grilla-tarjetas">
 );
     $h .= tarjeta($p, $_->[3], $_->[0], $_->[1], $_->[2], 'Ingresar') for @ACCESOS;
     $h .= qq(</div>\n</section>\n<section class="wrap bloque">\n<h2 class="titulo-seccion">Sitios de interés</h2>\n<div class="grilla-tarjetas tres">\n);
