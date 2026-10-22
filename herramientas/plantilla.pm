@@ -35,6 +35,7 @@ my %DESCRIPCIONES = (
     confederacion => 'La Confederación de Compañías Chileno-Alemanas de Bomberos: directorio y las compañías confederadas de todo Chile.',
     dotacion      => 'Oficialidad 2026–2028 y nómina de voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
     formacion     => 'Formación de voluntarios: convocatorias, Aula Virtual, malla curricular y material de la Academia Nacional de Bomberos.',
+    postula       => 'Postula como bombero voluntario de la Quinta Compañía de Bomberos de Talcahuano. Completa el formulario y te contactaremos.',
     acceso        => 'Acceso Quintino: intranet y plataformas internas para voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
     material      => 'Material mayor de la Quinta: las unidades BX-5, B-5 y la embarcación Harbor 28.',
     bx5           => 'Unidad BX-5: Iveco Magirus FF150E30W 4x4 de 2012, unidad mixta de incendio y rescate de la Quinta Compañía de Talcahuano.',
@@ -66,6 +67,8 @@ sub rutas_paginas {
         directorio    => ['archivo/directorio/',       'Directorio',          'Archivo'],
         socios        => ['archivo/socios-colaboradores/', 'Socios Colaboradores', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
+        postula       => ['postula/',                   'Postula a la Quinta', ''],
+        gracias       => ['postula/gracias/',           '¡Gracias por postular!', ''],
         material      => ['material-mayor/',           'Material Mayor',      'La Quinta'],
         bx5           => ['material-mayor/bx-5/',      'Unidad BX-5',         'La Quinta'],
         b5            => ['material-mayor/b-5/',       'Unidad B-5',          'La Quinta'],
@@ -201,7 +204,7 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 <section class="wrap bloque">
 <h2 class="titulo-seccion">La Quinta</h2>
 <div class="grilla-tarjetas tres">
-) . tarjeta($p, 'sisab', 'Postula a la Quinta', '¿Quieres ser bombero voluntario? Únete a la Quinta y sirve a Talcahuano. Escríbenos y te contamos cómo postular.', 'mailto:correo@funfte.cl?subject=Quiero%20postular%20a%20la%20Quinta', 'Postular')
+) . tarjeta($p, 'sisab', 'Postula a la Quinta', '¿Quieres ser bombero voluntario? Únete a la Quinta y sirve a Talcahuano. Completa el formulario y te contactaremos.', 'postula/', 'Postular')
   . tarjeta($p, 'corazon', 'Hazte socio', 'Colabora con la Quinta y hazte socio cooperador. Con tu ayuda continuaremos salvando vidas.', $COOPERADORES, 'Inscríbete')
   . tarjeta($p, 'reloj', 'Sitio centenario', 'Navega a través de la historia de nuestra compañía en el especial del centenario.')
   . qq(</div>
@@ -248,6 +251,46 @@ qq(<section class="wrap bloque">
 </section>);
 }
 
+# Formulario de postulacion. El sitio es estatico: FormSubmit (formsubmit.co) recibe
+# los datos y los envia por correo a correo@ con copia a secretario@. El primer envio
+# llega como correo de activacion a correo@funfte.cl y hay que confirmarlo.
+my $POSTULACION_PARA = 'correo@funfte.cl';
+my $POSTULACION_CC   = 'secretario@funfte.cl';
+
+sub postula {
+    my ($p) = @_;
+    return qq(<section class="wrap bloque">
+<p class="intro">¿Quieres ser bombero voluntario? Déjanos tus datos y la Quinta se pondrá en contacto contigo para contarte cómo es el proceso de ingreso.</p>
+<form class="formulario" action="https://formsubmit.co/$POSTULACION_PARA" method="POST">
+<input type="hidden" name="_subject" value="Nueva postulación a la Quinta">
+<input type="hidden" name="_cc" value="$POSTULACION_CC">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="${SITIO}postula/gracias/">
+<input type="text" name="_honey" class="oculto" tabindex="-1" autocomplete="off" aria-hidden="true">
+<label for="nombre">Nombre completo</label>
+<input id="nombre" name="Nombre" type="text" autocomplete="name" required>
+<label for="rut">RUT</label>
+<input id="rut" name="RUT" type="text" inputmode="text" placeholder="12.345.678-9" pattern="[0-9.]{7,10}-[0-9kK]" title="RUT con guion y dígito verificador, por ejemplo 12.345.678-9" required>
+<label for="nacimiento">Fecha de nacimiento</label>
+<input id="nacimiento" name="Fecha de nacimiento" type="date" required>
+<label for="correo">Correo electrónico</label>
+<input id="correo" name="email" type="email" autocomplete="email" required>
+<label for="telefono">Teléfono</label>
+<input id="telefono" name="Teléfono" type="tel" autocomplete="tel" placeholder="+56 9 1234 5678" required>
+<button class="boton" type="submit">Enviar postulación</button>
+<p class="formulario-ayuda">Usaremos tus datos solo para contactarte por tu postulación. ¿Dudas? Escríbenos a <a href="mailto:correo\@funfte.cl">correo\@funfte.cl</a>.</p>
+</form>
+</section>);
+}
+
+sub gracias {
+    my ($p) = @_;
+    return qq(<section class="wrap bloque">
+<p class="intro">Recibimos tu postulación. La Quinta se pondrá en contacto contigo por correo o teléfono.</p>
+<p><a class="boton" href="$p">Volver a la portada</a></p>
+</section>);
+}
+
 sub archivo {
     my ($p) = @_;
     my %pg = rutas_paginas();
@@ -290,6 +333,8 @@ sub pagina {
                : $a{clave} eq 'formacion'   ? $cabecera . formacion($p)
                : $a{clave} eq 'acceso'      ? $cabecera . acceso_personal($p)
                : $a{clave} eq 'archivo'     ? $cabecera . archivo($p)
+               : $a{clave} eq 'postula'     ? $cabecera . postula($p)
+               : $a{clave} eq 'gracias'     ? $cabecera . gracias($p)
                : $cabecera . qq(<article class="wrap contenido">\n$a{contenido}\n</article>);
     # en la 404 ningun item del menu queda marcado como actual
     my $menu = menu($p, $a{clave} eq 'error404' ? '-' : $a{ruta}, $a{seccion});
@@ -298,7 +343,7 @@ sub pagina {
     my $anio = (localtime)[5] + 1900;
     my $descripcion = $a{descripcion} // $DESCRIPCION;
     # el archivo y la pagina 404 no deben aparecer en buscadores
-    my $indexable = $a{ruta} !~ m{^archivo/} && $a{clave} ne 'error404';
+    my $indexable = $a{ruta} !~ m{^archivo/} && $a{clave} !~ /^(?:error404|gracias)$/;
     my $meta = $indexable ? meta_compartir(%a, titulo_completo => $titulo, descripcion => $descripcion)
                           : qq(\n<meta name="robots" content="noindex">);
     return <<"HTML";
