@@ -35,7 +35,7 @@ Sube los archivos fuente **y** las páginas regeneradas en el mismo commit. Si `
 
 Flujo obligatorio, en este orden:
 
-1. **Cada persona trabaja en su propia rama**, que lleva su usuario de GitHub en minúsculas (por ejemplo `nachoodc` o `wh1t3b0x`) y que crea el owner. Antes de empezar, ponla al día con `desarrollo`:
+1. **Cada persona trabaja en su propia rama**, que lleva su apellido en minúsculas (por ejemplo `delgado` o `molina`) y que crea el owner. Antes de empezar, ponla al día con `desarrollo`:
    ```bash
    git checkout <rama>
    git pull
