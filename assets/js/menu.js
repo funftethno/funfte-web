@@ -56,14 +56,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Portada: saludo a las compañias que estan de aniversario hoy o lo estuvieron en la
-  // ultimos 3 dias. Para probar otro dia: ?fecha=MM-DD (por ejemplo ?fecha=11-08).
+  // Portada: saludo a las compañias que estan de aniversario hoy (DIAS_SALUDO permite
+  // mantenerlo unos dias mas). Para probar otro dia: ?fecha=MM-DD (por ejemplo ?fecha=11-08).
   var datos = document.getElementById('aniversarios');
   var saludos = document.getElementById('saludos');
   if (datos && saludos) {
     var MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto',
                  'septiembre', 'octubre', 'noviembre', 'diciembre'];
-    var DIAS_SALUDO = 3;
+    var DIAS_SALUDO = 0;   // dias que sigue visible despues del aniversario
     var hoy = new Date();
     var prueba = /[?&]fecha=(\d{2})-(\d{2})/.exec(location.search);
     if (prueba) hoy = new Date(hoy.getFullYear(), +prueba[1] - 1, +prueba[2]);
