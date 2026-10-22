@@ -157,6 +157,10 @@ my %ICONOS = (
     web      => 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-3a15 15 0 0 0-1.3-3.9A8 8 0 0 1 18.9 8zM12 4c.8 1.1 1.5 2.5 1.9 4h-3.8c.4-1.5 1.1-2.9 1.9-4zM4.3 14a8 8 0 0 1 0-4h3.4a16 16 0 0 0 0 4H4.3zm.8 2h3a15 15 0 0 0 1.3 3.9A8 8 0 0 1 5.1 16zm3-8h-3a8 8 0 0 1 4.3-3.9C8.7 5.3 8.3 6.6 8.1 8zM12 20c-.8-1.1-1.5-2.5-1.9-4h3.8c-.4 1.5-1.1 2.9-1.9 4zm2.3-6H9.7a14 14 0 0 1 0-4h4.6a14 14 0 0 1 0 4zm.3 5.9a15 15 0 0 0 1.3-3.9h3a8 8 0 0 1-4.3 3.9zM16.3 14a16 16 0 0 0 0-4h3.4a8 8 0 0 1 0 4h-3.4z',
     torta    => 'M12 2c1 1.3 1.5 2.3 1.5 3a1.5 1.5 0 0 1-3 0c0-.7.5-1.7 1.5-3zm-1 5h2v3h5a2 2 0 0 1 2 2v2.5c-1 0-1.5-.8-2.5-.8s-1.5.8-2.5.8-1.5-.8-2.5-.8-1.5.8-2.5.8-1.5-.8-2.5-.8-1.5.8-2.5.8V12a2 2 0 0 1 2-2h5V7zm-7 9c1 0 1.5-.8 2.5-.8s1.5.8 2.5.8 1.5-.8 2.5-.8 1.5.8 2.5.8 1.5-.8 2.5-.8 1.5.8 2.5.8V22H4v-6z',
     candado  =>'M12 2a5 5 0 0 1 5 5v3h2v12H5V10h2V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v3h6V7a3 3 0 0 0-3-3zm0 9a2 2 0 0 0-1 3.7V19h2v-2.3A2 2 0 0 0 12 13z',
+    grupo    => 'M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 2c-2.3 0-7 1.2-7 3.5V19h14v-2.5C15 14.2 10.3 13 8 13zm8 0-1 .1c1.2.8 2 2 2 3.4V19h6v-2.5c0-2.3-4.7-3.5-7-3.5z',
+    calendario => 'M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V10h14v10zM7 12h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm-8 4h2v2H7v-2zm4 0h2v2h-2v-2z',
+    llama    => 'M12 12.9l-2.1 2.1a2.9 2.9 0 0 0-.9 2.1C9 18.7 10.3 20 12 20s3-1.3 3-2.9c0-.8-.3-1.5-.9-2.1L12 12.9zM16 6l-.4.6C14.4 8 12 7.2 12 5.3V2S4 6 4 13c0 2.9 1.6 5.5 3.9 6.9a4.9 4.9 0 0 1 .6-6.3l3.5-3.5 3.5 3.5a4.9 4.9 0 0 1 .6 6.3c1.9-1.2 3.3-3.1 3.7-5.3.7-3.5-1-6.8-3.8-8.6z',
+    camion   => 'M20 8h-3V4H3a2 2 0 0 0-2 2v11h2a3 3 0 0 0 6 0h6a3 3 0 0 0 6 0h2v-5l-3-4zM6 18.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm13.5-9 2 2.5H17V9.5h2.5zM18 18.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z',
 );
 
 sub icono { qq(<svg viewBox="0 0 24 24" aria-hidden="true"><path d="$ICONOS{$_[0]}"/></svg>) }
@@ -264,6 +268,38 @@ sub aniversarios {
     return json([ sort { $a->{mes} <=> $b->{mes} || $a->{dia} <=> $b->{dia} } @lista ]);
 }
 
+# Franja de datos bajo la portada. Los numeros se calculan al generar: los años desde
+# $FUNDACION, los voluntarios con el mismo total de Dotacion y las maquinas contando las
+# tarjetas de "Unidades en servicio" de Material Mayor.
+sub leer_contenido {
+    open my $fh, '<:utf8', "$FindBin::Bin/contenido/$_[0].html" or return '';
+    local $/;
+    return scalar <$fh>;
+}
+
+sub datos_portada {
+    my ($p) = @_;
+    my ($anio, $mes, $dia) = split /-/, $FUNDACION;
+    my @hoy = localtime;
+    my $anios = $hoy[5] + 1900 - $anio - (($hoy[4] + 1) * 100 + $hoy[3] < $mes * 100 + $dia ? 1 : 0);
+    my ($voluntarios) = contar_dotacion(leer_contenido('dotacion'));
+    my ($servicio) = leer_contenido('material') =~ m{<div class="[^"]*grilla-servicio[^"]*">(.*?)</div>}s;
+    my $maquinas = () = ($servicio // '') =~ /<a class="tarjeta-unidad"/g;
+    my @datos = (
+        ['calendario', $anios,       'Años de historia',     'historia/'],
+        ['grupo',      $voluntarios, 'Voluntarios',          'dotacion/'],
+        ['llama',      'Agua y Rescate Integral', 'Especialidad', 'la-quinta/'],
+        ['camion',     $maquinas,    'Máquinas en servicio', 'material-mayor/'],
+    );
+    my $h = qq(<section class="datos-portada" aria-label="La Quinta en cifras">\n<ul class="wrap">\n);
+    for (@datos) {
+        my ($icono, $valor, $etiqueta, $ruta) = @$_;
+        my $clase = $valor =~ /^\d+$/ ? 'numero' : 'texto';
+        $h .= qq(<li class="$clase"><a href="$p$ruta">) . icono($icono) . qq(<strong>$valor</strong><span>$etiqueta</span></a></li>\n);
+    }
+    return $h . qq(</ul>\n</section>\n);
+}
+
 sub inicio {
     my ($p) = @_;
     my $aniversarios = aniversarios($p);
@@ -278,7 +314,7 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 <div class="acciones"><a class="boton" href="${p}la-quinta/">Conoce la Quinta</a><a class="boton secundario" href="$REDES[0][1]" target="_blank" rel="noopener">Síguenos en Instagram</a></div>
 </div>
 </section>
-<section class="wrap bloque">
+) . datos_portada($p) . qq(<section class="wrap bloque">
 <h2 class="titulo-seccion">La Quinta</h2>
 <div class="grilla-tarjetas tres">
 ) . tarjeta($p, 'sisab', 'Postula a la Quinta', '¿Quieres ser bombero voluntario? Únete a la Quinta y sirve a Talcahuano. Completa el formulario y te contactaremos.', 'postula/', 'Postular')
@@ -435,17 +471,23 @@ sub archivo {
 # Resumen de la dotacion en cifras: cuenta los nombres de cada lista "Voluntarios ..."
 # de la pagina, y la dotacion total (sin confederados), asi el resumen nunca queda desactualizado
 # al agregar o quitar voluntarios.
-sub cifras_dotacion {
+sub contar_dotacion {
     my ($html) = @_;
-    my $h = qq(<ul class="cifras">\n);
-    my $total = 0;
+    my (@tipos, $total);
     while ($html =~ m{<h3>Voluntarios (\w+)</h3>\s*<ol[^>]*>(.*?)</ol>}gs) {
         my ($tipo, $lista) = (ucfirst $1, $2);
         my $n = () = $lista =~ /<li\b/g;
-        $h .= qq(<li><strong>$n</strong>$tipo</li>\n);
+        push @tipos, [$tipo, $n];
         # los confederados son de otras compañías: no suman a la dotación de la Quinta
         $total += $n unless $tipo eq 'Confederados';
     }
+    return ($total // 0, @tipos);
+}
+
+sub cifras_dotacion {
+    my ($total, @tipos) = contar_dotacion($_[0]);
+    my $h = qq(<ul class="cifras">\n);
+    $h .= qq(<li><strong>$_->[1]</strong>$_->[0]</li>\n) for @tipos;
     return $h . qq(</ul>\n<ul class="cifras">\n<li class="cifra-total"><strong>$total</strong>Dotación total</li>\n</ul>);
 }
 
