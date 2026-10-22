@@ -57,17 +57,19 @@ El contenido se extrajo una sola vez del sitio antiguo (WordPress), ya limpio y 
 
 | Rama | Quién sube | Dónde se ve |
 |---|---|---|
-| `desarrollo` | Cualquier colaborador, directamente | Vista previa: `https://desarrollo-funfte-web.funfteit.workers.dev` |
-| `master` | Nadie directamente: solo por Pull Request aprobado | Sitio oficial `https://funfte.cl` |
+| Tu rama (`<rama>`) | Tú | `https://<rama>-funfte-web.funfteit.workers.dev/` |
+| `desarrollo` | Cualquier colaborador, cuando su rama está probada | `https://desarrollo-funfte-web.funfteit.workers.dev/` |
+| `master` | Solo el owner, por Pull Request desde `desarrollo` | Sitio oficial `https://funfte.cl` |
 
-1. Trabaja en la rama `desarrollo`:
+1. **Crea tu rama** desde `desarrollo` actualizado. Usa un nombre corto, en minúsculas, con guiones y sin `/` ni tildes, porque forma parte de la dirección de la vista previa:
 
    ```bash
    git checkout desarrollo
    git pull
+   git checkout -b nomina-mayo
    ```
 
-2. Haz el cambio, regenera y revisa:
+2. **Haz el cambio, regenera y revisa:**
 
    ```bash
    perl herramientas/generar.pl
@@ -76,17 +78,31 @@ El contenido se extrajo una sola vez del sitio antiguo (WordPress), ya limpio y 
 
    `revisar.pl` avisa si quedaron páginas sin regenerar o enlaces internos rotos.
 
-3. Sube a `desarrollo`. En uno o dos minutos se ve en la vista previa:
+3. **Sube tu rama y pruébala** en su vista previa, que se actualiza en uno o dos minutos (en el ejemplo, `https://nomina-mayo-funfte-web.funfteit.workers.dev/`). GitHub también corre la revisión automática; mira que salga ✅.
 
    ```bash
    git add -A
    git commit -m "Describe el cambio"
-   git push
+   git push -u origin nomina-mayo
    ```
 
-4. Cuando esté listo para publicarse, abre un **Pull Request** de `desarrollo` hacia `master` en GitHub. GitHub ejecuta la misma revisión automáticamente; si pasa y un administrador lo aprueba, se acepta y el cambio queda en `funfte.cl` en uno o dos minutos.
+4. **Cuando esté probada, llévala a `desarrollo`** y bórrala:
 
-Si trabajas en paralelo con otra persona, puedes crear tu propia rama (`git checkout -b mi-cambio`); también tendrá su vista previa en `https://mi-cambio-funfte-web.funfteit.workers.dev`.
+   ```bash
+   git checkout desarrollo
+   git pull
+   git merge nomina-mayo
+   perl herramientas/generar.pl && perl herramientas/revisar.pl
+   git push
+   git branch -d nomina-mayo
+   git push origin --delete nomina-mayo
+   ```
+
+   Si `git merge` avisa de conflictos en páginas `index.html`, no los resuelvas a mano: quédate con cualquiera de las dos versiones, ejecuta `perl herramientas/generar.pl` y termina el merge.
+
+5. **El owner pasa `desarrollo` a producción** con un Pull Request de `desarrollo` hacia `master`. Al aceptarlo, el cambio queda en `funfte.cl` en uno o dos minutos.
+
+No hagas push directo ni force push a `master`, ni force push a `desarrollo`.
 
 ### Usarlo con asistentes de IA
 Las reglas para asistentes de IA (Codex, Cursor, Copilot, Gemini, Claude Code, etc.) están en `AGENTS.md`. Si tu asistente no lo lee solo, pídele que lo lea antes de empezar. Si cambian las convenciones del sitio, actualiza `AGENTS.md`.
