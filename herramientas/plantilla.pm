@@ -24,12 +24,12 @@ sub rutas_paginas {
         trabajo       => ['nuestro-trabajo/',          'Nuestro Trabajo',     'Nuestro Trabajo'],
         capacitacion  => ['capacitacion/',             'Capacitación',        'Nuestro Trabajo'],
         guardia       => ['guardia-nocturna/',         'Guardia Nocturna',    'Nuestro Trabajo'],
-        formacion     => ['formacion/',                'Formación',           'Nuestro Trabajo'],
+        formacion     => ['formacion/',                'Formación',           'Formación'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
-        material      => ['material-mayor/',           'Material Mayor',      'Material Mayor'],
-        bx5           => ['material-mayor/bx-5/',      'Unidad BX-5',         'Material Mayor'],
-        b5            => ['material-mayor/b-5/',       'Unidad B-5',          'Material Mayor'],
-        harbor        => ['material-mayor/harbor-28/', 'Unidad Harbor 28',    'Material Mayor'],
+        material      => ['material-mayor/',           'Material Mayor',      'La Quinta'],
+        bx5           => ['material-mayor/bx-5/',      'Unidad BX-5',         'La Quinta'],
+        b5            => ['material-mayor/b-5/',       'Unidad B-5',          'La Quinta'],
+        harbor        => ['material-mayor/harbor-28/', 'Unidad Harbor 28',    'La Quinta'],
         contacto      => ['contacto/',                 'Contacto',            'Contacto'],
         redes         => ['redes-sociales/',           'Redes Sociales',      'Contacto'],
     );
@@ -54,10 +54,9 @@ my @ACCESOS = (
 
 my @MENU = (
     ['Inicio', ''],
-    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Confederación','confederacion/'], ['Socios Colaboradores','socios-colaboradores/']]],
+    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Confederación','confederacion/'], ['Socios Colaboradores','socios-colaboradores/'], ['Material Mayor','material-mayor/']]],
     ['Dotación', 'dotacion/', [['Directorio','directorio/']]],
-    ['Nuestro Trabajo', 'nuestro-trabajo/', [['Capacitación','capacitacion/'], ['Formación','formacion/'], ['Guardia Nocturna','guardia-nocturna/']]],
-    ['Material Mayor', 'material-mayor/', [['Unidad B-5','material-mayor/b-5/'], ['Unidad BX-5','material-mayor/bx-5/'], ['Unidad Harbor 28','material-mayor/harbor-28/']]],
+    ['Formación', 'formacion/'],
     ['Contacto', 'contacto/', [['Redes Sociales','redes-sociales/'], ['Webmail', $WEBMAIL]]],
 );
 
