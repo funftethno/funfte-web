@@ -56,18 +56,32 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Portada: saludo a las compañias que estan de aniversario hoy.
-  // Para probar otro dia: ?fecha=MM-DD (por ejemplo ?fecha=11-08).
+  // Portada: saludo a las compañias que estan de aniversario hoy o lo estuvieron en la
+  // ultima semana. Para probar otro dia: ?fecha=MM-DD (por ejemplo ?fecha=11-08).
   var datos = document.getElementById('aniversarios');
   var saludos = document.getElementById('saludos');
   if (datos && saludos) {
+    var MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto',
+                 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    var DIAS_SALUDO = 7;
     var hoy = new Date();
     var prueba = /[?&]fecha=(\d{2})-(\d{2})/.exec(location.search);
-    var mes = prueba ? +prueba[1] : hoy.getMonth() + 1;
-    var dia = prueba ? +prueba[2] : hoy.getDate();
-    JSON.parse(datos.textContent).forEach(function (c) {
-      if (c.mes !== mes || c.dia !== dia) return;
-      var anios = hoy.getFullYear() - c.anio;
+    if (prueba) hoy = new Date(hoy.getFullYear(), +prueba[1] - 1, +prueba[2]);
+    hoy.setHours(0, 0, 0, 0);
+    JSON.parse(datos.textContent).map(function (c) {
+      // el aniversario mas reciente (este año, o el anterior si aun no llega)
+      var fecha = new Date(hoy.getFullYear(), c.mes - 1, c.dia);
+      if (fecha > hoy) fecha.setFullYear(fecha.getFullYear() - 1);
+      c.hace = Math.round((hoy - fecha) / 86400000);
+      c.anios = fecha.getFullYear() - c.anio;
+      return c;
+    }).filter(function (c) {
+      return c.hace <= DIAS_SALUDO;
+    }).sort(function (a, b) {
+      return a.hace - b.hace;
+    }).forEach(function (c) {
+      var anios = c.anios;
+      var cuando = c.hace === 0 ? null : 'el ' + c.dia + ' de ' + MESES[c.mes - 1];
       var tarjeta = document.createElement(c.enlace ? 'a' : 'div');
       tarjeta.className = 'saludo';
       if (c.enlace) { tarjeta.href = c.enlace; tarjeta.target = '_blank'; tarjeta.rel = 'noopener'; }
@@ -79,13 +93,17 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       var texto = document.createElement('p');
       if (c.propia) {
-        texto.innerHTML = '<strong>¡Hoy la Quinta está de aniversario!</strong> Cumplimos ' + anios + ' años al servicio de Talcahuano.';
+        texto.innerHTML = cuando
+          ? '<strong>¡La Quinta estuvo de aniversario!</strong> ' + cuando[0].toUpperCase() + cuando.slice(1) + ' cumplimos ' + anios + ' años al servicio de Talcahuano.'
+          : '<strong>¡Hoy la Quinta está de aniversario!</strong> Cumplimos ' + anios + ' años al servicio de Talcahuano.';
       } else {
-        texto.appendChild(document.createTextNode('Hoy saludamos a la '));
+        texto.appendChild(document.createTextNode(cuando ? 'Saludamos a la ' : 'Hoy saludamos a la '));
         var nombre = document.createElement('strong');
         nombre.textContent = c.nombre;
         texto.appendChild(nombre);
-        texto.appendChild(document.createTextNode(' por su aniversario de ' + anios + ' años.'));
+        texto.appendChild(document.createTextNode(cuando
+          ? ', que ' + cuando + ' cumplió ' + anios + ' años.'
+          : ' por su aniversario de ' + anios + ' años.'));
       }
       tarjeta.appendChild(texto);
       saludos.appendChild(tarjeta);

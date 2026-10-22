@@ -78,7 +78,7 @@ Flujo obligatorio, en este orden:
 - **Nombres de personas**: «Nombre Apellido1 Apellido2», con mayúscula inicial y tildes del español (Gómez, Zúñiga, Matías). No inventes apellidos ni datos: si falta algo, pregunta.
 - **Dotación** (`herramientas/contenido/dotacion.html`): la oficialidad va en tarjetas `<ul class="oficiales fila">`, una lista por fila de jerarquía (por ejemplo, el Capitán solo y debajo los tenientes). La nómina va en `<ol class="nomina">`, ordenada por número de registro, bajo títulos «Voluntarios insignes», «Voluntarios honorarios», etc. Las cifras del resumen (marca `<!--CIFRAS_DOTACION-->`) se calculan solas contando cada lista «Voluntarios …»: no las escribas a mano ni borres la marca.
 - **Confederación** (`herramientas/contenido/confederacion.html`): las compañías van ordenadas por fecha de fundación.
-- **Saludo de aniversario en la portada**: se arma solo con las tarjetas de `cbt.html` y `confederacion.html` (título `<h4>`, «Fundada el D de mes de AAAA», escudo e Instagram), y `menu.js` lo muestra el día que corresponde. Mantén ese formato de fecha en las tarjetas. Para probar otro día, abre la portada con `?fecha=MM-DD`.
+- **Saludo de aniversario en la portada**: se arma solo con las tarjetas de `cbt.html` y `confederacion.html` (título `<h4>`, «Fundada el D de mes de AAAA», escudo e Instagram), y `menu.js` lo muestra desde el día del aniversario y durante la semana siguiente. Mantén ese formato de fecha en las tarjetas. Para probar otro día, abre la portada con `?fecha=MM-DD`.
 - **Enlaces externos**: sin parámetros de seguimiento (`utm_*`, `fbclid`). La plantilla les agrega `target="_blank" rel="noopener"`.
 - No copies texto, imágenes ni código del sitio WordPress antiguo: estaba hackeado.
 
