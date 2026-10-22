@@ -95,14 +95,16 @@ my $SOAP    = 'https://soapbomberos.cl/donacion/5-cia-talcahuano';
 my $AULA    = 'https://aula.anb.cl/moodle/login/index.php';
 my $ANB     = 'https://www.anb.cl';
 
-# Pagina "Acceso Quintino":[titulo, detalle, enlace, icono] (sin enlace = pronto)
+# Pagina "Acceso Quintino": [titulo, detalle, enlace, icono] (sin enlace = pronto).
+# @ACCESOS son las plataformas internas; @SITIOS, sitios institucionales de interes.
 my @ACCESOS = (
     ['Webmail',                          'Correo electrónico institucional @funfte.cl mediante la plataforma de Google.', $WEBMAIL, 'correo'],
-    ['Plataforma de Registro y Control', 'Plataforma de administración y gestión interna de bomberos SISPAR.', 'https://sispar.sisparnovenacbt.com/login.php', 'sisab'],
+    ['SISPAR',                           'Plataforma de registro y control: administración y gestión interna de bomberos.', 'https://sispar.sisparnovenacbt.com/login.php', 'sisab'],
     ['Registro Nacional de Bomberos',    'Acceso RNB a los sistemas de la Junta Nacional de Bomberos.', 'https://www.bomberos.cl/sist/escritorio_virtual/', 'documento'],
+);
+my @SITIOS = (
     ['Cuerpo de Bomberos de Talcahuano', 'Sitio oficial del Cuerpo de Bomberos de Talcahuano.', 'https://cbt.cl', 'web'],
     ['Bomberos de Chile',                'Sitio de la Junta Nacional de Cuerpos de Bomberos de Chile.', 'https://www.bomberos.cl', 'web'],
-    ['Biblioteca Virtual',               'Material de trabajo interno, oficios y manuales operativos.', undef, 'libro'],
 );
 
 my @MENU = (
@@ -192,10 +194,12 @@ sub acceso_personal {
 </div>
 </section>
 <section class="wrap bloque">
-<h2 class="titulo-seccion">Otros accesos</h2>
-<div class="grilla-tarjetas">
+<h2 class="titulo-seccion">Accesos administrativos</h2>
+<div class="grilla-tarjetas tres">
 );
     $h .= tarjeta($p, $_->[3], $_->[0], $_->[1], $_->[2], 'Ingresar') for @ACCESOS;
+    $h .= qq(</div>\n</section>\n<section class="wrap bloque">\n<h2 class="titulo-seccion">Sitios de interés</h2>\n<div class="grilla-tarjetas tres">\n);
+    $h .= tarjeta($p, $_->[3], $_->[0], $_->[1], $_->[2], 'Visitar') for @SITIOS;
     return $h . "</div>\n</section>";
 }
 
