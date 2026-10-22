@@ -221,13 +221,13 @@ a:hover { color: var(--rojo-oscuro); }
   position: relative;
   color: #fff;
   background: var(--carbon) center / cover no-repeat;
-  padding: 110px 0 120px;
+  padding: 64px 0 72px;
 }
 .portada::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(20,20,24,.62) 0%, rgba(20,20,24,.78) 100%);
+  background: rgba(20,20,24,.74);
 }
 .portada .wrap { position: relative; text-align: center; }
 
@@ -242,15 +242,15 @@ a:hover { color: var(--rojo-oscuro); }
 
 .portada h1 {
   font-family: var(--fuente-titulos);
-  font-size: clamp(1.9rem, 4.6vw, 3.4rem);
-  line-height: 1.15;
-  margin: 0 auto 18px;
+  font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+  line-height: 1.2;
+  margin: 0 auto 14px;
   max-width: 980px;
   text-wrap: balance;
 }
 .portada h1 span { display: block; }
 
-.bajada { font-size: 1.15rem; max-width: 600px; margin: 0 auto 28px; opacity: .92; text-wrap: balance; }
+.bajada { font-size: 1.02rem; max-width: 560px; margin: 0 auto 24px; opacity: .92; text-wrap: balance; }
 
 .acciones { display: flex; flex-wrap: wrap; gap: 12px; }
 .portada .acciones { justify-content: center; }
@@ -343,7 +343,7 @@ a:hover { color: var(--rojo-oscuro); }
 @media (max-width: 560px) {
   .boton-acceso { padding: 8px 12px; font-size: .82rem; }
   .grilla-tarjetas, .grilla-tarjetas.tres { grid-template-columns: 1fr; }
-  .portada { padding: 72px 0 80px; }
+  .portada { padding: 48px 0 56px; }
 }
 
 /* ---------- Paginas interiores ---------- */
