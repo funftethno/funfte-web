@@ -9,11 +9,42 @@ document.addEventListener('DOMContentLoaded', function () {
     menu.classList.toggle('abierto', !abierto);
   });
 
-  // Campos de formulario que solo aceptan digitos (por ejemplo, el telefono de Contacto)
-  document.querySelectorAll('[data-solo-numeros]').forEach(function (campo) {
+  // Telefonos de los formularios: solo digitos, maximo 9, agrupados como 9 1234 5678
+  document.querySelectorAll('[data-telefono]').forEach(function (campo) {
     campo.addEventListener('input', function () {
-      var limpio = campo.value.replace(/\D/g, '');
-      if (limpio !== campo.value) campo.value = limpio;
+      var d = campo.value.replace(/\D/g, '');
+      if (d.length > 9 && d.indexOf('56') === 0) d = d.slice(2);  // pegado con +56
+      d = d.slice(0, 9);
+      var formato = [d.slice(0, 1), d.slice(1, 5), d.slice(5)].filter(Boolean).join(' ');
+      if (formato !== campo.value) campo.value = formato;
+    });
+  });
+
+  // RUT: agrega puntos y guion (12.345.678-9) y revisa el digito verificador (modulo 11)
+  function digitoVerificador(cuerpo) {
+    var suma = 0, factor = 2;
+    for (var i = cuerpo.length - 1; i >= 0; i--) {
+      suma += Number(cuerpo[i]) * factor;
+      factor = factor === 7 ? 2 : factor + 1;
+    }
+    var dv = 11 - (suma % 11);
+    return dv === 11 ? '0' : dv === 10 ? 'K' : String(dv);
+  }
+  document.querySelectorAll('[data-rut]').forEach(function (campo) {
+    campo.addEventListener('input', function () {
+      var limpio = campo.value.toUpperCase().replace(/[^0-9K]/g, '');
+      // la K solo puede ser el digito verificador (el ultimo caracter)
+      limpio = limpio.slice(0, -1).replace(/K/g, '') + limpio.slice(-1);
+      limpio = limpio.slice(0, 9);
+      var formato = limpio;
+      if (limpio.length > 1) {
+        var cuerpo = limpio.slice(0, -1);
+        formato = cuerpo.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '-' + limpio.slice(-1);
+      }
+      if (formato !== campo.value) campo.value = formato;
+      var completo = /^\d{7,8}[0-9K]$/.test(limpio);
+      campo.setCustomValidity(completo && digitoVerificador(limpio.slice(0, -1)) !== limpio.slice(-1)
+        ? 'El RUT no es válido: revisa el dígito verificador.' : '');
     });
   });
 

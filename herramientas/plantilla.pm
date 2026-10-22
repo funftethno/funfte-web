@@ -271,14 +271,14 @@ sub postula {
 <label for="nombre">Nombre completo</label>
 <input id="nombre" name="Nombre" type="text" autocomplete="name" required>
 <label for="rut">RUT</label>
-<input id="rut" name="RUT" type="text" inputmode="text" placeholder="12.345.678-9" pattern="[0-9.]{7,10}-[0-9kK]" title="RUT con guion y dígito verificador, por ejemplo 12.345.678-9" required>
+<input id="rut" name="RUT" type="text" inputmode="text" autocomplete="off" maxlength="12" placeholder="12.345.678-9" pattern="[0-9]{1,2}\.[0-9]{3}\.[0-9]{3}-[0-9K]" title="RUT con dígito verificador, por ejemplo 12.345.678-9" data-rut required>
 <label for="nacimiento">Fecha de nacimiento</label>
 <input id="nacimiento" name="Fecha de nacimiento" type="date" required>
 <label for="correo">Correo electrónico</label>
 <input id="correo" name="email" type="email" autocomplete="email" required>
 <label for="telefono">Teléfono</label>
-<div class="telefono"><span aria-hidden="true">+56</span><input id="telefono" name="Teléfono (+56)" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="9" pattern="[0-9]{9}" placeholder="912345678" title="9 dígitos, sin el +56. Por ejemplo: 912345678" data-solo-numeros aria-describedby="telefono-ayuda" required></div>
-<p id="telefono-ayuda" class="campo-ayuda">9 dígitos, sin espacios.</p>
+<div class="telefono"><span aria-hidden="true">+56</span><input id="telefono" name="Teléfono (+56)" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="11" pattern="[0-9] [0-9]{4} [0-9]{4}" placeholder="9 1234 5678" title="9 dígitos, sin el +56. Por ejemplo: 9 1234 5678" data-telefono aria-describedby="telefono-ayuda" required></div>
+<p id="telefono-ayuda" class="campo-ayuda">9 dígitos.</p>
 <label for="referencia">¿Cómo conociste a la Quinta? ¿Alguien te recomendó?</label>
 <textarea id="referencia" name="Cómo conoció a la Quinta / referencia" rows="3" placeholder="Por ejemplo: un amigo voluntario, redes sociales, un evento de la compañía…" required></textarea>
 <button class="boton" type="submit">Enviar postulación</button>
@@ -311,8 +311,8 @@ sub formulario_contacto {
 <label for="c-correo">Correo electrónico</label>
 <input id="c-correo" name="email" type="email" autocomplete="email" required>
 <label for="c-telefono">Teléfono</label>
-<div class="telefono"><span aria-hidden="true">+56</span><input id="c-telefono" name="Teléfono (+56)" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="9" pattern="[0-9]{9}" placeholder="912345678" title="9 dígitos, sin el +56. Por ejemplo: 912345678" data-solo-numeros aria-describedby="c-telefono-ayuda"></div>
-<p id="c-telefono-ayuda" class="campo-ayuda">9 dígitos, sin espacios.</p>
+<div class="telefono"><span aria-hidden="true">+56</span><input id="c-telefono" name="Teléfono (+56)" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="11" pattern="[0-9] [0-9]{4} [0-9]{4}" placeholder="9 1234 5678" title="9 dígitos, sin el +56. Por ejemplo: 9 1234 5678" data-telefono aria-describedby="c-telefono-ayuda"></div>
+<p id="c-telefono-ayuda" class="campo-ayuda">9 dígitos.</p>
 <label for="c-mensaje">Mensaje</label>
 <textarea id="c-mensaje" name="Mensaje" rows="5" required></textarea>
 <button class="boton" type="submit">Enviar mensaje</button>
