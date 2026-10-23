@@ -781,6 +781,7 @@ sub pagina {
 <title>$titulo</title>
 <meta name="description" content="$descripcion">$meta
 <link rel="icon" href="${p}favicon.ico$V_ICO">
+<link rel="icon" type="image/png" sizes="192x192" href="${p}assets/img/icono-192.png">
 <link rel="apple-touch-icon" href="${p}assets/img/icono-180.png">
 <link rel="stylesheet" href="${p}assets/css/estilos.css$V_CSS">
 <script src="${p}assets/js/menu.js$V_JS" defer></script>
