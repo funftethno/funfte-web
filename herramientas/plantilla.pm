@@ -56,15 +56,15 @@ my %DESCRIPCIONES = (
     mx5           => 'Unidad MX-5: Scania-Ziegler/Cela TLF 40/12 + ALP 330X, Scania P410. Plataforma aérea para rescate de difícil acceso y control de incendios en edificios.',
     rx5           => 'Unidad RX-5: MAN-Magirus LF 30/20 de 2024, sobre chasis MAN TGM 18.320. Rescate técnico pesado y control de incendios.',
     harbor        => 'Unidad Mauricio II / Harbor 28: embarcación de rescate medioambiental para descontaminación de aguas de la Quinta Compañía de Talcahuano.',
-    gallo         => 'Gallo, 1908: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    beduwe        => 'Usines Beduwé «Bomba Chile», 1911: fotografías del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    hansa         => 'Hansa Lloyd «Bomba Flanders», 1927: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    ford          => 'Ford «Bomba Champion», 1941: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    magirus       => 'Magirus Deutz, 1954: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    berliet       => 'Berliet-Camiva, 1973: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    s170          => 'Renault Camiva S-170, 1990: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    gallo         => 'Gallo porta mangueras, 1908: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    beduwe        => 'Bomba a vapor Usines Beduwé «Bomba Chile», 1911: fotografías del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    hansa         => 'Autobomba Hansa Lloyd con bomba Flanders, 1927: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    ford          => 'Autobomba Ford con bomba Champion, 1941: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    magirus       => 'Magirus Deutz con escalera mecánica, 1954: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    berliet       => 'Berliet-Camiva «Lili Marlen», 1973: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    s170          => 'Renault Camiva S-170 «Panzer», 1990: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
     b110          => 'Renault Camiva B-110, 1994: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    s150          => 'Renault Camiva S-150, 1999: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    s150          => 'Renault Camiva S-150 «El Guayo», 1999: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
     contacto      => 'Contacto de la Quinta Compañía de Bomberos de Talcahuano: Río Maule 5383, Villa Independencia. Correo, formulario de contacto y mapa.',
     error404      => 'La página que buscas no existe o cambió de dirección.',
 );
@@ -102,15 +102,15 @@ sub rutas_paginas {
         mx5           => ['material-mayor/mx-5/',      'Unidad MX-5',         'La Quinta'],
         rx5           => ['material-mayor/rx-5/',      'Unidad RX-5',         'La Quinta'],
         harbor        => ['material-mayor/harbor-28/', 'Unidad Mauricio II / Harbor 28', 'La Quinta'],
-        gallo         => ['material-mayor/gallo-1908/', 'Gallo, 1908', 'La Quinta'],
-        beduwe        => ['material-mayor/usines-beduwe-1911/', 'Usines Beduwé «Bomba Chile», 1911', 'La Quinta'],
-        hansa         => ['material-mayor/hansa-lloyd-1927/', 'Hansa Lloyd «Bomba Flanders», 1927', 'La Quinta'],
-        ford          => ['material-mayor/ford-champion-1941/', 'Ford «Bomba Champion», 1941', 'La Quinta'],
-        magirus       => ['material-mayor/magirus-deutz-1954/', 'Magirus Deutz, 1954', 'La Quinta'],
-        berliet       => ['material-mayor/berliet-camiva-1973/', 'Berliet-Camiva, 1973', 'La Quinta'],
-        s170          => ['material-mayor/renault-camiva-s-170-1990/', 'Renault Camiva S-170, 1990', 'La Quinta'],
+        gallo         => ['material-mayor/gallo-1908/', 'Gallo porta mangueras, 1908', 'La Quinta'],
+        beduwe        => ['material-mayor/usines-beduwe-1911/', 'Bomba a vapor Usines Beduwé «Bomba Chile», 1911', 'La Quinta'],
+        hansa         => ['material-mayor/hansa-lloyd-1927/', 'Autobomba Hansa Lloyd, 1927', 'La Quinta'],
+        ford          => ['material-mayor/ford-champion-1941/', 'Autobomba Ford, 1941', 'La Quinta'],
+        magirus       => ['material-mayor/magirus-deutz-1954/', 'Magirus Deutz con escalera mecánica, 1954', 'La Quinta'],
+        berliet       => ['material-mayor/berliet-camiva-1973/', 'Berliet-Camiva «Lili Marlen», 1973', 'La Quinta'],
+        s170          => ['material-mayor/renault-camiva-s-170-1990/', 'Renault Camiva S-170 «Panzer», 1990', 'La Quinta'],
         b110          => ['material-mayor/renault-camiva-b-110-1994/', 'Renault Camiva B-110, 1994', 'La Quinta'],
-        s150          => ['material-mayor/renault-camiva-s-150-1999/', 'Renault Camiva S-150, 1999', 'La Quinta'],
+        s150          => ['material-mayor/renault-camiva-s-150-1999/', 'Renault Camiva S-150 «El Guayo», 1999', 'La Quinta'],
         contacto      => ['contacto/',                 'Contacto',            'Contacto'],
     );
     return map { $_ => { ruta => $p{$_}[0], titulo => $p{$_}[1], seccion => $p{$_}[2],
@@ -135,6 +135,41 @@ my @SITIOS = (
     ['Cuerpo de Bomberos de Talcahuano', 'Sitio oficial del Cuerpo de Bomberos de Talcahuano.', 'https://cbt.cl', 'web'],
     ['Bomberos de Chile',                'Sitio de la Junta Nacional de Cuerpos de Bomberos de Chile.', 'https://www.bomberos.cl', 'web'],
 );
+
+# Material Mayor: datos de cada unidad para su tarjeta y su ficha (grilla_maquinas y
+# ficha_unidad). La foto principal, el resumen y el carrusel salen de su archivo de contenido.
+# grupo 'servicio' o 'historica' (en orden cronologico); apodo y tipo pueden ir vacios.
+my @UNIDADES = (
+    { clave => 'b5',      grupo => 'servicio',  nombre => 'B-5',            tipo => 'Incendio',
+      datos => [Marca => 'Iveco Magirus', Modelo => 'FF150E30', 'Año' => 2018, 'Tracción' => '4×2', Estanque => '3.500 litros', Cabina => '1+9'] },
+    { clave => 'mx5',     grupo => 'servicio',  nombre => 'MX-5',           tipo => 'Plataforma aérea',
+      datos => [Marca => 'Scania', Modelo => 'P410', 'Carrocería' => 'Ziegler/Cela TLF 40/12 + ALP 330X'] },
+    { clave => 'rx5',     grupo => 'servicio',  nombre => 'RX-5',           tipo => 'Rescate pesado',
+      datos => [Marca => 'MAN-Magirus', Modelo => 'TGM 18.320', 'Año' => 2024, 'Carrocería' => 'LF 30/20'] },
+    { clave => 'gallo',   grupo => 'historica', nombre => 'Gallo',          tipo => 'Carrete porta mangueras',
+      datos => ['Año' => 1908] },
+    { clave => 'beduwe',  grupo => 'historica', nombre => 'Usines Beduwé',  tipo => 'Bomba a vapor', apodo => 'Bomba Chile',
+      datos => [Marca => 'Usines Beduwé', 'Año' => 1911] },
+    { clave => 'hansa',   grupo => 'historica', nombre => 'Hansa Lloyd',    tipo => 'Autobomba',
+      datos => [Marca => 'Hansa Lloyd', 'Año' => 1927, Bomba => 'Flanders'] },
+    { clave => 'ford',    grupo => 'historica', nombre => 'Ford',           tipo => 'Autobomba',
+      datos => [Marca => 'Ford', 'Año' => 1941, Bomba => 'Champion'] },
+    { clave => 'magirus', grupo => 'historica', nombre => 'Magirus Deutz',  tipo => 'Escalera mecánica',
+      datos => [Marca => 'Magirus Deutz', 'Año' => 1954] },
+    { clave => 'berliet', grupo => 'historica', nombre => 'Berliet-Camiva', tipo => '', apodo => 'Lili Marlen',
+      datos => [Marca => 'Berliet-Camiva', 'Año' => 1973] },
+    { clave => 's170',    grupo => 'historica', nombre => 'S-170',          tipo => '', apodo => 'Panzer',
+      datos => [Marca => 'Renault Camiva', Modelo => 'S-170', 'Año' => 1990] },
+    { clave => 'b110',    grupo => 'historica', nombre => 'B-110',          tipo => 'Rescate',
+      datos => [Marca => 'Renault Camiva', Modelo => 'B-110', 'Año' => 1994] },
+    { clave => 's150',    grupo => 'historica', nombre => 'S-150',          tipo => '', apodo => 'El Guayo',
+      datos => [Marca => 'Renault Camiva', Modelo => 'S-150', 'Año' => 1999] },
+    { clave => 'harbor',  grupo => 'historica', nombre => 'Harbor 28',      tipo => 'Rescate medioambiental', apodo => 'Mauricio II',
+      datos => [Marca => 'Astilleros Marco', Modelo => 'Harbor 28', 'Año' => 2001] },
+    { clave => 'bx5',     grupo => 'historica', nombre => 'BX-5',           tipo => 'Incendio y rescate',
+      datos => [Marca => 'Iveco Magirus', Modelo => 'FF150E30W', 'Año' => 2012, 'Tracción' => '4×4', Estanque => '2.500 litros', Cabina => '1+8'] },
+);
+my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
 
 my @MENU = (
     ['Inicio', ''],
@@ -270,7 +305,7 @@ sub aniversarios {
 
 # Franja de datos bajo la portada. Los numeros se calculan al generar: los años desde
 # $FUNDACION, los voluntarios con el mismo total de Dotacion y las maquinas contando las
-# tarjetas de "Unidades en servicio" de Material Mayor.
+# unidades en servicio de @UNIDADES.
 sub leer_contenido {
     open my $fh, '<:utf8', "$FindBin::Bin/contenido/$_[0].html" or return '';
     local $/;
@@ -283,8 +318,7 @@ sub datos_portada {
     my @hoy = localtime;
     my $anios = $hoy[5] + 1900 - $anio - (($hoy[4] + 1) * 100 + $hoy[3] < $mes * 100 + $dia ? 1 : 0);
     my ($voluntarios) = contar_dotacion(leer_contenido('dotacion'));
-    my ($servicio) = leer_contenido('material') =~ m{<div class="[^"]*grilla-servicio[^"]*">(.*?)</div>}s;
-    my $maquinas = () = ($servicio // '') =~ /<a class="tarjeta-unidad"/g;
+    my $maquinas = grep { $_->{grupo} eq 'servicio' } @UNIDADES;
     my @datos = (
         ['calendario', $anios,       'Años de historia',     'historia/'],
         ['grupo',      $voluntarios, 'Voluntarios',          'dotacion/'],
@@ -513,6 +547,70 @@ sub secciones {
     return $h . '</div>';
 }
 
+# Datos de una unidad (marca, modelo, año...) en pares titulo/valor; la tarjeta muestra los
+# primeros $max y la ficha todos.
+sub datos_unidad {
+    my ($u, $max) = @_;
+    my @d = @{ $u->{datos} };
+    splice @d, 2 * $max if $max && @d > 2 * $max;
+    my $h = qq(<dl class="datos-unidad">);
+    while (my ($titulo, $valor) = splice @d, 0, 2) {
+        $h .= qq(<div><dt>$titulo</dt><dd>$valor</dd></div>);
+    }
+    return "$h</dl>";
+}
+
+sub apodo { $_[0]{apodo} ? qq(<span class="apodo">«$_[0]{apodo}»</span>) : '' }
+
+# Tarjeta de una unidad: apodo sobre la foto, nombre, tipo, primer parrafo y datos principales.
+sub tarjeta_maquina {
+    my ($p, $u) = @_;
+    my %rutas = rutas_paginas();
+    my $html = leer_contenido($u->{clave});
+    my ($foto) = $html =~ m{assets/img/([^"']+)};
+    my ($resumen) = $html =~ m{<p>(.*?)</p>}s;
+    $resumen =~ s/<[^>]+>//g;
+    return qq(<a class="tarjeta-maquina" href="$p$rutas{$u->{clave}}{ruta}"><span class="foto">) . apodo($u)
+        . qq(<img src="${p}assets/img/$foto" alt="" loading="lazy"></span><span class="cuerpo">)
+        . qq(<span class="titulo"><strong) . ($u->{nombre} =~ /^\S{1,6}$/ ? q( class="codigo") : q()) . qq(>$u->{nombre}</strong><span class="tipo">$u->{tipo}</span></span>)
+        . qq(<span class="resumen">$resumen</span>) . datos_unidad($u, 4) . '</span></a>';
+}
+
+# Grilla de tarjetas de un grupo de @UNIDADES; en material.html va con <!--UNIDADES_SERVICIO-->
+# o <!--UNIDADES_HISTORICAS-->.
+sub grilla_maquinas {
+    my ($p, $grupo, @unidades) = @_;
+    @unidades = grep { $_->{grupo} eq $grupo } @UNIDADES unless @unidades;
+    return qq(<div class="grilla-maquinas $grupo">\n) . join('', map { tarjeta_maquina($p, $_) . "\n" } @unidades) . '</div>';
+}
+
+# Ficha de una unidad: texto y datos a la izquierda, la primera foto a la derecha y las demas
+# en un carrusel. Lo que viene desde el primer <h3> del contenido (caracteristicas) va debajo,
+# a todo el ancho. Al final, las otras unidades en servicio o las historicas vecinas.
+sub ficha_unidad {
+    my ($p, $u, $html) = @_;
+    my @fotos = $html =~ /(<img\b[^>]*>)/g;
+    $html =~ s/<img\b[^>]*>\s*//g;
+    my ($texto, $resto) = split /(?=<h3>)/, $html, 2;
+    my $principal = (shift @fotos // '') =~ s/loading="lazy"/loading="eager"/r;
+    my $h = qq(<div class="ficha-unidad $u->{grupo}">\n<div class="ficha-texto">\n)
+        . ($u->{tipo} ? qq(<p class="ficha-tipo">$u->{tipo}</p>\n) : '')
+        . $texto . datos_unidad($u) . qq(\n</div>\n<div class="ficha-foto">) . apodo($u) . qq($principal</div>\n</div>\n);
+    $h .= qq(<div class="carrusel">\n<div class="carrusel-pista">\n) . join("\n", @fotos) . qq(\n</div>\n)
+        . qq(<button type="button" class="carrusel-boton anterior" aria-label="Fotos anteriores" hidden>‹</button>)
+        . qq(<button type="button" class="carrusel-boton siguiente" aria-label="Fotos siguientes" hidden>›</button>\n</div>\n) if @fotos;
+    $h .= $resto // '';
+    my @grupo = grep { $_->{grupo} eq $u->{grupo} } @UNIDADES;
+    my ($i) = grep { $grupo[$_] == $u } 0 .. $#grupo;
+    my @otras = $u->{grupo} eq 'servicio' ? grep({ $_ != $u } @grupo)
+              : (($i > 0 ? $grupo[$i - 1] : ()), ($i < $#grupo ? $grupo[$i + 1] : ()));
+    return $h . ($u->{grupo} eq 'servicio'
+        ? qq(<h2 class="otras">Otras unidades en servicio</h2>\n) . grilla_maquinas($p, 'servicio', @otras)
+          . qq(\n<p><a href="${p}material-mayor/#unidades-historicas">Ver las unidades históricas de la Compañía</a></p>)
+        : qq(<h2 class="otras">Otras unidades históricas</h2>\n) . grilla_maquinas($p, 'historica', @otras)
+          . qq(\n<p><a href="${p}material-mayor/#unidades-historicas">Volver a las unidades históricas</a></p>));
+}
+
 # Dotacion con fotos (Archivo): la misma nomina de dotacion.html en tarjetas con el numero de
 # antiguedad, el nombre y la foto de cada voluntario: assets/img/voluntario-<nombre>.jpg, en
 # minusculas, sin tildes y con guiones (por ejemplo voluntario-fernando-vera-torres.jpg); si aun
@@ -646,9 +744,12 @@ sub pagina {
                : $a{clave} eq 'postula'     ? $cabecera . postula($p)
                : $a{clave} eq 'gracias'     ? $cabecera . gracias($p, 'Recibimos tu postulación. La Quinta se pondrá en contacto contigo por correo o teléfono.')
                : $a{clave} eq 'enviado'     ? $cabecera . gracias($p, 'Recibimos tu mensaje. Te responderemos a la brevedad por correo.')
+               : $UNIDAD{$a{clave}}         ? $cabecera . qq(<article class="wrap contenido">\n) . ficha_unidad($p, $UNIDAD{$a{clave}}, $a{contenido}) . qq(\n</article>)
                : $cabecera . qq(<article class="wrap contenido">\n) . ($a{contenido} =~ s/<!--FORMULARIO_CONTACTO-->/formulario_contacto()/er
                                                                         =~ s/<!--CIFRAS_DOTACION-->/cifras_dotacion($a{contenido})/er
-                                                                        =~ s/<!--SECCIONES-->/secciones($p, $a{ruta})/er) . qq(\n</article>);
+                                                                        =~ s/<!--SECCIONES-->/secciones($p, $a{ruta})/er
+                                                                        =~ s/<!--UNIDADES_SERVICIO-->/grilla_maquinas($p, 'servicio')/er
+                                                                        =~ s/<!--UNIDADES_HISTORICAS-->/grilla_maquinas($p, 'historica')/er) . qq(\n</article>);
     # en la 404 ningun item del menu queda marcado como actual
     my $menu = menu($p, $a{clave} eq 'error404' ? '-' : $a{ruta}, $a{seccion});
     my $acceso_actual = $a{clave} eq 'acceso' ? ' aria-current="page"' : '';
