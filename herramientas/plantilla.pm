@@ -43,6 +43,7 @@ my %DESCRIPCIONES = (
     inicio        => 'Sitio oficial de la Quinta Compañía de Bomberos «Bomba Chile» de Talcahuano, fundada el 29 de enero de 1908. Especialidad en agua y rescate integral.',
     laquinta      => 'Quiénes somos: la Quinta Compañía «Bomba Chile» del Cuerpo de Bomberos de Talcahuano, fundada en 1908 por inmigrantes alemanes.',
     historia      => 'La historia de la Quinta Compañía de Bomberos de Talcahuano desde su fundación en 1908 por la colonia alemana del puerto.',
+    lineatiempo   => 'Línea de tiempo de la Quinta Compañía de Bomberos de Talcahuano, desde su fundación en 1908 hasta hoy.',
     cuartel       => 'Nuestro cuartel en Villa Independencia, ingreso sur de Talcahuano: instalaciones, guardia nocturna y área de acción.',
     cbt           => 'El Cuerpo de Bomberos de Talcahuano y sus diez compañías: nombres, fundación, especialidad y sector de cada una.',
     confederacion => 'La Confederación de Compañías Chileno-Alemanas de Bomberos: directorio y las compañías confederadas de todo Chile.',
@@ -64,7 +65,7 @@ my %DESCRIPCIONES = (
     berliet       => 'Berliet-Camiva «Lili Marlen», 1973: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
     s170          => 'Renault Camiva S-170 «Panzer», 1990: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
     b110          => 'Renault Camiva B-110 «Lustrín», 1994: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    s150          => 'Renault Camiva S-150 «Micromachine», 1999: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    s150          => 'Renault Camiva S-150 «El Guayo», 1999: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
     contacto      => 'Contacto de la Quinta Compañía de Bomberos de Talcahuano: Río Maule 5383, Villa Independencia. Correo, formulario de contacto y mapa.',
     error404      => 'La página que buscas no existe o cambió de dirección.',
 );
@@ -82,7 +83,8 @@ sub rutas_paginas {
         confederacion => ['confederacion/',            'Confederación',       'La Quinta'],
         dotacion      => ['dotacion/',                 'Dotación',            'Dotación'],
         formacion     => ['formacion/',                'Formación',           'Formación'],
-        # Paginas retiradas del sitio: solo se llega a ellas desde el enlace ARCHIVO del pie
+        # Paginas fuera del menu: solo se llega a ellas desde el enlace ARCHIVO del pie. Las de
+        # seccion Archivo estan retiradas; las de Desarrollo estan en preparacion.
         archivo       => ['archivo/',                  'Archivo',             ''],
         trabajo       => ['archivo/nuestro-trabajo/',  'Nuestro Trabajo',     'Archivo'],
         capacitacion  => ['archivo/capacitacion/',     'Capacitación',        'Archivo'],
@@ -90,9 +92,10 @@ sub rutas_paginas {
         redes         => ['archivo/redes-sociales/',   'Redes Sociales',      'Archivo'],
         directorio    => ['archivo/directorio/',       'Directorio',          'Archivo'],
         socios        => ['archivo/socios-colaboradores/', 'Socios Colaboradores', 'Archivo'],
-        fotos         => ['archivo/dotacion-con-fotos/', 'Dotación con fotos',  'Archivo'],
+        fotos         => ['archivo/dotacion-con-fotos/', 'Dotación con fotos',  'Desarrollo'],
+        lineatiempo   => ['archivo/historia/',         'Historia',            'Desarrollo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
-        calendario    => ['acceso-quintino/calendario/', 'Calendario de cumpleaños', 'Acceso Quintino'],
+        calendario    => ['acceso-quintino/calendario/', 'Calendario de aniversarios', 'Acceso Quintino'],
         postula       => ['postula/',                   'Postula a la Quinta', ''],
         gracias       => ['postula/gracias/',           '¡Gracias por postular!', ''],
         enviado       => ['contacto/gracias/',          '¡Mensaje enviado!',  ''],
@@ -110,7 +113,7 @@ sub rutas_paginas {
         berliet       => ['material-mayor/berliet-camiva-1973/', 'Berliet-Camiva «Lili Marlen», 1973', 'La Quinta'],
         s170          => ['material-mayor/renault-camiva-s-170-1990/', 'Renault Camiva S-170 «Panzer», 1990', 'La Quinta'],
         b110          => ['material-mayor/renault-camiva-b-110-1994/', 'Renault Camiva B-110 «Lustrín», 1994', 'La Quinta'],
-        s150          => ['material-mayor/renault-camiva-s-150-1999/', 'Renault Camiva S-150 «Micromachine», 1999', 'La Quinta'],
+        s150          => ['material-mayor/renault-camiva-s-150-1999/', 'Renault Camiva S-150 «El Guayo», 1999', 'La Quinta'],
         contacto      => ['contacto/',                 'Contacto',            'Contacto'],
     );
     return map { $_ => { ruta => $p{$_}[0], titulo => $p{$_}[1], seccion => $p{$_}[2],
@@ -129,7 +132,8 @@ my @ACCESOS = (
     ['Webmail',                          'Correo electrónico institucional @funfte.cl mediante la plataforma de Google.', $WEBMAIL, 'correo'],
     ['SISPAR',                           'Plataforma de registro y control: administración y gestión interna de bomberos.', 'https://sispar.sisparnovenacbt.com/login.php', 'sisab'],
     ['Registro Nacional de Bomberos',    'Acceso RNB a los sistemas de la Junta Nacional de Bomberos.', 'https://www.bomberos.cl/sist/escritorio_virtual/', 'documento'],
-    ['Calendario de cumpleaños',         'Aniversarios de las compañías, para mostrar en pantalla completa en el cuartel.', 'acceso-quintino/calendario/', 'torta'],
+    ['Últimos despachos',                'Despachos de la Central de Alarmas del Cuerpo de Bomberos de Talcahuano, en su cuenta de X.', 'https://x.com/central_cbt', 'llama'],
+    ['Calendario de aniversarios',       'Aniversarios de las compañías, para mostrar en pantalla completa en el cuartel.', 'acceso-quintino/calendario/', 'torta'],
 );
 my @SITIOS = (
     ['Cuerpo de Bomberos de Talcahuano', 'Sitio oficial del Cuerpo de Bomberos de Talcahuano.', 'https://cbt.cl', 'web'],
@@ -163,7 +167,7 @@ my @UNIDADES = (
       datos => [Marca => 'Renault Camiva', Modelo => 'S-170', 'Año' => 1990] },
     { clave => 'b110',    grupo => 'historica', nombre => 'B-110',          tipo => 'Rescate', apodo => 'Lustrín',
       datos => [Marca => 'Renault Camiva', Modelo => 'B-110', 'Año' => 1994] },
-    { clave => 's150',    grupo => 'historica', nombre => 'S-150',          tipo => '', apodo => 'Micromachine',
+    { clave => 's150',    grupo => 'historica', nombre => 'S-150',          tipo => '', apodo => 'El Guayo',
       datos => [Marca => 'Renault Camiva', Modelo => 'S-150', 'Año' => 1999] },
     { clave => 'harbor',  grupo => 'historica', nombre => 'Harbor 28',      tipo => 'Rescate medioambiental', apodo => 'Mauricio II',
       datos => [Marca => 'Astilleros Marco', Modelo => 'Harbor 28', 'Año' => 2001] },
@@ -368,7 +372,7 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 </section>);
 }
 
-# Calendario de cumpleaños para la pantalla del cuartel (Acceso Quintino). calendario.js
+# Calendario de aniversarios para la pantalla del cuartel (Acceso Quintino). calendario.js
 # lo arma con los mismos datos del saludo de la portada y lo actualiza solo cada minuto.
 sub calendario {
     my ($p) = @_;
@@ -381,7 +385,7 @@ sub calendario {
 <div class="pantalla" id="pantalla">
 <header class="pantalla-cabecera">
 <img src="${p}assets/img/escudo-quinta.png" alt="">
-<div><p class="pantalla-titulo">Cumpleaños</p><p class="pantalla-fecha" id="pantalla-fecha"></p></div>
+<div><p class="pantalla-titulo">Aniversarios</p><p class="pantalla-fecha" id="pantalla-fecha"></p></div>
 <p class="pantalla-hora" id="pantalla-hora"></p>
 </header>
 <div class="pantalla-cuerpo">
@@ -488,10 +492,15 @@ sub formulario_contacto {
 sub archivo {
     my ($p) = @_;
     my %pg = rutas_paginas();
-    my @retiradas = sort { $a->{titulo} cmp $b->{titulo} } grep { $_->{seccion} eq 'Archivo' } values %pg;
-    my $h = qq(<article class="wrap contenido">\n<p>Páginas retiradas del sitio. Se conservan aquí como referencia.</p>\n<ul>\n);
-    $h .= qq(<li><a href="$p$_->{ruta}">$_->{titulo}</a></li>\n) for @retiradas;
-    return $h . "</ul>\n</article>";
+    my $lista = sub {
+        my ($seccion) = @_;
+        my @paginas = sort { $a->{titulo} cmp $b->{titulo} } grep { $_->{seccion} eq $seccion } values %pg;
+        return qq(<ul>\n) . join('', map { qq(<li><a href="$p$_->{ruta}">$_->{titulo}</a></li>\n) } @paginas) . qq(</ul>\n);
+    };
+    return qq(<article class="wrap contenido">\n)
+        . qq(<h2>Desarrollo</h2>\n<p>Páginas en preparación, que todavía no forman parte del menú.</p>\n) . $lista->('Desarrollo')
+        . qq(<h2>Archivo</h2>\n<p>Páginas retiradas del sitio. Se conservan aquí como referencia.</p>\n) . $lista->('Archivo')
+        . "</article>";
 }
 
 # Resumen de la dotacion en cifras: cuenta los nombres de cada lista "Voluntarios ..."
@@ -612,7 +621,7 @@ sub ficha_unidad {
           . qq(\n<p><a href="${p}material-mayor/#unidades-historicas">Volver a las unidades históricas</a></p>));
 }
 
-# Dotacion con fotos (Archivo): la misma nomina de dotacion.html en tarjetas con el numero de
+# Dotacion con fotos (Desarrollo): la misma nomina de dotacion.html en tarjetas con el numero de
 # antiguedad, el nombre y la foto de cada voluntario: assets/img/voluntario-<nombre>.jpg, en
 # minusculas, sin tildes y con guiones (por ejemplo voluntario-fernando-vera-torres.jpg); si aun
 # no hay, una silueta. La generacion y el numero de registro son privados: van cifrados en

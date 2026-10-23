@@ -1,4 +1,4 @@
-// Calendario de cumpleaños (Acceso Quintino): pensado para dejarlo en pantalla completa
+// Calendario de aniversarios (Acceso Quintino): pensado para dejarlo en pantalla completa
 // en un televisor del cuartel. Muestra los aniversarios de hoy y los proximos, y se
 // actualiza solo. Para probar otro dia: ?fecha=MM-DD (por ejemplo ?fecha=11-08).
 document.addEventListener('DOMContentLoaded', function () {
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var zonaHoy = document.getElementById('pantalla-hoy');
     zonaHoy.textContent = '';
     var destacados = deHoy.length ? deHoy : siguientes.slice(0, 1);
-    zonaHoy.appendChild(elemento('p', 'pantalla-etiqueta', deHoy.length ? '¡Feliz aniversario!' : 'Próximo cumpleaños'));
+    zonaHoy.appendChild(elemento('p', 'pantalla-etiqueta', deHoy.length ? '¡Feliz aniversario!' : 'Próximo aniversario'));
     destacados.forEach(function (a) {
       var tarjeta = elemento('div', 'pantalla-destacado');
       tarjeta.appendChild(escudo(a.c, 'pantalla-escudo'));

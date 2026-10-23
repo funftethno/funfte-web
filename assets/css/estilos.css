@@ -671,7 +671,7 @@ a.saludo:hover { border-color: var(--dorado); }
 .contenido .cia-enlaces { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; margin-top: auto; padding-top: 8px; }
 .contenido .cia-enlaces a { margin-top: 0; }
 
-/* Calendario de cumpleaños (Acceso Quintino): vista para pantalla completa en el cuartel.
+/* Calendario de aniversarios (Acceso Quintino): vista para pantalla completa en el cuartel.
    Las medidas usan --u, que en pantalla completa crece con el tamaño del televisor. */
 .pantalla {
   --u: 8px;
@@ -834,6 +834,63 @@ a.saludo:hover { border-color: var(--dorado); }
   .ficha-unidad { grid-template-columns: 1fr; gap: 20px; }
   .ficha-foto { order: -1; }
   .contenido .carrusel-pista img { flex-basis: 80%; width: 80%; }
+}
+
+/* Linea de tiempo (Desarrollo › Historia): el año a la izquierda sobre una linea vertical */
+.linea-tiempo { list-style: none; margin: 2em 0; padding: 0; }
+.linea-tiempo > li {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 0 28px;
+  position: relative;
+  padding-bottom: 2.2em;
+}
+.linea-tiempo > li::before {
+  content: "";
+  position: absolute;
+  left: 97px;
+  top: .5em;
+  bottom: 0;
+  width: 2px;
+  background: var(--borde);
+}
+.linea-tiempo > li:last-child::before { display: none; }
+.linea-tiempo .anio {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--rojo);
+  text-align: right;
+  line-height: 1.2;
+  position: relative;
+}
+.linea-tiempo .anio::after {
+  content: "";
+  position: absolute;
+  right: -20px;
+  top: .4em;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--rojo);
+  box-shadow: 0 0 0 4px var(--fondo);
+}
+.linea-tiempo .hito h3 { margin: .1em 0 .3em; }
+.linea-tiempo .hito p { margin: 0 0 .6em; }
+.hito-fotos { display: flex; flex-wrap: wrap; gap: 12px; }
+.contenido .hito-fotos img {
+  margin: .4em 0 0;
+  width: calc(50% - 6px);
+  max-width: 340px;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+@media (max-width: 560px) {
+  .linea-tiempo > li { grid-template-columns: 1fr; padding-left: 26px; }
+  .linea-tiempo > li::before { left: 5px; top: .6em; }
+  .linea-tiempo .anio { text-align: left; }
+  .linea-tiempo .anio::after { right: auto; left: -26px; }
 }
 
 /* Accesos a las subsecciones (secciones() en plantilla.pm): los logos van enteros */
