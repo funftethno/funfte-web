@@ -171,7 +171,7 @@ my @UNIDADES = (
       datos => [Marca => 'Renault Camiva', Modelo => 'S-150', 'Año' => 1999] },
     { clave => 'harbor',  grupo => 'historica', nombre => 'Harbor 28',      tipo => 'Rescate medioambiental', apodo => 'Mauricio II',
       datos => [Marca => 'Astilleros Marco', Modelo => 'Harbor 28', 'Año' => 2001] },
-    { clave => 'bx5',     grupo => 'historica', nombre => 'BX-5',           tipo => 'Incendio y rescate',
+    { clave => 'bx5',     grupo => 'historica', nombre => 'BX-5',           tipo => 'Incendio y rescate', apodo => 'Kaiser',
       datos => [Marca => 'Iveco Magirus', Modelo => 'FF150E30W', 'Año' => 2012, 'Tracción' => '4×4', 'Carrocería' => 'HLF 30/25', Motor => '299 HP', Estanque => '2.500 litros', Cabina => '1+8'] },
 );
 my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
