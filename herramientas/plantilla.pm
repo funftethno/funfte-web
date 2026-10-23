@@ -342,7 +342,7 @@ sub inicio {
     my ($p) = @_;
     my $aniversarios = aniversarios($p);
     my $portada = 'portada-compania.jpg';
-    my $escudo  = '2013-04-Sin-titulo-3.png';
+    my $escudo  = 'escudo-quinta.png';
     return
 qq(<section class="portada" style="background-image:url('${p}assets/img/$portada')">
 <div class="wrap">
