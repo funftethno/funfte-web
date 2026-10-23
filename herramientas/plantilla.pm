@@ -299,7 +299,7 @@ sub aniversarios {
             my ($enlace) = $t =~ m{<a href="(https://www\.instagram\.com/[^"]+)"};
             ($enlace) = $t =~ m{<a href="(https?://[^"]+)"} unless $enlace;
             push @lista, { nombre => $nombre, dia => $dia, mes => $MESES{$mes}, anio => $anio,
-                           ($escudo ? (escudo => "$p$escudo") : ()), ($enlace ? (enlace => $enlace) : ()) };
+                           escudo => $p . ($escudo // 'assets/img/escudo-desconocido.svg'), ($enlace ? (enlace => $enlace) : ()) };
         }
     }
     my @quinta = (1908, 1, 29);
