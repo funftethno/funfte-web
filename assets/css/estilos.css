@@ -255,10 +255,10 @@ a:hover { color: var(--rojo-oscuro); }
 .acciones { display: flex; flex-wrap: wrap; gap: 12px; }
 .portada .acciones { justify-content: center; }
 
-/* En pantallas anchas el texto va a la izquierda y la foto se encuadra algo arriba
-   del centro, para que se vean los estandartes y la guardia a la derecha. */
+/* En pantallas anchas el texto va a la izquierda y la foto se encuadra abajo, para que
+   se vea la compañía completa, con sus máquinas detrás. */
 @media (min-width: 900px) {
-  .portada { background-position: center 22%; }
+  .portada { background-position: center 80%; }
   .portada::before {
     background: linear-gradient(90deg, rgba(20,20,24,.85) 0%, rgba(20,20,24,.6) 45%, rgba(20,20,24,.25) 75%);
   }

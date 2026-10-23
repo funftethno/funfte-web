@@ -50,7 +50,7 @@ my %DESCRIPCIONES = (
     formacion     => 'Formación de voluntarios: convocatorias, Aula Virtual, malla curricular y material de la Academia Nacional de Bomberos.',
     postula       => 'Postula como bombero voluntario de la Quinta Compañía de Bomberos de Talcahuano. Completa el formulario y te contactaremos.',
     acceso        => 'Acceso Quintino: intranet y plataformas internas para voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
-    material      => 'Material mayor de la Quinta: unidades B-5, MX-5 y RX-5 en servicio, además de sus vehículos históricos.',
+    material      => 'Material mayor de la Quinta: unidades B-5, RX-5 y MX-5 en servicio, además de sus vehículos históricos.',
     bx5           => 'Unidad BX-5: Iveco Magirus FF150E30W 4x4 de 2012, unidad mixta de incendio y rescate de la Quinta Compañía de Talcahuano.',
     b5            => 'Unidad B-5: Iveco Magirus FF150E30 de 2018, unidad de control de incendios de la Quinta Compañía de Talcahuano.',
     mx5           => 'Unidad MX-5: Scania-Ziegler/Cela TLF 40/12 + ALP 330X, Scania P410. Plataforma aérea para rescate de difícil acceso y control de incendios en edificios.',
@@ -138,14 +138,15 @@ my @SITIOS = (
 
 # Material Mayor: datos de cada unidad para su tarjeta y su ficha (grilla_maquinas y
 # ficha_unidad). La foto principal, el resumen y el carrusel salen de su archivo de contenido.
-# grupo 'servicio' o 'historica' (en orden cronologico); apodo y tipo pueden ir vacios.
+# grupo 'servicio' o 'historica', en el orden en que se muestran (las historicas por año);
+# apodo y tipo pueden ir vacios.
 my @UNIDADES = (
     { clave => 'b5',      grupo => 'servicio',  nombre => 'B-5',            tipo => 'Incendio',
       datos => [Marca => 'Iveco Magirus', Modelo => 'FF150E30', 'Año' => 2018, 'Tracción' => '4×2', Estanque => '3.500 litros', Cabina => '1+9'] },
-    { clave => 'mx5',     grupo => 'servicio',  nombre => 'MX-5',           tipo => 'Plataforma aérea',
-      datos => [Marca => 'Scania', Modelo => 'P410', 'Carrocería' => 'Ziegler/Cela TLF 40/12 + ALP 330X'] },
     { clave => 'rx5',     grupo => 'servicio',  nombre => 'RX-5',           tipo => 'Rescate pesado',
       datos => [Marca => 'MAN-Magirus', Modelo => 'TGM 18.320', 'Año' => 2024, 'Carrocería' => 'LF 30/20'] },
+    { clave => 'mx5',     grupo => 'servicio',  nombre => 'MX-5',           tipo => 'Plataforma aérea',
+      datos => [Marca => 'Scania', Modelo => 'P410', 'Carrocería' => 'Ziegler/Cela TLF 40/12 + ALP 330X'] },
     { clave => 'gallo',   grupo => 'historica', nombre => 'Gallo',          tipo => 'Carrete porta mangueras',
       datos => ['Año' => 1908] },
     { clave => 'beduwe',  grupo => 'historica', nombre => 'Usines Beduwé',  tipo => 'Bomba a vapor', apodo => 'Bomba Chile',
@@ -337,7 +338,7 @@ sub datos_portada {
 sub inicio {
     my ($p) = @_;
     my $aniversarios = aniversarios($p);
-    my $portada = 'portada-estandartes.jpg';
+    my $portada = 'portada-compania.jpg';
     my $escudo  = '2013-04-Sin-titulo-3.png';
     return
 qq(<section class="portada" style="background-image:url('${p}assets/img/$portada')">
