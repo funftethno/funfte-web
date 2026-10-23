@@ -634,7 +634,7 @@ my %CARGOS = (
     'Juan Uriarte Parra'          => [['Director', '1972–1975, 1992']],
     'Lientur Grandón Inda'        => [['Director', '1989–1991']],
     'Francisco Castro Herrera'    => [['Capitán',  '1990']],
-    'Jorge Ogalde Gómez'          => [['Capitán',  '1992–1995'], ['Director', '2009–2025']],
+    'Jorge Ogalde Gómez'          => [['Capitán',  '1992–1995'], ['Director', '2009–2028']],
     'Mario Villagra Vega'         => [['Director', '1996']],
     'Patricio Retamales Leiva'    => [['Capitán',  '1987–1989, 1996, 2006']],
     'Jaime Athens Moscoso'        => [['Capitán',  '1997–1998']],
@@ -642,6 +642,7 @@ my %CARGOS = (
     'Gustavo Lamig Fritz'         => [['Capitán',  '2007–2009, 2013–2017']],
     'Nelson Salgado Ríos'         => [['Capitán',  '2018–2019, 2022–2023']],
     'Mauricio Oliveros Henríquez' => [['Capitán',  '2020–2021, 2024–2025']],
+    'Matías Villegas Bustos'      => [['Capitán',  '2026–2028']],
 );
 
 sub dotacion_fotos {
