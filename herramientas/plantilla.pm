@@ -131,7 +131,7 @@ my @ACCESOS = (
     ['Webmail',                          'Correo electrónico institucional @funfte.cl mediante la plataforma de Google.', $WEBMAIL, 'correo'],
     ['SISPAR',                           'Plataforma de registro y control: administración y gestión interna de bomberos.', 'https://sispar.sisparnovenacbt.com/login.php', 'sisab'],
     ['Registro Nacional de Bomberos',    'Acceso RNB a los sistemas de la Junta Nacional de Bomberos.', 'https://www.bomberos.cl/sist/escritorio_virtual/', 'documento'],
-    ['Últimos despachos',                'Despachos de la Central de Alarmas del Cuerpo de Bomberos de Talcahuano, en su cuenta de X.', 'https://x.com/central_cbt', 'llama'],
+    ['Central CBT',                      'Despachos de la Central de Alarmas del Cuerpo de Bomberos de Talcahuano, en su cuenta de X.', 'https://x.com/central_cbt', 'llama'],
     ['Calendario de aniversarios',       'Aniversarios de las compañías, para mostrar en pantalla completa en el cuartel.', 'acceso-quintino/calendario/', 'torta'],
 );
 my @SITIOS = (
