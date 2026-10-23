@@ -397,7 +397,7 @@ a.saludo:hover { border-color: var(--dorado); }
   padding: 56px 0;
   margin-top: 72px;
 }
-.lema img { max-height: 70px; width: auto; margin-bottom: 12px; }
+.lema img { max-height: 60px; width: auto; margin-bottom: 12px; }
 .lema blockquote { margin: 0; font-family: var(--fuente-titulos); font-size: clamp(1.2rem, 3vw, 1.6rem); }
 .lema blockquote p { margin: 4px 0; }
 .lema blockquote p + p { font-size: .8em; opacity: .8; font-style: italic; }
