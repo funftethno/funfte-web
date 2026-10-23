@@ -628,6 +628,22 @@ sub foto_voluntario {
     return -e "$FindBin::Bin/../assets/img/voluntario-$archivo.jpg" ? "voluntario-$archivo.jpg" : 'voluntario-sin-foto.svg';
 }
 
+# Voluntarios de la nomina que fueron Director o Capitan de la Quinta, con sus periodos
+# (tablas «Directores de compañía» y «Capitanes de compañía» de la historia de la Quinta).
+my %CARGOS = (
+    'Juan Uriarte Parra'          => [['Director', '1972–1975, 1992']],
+    'Lientur Grandón Inda'        => [['Director', '1989–1991']],
+    'Francisco Castro Herrera'    => [['Capitán',  '1990']],
+    'Jorge Ogalde Gómez'          => [['Capitán',  '1992–1995'], ['Director', '2009–2025']],
+    'Mario Villagra Vega'         => [['Director', '1996']],
+    'Patricio Retamales Leiva'    => [['Capitán',  '1987–1989, 1996, 2006']],
+    'Jaime Athens Moscoso'        => [['Capitán',  '1997–1998']],
+    'Anselmo Villagra Cabello'    => [['Director', '2004–2008']],
+    'Gustavo Lamig Fritz'         => [['Capitán',  '2007–2009, 2013–2017']],
+    'Nelson Salgado Ríos'         => [['Capitán',  '2018–2019, 2022–2023']],
+    'Mauricio Oliveros Henríquez' => [['Capitán',  '2020–2021, 2024–2025']],
+);
+
 sub dotacion_fotos {
     my ($p) = @_;
     open my $fh, '<:utf8', "$FindBin::Bin/contenido/dotacion.html" or return '';
@@ -650,7 +666,9 @@ sub dotacion_fotos {
         my ($titulo, $lista) = ($1, $2);
         $lista =~ s{<li>((?:<span>[^<]+</span>)?)([^<]+)}{
             my ($antiguedad, $nombre) = ($1, $2);
-            qq(<li><img class="foto" src="${p}assets/img/) . foto_voluntario($nombre =~ s/\s+$//r) . qq(" alt="" width="120" height="120" loading="lazy">$antiguedad$nombre);
+            my $limpio = $nombre =~ s/\s+$//r;
+            my $cargos = join '', map { qq(<small class="cargo">$_->[0] $_->[1]</small>) } @{ $CARGOS{$limpio} // [] };
+            qq(<li><img class="foto" src="${p}assets/img/) . foto_voluntario($limpio) . qq(" alt="" width="120" height="120" loading="lazy">$antiguedad$nombre$cargos);
         }ge;
         $h .= qq($titulo\n<ol class="nomina fotos">$lista</ol>\n);
     }

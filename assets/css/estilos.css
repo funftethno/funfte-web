@@ -557,6 +557,7 @@ a.saludo:hover { border-color: var(--dorado); }
 }
 .contenido .nomina.fotos span { min-width: 0; font-size: .78rem; letter-spacing: .06em; }
 .contenido .nomina.fotos small { font-size: .82rem; font-weight: 400; }
+.contenido .nomina.fotos .cargo { font-size: .76rem; font-weight: 600; color: var(--rojo); }
 .contenido .nomina.fotos .privados {
   width: 100%;
   margin: auto 0 0;
