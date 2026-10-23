@@ -829,7 +829,7 @@ a.saludo:hover { border-color: var(--dorado); }
   .carrusel-unidades .tarjeta-maquina { flex-basis: 80%; }
 }
 
-/* Linea de tiempo (Desarrollo › Historia): el año a la izquierda sobre una linea vertical */
+/* Linea de tiempo (Historia): el año a la izquierda sobre una linea vertical */
 .linea-tiempo { list-style: none; margin: 2em 0; padding: 0; }
 .linea-tiempo > li {
   display: grid;

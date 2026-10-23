@@ -42,8 +42,7 @@ my $DESCRIPCION = 'Quinta Compañía de Bomberos «Bomba Chile» de Talcahuano, 
 my %DESCRIPCIONES = (
     inicio        => 'Sitio oficial de la Quinta Compañía de Bomberos «Bomba Chile» de Talcahuano, fundada el 29 de enero de 1908. Especialidad en agua y rescate integral.',
     laquinta      => 'Quiénes somos: la Quinta Compañía «Bomba Chile» del Cuerpo de Bomberos de Talcahuano, fundada en 1908 por inmigrantes alemanes.',
-    historia      => 'La historia de la Quinta Compañía de Bomberos de Talcahuano desde su fundación en 1908 por la colonia alemana del puerto.',
-    lineatiempo   => 'Línea de tiempo de la Quinta Compañía de Bomberos de Talcahuano, desde su fundación en 1908 hasta hoy.',
+    historia      => 'La historia de la Quinta Compañía de Bomberos de Talcahuano en una línea de tiempo, desde su fundación en 1908 por la colonia alemana del puerto hasta hoy.',
     cuartel       => 'Nuestro cuartel en Villa Independencia, ingreso sur de Talcahuano: instalaciones, guardia nocturna y área de acción.',
     cbt           => 'El Cuerpo de Bomberos de Talcahuano y sus diez compañías: nombres, fundación, especialidad y sector de cada una.',
     confederacion => 'La Confederación de Compañías Chileno-Alemanas de Bomberos: directorio y las compañías confederadas de todo Chile.',
@@ -93,7 +92,7 @@ sub rutas_paginas {
         directorio    => ['archivo/directorio/',       'Directorio',          'Archivo'],
         socios        => ['archivo/socios-colaboradores/', 'Socios Colaboradores', 'Archivo'],
         fotos         => ['archivo/dotacion-con-fotos/', 'Dotación con fotos',  'Desarrollo'],
-        lineatiempo   => ['archivo/historia/',         'Historia',            'Desarrollo'],
+        historiaant   => ['archivo/historia-anterior/', 'Historia anterior', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         calendario    => ['acceso-quintino/calendario/', 'Calendario de aniversarios', 'Acceso Quintino'],
         postula       => ['postula/',                   'Postula a la Quinta', ''],
@@ -178,7 +177,7 @@ my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
 
 my @MENU = (
     ['Inicio', ''],
-    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/','imagen-pendiente.svg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
+    ['La Quinta', 'la-quinta/', [['Historia','historia/','historia-estandarte-1911.jpg'], ['Cuartel','cuartel/','imagen-pendiente.svg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
     ['Dotación', 'dotacion/', [['Oficialidad','dotacion/#oficialidad'], ['Dotación completa','dotacion/#dotacion-completa']]],
     ['Formación', 'formacion/'],
     ['Contacto', 'contacto/'],
