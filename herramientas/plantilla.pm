@@ -548,22 +548,22 @@ sub secciones {
     return $h . '</div>';
 }
 
-# Datos de una unidad (marca, modelo, año...) en pares titulo/valor; la tarjeta muestra los
-# primeros $max y la ficha todos.
+# Datos de una unidad (marca, modelo, año...) en pares titulo/valor; la tarjeta muestra solo
+# los titulos que se le pasan y la ficha todos.
 sub datos_unidad {
-    my ($u, $max) = @_;
+    my ($u, @solo) = @_;
+    my %solo = map { $_ => 1 } @solo;
     my @d = @{ $u->{datos} };
-    splice @d, 2 * $max if $max && @d > 2 * $max;
     my $h = qq(<dl class="datos-unidad">);
     while (my ($titulo, $valor) = splice @d, 0, 2) {
-        $h .= qq(<div><dt>$titulo</dt><dd>$valor</dd></div>);
+        $h .= qq(<div><dt>$titulo</dt><dd>$valor</dd></div>) if !@solo || $solo{$titulo};
     }
     return "$h</dl>";
 }
 
 sub apodo { $_[0]{apodo} ? qq(<span class="apodo">$_[0]{apodo}</span>) : '' }
 
-# Tarjeta de una unidad: apodo sobre la foto, nombre, tipo, primer parrafo y datos principales.
+# Tarjeta de una unidad: apodo sobre la foto, nombre, tipo, primer parrafo, marca, modelo y año.
 sub tarjeta_maquina {
     my ($p, $u) = @_;
     my %rutas = rutas_paginas();
@@ -574,7 +574,7 @@ sub tarjeta_maquina {
     return qq(<a class="tarjeta-maquina" href="$p$rutas{$u->{clave}}{ruta}"><span class="foto">) . apodo($u)
         . qq(<img src="${p}assets/img/$foto" alt="" loading="lazy"></span><span class="cuerpo">)
         . qq(<span class="titulo"><strong) . ($u->{nombre} =~ /^\S{1,6}$/ ? q( class="codigo") : q()) . qq(>$u->{nombre}</strong><span class="tipo">$u->{tipo}</span></span>)
-        . qq(<span class="resumen">$resumen</span>) . datos_unidad($u, 4) . '</span></a>';
+        . qq(<span class="resumen">$resumen</span>) . datos_unidad($u, 'Marca', 'Modelo', 'Año') . '</span></a>';
 }
 
 # Grilla de tarjetas de un grupo de @UNIDADES; en material.html va con <!--UNIDADES_SERVICIO-->
