@@ -125,6 +125,9 @@ document.addEventListener('DOMContentLoaded', function () {
     siguiente.addEventListener('click', function () { pista.scrollBy({ left: pista.clientWidth, behavior: 'smooth' }); });
     pista.addEventListener('scroll', flechas);
     window.addEventListener('resize', flechas);
+    // carrusel de unidades: parte centrado en la unidad de la ficha
+    var actual = pista.querySelector('.actual');
+    if (actual) pista.scrollLeft = actual.offsetLeft - pista.offsetLeft - (pista.clientWidth - actual.offsetWidth) / 2;
     flechas();
   });
 });

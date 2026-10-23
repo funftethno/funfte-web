@@ -575,13 +575,14 @@ sub apodo { $_[0]{apodo} ? qq(<span class="apodo">$_[0]{apodo}</span>) : '' }
 
 # Tarjeta de una unidad: apodo sobre la foto, nombre, tipo, primer parrafo, marca, modelo y año.
 sub tarjeta_maquina {
-    my ($p, $u) = @_;
+    my ($p, $u, $actual) = @_;
     my %rutas = rutas_paginas();
     my $html = leer_contenido($u->{clave});
     my ($foto) = $html =~ m{assets/img/([^"']+)};
     my ($resumen) = $html =~ m{<p>(.*?)</p>}s;
     $resumen =~ s/<[^>]+>//g;
-    return qq(<a class="tarjeta-maquina" href="$p$rutas{$u->{clave}}{ruta}"><span class="foto">) . apodo($u)
+    my $marca = $actual ? q( actual" aria-current="page) : '';
+    return qq(<a class="tarjeta-maquina $u->{grupo}$marca" href="$p$rutas{$u->{clave}}{ruta}"><span class="foto">) . apodo($u)
         . qq(<img src="${p}assets/img/$foto" alt="" loading="lazy"></span><span class="cuerpo">)
         . qq(<span class="titulo"><strong) . ($u->{nombre} =~ /^\S{1,6}$/ ? q( class="codigo") : q()) . qq(>$u->{nombre}</strong><span class="tipo">$u->{tipo}</span></span>)
         . qq(<span class="resumen">$resumen</span>) . datos_unidad($u, 'Marca', 'Modelo', 'Año') . '</span></a>';
@@ -597,7 +598,7 @@ sub grilla_maquinas {
 
 # Ficha de una unidad: texto y datos a la izquierda, la primera foto a la derecha y las demas
 # en un carrusel. Lo que viene desde el primer <h3> del contenido (caracteristicas) va debajo,
-# a todo el ancho. Al final, las otras unidades en servicio o las historicas vecinas.
+# a todo el ancho. Al final, todas las unidades en un carrusel centrado en la actual.
 sub ficha_unidad {
     my ($p, $u, $html) = @_;
     my @fotos = $html =~ /(<img\b[^>]*>)/g;
@@ -611,15 +612,14 @@ sub ficha_unidad {
         . qq(<button type="button" class="carrusel-boton anterior" aria-label="Fotos anteriores" hidden>‹</button>)
         . qq(<button type="button" class="carrusel-boton siguiente" aria-label="Fotos siguientes" hidden>›</button>\n</div>\n) if @fotos;
     $h .= $resto // '';
-    my @grupo = grep { $_->{grupo} eq $u->{grupo} } @UNIDADES;
-    my ($i) = grep { $grupo[$_] == $u } 0 .. $#grupo;
-    my @otras = $u->{grupo} eq 'servicio' ? grep({ $_ != $u } @grupo)
-              : (($i > 0 ? $grupo[$i - 1] : ()), ($i < $#grupo ? $grupo[$i + 1] : ()));
-    return $h . ($u->{grupo} eq 'servicio'
-        ? qq(<h2 class="otras">Otras unidades en servicio</h2>\n) . grilla_maquinas($p, 'servicio', @otras)
-          . qq(\n<p><a href="${p}material-mayor/#unidades-historicas">Ver las unidades históricas de la Compañía</a></p>)
-        : qq(<h2 class="otras">Otras unidades históricas</h2>\n) . grilla_maquinas($p, 'historica', @otras)
-          . qq(\n<p><a href="${p}material-mayor/#unidades-historicas">Volver a las unidades históricas</a></p>));
+    # todas las unidades, de la mas nueva a la mas antigua; menu.js centra el carrusel en la actual
+    my %anio = map { $_ => { @{ $_->{datos} } }->{'Año'} // 0 } @UNIDADES;
+    my @todas = sort { $anio{$b} <=> $anio{$a} } @UNIDADES;
+    return $h . qq(<h2 class="otras">Otras unidades</h2>\n<div class="carrusel carrusel-unidades">\n<div class="carrusel-pista">\n)
+        . join('', map { tarjeta_maquina($p, $_, $_ == $u) . "\n" } @todas) . qq(</div>\n)
+        . qq(<button type="button" class="carrusel-boton anterior" aria-label="Unidades más nuevas" hidden>‹</button>)
+        . qq(<button type="button" class="carrusel-boton siguiente" aria-label="Unidades más antiguas" hidden>›</button>\n</div>\n)
+        . qq(<p><a href="${p}material-mayor/">Ver todo el material mayor</a></p>);
 }
 
 # Dotacion con fotos (Desarrollo): la misma nomina de dotacion.html en tarjetas con el numero de
