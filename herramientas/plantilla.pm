@@ -142,7 +142,7 @@ my @SITIOS = (
 # apodo y tipo pueden ir vacios.
 my @UNIDADES = (
     { clave => 'b5',      grupo => 'servicio',  nombre => 'B-5',            tipo => 'Incendio',
-      datos => [Marca => 'Iveco Magirus', Modelo => 'FF160E30', 'Año' => 2018, 'Tracción' => '4×2', 'Carrocería' => 'TLF 30/40', Motor => '299 HP', Estanque => '3.500 litros', Cabina => '1+9'] },
+      datos => [Marca => 'Iveco Magirus', Modelo => 'FF160E30', 'Año' => 2018, 'Tracción' => '4×2', 'Carrocería' => 'TLF 30/40', Motor => '299 HP', Estanque => '3.000 litros', Espuma => '200 litros', Cabina => '1+9'] },
     { clave => 'rx5',     grupo => 'servicio',  nombre => 'RX-5',           tipo => 'Rescate pesado',
       datos => [Marca => 'MAN-Magirus', Modelo => 'TGM 18.320', 'Año' => 2024, 'Carrocería' => 'LF 30/20'] },
     { clave => 'mx5',     grupo => 'servicio',  nombre => 'MX-5',           tipo => 'Plataforma aérea',
