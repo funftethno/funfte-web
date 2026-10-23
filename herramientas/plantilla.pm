@@ -178,7 +178,7 @@ my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
 
 my @MENU = (
     ['Inicio', ''],
-    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/','escudo-quinta.png'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
+    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/','imagen-pendiente.svg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
     ['Dotación', 'dotacion/', [['Oficialidad','dotacion/#oficialidad'], ['Dotación completa','dotacion/#dotacion-completa']]],
     ['Formación', 'formacion/'],
     ['Contacto', 'contacto/'],
@@ -534,11 +534,11 @@ sub cifras_dotacion {
 # Tarjetas de acceso a las subsecciones de una pagina del menu (por ejemplo La Quinta), donde
 # su contenido tiene <!--SECCIONES-->. Salen del submenu de @MENU, con la descripcion de cada
 # pagina y la primera imagen de su contenido; un logo (PNG) se muestra entero y una pagina sin
-# imagen lleva el escudo de la Quinta. Un tercer valor en el submenu (foto) reemplaza esa imagen
+# imagen muestra imagen-pendiente.svg, para que se note. Un tercer valor en el submenu (foto) reemplaza esa imagen
 # solo en la tarjeta, sin mostrarla en la pagina. %SECCIONES_EXTRA agrega al comienzo paginas que no estan
 # en ese submenu, con una foto elegida si su contenido no tiene.
 my %SECCIONES_EXTRA = (
-    'la-quinta/' => [['Dotación', 'dotacion/', 'escudo-quinta.png']],
+    'la-quinta/' => [['Dotación', 'dotacion/', 'imagen-pendiente.svg']],
 );
 sub secciones {
     my ($p, $ruta) = @_;
@@ -550,8 +550,8 @@ sub secciones {
         my ($titulo, $destino, $foto) = @$s;
         my $c = $clave{$destino} // next;
         ($foto) = leer_contenido($c) =~ m{assets/img/([^"']+\.(?:jpe?g|png))}i unless $foto;
-        my $clase = !$foto || $foto =~ /\.png$/i ? ' class="logo"' : '';
-        $foto //= 'escudo-quinta.png';
+        $foto //= 'imagen-pendiente.svg';
+        my $clase = $foto =~ /\.png$/i ? ' class="logo"' : '';
         $h .= qq(<a class="tarjeta-unidad" href="$p$destino"><img$clase src="${p}assets/img/$foto" alt="" loading="lazy">)
             . qq(<span class="tarjeta-texto"><strong>$titulo</strong><span>$DESCRIPCIONES{$c}</span></span></a>\n);
     }
@@ -579,6 +579,7 @@ sub tarjeta_maquina {
     my %rutas = rutas_paginas();
     my $html = leer_contenido($u->{clave});
     my ($foto) = $html =~ m{assets/img/([^"']+)};
+    $foto //= 'imagen-pendiente.svg';
     my ($resumen) = $html =~ m{<p>(.*?)</p>}s;
     $resumen =~ s/<[^>]+>//g;
     my $marca = $actual ? q( actual" aria-current="page) : '';
@@ -604,7 +605,7 @@ sub ficha_unidad {
     my @fotos = $html =~ /(<img\b[^>]*>)/g;
     $html =~ s/<img\b[^>]*>\s*//g;
     my ($texto, $resto) = split /(?=<h3>)/, $html, 2;
-    my $principal = (shift @fotos // '') =~ s/loading="lazy"/loading="eager"/r;
+    my $principal = (shift @fotos // qq(<img src="${p}assets/img/imagen-pendiente.svg" alt="Imagen pendiente de la unidad">)) =~ s/loading="lazy"/loading="eager"/r;
     my $h = qq(<div class="ficha-unidad $u->{grupo}">\n<div class="ficha-texto">\n)
         . ($u->{tipo} ? qq(<p class="ficha-tipo">$u->{tipo}</p>\n) : '')
         . $texto . datos_unidad($u) . qq(\n</div>\n<div class="ficha-foto">) . apodo($u) . qq($principal</div>\n</div>\n);
