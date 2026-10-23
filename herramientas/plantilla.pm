@@ -315,7 +315,7 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 </div>
 </section>
 ) . datos_portada($p) . qq(<section class="wrap bloque">
-<h2 class="titulo-seccion">Juntos protegemos la ciudad</h2>
+<h2 class="titulo-seccion">Tu apoyo hace la diferencia</h2>
 <div class="grilla-tarjetas tres">
 ) . tarjeta($p, 'sisab', 'Postula a la Quinta', '¿Quieres ser bombero voluntario? Únete a la Quinta y sirve a Talcahuano. Completa el formulario y te contactaremos.', 'postula/', 'Postular')
   . tarjeta($p, 'corazon', 'Hazte socio', 'Colabora con la Quinta y hazte socio cooperador. Con tu ayuda continuaremos salvando vidas.', $COOPERADORES, 'Inscríbete')
