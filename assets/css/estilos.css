@@ -256,7 +256,7 @@ a:hover { color: var(--rojo-oscuro); }
 .portada .acciones { justify-content: center; }
 
 /* En pantallas anchas el texto va a la izquierda y la foto se encuadra algo arriba
-   del centro, para que se vea la cara del bombero a la derecha. */
+   del centro, para que se vean los estandartes y la guardia a la derecha. */
 @media (min-width: 900px) {
   .portada { background-position: center 22%; }
   .portada::before {

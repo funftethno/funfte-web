@@ -303,7 +303,7 @@ sub datos_portada {
 sub inicio {
     my ($p) = @_;
     my $aniversarios = aniversarios($p);
-    my $portada = '2011-12-DSC0103-1030x688.jpg';
+    my $portada = 'portada-estandartes.jpg';
     my $escudo  = '2013-04-Sin-titulo-3.png';
     return
 qq(<section class="portada" style="background-image:url('${p}assets/img/$portada')">
