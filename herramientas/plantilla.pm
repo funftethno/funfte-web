@@ -178,7 +178,7 @@ my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
 
 my @MENU = (
     ['Inicio', ''],
-    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
+    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/','escudo-quinta.png'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
     ['Dotación', 'dotacion/', [['Oficialidad','dotacion/#oficialidad'], ['Dotación completa','dotacion/#dotacion-completa']]],
     ['Formación', 'formacion/'],
     ['Contacto', 'contacto/'],
@@ -538,7 +538,7 @@ sub cifras_dotacion {
 # solo en la tarjeta, sin mostrarla en la pagina. %SECCIONES_EXTRA agrega al comienzo paginas que no estan
 # en ese submenu, con una foto elegida si su contenido no tiene.
 my %SECCIONES_EXTRA = (
-    'la-quinta/' => [['Dotación', 'dotacion/', '2013-06-P9270023.jpg']],
+    'la-quinta/' => [['Dotación', 'dotacion/', 'escudo-quinta.png']],
 );
 sub secciones {
     my ($p, $ruta) = @_;
