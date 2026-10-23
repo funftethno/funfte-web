@@ -110,4 +110,21 @@ document.addEventListener('DOMContentLoaded', function () {
       saludos.hidden = false;
     });
   }
+
+  // Carrusel de fotos de las fichas de Material Mayor: las flechas avanzan de a un ancho y
+  // se esconden en los extremos. Sin JavaScript, la pista igual se desplaza con el dedo.
+  document.querySelectorAll('.carrusel').forEach(function (carrusel) {
+    var pista = carrusel.querySelector('.carrusel-pista');
+    var anterior = carrusel.querySelector('.anterior');
+    var siguiente = carrusel.querySelector('.siguiente');
+    function flechas() {
+      anterior.hidden = pista.scrollLeft <= 4;
+      siguiente.hidden = pista.scrollLeft + pista.clientWidth >= pista.scrollWidth - 4;
+    }
+    anterior.addEventListener('click', function () { pista.scrollBy({ left: -pista.clientWidth, behavior: 'smooth' }); });
+    siguiente.addEventListener('click', function () { pista.scrollBy({ left: pista.clientWidth, behavior: 'smooth' }); });
+    pista.addEventListener('scroll', flechas);
+    window.addEventListener('resize', flechas);
+    flechas();
+  });
 });
