@@ -411,13 +411,6 @@ qq(<section class="wrap bloque">
   . tarjeta($p, 'libro', 'Guías de autoinstrucción', 'Guías para estudiar de forma autónoma antes de cada curso.', "$ANB/guias-de-autoinstruccion", 'Ver guías')
   . tarjeta($p, 'documento', 'Artículos técnicos', 'Publicaciones técnicas para la actualización de conocimientos.', "$ANB/articulos-tecnicos", 'Ver artículos')
   . qq(</div>
-</section>
-<section class="wrap bloque">
-<h2 class="titulo-seccion">Más recursos</h2>
-<div class="grilla-tarjetas tres">
-) . tarjeta($p, 'libro', 'Bibliotecas de Bomberos de Chile', 'Publicaciones, revistas y documentos de la Junta Nacional de Bomberos.', 'https://www.bomberos.cl/bibliotecas', 'Ir a bibliotecas')
-  . tarjeta($p, 'candado', 'Biblioteca Virtual de la Quinta', 'Material de trabajo interno, oficios y manuales operativos de la compañía.')
-  . qq(</div>
 </section>);
 }
 
