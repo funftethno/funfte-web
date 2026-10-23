@@ -52,7 +52,7 @@ my %DESCRIPCIONES = (
     acceso        => 'Acceso Quintino: intranet y plataformas internas para voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
     material      => 'Material mayor de la Quinta: unidades B-5, RX-5 y MX-5 en servicio, además de sus vehículos históricos.',
     bx5           => 'Unidad BX-5: Iveco Magirus FF150E30W 4x4 de 2012, unidad mixta de incendio y rescate de la Quinta Compañía de Talcahuano.',
-    b5            => 'Unidad B-5: Iveco Magirus FF150E30 de 2018, unidad de control de incendios de la Quinta Compañía de Talcahuano.',
+    b5            => 'Unidad B-5: Iveco Magirus FF160E30 de 2018, unidad de control de incendios de la Quinta Compañía de Talcahuano.',
     mx5           => 'Unidad MX-5: Scania-Ziegler/Cela TLF 40/12 + ALP 330X de 2025, Scania P410. Plataforma aérea para rescate de difícil acceso y control de incendios en edificios.',
     rx5           => 'Unidad RX-5: MAN-Magirus LF 30/20 de 2024, sobre chasis MAN TGM 18.320. Rescate técnico pesado y control de incendios.',
     harbor        => 'Unidad Mauricio II / Harbor 28: embarcación de rescate medioambiental para descontaminación de aguas de la Quinta Compañía de Talcahuano.',
@@ -142,7 +142,7 @@ my @SITIOS = (
 # apodo y tipo pueden ir vacios.
 my @UNIDADES = (
     { clave => 'b5',      grupo => 'servicio',  nombre => 'B-5',            tipo => 'Incendio',
-      datos => [Marca => 'Iveco Magirus', Modelo => 'FF150E30', 'Año' => 2018, 'Tracción' => '4×2', Estanque => '3.500 litros', Cabina => '1+9'] },
+      datos => [Marca => 'Iveco Magirus', Modelo => 'FF160E30', 'Año' => 2018, 'Tracción' => '4×2', 'Carrocería' => 'TLF 30/40', Motor => '299 HP', Estanque => '3.500 litros', Cabina => '1+9'] },
     { clave => 'rx5',     grupo => 'servicio',  nombre => 'RX-5',           tipo => 'Rescate pesado',
       datos => [Marca => 'MAN-Magirus', Modelo => 'TGM 18.320', 'Año' => 2024, 'Carrocería' => 'LF 30/20'] },
     { clave => 'mx5',     grupo => 'servicio',  nombre => 'MX-5',           tipo => 'Plataforma aérea',
