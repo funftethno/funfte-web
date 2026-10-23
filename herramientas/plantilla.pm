@@ -561,7 +561,7 @@ sub datos_unidad {
     return "$h</dl>";
 }
 
-sub apodo { $_[0]{apodo} ? qq(<span class="apodo">«$_[0]{apodo}»</span>) : '' }
+sub apodo { $_[0]{apodo} ? qq(<span class="apodo">$_[0]{apodo}</span>) : '' }
 
 # Tarjeta de una unidad: apodo sobre la foto, nombre, tipo, primer parrafo y datos principales.
 sub tarjeta_maquina {
