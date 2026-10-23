@@ -178,7 +178,7 @@ my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
 
 my @MENU = (
     ['Inicio', ''],
-    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Material Mayor','material-mayor/'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
+    ['La Quinta', 'la-quinta/', [['Historia','historia/'], ['Cuartel','cuartel/'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
     ['Dotación', 'dotacion/', [['Oficialidad','dotacion/#oficialidad'], ['Dotación completa','dotacion/#dotacion-completa']]],
     ['Formación', 'formacion/'],
     ['Contacto', 'contacto/'],
@@ -534,7 +534,8 @@ sub cifras_dotacion {
 # Tarjetas de acceso a las subsecciones de una pagina del menu (por ejemplo La Quinta), donde
 # su contenido tiene <!--SECCIONES-->. Salen del submenu de @MENU, con la descripcion de cada
 # pagina y la primera imagen de su contenido; un logo (PNG) se muestra entero y una pagina sin
-# imagen lleva el escudo de la Quinta. %SECCIONES_EXTRA agrega al comienzo paginas que no estan
+# imagen lleva el escudo de la Quinta. Un tercer valor en el submenu (foto) reemplaza esa imagen
+# solo en la tarjeta, sin mostrarla en la pagina. %SECCIONES_EXTRA agrega al comienzo paginas que no estan
 # en ese submenu, con una foto elegida si su contenido no tiene.
 my %SECCIONES_EXTRA = (
     'la-quinta/' => [['Dotación', 'dotacion/', '2013-06-P9270023.jpg']],
