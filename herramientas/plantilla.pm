@@ -653,12 +653,7 @@ sub dotacion_fotos {
     my $h = qq(<article class="wrap contenido">\n);
     if (open my $c, '<', "$FindBin::Bin/contenido/privados.cifrado") {
         chomp(my $cifrado = <$c>);
-        $h .= qq(<form class="desbloqueo" id="desbloqueo">
-<label for="clave-privados">Contraseña para ver la generación y el número de registro</label>
-<div><input id="clave-privados" name="clave" type="password" autocomplete="off" required>
-<button class="boton" type="submit">Desbloquear</button></div>
-<p id="desbloqueo-aviso" class="desbloqueo-aviso" aria-live="polite"></p>
-</form>
+        $h .= qq(<input class="truco" id="truco" type="password" autocomplete="off" aria-hidden="true" tabindex="-1">
 <script type="application/json" id="privados">$cifrado</script>
 <script src="${p}assets/js/privados.js$V_PRIV" defer></script>
 );

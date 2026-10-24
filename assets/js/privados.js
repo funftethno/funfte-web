@@ -1,17 +1,18 @@
 // Dotacion con fotos (Archivo): la generacion y el numero de registro de cada voluntario vienen
 // cifrados y se muestran al ingresar la contraseña. El cifrado es el de "openssl enc -aes-256-cbc
 // -pbkdf2 -md sha256" (ver herramientas/cifrar_privados.pl): "Salted__", 8 bytes de sal y el texto.
+// No hay formulario a la vista: la contraseña se escribe con el teclado en cualquier parte de la
+// pagina, como un truco de videojuego. En el celular, cinco toques seguidos al titulo abren el
+// teclado sobre un campo invisible.
 document.addEventListener('DOMContentLoaded', function () {
   var datos = document.getElementById('privados');
-  var form = document.getElementById('desbloqueo');
-  if (!datos || !form) return;
-  if (!window.crypto || !crypto.subtle) { form.hidden = true; return; }
+  var campo = document.getElementById('truco');
+  if (!datos || !campo || !window.crypto || !crypto.subtle) return;
 
   var cifrado = JSON.parse(datos.textContent);
   var bytes = Uint8Array.from(atob(cifrado.datos), function (c) { return c.charCodeAt(0); });
   var sal = bytes.slice(8, 16);
   var texto = bytes.slice(16);
-  var aviso = document.getElementById('desbloqueo-aviso');
 
   function descifrar(clave) {
     return crypto.subtle.importKey('raw', new TextEncoder().encode(clave), 'PBKDF2', false, ['deriveBits'])
@@ -47,15 +48,35 @@ document.addEventListener('DOMContentLoaded', function () {
       });
       li.appendChild(dl);
     });
-    form.hidden = true;
+    listo = true;
+    campo.blur();
   }
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    aviso.textContent = 'Revisando…';
-    descifrar(form.clave.value).then(mostrar, function () {
-      aviso.textContent = 'Contraseña incorrecta.';
-      form.clave.select();
-    });
+  // lo escrito se prueba cuando se deja de teclar un momento; si no sirve, se olvida sin avisar
+  var escrito = '', espera, listo = false;
+  function probar() {
+    var clave = escrito;
+    escrito = '';
+    campo.value = '';
+    if (clave) descifrar(clave).then(mostrar, function () {});
+  }
+  function tecla(texto) {
+    if (listo) return;
+    escrito = texto;
+    clearTimeout(espera);
+    espera = setTimeout(probar, 900);
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.target === campo || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key.length === 1) tecla(escrito + e.key);
+    else if (e.key === 'Backspace') tecla(escrito.slice(0, -1));
+  });
+  campo.addEventListener('input', function () { tecla(campo.value); });
+
+  var titulo = document.querySelector('h1'), toques = 0, reinicio;
+  if (titulo) titulo.addEventListener('click', function () {
+    clearTimeout(reinicio);
+    reinicio = setTimeout(function () { toques = 0; }, 1500);
+    if (++toques >= 5) { toques = 0; campo.focus(); }
   });
 });

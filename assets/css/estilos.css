@@ -580,14 +580,8 @@ a.saludo:hover { border-color: var(--dorado); }
   color: var(--texto-suave);
 }
 .contenido .nomina.fotos .privados dd { margin: 0; font-size: .9rem; font-weight: 700; color: var(--rojo); font-variant-numeric: tabular-nums; }
-.desbloqueo { margin: 0 0 32px; padding: 16px 18px; border: 1px solid var(--borde); border-radius: var(--radio); background: var(--fondo-suave); }
-.desbloqueo[hidden] { display: none; }
-.desbloqueo label { display: block; font-size: .9rem; font-weight: 600; margin-bottom: 6px; }
-.desbloqueo div { display: flex; flex-wrap: wrap; gap: 8px; }
-.desbloqueo input { flex: 1 1 180px; max-width: 280px; padding: 10px 12px; font: inherit; border: 1px solid var(--borde); border-radius: 6px; background: #fff; }
-.desbloqueo .boton { cursor: pointer; font: inherit; font-weight: 600; border: 0; }
-.desbloqueo-aviso { margin: 8px 0 0; font-size: .85rem; color: var(--texto-suave); }
-.desbloqueo-aviso:empty { display: none; }
+/* campo invisible del truco para ver los datos privados (privados.js) */
+.truco { position: fixed; top: 0; left: 0; width: 1px; height: 1px; padding: 0; border: 0; opacity: 0; font-size: 16px; }
 .contenido .oficiales span {
   display: block;
   font-size: .78rem;
