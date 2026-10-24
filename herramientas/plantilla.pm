@@ -81,7 +81,7 @@ sub rutas_paginas {
         cbt           => ['cuerpo-de-bomberos/',        'Cuerpo de Bomberos',  'La Quinta'],
         confederacion => ['confederacion/',            'Confederación',       'La Quinta'],
         dotacion      => ['dotacion/',                 'Dotación',            'Dotación'],
-        formacion     => ['formacion/',                'Formación',           'Formación'],
+        formacion     => ['archivo/formacion/',        'Formación',           'Archivo'],
         # Paginas fuera del menu: solo se llega a ellas desde el enlace ARCHIVO del pie. Las de
         # seccion Archivo estan retiradas; las de Desarrollo estan en preparacion.
         archivo       => ['archivo/',                  'Archivo',             ''],
@@ -179,7 +179,6 @@ my @MENU = (
     ['Inicio', ''],
     ['La Quinta', 'la-quinta/', [['Historia','historia/','historia-estandarte-1911.jpg'], ['Cuartel','cuartel/','imagen-pendiente.svg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
     ['Dotación', 'dotacion/', [['Oficialidad','dotacion/#oficialidad'], ['Dotación completa','dotacion/#dotacion-completa']]],
-    ['Formación', 'formacion/'],
     ['Contacto', 'contacto/'],
 );
 
@@ -271,6 +270,7 @@ sub acceso_personal {
 <div class="grilla-tarjetas">
 );
     $h .= tarjeta($p, $_->[3], $_->[0], $_->[1], $_->[2], 'Ingresar') for @ACCESOS;
+    $h .= qq(</div>\n</section>\n<section class="wrap bloque">\n<h2 class="titulo-seccion">Academia Nacional de Bomberos</h2>\n<div class="grilla-tarjetas tres">\n) . tarjetas_anb($p);
     $h .= qq(</div>\n</section>\n<section class="wrap bloque">\n<h2 class="titulo-seccion">Sitios de interés</h2>\n<div class="grilla-tarjetas tres">\n);
     $h .= tarjeta($p, $_->[3], $_->[0], $_->[1], $_->[2], 'Visitar') for @SITIOS;
     return $h . "</div>\n</section>";
@@ -397,6 +397,7 @@ sub calendario {
 <script src="${p}assets/js/calendario.js$V_CAL" defer></script>);
 }
 
+# Formacion quedo en el Archivo; sus accesos a la ANB ahora van tambien en Acceso Quintino.
 sub formacion {
     my ($p) = @_;
     return
@@ -404,14 +405,19 @@ qq(<section class="wrap bloque">
 <p class="intro">La formación permanente es uno de los pilares de la Quinta. Aquí reunimos los accesos a las plataformas de capacitación de la Academia Nacional de Bomberos (ANB) y otros recursos de estudio para nuestros voluntarios.</p>
 <h2 class="titulo-seccion">Academia Nacional de Bomberos</h2>
 <div class="grilla-tarjetas tres">
-) . tarjeta($p, 'convoca', 'Convocatorias para Bomberos', 'Cursos abiertos y fechas de postulación de la Academia Nacional de Bomberos.', "$ANB/convocatorias-para-bomberos", 'Ver convocatorias')
+) . tarjetas_anb($p) . qq(</div>
+</section>);
+}
+
+# Accesos a las plataformas y documentos de la Academia Nacional de Bomberos
+sub tarjetas_anb {
+    my ($p) = @_;
+    return tarjeta($p, 'convoca', 'Convocatorias para Bomberos', 'Cursos abiertos y fechas de postulación de la Academia Nacional de Bomberos.', "$ANB/convocatorias-para-bomberos", 'Ver convocatorias')
   . tarjeta($p, 'web', 'Aula Virtual ANB', 'Plataforma de cursos en línea. Ingresa con tu usuario del Registro Nacional de Bomberos.', $AULA, 'Entrar al aula virtual')
   . tarjeta($p, 'birrete', 'Malla curricular', 'Malla curricular 2025–2028 de la Academia Nacional de Bomberos (PDF).', "$ANB/documentos_sitio/43775_Malla_curricular_2025_2028.pdf", 'Ver malla')
   . tarjeta($p, 'documento', 'Material académico', 'Manuales y material de apoyo para los cursos de la Academia.', "$ANB/material-academico", 'Ver material')
   . tarjeta($p, 'libro', 'Guías de autoinstrucción', 'Guías para estudiar de forma autónoma antes de cada curso.', "$ANB/guias-de-autoinstruccion", 'Ver guías')
-  . tarjeta($p, 'documento', 'Artículos técnicos', 'Publicaciones técnicas para la actualización de conocimientos.', "$ANB/articulos-tecnicos", 'Ver artículos')
-  . qq(</div>
-</section>);
+  . tarjeta($p, 'documento', 'Artículos técnicos', 'Publicaciones técnicas para la actualización de conocimientos.', "$ANB/articulos-tecnicos", 'Ver artículos');
 }
 
 # Formulario de postulacion. El sitio es estatico: FormSubmit (formsubmit.co) recibe
