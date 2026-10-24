@@ -130,4 +130,18 @@ document.addEventListener('DOMContentLoaded', function () {
     if (actual) pista.scrollLeft = actual.offsetLeft - pista.offsetLeft - (pista.clientWidth - actual.offsetWidth) / 2;
     flechas();
   });
+
+  // Galeria de un hito de Historia: tocar una miniatura la deja como foto principal
+  document.querySelectorAll('.hito-galeria').forEach(function (galeria) {
+    var principal = galeria.querySelector('.galeria-principal');
+    galeria.querySelectorAll('.miniatura').forEach(function (miniatura) {
+      miniatura.addEventListener('click', function () {
+        var foto = miniatura.querySelector('img');
+        principal.src = foto.src;
+        principal.alt = foto.alt;
+        galeria.querySelector('.miniatura.actual').classList.remove('actual');
+        miniatura.classList.add('actual');
+      });
+    });
+  });
 });

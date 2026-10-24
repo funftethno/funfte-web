@@ -874,6 +874,16 @@ a.saludo:hover { border-color: var(--dorado); }
   aspect-ratio: 3 / 2;
   object-fit: cover;
 }
+/* Hito con 3 fotos o mas (galeria_hito): foto principal y carrusel de miniaturas */
+.hito-galeria { max-width: 520px; margin-top: .4em; }
+.contenido .hito-galeria .galeria-principal { display: block; margin: 0; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+.carrusel-miniaturas { margin: 8px 0 0; }
+.carrusel-miniaturas .carrusel-pista { gap: 8px; }
+.miniatura { flex: 0 0 calc((100% - 24px) / 4); padding: 0; border: 2px solid transparent; border-radius: 6px; background: none; cursor: pointer; opacity: .7; scroll-snap-align: start; }
+.miniatura:hover, .miniatura.actual { opacity: 1; }
+.miniatura.actual { border-color: var(--rojo); }
+.contenido .carrusel-miniaturas .carrusel-pista img { display: block; flex: none; width: 100%; aspect-ratio: 3 / 2; border-radius: 4px; }
+.carrusel-miniaturas .carrusel-boton { width: 28px; height: 28px; font-size: 1.1rem; }
 @media (max-width: 560px) {
   .linea-tiempo > li { grid-template-columns: 1fr; padding-left: 26px; }
   .linea-tiempo > li::before { left: 5px; top: .6em; }

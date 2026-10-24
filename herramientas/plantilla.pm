@@ -744,6 +744,19 @@ sub datos_estructurados {
     return join '', map { qq(\n<script type="application/ld+json">) . json({ '@context' => 'https://schema.org', %$_ }) . '</script>' } @datos;
 }
 
+# Hitos de Historia con 3 fotos o mas: la primera queda como foto principal y debajo van
+# todas en un carrusel de miniaturas; menu.js cambia la principal al tocar una miniatura.
+sub galeria_hito {
+    my ($fotos) = @_;
+    my @fotos = $fotos =~ /(<img[^>]*>)/g;
+    (my $principal = $fotos[0]) =~ s/<img /<img class="galeria-principal" /;
+    my $n = 0;
+    my $miniaturas = join "\n", map { '<button type="button" class="miniatura' . ($n++ ? '' : ' actual') . qq(">$_</button>) } @fotos;
+    return qq(<div class="hito-galeria">\n$principal\n<div class="carrusel carrusel-miniaturas">\n<div class="carrusel-pista">\n$miniaturas\n</div>\n)
+        . qq(<button type="button" class="carrusel-boton anterior" aria-label="Fotos anteriores" hidden>‹</button>)
+        . qq(<button type="button" class="carrusel-boton siguiente" aria-label="Fotos siguientes" hidden>›</button>\n</div>\n</div>);
+}
+
 sub pagina {
     my %a = @_;
     # la pagina 404 se sirve en cualquier direccion: usa rutas absolutas
@@ -767,7 +780,8 @@ sub pagina {
                                                                         =~ s/<!--CIFRAS_DOTACION-->/cifras_dotacion($a{contenido})/er
                                                                         =~ s/<!--SECCIONES-->/secciones($p, $a{ruta})/er
                                                                         =~ s/<!--UNIDADES_SERVICIO-->/grilla_maquinas($p, 'servicio')/er
-                                                                        =~ s/<!--UNIDADES_HISTORICAS-->/grilla_maquinas($p, 'historica')/er) . qq(\n</article>);
+                                                                        =~ s/<!--UNIDADES_HISTORICAS-->/grilla_maquinas($p, 'historica')/er
+                                                                        =~ s{<div class="hito-fotos">\s*((?:<img[^>]*>\s*){3,})</div>}{galeria_hito($1)}ger) . qq(\n</article>);
     # en la 404 ningun item del menu queda marcado como actual
     my $menu = menu($p, $a{clave} eq 'error404' ? '-' : $a{ruta}, $a{seccion});
     my $acceso_actual = $a{clave} eq 'acceso' ? ' aria-current="page"' : '';
