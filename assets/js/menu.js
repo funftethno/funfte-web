@@ -131,6 +131,44 @@ document.addEventListener('DOMContentLoaded', function () {
     flechas();
   });
 
+  // Visor de fotos: tocar una foto de una ficha o de Historia la muestra en grande, con
+  // flechas para recorrer las demas fotos de la misma ficha o del mismo hito.
+  var FOTOS = '.ficha-foto img, .carrusel-pista > img, .hito-fotos img, .miniatura img';
+  var visor = document.createElement('dialog');
+  visor.className = 'visor';
+  visor.innerHTML = '<figure><img alt=""><figcaption></figcaption></figure>'
+    + '<button type="button" class="visor-cerrar" aria-label="Cerrar">×</button>'
+    + '<button type="button" class="carrusel-boton anterior" aria-label="Foto anterior">‹</button>'
+    + '<button type="button" class="carrusel-boton siguiente" aria-label="Foto siguiente">›</button>';
+  document.body.appendChild(visor);
+  var grupo = [], actual = 0;
+  var grande = visor.querySelector('img'), leyenda = visor.querySelector('figcaption');
+  function mostrar(i) {
+    actual = (i + grupo.length) % grupo.length;
+    grande.src = grupo[actual].src;
+    grande.alt = leyenda.textContent = grupo[actual].alt;
+  }
+  document.addEventListener('click', function (e) {
+    var foto = e.target.closest('.ficha-foto img, .carrusel-pista > img, .hito-fotos img, .galeria-principal');
+    if (!foto || visor.open) return;
+    grupo = [].slice.call((foto.closest('.hito, article') || document).querySelectorAll(FOTOS));
+    var i = 0;
+    grupo.forEach(function (f, n) { if (f.src === foto.src) i = n; });
+    visor.querySelector('.anterior').hidden = visor.querySelector('.siguiente').hidden = grupo.length < 2;
+    mostrar(i);
+    visor.showModal();
+  });
+  visor.querySelector('.visor-cerrar').addEventListener('click', function () { visor.close(); });
+  visor.querySelector('.anterior').addEventListener('click', function () { mostrar(actual - 1); });
+  visor.querySelector('.siguiente').addEventListener('click', function () { mostrar(actual + 1); });
+  // tocar fuera de la foto cierra; las flechas del teclado cambian de foto
+  visor.addEventListener('click', function (e) { if (e.target === visor || e.target.tagName === 'FIGURE') visor.close(); });
+  visor.addEventListener('keydown', function (e) {
+    if (grupo.length < 2) return;
+    if (e.key === 'ArrowLeft') mostrar(actual - 1);
+    if (e.key === 'ArrowRight') mostrar(actual + 1);
+  });
+
   // Galeria de un hito de Historia: tocar una miniatura la deja como foto principal
   document.querySelectorAll('.hito-galeria').forEach(function (galeria) {
     var principal = galeria.querySelector('.galeria-principal');
