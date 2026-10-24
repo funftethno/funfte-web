@@ -7,7 +7,7 @@ use Exporter 'import';
 use Digest::MD5 qw(md5_hex);
 use FindBin;
 use Unicode::Normalize qw(NFD);
-our @EXPORT_OK = qw(pagina rutas_paginas);
+our @EXPORT_OK = qw(pagina rutas_paginas fotos_tarjetas);
 
 my $NOMBRE  = 'Quinta Compañía de Bomberos de Talcahuano';
 
@@ -571,13 +571,24 @@ sub datos_unidad {
 
 sub apodo { $_[0]{apodo} ? qq(<span class="apodo">$_[0]{apodo}</span>) : '' }
 
+# Foto de la tarjeta de una unidad: la primera de su archivo de contenido.
+sub foto_tarjeta {
+    my ($u) = @_;
+    my ($foto) = leer_contenido($u->{clave}) =~ m{assets/img/([^"']+)};
+    return $foto // 'imagen-pendiente.svg';
+}
+
+# Fotos de las tarjetas de todas las unidades, para herramientas/miniaturas.pl.
+sub fotos_tarjetas { return map { foto_tarjeta($_) } @UNIDADES }
+
 # Tarjeta de una unidad: apodo sobre la foto, nombre, tipo, primer parrafo, marca, modelo y año.
 sub tarjeta_maquina {
     my ($p, $u, $actual) = @_;
     my %rutas = rutas_paginas();
     my $html = leer_contenido($u->{clave});
-    my ($foto) = $html =~ m{assets/img/([^"']+)};
-    $foto //= 'imagen-pendiente.svg';
+    my $foto = foto_tarjeta($u);
+    # miniatura de 640 px (herramientas/miniaturas.pl); si aun no existe, la foto completa
+    $foto = "mini/$foto" if -e "$FindBin::Bin/../assets/img/mini/$foto";
     my ($resumen) = $html =~ m{<p>(.*?)</p>}s;
     $resumen =~ s/<[^>]+>//g;
     my $marca = $actual ? q( actual" aria-current="page) : '';

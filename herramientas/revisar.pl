@@ -66,11 +66,13 @@ for my $pagina (paginas()) {
 
 # Solo aviso: una imagen sin uso no rompe el sitio, pero pesa en el repositorio.
 $usadas{$_}++ for leer('assets/css/estilos.css') =~ m{img/([^"')\s]+)}g;
-opendir my $dir, 'assets/img' or die "assets/img: $!";
-for my $img (sort grep { !/^\./ } readdir $dir) {
-    print "Aviso: assets/img/$img no se usa en ninguna pagina; si sobra, borrala.\n" unless $usadas{$img};
+for my $carpeta ('', 'mini/') {
+    opendir my $dir, "assets/img/$carpeta" or next;
+    for my $img (sort grep { !/^\./ && -f "assets/img/$carpeta$_" } readdir $dir) {
+        print "Aviso: assets/img/$carpeta$img no se usa en ninguna pagina; si sobra, borrala.\n" unless $usadas{"$carpeta$img"};
+    }
+    closedir $dir;
 }
-closedir $dir;
 
 # Con --externos, ademas prueba los enlaces a otros sitios (necesita red y curl; tarda
 # uno o dos minutos). Lo corre una vez al mes .github/workflows/enlaces.yml.
