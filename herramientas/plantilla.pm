@@ -47,9 +47,6 @@ my %DESCRIPCIONES = (
     cbt           => 'El Cuerpo de Bomberos de Talcahuano y sus diez compañías: nombres, fundación, especialidad y sector de cada una.',
     confederacion => 'La Confederación de Compañías Chileno-Alemanas de Bomberos: directorio y las compañías confederadas de todo Chile.',
     dotacion      => 'Oficialidad 2026–2028 y nómina de voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
-    formacion     => 'Formación de voluntarios: convocatorias, Aula Virtual, malla curricular y material de la Academia Nacional de Bomberos.',
-    feedback      => 'Ayúdanos a mejorar la página de la Quinta: envía tus correcciones, datos para la historia, fotos o ideas.',
-    postula       => 'Postula como bombero voluntario de la Quinta Compañía de Bomberos de Talcahuano. Completa el formulario y te contactaremos.',
     acceso        => 'Acceso Quintino: intranet y plataformas internas para voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
     material      => 'Material mayor de la Quinta: unidades B-5, RX-5 y MX-5 en servicio, además de sus vehículos históricos.',
     bx5           => 'Unidad BX-5: Iveco Magirus FF150E30W 4x4 de 2012, unidad mixta de incendio y rescate de la Quinta Compañía de Talcahuano.',
@@ -71,8 +68,8 @@ my %DESCRIPCIONES = (
 );
 
 # clave => ruta, titulo, seccion del menu.
-# El contenido de cada pagina esta en herramientas/contenido/<clave>.html; portada,
-# formacion y acceso quintino tienen su contenido en este archivo.
+# El contenido de cada pagina esta en herramientas/contenido/<clave>.html; portada
+# y acceso quintino tienen su contenido en este archivo.
 sub rutas_paginas {
     my %p = (
         inicio        => ['',                          'Inicio',              ''],
@@ -82,7 +79,6 @@ sub rutas_paginas {
         cbt           => ['cuerpo-de-bomberos/',        'Cuerpo de Bomberos',  'La Quinta'],
         confederacion => ['confederacion/',            'Confederación',       'La Quinta'],
         dotacion      => ['dotacion/',                 'Dotación',            'Dotación'],
-        formacion     => ['archivo/formacion/',        'Formación',           'Archivo'],
         # Paginas fuera del menu: solo se llega a ellas desde el enlace ARCHIVO del pie. Las de
         # seccion Archivo estan retiradas; las de Desarrollo estan en preparacion.
         archivo       => ['archivo/',                  'Archivo',             ''],
@@ -96,11 +92,7 @@ sub rutas_paginas {
         historiaant   => ['archivo/historia-anterior/', 'Historia anterior', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         calendario    => ['acceso-quintino/calendario/', 'Calendario de aniversarios', 'Acceso Quintino'],
-        postula       => ['postula/',                   'Postula a la Quinta', ''],
-        gracias       => ['postula/gracias/',           '¡Gracias por postular!', ''],
         enviado       => ['contacto/gracias/',          '¡Mensaje enviado!',  ''],
-        feedback      => ['feedback/',                  'Feedback de la página', ''],
-        feedback_ok   => ['feedback/gracias/',          '¡Gracias por tu aporte!', ''],
         material      => ['material-mayor/',           'Material Mayor',      'La Quinta'],
         bx5           => ['material-mayor/bx-5/',      'Unidad BX-5',         'La Quinta'],
         b5            => ['material-mayor/b-5/',       'Unidad B-5',          'La Quinta'],
@@ -352,14 +344,13 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 <p class="antetitulo">Fünfte Deutsche Feuerwehrkompanie Talcahuano</p>
 <h1><span>Quinta Compañía de Bomberos</span> <span>«Bomba Chile» de Talcahuano</span></h1>
 <p class="bajada">Fundada el 29 de enero de 1908. Especialidad en agua y rescate integral al servicio de Talcahuano.</p>
-<div class="acciones"><a class="boton" href="${p}la-quinta/">Conoce la Quinta</a><a class="boton secundario" href="$REDES[0][1]" target="_blank" rel="noopener">Síguenos en Instagram</a><a class="boton secundario" href="${p}feedback/">Feedback</a></div>
+<div class="acciones"><a class="boton" href="${p}la-quinta/">Conoce la Quinta</a><a class="boton secundario" href="$REDES[0][1]" target="_blank" rel="noopener">Síguenos en Instagram</a></div>
 </div>
 </section>
 ) . datos_portada($p) . qq(<section class="wrap bloque">
 <h2 class="titulo-seccion">Tu apoyo hace la diferencia</h2>
-<div class="grilla-tarjetas tres">
-) . tarjeta($p, 'sisab', 'Postula a la Quinta', '¿Quieres ser bombero voluntario? Únete a la Quinta y sirve a Talcahuano. Completa el formulario y te contactaremos.', 'postula/', 'Postular')
-  . tarjeta($p, 'corazon', 'Hazte socio', 'Colabora con la Quinta y hazte socio cooperador. Con tu ayuda continuaremos salvando vidas.', $COOPERADORES, 'Inscríbete')
+<div class="grilla-tarjetas dos">
+) . tarjeta($p, 'corazon', 'Hazte socio', 'Colabora con la Quinta y hazte socio cooperador. Con tu ayuda continuaremos salvando vidas.', $COOPERADORES, 'Inscríbete')
   . tarjeta($p, 'auto', 'Compra tu SOAP', 'Compra tu SOAP con Bomberos de Chile y elige a la Quinta: tu donación va directamente a nuestra compañía.', $SOAP, 'Comprar SOAP')
   . qq(</div>
 </section>
@@ -400,18 +391,6 @@ sub calendario {
 <script src="${p}assets/js/calendario.js$V_CAL" defer></script>);
 }
 
-# Formacion quedo en el Archivo; sus accesos a la ANB ahora van tambien en Acceso Quintino.
-sub formacion {
-    my ($p) = @_;
-    return
-qq(<section class="wrap bloque">
-<p class="intro">La formación permanente es uno de los pilares de la Quinta. Aquí reunimos los accesos a las plataformas de capacitación de la Academia Nacional de Bomberos (ANB) y otros recursos de estudio para nuestros voluntarios.</p>
-<h2 class="titulo-seccion">Academia Nacional de Bomberos</h2>
-<div class="grilla-tarjetas tres">
-) . tarjetas_anb($p) . qq(</div>
-</section>);
-}
-
 # Accesos a las plataformas y documentos de la Academia Nacional de Bomberos
 sub tarjetas_anb {
     my ($p) = @_;
@@ -423,45 +402,13 @@ sub tarjetas_anb {
   . tarjeta($p, 'documento', 'Artículos técnicos', 'Publicaciones técnicas para la actualización de conocimientos.', "$ANB/articulos-tecnicos", 'Ver artículos');
 }
 
-# Formulario de postulacion. El sitio es estatico: FormSubmit (formsubmit.co) recibe
+# Formulario de Contacto. El sitio es estatico: FormSubmit (formsubmit.co) recibe
 # los datos y los envia por correo a funfteit@gmail.com con copia a correo@funfte.cl.
 # FormSubmit pide activar una vez la direccion principal (correo a funfteit@gmail.com).
 # Los formularios con data-envio se mandan en segundo plano desde menu.js (sin salir del sitio
 # ni pasar por el captcha de FormSubmit; el campo _honey frena el spam). Sin JavaScript, o si
 # FormSubmit no responde, se envian de la forma normal.
-my $POSTULACION_PARA = 'funfteit@gmail.com';
-my $POSTULACION_CC   = 'correo@funfte.cl';
-
-sub postula {
-    my ($p) = @_;
-    return qq(<section class="wrap bloque">
-<p class="intro">¿Quieres ser bombero voluntario? Déjanos tus datos y la Quinta se pondrá en contacto contigo para contarte cómo es el proceso de ingreso.</p>
-<form class="formulario" action="https://formsubmit.co/$POSTULACION_PARA" method="POST" data-envio>
-<input type="hidden" name="_subject" value="Nueva postulación a la Quinta">
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_cc" value="$POSTULACION_CC">
-<input type="hidden" name="_template" value="table">
-<input type="hidden" name="_next" value="${SITIO}postula/gracias/">
-<input type="text" name="_honey" class="oculto" tabindex="-1" autocomplete="off" aria-hidden="true">
-<label for="nombre">Nombre completo</label>
-<input id="nombre" name="Nombre" type="text" autocomplete="name" required>
-<label for="rut">RUT</label>
-<input id="rut" name="RUT" type="text" inputmode="text" autocomplete="off" maxlength="12" placeholder="12.345.678-9" pattern="[0-9]{1,2}\.[0-9]{3}\.[0-9]{3}-[0-9K]" title="RUT con dígito verificador, por ejemplo 12.345.678-9" data-rut required>
-<label for="nacimiento">Fecha de nacimiento</label>
-<input id="nacimiento" name="Fecha de nacimiento" type="date" required>
-<label for="correo">Correo electrónico</label>
-<input id="correo" name="email" type="email" autocomplete="email" required>
-<label for="telefono">Teléfono</label>
-<div class="telefono"><span aria-hidden="true">+56</span><input id="telefono" name="Teléfono (+56)" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="11" pattern="[0-9] [0-9]{4} [0-9]{4}" placeholder="9 1234 5678" title="9 dígitos, sin el +56. Por ejemplo: 9 1234 5678" data-telefono aria-describedby="telefono-ayuda" required></div>
-<p id="telefono-ayuda" class="campo-ayuda">9 dígitos.</p>
-<label for="referencia">¿Cómo conociste a la Quinta? ¿Alguien te recomendó?</label>
-<textarea id="referencia" name="Cómo conoció a la Quinta / referencia" rows="3" placeholder="Por ejemplo: un amigo voluntario, redes sociales, un evento de la compañía…" required></textarea>
-<button class="boton" type="submit">Enviar postulación</button>
-<p class="formulario-estado" role="status" aria-live="polite" hidden></p>
-<p class="formulario-ayuda">Usaremos tus datos solo para contactarte por tu postulación. ¿Dudas? Escríbenos a <a href="mailto:correo\@funfte.cl">correo\@funfte.cl</a>.</p>
-</form>
-</section>);
-}
+my $FORMULARIOS_PARA = 'funfteit@gmail.com';
 
 sub gracias {
     my ($p, $texto) = @_;
@@ -471,12 +418,11 @@ sub gracias {
 </section>);
 }
 
-# Formulario de Contacto: tambien por FormSubmit, a la misma direccion principal ($POSTULACION_PARA).
 # Se inserta en herramientas/contenido/contacto.html donde esta <!--FORMULARIO_CONTACTO-->.
 my $CONTACTO_CC = 'correo@funfte.cl';
 
 sub formulario_contacto {
-    return qq(<form class="formulario" action="https://formsubmit.co/$POSTULACION_PARA" method="POST" data-envio>
+    return qq(<form class="formulario" action="https://formsubmit.co/$FORMULARIOS_PARA" method="POST" data-envio>
 <input type="hidden" name="_subject" value="Nuevo mensaje desde funfte.cl">
 <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_cc" value="$CONTACTO_CC">
@@ -495,29 +441,6 @@ sub formulario_contacto {
 <button class="boton" type="submit">Enviar mensaje</button>
 <p class="formulario-estado" role="status" aria-live="polite" hidden></p>
 </form>);
-}
-
-# Formulario de Feedback (boton de la portada): para que los quintinos manden correcciones, datos
-# para la historia, fotos o ideas sobre la pagina. Va solo a funfteit@gmail.com, sin copia a correo@funfte.cl.
-sub feedback {
-    my ($p) = @_;
-    return qq(<section class="wrap bloque">
-<p class="intro">¿Viste algo que corregir, tienes un dato o una anécdota para la historia, una foto que quieras sumar o una idea para mejorar la página? Cuéntanos: todo aporte ayuda a que el sitio de la Quinta quede mejor.</p>
-<form class="formulario" action="https://formsubmit.co/$POSTULACION_PARA" method="POST" data-envio>
-<input type="hidden" name="_subject" value="Feedback de la página funfte.cl">
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_template" value="table">
-<input type="hidden" name="_next" value="${SITIO}feedback/gracias/">
-<input type="text" name="_honey" class="oculto" tabindex="-1" autocomplete="off" aria-hidden="true">
-<label for="f-nombre">Nombre</label>
-<input id="f-nombre" name="Nombre" type="text" autocomplete="name" required>
-<label for="f-mensaje">Mensaje</label>
-<textarea id="f-mensaje" name="Mensaje" rows="6" placeholder="Por ejemplo: en Historia falta tal fecha, el nombre de tal voluntario va con tilde, tengo fotos del carro antiguo…" required></textarea>
-<button class="boton" type="submit">Enviar</button>
-<p class="formulario-estado" role="status" aria-live="polite" hidden></p>
-<p class="formulario-ayuda">¿Tienes fotos? Cuéntalo en el mensaje y déjanos un correo o teléfono para escribirte y pedírtelas.</p>
-</form>
-</section>);
 }
 
 sub archivo {
@@ -817,16 +740,11 @@ sub pagina {
         . ($a{seccion} && $a{seccion} ne $a{titulo} ? qq(<p class="antetitulo">$a{seccion}</p>) : '')
         . qq(<h1>$a{titulo}</h1></div></section>\n);
     my $cuerpo = $es_inicio                 ? inicio($p)
-               : $a{clave} eq 'formacion'   ? $cabecera . formacion($p)
                : $a{clave} eq 'acceso'      ? $cabecera . acceso_personal($p)
                : $a{clave} eq 'calendario'  ? $cabecera . calendario($p)
                : $a{clave} eq 'archivo'     ? $cabecera . archivo($p)
                : $a{clave} eq 'fotos'       ? $cabecera . dotacion_fotos($p)
-               : $a{clave} eq 'postula'     ? $cabecera . postula($p)
-               : $a{clave} eq 'gracias'     ? $cabecera . gracias($p, 'Recibimos tu postulación. La Quinta se pondrá en contacto contigo por correo o teléfono.')
                : $a{clave} eq 'enviado'     ? $cabecera . gracias($p, 'Recibimos tu mensaje. Te responderemos a la brevedad por correo.')
-               : $a{clave} eq 'feedback'    ? $cabecera . feedback($p)
-               : $a{clave} eq 'feedback_ok' ? $cabecera . gracias($p, 'Recibimos tu aporte. Lo revisaremos para seguir mejorando la página de la Quinta.')
                : $UNIDAD{$a{clave}}         ? $cabecera . qq(<article class="wrap contenido">\n) . ficha_unidad($p, $UNIDAD{$a{clave}}, $a{contenido}) . qq(\n</article>)
                : $cabecera . qq(<article class="wrap contenido">\n) . ($a{contenido} =~ s/<!--FORMULARIO_CONTACTO-->/formulario_contacto()/er
                                                                         =~ s/<!--CIFRAS_DOTACION-->/cifras_dotacion($a{contenido})/er
@@ -841,7 +759,7 @@ sub pagina {
     my $anio = (localtime)[5] + 1900;
     my $descripcion = $a{descripcion} // $DESCRIPCION;
     # el archivo y la pagina 404 no deben aparecer en buscadores
-    my $indexable = $a{ruta} !~ m{^archivo/} && $a{clave} !~ /^(?:error404|gracias|enviado|feedback_ok|calendario)$/;
+    my $indexable = $a{ruta} !~ m{^archivo/} && $a{clave} !~ /^(?:error404|enviado|calendario)$/;
     my $meta = $indexable ? meta_compartir(%a, titulo_completo => $titulo, descripcion => $descripcion) . datos_estructurados(%a)
                           : qq(\n<meta name="robots" content="noindex">);
     my $redes = join "\n", map { qq(<li><a href="$_->[1]" target="_blank" rel="noopener">$_->[0]</a></li>) } @REDES;

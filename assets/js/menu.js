@@ -20,34 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // RUT: agrega puntos y guion (12.345.678-9) y revisa el digito verificador (modulo 11)
-  function digitoVerificador(cuerpo) {
-    var suma = 0, factor = 2;
-    for (var i = cuerpo.length - 1; i >= 0; i--) {
-      suma += Number(cuerpo[i]) * factor;
-      factor = factor === 7 ? 2 : factor + 1;
-    }
-    var dv = 11 - (suma % 11);
-    return dv === 11 ? '0' : dv === 10 ? 'K' : String(dv);
-  }
-  document.querySelectorAll('[data-rut]').forEach(function (campo) {
-    campo.addEventListener('input', function () {
-      var limpio = campo.value.toUpperCase().replace(/[^0-9K]/g, '');
-      // la K solo puede ser el digito verificador (el ultimo caracter)
-      limpio = limpio.slice(0, -1).replace(/K/g, '') + limpio.slice(-1);
-      limpio = limpio.slice(0, 9);
-      var formato = limpio;
-      if (limpio.length > 1) {
-        var cuerpo = limpio.slice(0, -1);
-        formato = cuerpo.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '-' + limpio.slice(-1);
-      }
-      if (formato !== campo.value) campo.value = formato;
-      var completo = /^\d{7,8}[0-9K]$/.test(limpio);
-      campo.setCustomValidity(completo && digitoVerificador(limpio.slice(0, -1)) !== limpio.slice(-1)
-        ? 'El RUT no es válido: revisa el dígito verificador.' : '');
-    });
-  });
-
   // Formularios (FormSubmit) en segundo plano: el boton dice «Enviando…» y, al confirmarse,
   // se va a la pagina de gracias (_next) sin salir del sitio. Si FormSubmit falla o no responde
   // en 25 s, se envia de la forma normal. El evento submit solo llega si los campos son validos.

@@ -344,6 +344,7 @@ a:hover { color: var(--rojo-oscuro); }
   gap: 20px;
 }
 .grilla-tarjetas.tres { grid-template-columns: repeat(3, 1fr); }
+.grilla-tarjetas.dos { grid-template-columns: repeat(2, 1fr); }
 
 .tarjeta {
   background: var(--fondo-suave);
@@ -408,7 +409,7 @@ a.saludo:hover { border-color: var(--dorado); }
 }
 @media (max-width: 560px) {
   .boton-acceso { padding: 8px 12px; font-size: .82rem; }
-  .grilla-tarjetas, .grilla-tarjetas.tres { grid-template-columns: 1fr; }
+  .grilla-tarjetas, .grilla-tarjetas.tres, .grilla-tarjetas.dos { grid-template-columns: 1fr; }
   .portada { padding: 48px 0 56px; }
 }
 
@@ -1009,7 +1010,6 @@ body:has(.visor[open]) { overflow: hidden; }
 .formulario .boton { align-self: flex-start; cursor: pointer; font: inherit; font-weight: 600; border: 0; }
 .formulario .boton[disabled] { opacity: .7; cursor: progress; }
 .formulario-estado { font-size: .9rem; color: var(--texto-suave); margin: 10px 0 0; }
-.formulario-ayuda { font-size: .85rem; color: var(--texto-suave); margin: 16px 0 0; }
 .formulario .oculto { position: absolute; left: -9999px; width: 1px; height: 1px; }
 @media (max-width: 560px) { .formulario { padding: 22px 18px; } }
 

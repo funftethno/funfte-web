@@ -106,7 +106,7 @@ sub escribir {
 for my $clave (sort keys %paginas) {
     my $pg = $paginas{$clave};
     print "$pg->{titulo}\n";
-    # portada, formacion y acceso quintino tienen su contenido en plantilla.pm
+    # portada y acceso quintino tienen su contenido en plantilla.pm
     my $archivo = "$CONTENIDO/$clave.html";
     my $contenido = -e $archivo ? leer_utf8($archivo) : '';
     escribir($pg->{ruta}, pagina(%$pg, clave => $clave, contenido => $contenido));
@@ -122,7 +122,7 @@ escribir_archivo('404.html', con_dimensiones('', pagina(
 )));
 
 # robots.txt y sitemap.xml: solo las paginas publicas (el Archivo queda fuera)
-my @publicas = sort grep { $_ !~ m{^(?:archivo|postula/gracias|contacto/gracias|feedback/gracias|acceso-quintino/calendario)/} } map { $_->{ruta} } values %paginas;
+my @publicas = sort grep { $_ !~ m{^(?:archivo|contacto/gracias|acceso-quintino/calendario)/} } map { $_->{ruta} } values %paginas;
 escribir_archivo('sitemap.xml', qq(<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n)
     . join('', map { "  <url><loc>$plantilla::SITIO$_</loc></url>\n" } @publicas) . "</urlset>\n");
 escribir_archivo('robots.txt', "User-agent: *\nAllow: /\n\nSitemap: ${plantilla::SITIO}sitemap.xml\n");

@@ -38,7 +38,7 @@ Las páginas (`index.html` de cada carpeta) **se generan**. No se editan a mano:
 | Qué cambiar | Archivo |
 |---|---|
 | Texto de cada página (La Quinta, Historia, Contacto, etc.) | `herramientas/contenido/<página>.html` |
-| Menú, cabecera, pie, portada, páginas Formación y Acceso Quintino, accesos y enlaces | `herramientas/plantilla.pm` |
+| Menú, cabecera, pie, portada, página Acceso Quintino, accesos y enlaces | `herramientas/plantilla.pm` |
 | Colores, tipografía y diseño | `assets/css/estilos.css` |
 | Menú en celular | `assets/js/menu.js` |
 | Imágenes (máximo 1600 px de ancho, con texto `alt`) | `assets/img/` |
@@ -106,7 +106,6 @@ Las reglas para asistentes de IA (Codex, Cursor, Copilot, Gemini, Claude Code, e
 index.html                 Portada
 la-quinta/ historia/ cuartel/ confederacion/
 dotacion/                  Oficialidad y Voluntarios
-formacion/
 material-mayor/ (b-5/, bx-5/, harbor-28/)
 archivo/                   Páginas en desarrollo (Dotación con fotos) y retiradas (Historia anterior, Nuestro Trabajo, Capacitación, Guardia Nocturna, Redes Sociales, Directorio, Socios Colaboradores); enlace «Archivo» en el pie
 contacto/

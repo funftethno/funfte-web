@@ -32,7 +32,7 @@ Es HTML estático generado con Perl. No hay WordPress, base de datos, Node ni fr
 | Qué cambiar | Archivo |
 |---|---|
 | Texto de una página | `herramientas/contenido/<clave>.html` (solo el cuerpo, sin cabecera ni pie) |
-| Menú, cabecera, pie, portada, Formación, Acceso Quintino, lista de páginas | `herramientas/plantilla.pm` |
+| Menú, cabecera, pie, portada, Acceso Quintino, lista de páginas | `herramientas/plantilla.pm` |
 | Estilos | `assets/css/estilos.css` |
 | Menú en celular | `assets/js/menu.js` |
 | Imágenes | `assets/img/` |
@@ -40,7 +40,7 @@ Es HTML estático generado con Perl. No hay WordPress, base de datos, Node ni fr
 - Las claves de página y sus rutas están en `rutas_paginas()` de `herramientas/plantilla.pm`. El menú está en `@MENU` y los accesos de Acceso Quintino en `@ACCESOS`.
 - Cada página pública tiene una descripción para buscadores y para la vista previa al compartir (WhatsApp, Facebook) en `%DESCRIPCIONES` de `plantilla.pm`. Si creas una página nueva, agrégale su descripción (una o dos frases).
 - Los datos públicos de la compañía (fundación, correo, dirección, coordenadas, redes sociales) son constantes al inicio de `plantilla.pm`. Los usan el pie y los datos estructurados para Google (JSON-LD, en `datos_estructurados()`): cámbialos ahí y no en el HTML.
-- Los formularios (Postula a la Quinta y Contacto) están en `plantilla.pm` (`postula()`, `formulario_contacto()`) y se envían por FormSubmit. En `herramientas/contenido/contacto.html`, la marca `<!--FORMULARIO_CONTACTO-->` indica dónde va el formulario: no la borres.
+- El formulario de Contacto está en `plantilla.pm` (`formulario_contacto()`) y se envía por FormSubmit. En `herramientas/contenido/contacto.html`, la marca `<!--FORMULARIO_CONTACTO-->` indica dónde va el formulario: no la borres.
 - `generar.pl` también produce `404.html`, `robots.txt` y `sitemap.xml`, y agrega `width`/`height` a cada imagen. No los edites a mano.
 - **Imágenes nuevas**: JPEG o PNG de máximo 1600 px de ancho y, en lo posible, menos de 300 KB. Nombre en minúsculas, sin espacios ni tildes. Toda imagen de contenido lleva un `alt` que describa lo que muestra; `revisar.pl` falla si falta y avisa si una imagen no se usa. Mientras falte una foto, las tarjetas y fichas muestran `assets/img/imagen-pendiente.svg` («Imagen pendiente»), para que se note y no se olvide; en un escudo se usa `escudo-desconocido.svg`.
 - Las rutas dentro de `herramientas/contenido/*.html` son **relativas a la página publicada**: `../assets/img/...` para una página de primer nivel, `../../assets/img/...` para una de segundo nivel (por ejemplo `material-mayor/b-5/` o `archivo/...`).
