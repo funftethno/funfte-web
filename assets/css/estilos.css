@@ -997,6 +997,8 @@ body:has(.visor[open]) { overflow: hidden; }
 .formulario input:focus-visible,
 .formulario textarea:focus-visible { outline: 2px solid var(--rojo); outline-offset: 1px; }
 .formulario .boton { align-self: flex-start; cursor: pointer; font: inherit; font-weight: 600; border: 0; }
+.formulario .boton[disabled] { opacity: .7; cursor: progress; }
+.formulario-estado { font-size: .9rem; color: var(--texto-suave); margin: 10px 0 0; }
 .formulario-ayuda { font-size: .85rem; color: var(--texto-suave); margin: 16px 0 0; }
 .formulario .oculto { position: absolute; left: -9999px; width: 1px; height: 1px; }
 @media (max-width: 560px) { .formulario { padding: 22px 18px; } }

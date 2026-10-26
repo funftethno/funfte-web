@@ -423,6 +423,9 @@ sub tarjetas_anb {
 # Formulario de postulacion. El sitio es estatico: FormSubmit (formsubmit.co) recibe
 # los datos y los envia por correo a funfteit@gmail.com con copia a correo@funfte.cl.
 # FormSubmit pide activar una vez la direccion principal (correo a funfteit@gmail.com).
+# Los formularios con data-envio se mandan en segundo plano desde menu.js (sin salir del sitio
+# ni pasar por el captcha de FormSubmit; el campo _honey frena el spam). Sin JavaScript, o si
+# FormSubmit no responde, se envian de la forma normal.
 my $POSTULACION_PARA = 'funfteit@gmail.com';
 my $POSTULACION_CC   = 'correo@funfte.cl';
 
@@ -430,8 +433,9 @@ sub postula {
     my ($p) = @_;
     return qq(<section class="wrap bloque">
 <p class="intro">¿Quieres ser bombero voluntario? Déjanos tus datos y la Quinta se pondrá en contacto contigo para contarte cómo es el proceso de ingreso.</p>
-<form class="formulario" action="https://formsubmit.co/$POSTULACION_PARA" method="POST">
+<form class="formulario" action="https://formsubmit.co/$POSTULACION_PARA" method="POST" data-envio>
 <input type="hidden" name="_subject" value="Nueva postulación a la Quinta">
+<input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_cc" value="$POSTULACION_CC">
 <input type="hidden" name="_template" value="table">
 <input type="hidden" name="_next" value="${SITIO}postula/gracias/">
@@ -450,6 +454,7 @@ sub postula {
 <label for="referencia">¿Cómo conociste a la Quinta? ¿Alguien te recomendó?</label>
 <textarea id="referencia" name="Cómo conoció a la Quinta / referencia" rows="3" placeholder="Por ejemplo: un amigo voluntario, redes sociales, un evento de la compañía…" required></textarea>
 <button class="boton" type="submit">Enviar postulación</button>
+<p class="formulario-estado" role="status" aria-live="polite" hidden></p>
 <p class="formulario-ayuda">Usaremos tus datos solo para contactarte por tu postulación. ¿Dudas? Escríbenos a <a href="mailto:correo\@funfte.cl">correo\@funfte.cl</a>.</p>
 </form>
 </section>);
@@ -468,8 +473,9 @@ sub gracias {
 my $CONTACTO_CC = 'correo@funfte.cl';
 
 sub formulario_contacto {
-    return qq(<form class="formulario" action="https://formsubmit.co/$POSTULACION_PARA" method="POST">
+    return qq(<form class="formulario" action="https://formsubmit.co/$POSTULACION_PARA" method="POST" data-envio>
 <input type="hidden" name="_subject" value="Nuevo mensaje desde funfte.cl">
+<input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_cc" value="$CONTACTO_CC">
 <input type="hidden" name="_template" value="table">
 <input type="hidden" name="_next" value="${SITIO}contacto/gracias/">
@@ -484,6 +490,7 @@ sub formulario_contacto {
 <label for="c-mensaje">Mensaje</label>
 <textarea id="c-mensaje" name="Mensaje" rows="5" required></textarea>
 <button class="boton" type="submit">Enviar mensaje</button>
+<p class="formulario-estado" role="status" aria-live="polite" hidden></p>
 </form>);
 }
 

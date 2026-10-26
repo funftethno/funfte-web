@@ -22,8 +22,8 @@
 <link rel="icon" href="../favicon.ico?v=ced1385c">
 <link rel="icon" type="image/png" sizes="192x192" href="../assets/img/icono-192.png">
 <link rel="apple-touch-icon" href="../assets/img/icono-180.png">
-<link rel="stylesheet" href="../assets/css/estilos.css?v=1b166d49">
-<script src="../assets/js/menu.js?v=5b95e43c" defer></script>
+<link rel="stylesheet" href="../assets/css/estilos.css?v=691607b6">
+<script src="../assets/js/menu.js?v=f265c6f8" defer></script>
 </head>
 <body>
 <a class="saltar" href="#principal">Saltar al contenido</a>
@@ -58,8 +58,9 @@
 <article class="wrap contenido">
 <h3>Contáctate con nosotros</h3>
 <p>Escríbenos a <a href="mailto:correo@funfte.cl">correo@funfte.cl</a> o déjanos un mensaje:</p>
-<form class="formulario" action="https://formsubmit.co/funfteit@gmail.com" method="POST">
+<form class="formulario" action="https://formsubmit.co/funfteit@gmail.com" method="POST" data-envio>
 <input type="hidden" name="_subject" value="Nuevo mensaje desde funfte.cl">
+<input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_cc" value="correo@funfte.cl">
 <input type="hidden" name="_template" value="table">
 <input type="hidden" name="_next" value="https://funfte.cl/contacto/gracias/">
@@ -74,6 +75,7 @@
 <label for="c-mensaje">Mensaje</label>
 <textarea id="c-mensaje" name="Mensaje" rows="5" required></textarea>
 <button class="boton" type="submit">Enviar mensaje</button>
+<p class="formulario-estado" role="status" aria-live="polite" hidden></p>
 </form>
 <h3>Redes sociales</h3>
 <p>Síguenos en <a href="https://www.instagram.com/funftetalcahuano/" target="_blank" rel="noopener">Instagram</a> y <a href="https://www.facebook.com/funfte" target="_blank" rel="noopener">Facebook</a>.</p>

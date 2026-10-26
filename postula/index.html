@@ -21,8 +21,8 @@
 <link rel="icon" href="../favicon.ico?v=ced1385c">
 <link rel="icon" type="image/png" sizes="192x192" href="../assets/img/icono-192.png">
 <link rel="apple-touch-icon" href="../assets/img/icono-180.png">
-<link rel="stylesheet" href="../assets/css/estilos.css?v=1b166d49">
-<script src="../assets/js/menu.js?v=5b95e43c" defer></script>
+<link rel="stylesheet" href="../assets/css/estilos.css?v=691607b6">
+<script src="../assets/js/menu.js?v=f265c6f8" defer></script>
 </head>
 <body>
 <a class="saltar" href="#principal">Saltar al contenido</a>
@@ -56,8 +56,9 @@
 <section class="cabecera-pagina"><div class="wrap"><h1>Postula a la Quinta</h1></div></section>
 <section class="wrap bloque">
 <p class="intro">¿Quieres ser bombero voluntario? Déjanos tus datos y la Quinta se pondrá en contacto contigo para contarte cómo es el proceso de ingreso.</p>
-<form class="formulario" action="https://formsubmit.co/funfteit@gmail.com" method="POST">
+<form class="formulario" action="https://formsubmit.co/funfteit@gmail.com" method="POST" data-envio>
 <input type="hidden" name="_subject" value="Nueva postulación a la Quinta">
+<input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_cc" value="correo@funfte.cl">
 <input type="hidden" name="_template" value="table">
 <input type="hidden" name="_next" value="https://funfte.cl/postula/gracias/">
@@ -76,6 +77,7 @@
 <label for="referencia">¿Cómo conociste a la Quinta? ¿Alguien te recomendó?</label>
 <textarea id="referencia" name="Cómo conoció a la Quinta / referencia" rows="3" placeholder="Por ejemplo: un amigo voluntario, redes sociales, un evento de la compañía…" required></textarea>
 <button class="boton" type="submit">Enviar postulación</button>
+<p class="formulario-estado" role="status" aria-live="polite" hidden></p>
 <p class="formulario-ayuda">Usaremos tus datos solo para contactarte por tu postulación. ¿Dudas? Escríbenos a <a href="mailto:correo@funfte.cl">correo@funfte.cl</a>.</p>
 </form>
 </section>

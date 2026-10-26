@@ -48,6 +48,41 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Formularios (FormSubmit) en segundo plano: el boton dice «Enviando…» y, al confirmarse,
+  // se va a la pagina de gracias (_next) sin salir del sitio. Si FormSubmit falla o no responde
+  // en 25 s, se envia de la forma normal. El evento submit solo llega si los campos son validos.
+  document.querySelectorAll('form[data-envio]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      if (!window.fetch || !window.FormData) return;
+      e.preventDefault();
+      var boton = form.querySelector('button[type="submit"]');
+      var estado = form.querySelector('.formulario-estado');
+      var textoBoton = boton.textContent;
+      var gracias = form.querySelector('input[name="_next"]').value;
+      boton.disabled = true;
+      boton.textContent = 'Enviando…';
+      estado.hidden = false;
+      estado.textContent = 'Enviando, esto puede tardar unos segundos…';
+      var control = window.AbortController ? new AbortController() : null;
+      var plazo = setTimeout(function () { if (control) control.abort(); }, 25000);
+      fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+        signal: control ? control.signal : undefined
+      }).then(function (r) { return r.json(); }).then(function (r) {
+        clearTimeout(plazo);
+        if (String(r.success) !== 'true') throw new Error(r.message || 'sin confirmación');
+        window.location.href = gracias;
+      }).catch(function () {
+        clearTimeout(plazo);
+        estado.textContent = 'Reintentando el envío…';
+        boton.textContent = textoBoton;
+        HTMLFormElement.prototype.submit.call(form);   // envio normal, sin volver a este evento
+      });
+    });
+  });
+
   document.querySelectorAll('.abrir-sub').forEach(function (boton) {
     boton.addEventListener('click', function () {
       var abierto = boton.getAttribute('aria-expanded') === 'true';
