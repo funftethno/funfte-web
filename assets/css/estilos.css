@@ -471,6 +471,9 @@ a.saludo:hover { border-color: var(--dorado); }
   margin-bottom: 12px;
 }
 .contenido .oficiales.fila li { flex: 0 1 200px; text-align: center; }
+/* Integrantes del mismo nivel (comisiones): todos en una fila, sin que el ultimo parezca subalterno */
+.contenido .oficiales.fila.pares { flex-wrap: nowrap; }
+.contenido .oficiales.fila.pares li { flex: 1 1 0; min-width: 0; }
 /* Compañía de origen bajo el nombre (directorio de la Confederación) */
 .contenido .oficiales small { display: block; font-size: .85rem; font-weight: 400; margin-top: 6px; }
 .contenido .oficiales small a { display: flex; align-items: center; gap: 8px; color: var(--texto-suave); text-decoration: none; }
@@ -1020,6 +1023,8 @@ body:has(.visor[open]) { overflow: hidden; }
   .contenido .oficiales li { padding: 10px 12px; font-size: .92rem; }
   .contenido .oficiales.fila { margin-bottom: 8px; }
   .contenido .oficiales.fila li { flex-basis: calc(50% - 4px); }
+  .contenido .oficiales.fila.pares { flex-wrap: wrap; justify-content: flex-start; }
+  .contenido .oficiales.fila.pares li { flex: 0 1 calc(50% - 4px); }
   .contenido .nomina.fotos { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
   .contenido .nomina.fotos li { padding: 12px 8px 10px; font-size: .92rem; }
   .contenido .nomina.fotos .foto { width: 72px; height: 72px; }
