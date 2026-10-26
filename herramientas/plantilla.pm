@@ -350,7 +350,7 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 ) . datos_portada($p) . qq(<section class="wrap bloque">
 <h2 class="titulo-seccion">Tu apoyo hace la diferencia</h2>
 <div class="grilla-tarjetas dos">
-) . tarjeta($p, 'corazon', 'Hazte socio', 'Colabora con la Quinta y hazte socio cooperador. Con tu ayuda continuaremos salvando vidas.', $COOPERADORES, 'Inscríbete')
+) . tarjeta($p, 'corazon', 'Hazte socio cooperador', 'Súmate y colabora con la Quinta. Con tu ayuda continuaremos salvando vidas.', $COOPERADORES, 'Inscríbete')
   . tarjeta($p, 'auto', 'Compra tu SOAP', 'Compra tu SOAP con Bomberos de Chile y elige a la Quinta: tu donación va directamente a nuestra compañía.', $SOAP, 'Comprar SOAP')
   . qq(</div>
 </section>
