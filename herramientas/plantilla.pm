@@ -368,7 +368,7 @@ qq(<section class="portada" style="background-image:url('${p}assets/img/$portada
 <section class="lema">
 <div class="wrap">
 <img src="${p}assets/img/$escudo" alt="" loading="lazy">
-<blockquote><p lang="de">«Gott zur Ehr, dem Nächsten zur Wehr»</p><p>«En honor a Dios y en ayuda al prójimo»</p></blockquote>
+<blockquote><p lang="de">«Gott zur Ehr, dem Nächsten zur Wehr»</p><p>«En honor a Dios y ayuda del prójimo»</p></blockquote>
 <p class="anios">29 · 01 · 1908</p>
 </div>
 </section>);
