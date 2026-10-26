@@ -471,6 +471,13 @@ a.saludo:hover { border-color: var(--dorado); }
   margin-bottom: 12px;
 }
 .contenido .oficiales.fila li { flex: 0 1 200px; text-align: center; }
+/* Compañía de origen bajo el nombre (directorio de la Confederación) */
+.contenido .oficiales small { display: block; font-size: .85rem; font-weight: 400; margin-top: 6px; }
+.contenido .oficiales small a { display: flex; align-items: center; gap: 8px; color: var(--texto-suave); text-decoration: none; }
+.contenido .oficiales small a:hover { color: var(--rojo); text-decoration: underline; }
+/* al tocar la compania en el directorio, su tarjeta queda marcada */
+.contenido .cia:target { outline: 2px solid var(--rojo); outline-offset: 2px; }
+.contenido .oficiales small img { width: 36px; height: 36px; object-fit: contain; margin: 0; border-radius: 0; flex-shrink: 0; }
 /* Resumen de la dotacion: numero grande y tipo de voluntario */
 .contenido .cifras {
   list-style: none;

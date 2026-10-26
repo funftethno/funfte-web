@@ -290,7 +290,7 @@ sub aniversarios {
         open my $fh, '<:utf8', "$FindBin::Bin/contenido/$archivo.html" or next;
         local $/;
         my $html = <$fh>;
-        while ($html =~ m{<article class="cia">(.*?)</article>}gs) {
+        while ($html =~ m{<article class="cia"[^>]*>(.*?)</article>}gs) {
             my $t = $1;
             my ($nombre) = $t =~ m{<h4>(.*?)</h4>} or next;
             my ($dia, $mes, $anio) = $t =~ /Fundada el (\d+) de (\w+) de (\d{4})/ or next;
