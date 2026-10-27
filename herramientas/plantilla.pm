@@ -338,10 +338,12 @@ sub datos_portada {
 sub inicio {
     my ($p) = @_;
     my $aniversarios = aniversarios($p);
-    my $portada = 'portada-compania-2026.jpg';
+    # foto de portada en dos versiones: el celular baja un recorte vertical del centro del grupo
+    my ($portada, $portada_celular) = ('portada-compania-2026-escritorio.jpg', 'portada-compania-2026-celular-b.jpg');
     my $escudo  = 'aguila-quinta.png';
     return
-qq(<section class="portada" style="background-image:url('${p}assets/img/$portada')">
+qq(<section class="portada">
+<picture class="portada-foto"><source media="(max-width: 600px)" srcset="${p}assets/img/$portada_celular"><img src="${p}assets/img/$portada" alt="" fetchpriority="high"></picture>
 <div class="wrap">
 <p class="antetitulo">Fünfte Deutsche Feuerwehrkompanie Talcahuano</p>
 <h1><span>Quinta Compañía de Bomberos</span> <span>«Bomba Chile» de Talcahuano</span></h1>
