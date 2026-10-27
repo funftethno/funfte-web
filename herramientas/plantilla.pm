@@ -48,7 +48,7 @@ my %DESCRIPCIONES = (
     cbt           => 'El Cuerpo de Bomberos de Talcahuano y sus diez compañías: nombres, fundación, especialidad y sector de cada una.',
     confederacion => 'La Confederación de Compañías Chileno-Alemanas de Bomberos: directorio y las compañías confederadas de todo Chile.',
     dotacion      => 'Nómina de voluntarios insignes, honorarios y activos de la Quinta Compañía de Bomberos de Talcahuano.',
-    oficialidad   => 'Oficialidad 2026–2028 de la Quinta Compañía de Bomberos de Talcahuano y su oficialidad histórica, desde la primera de 1908.',
+    oficialidad   => 'Oficialidad 2026–2027 de la Quinta Compañía de Bomberos de Talcahuano y su oficialidad histórica, desde la primera de 1908.',
     acceso        => 'Acceso Quintino: intranet y plataformas internas para voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
     material      => 'Material mayor de la Quinta: unidades B-5, RX-5 y MX-5 en servicio, además de sus vehículos históricos.',
     bx5           => 'Unidad BX-5: Iveco Magirus FF150E30W 4x4 de 2012, unidad mixta de incendio y rescate de la Quinta Compañía de Talcahuano.',
@@ -613,7 +613,7 @@ my %CARGOS = (
     'Juan Uriarte Parra'          => [['Director', '1972–1975, 1992']],
     'Lientur Grandón Inda'        => [['Director', '1989–1991']],
     'Francisco Castro Herrera'    => [['Capitán',  '1990']],
-    'Jorge Ogalde Gómez'          => [['Capitán',  '1992–1995'], ['Director', '2009–2028']],
+    'Jorge Ogalde Gómez'          => [['Capitán',  '1992–1995'], ['Director', '2009–2027']],
     'Mario Villagra Vega'         => [['Director', '1996']],
     'Patricio Retamales Leiva'    => [['Capitán',  '1987–1989, 1996, 2006']],
     'Jaime Athens Moscoso'        => [['Capitán',  '1997–1998']],
@@ -621,7 +621,7 @@ my %CARGOS = (
     'Gustavo Lamig Fritz'         => [['Capitán',  '2007–2009, 2013–2017']],
     'Nelson Salgado Ríos'         => [['Capitán',  '2018–2019, 2022–2023']],
     'Mauricio Oliveros Henríquez' => [['Capitán',  '2020–2021, 2024–2025']],
-    'Matías Villegas Bustos'      => [['Capitán',  '2026–2028']],
+    'Matías Villegas Bustos'      => [['Capitán',  '2026–2027']],
 );
 
 sub dotacion_fotos {
