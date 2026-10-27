@@ -139,26 +139,28 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Visor de fotos: tocar una foto de una ficha o de Historia la muestra en grande, con
-  // flechas para recorrer las demas fotos de la misma ficha o del mismo hito.
+  // flechas para recorrer las demas fotos de la misma ficha o del mismo hito. Una imagen
+  // .ampliable (por ejemplo, un acta) se abre sola, sin las demas.
   var FOTOS = '.ficha-foto img, .carrusel-pista > img, .hito-fotos img, .miniatura img';
   var visor = document.createElement('dialog');
   visor.className = 'visor';
-  visor.innerHTML = '<figure><img alt=""><figcaption></figcaption></figure>'
+  visor.innerHTML = '<figure><img alt=""></figure>'
     + '<button type="button" class="visor-cerrar" aria-label="Cerrar">×</button>'
     + '<button type="button" class="carrusel-boton anterior" aria-label="Foto anterior">‹</button>'
     + '<button type="button" class="carrusel-boton siguiente" aria-label="Foto siguiente">›</button>';
   document.body.appendChild(visor);
   var grupo = [], actual = 0;
-  var grande = visor.querySelector('img'), leyenda = visor.querySelector('figcaption');
+  var grande = visor.querySelector('img');
   function mostrar(i) {
     actual = (i + grupo.length) % grupo.length;
     grande.src = grupo[actual].src;
-    grande.alt = leyenda.textContent = grupo[actual].alt;
+    grande.alt = grupo[actual].alt;
   }
   document.addEventListener('click', function (e) {
-    var foto = e.target.closest('.ficha-foto img, .carrusel-pista > img, .hito-fotos img, .galeria-principal');
+    var foto = e.target.closest('.ficha-foto img, .carrusel-pista > img, .hito-fotos img, .galeria-principal, img.ampliable');
     if (!foto || visor.open) return;
-    grupo = [].slice.call((foto.closest('.hito, article') || document).querySelectorAll(FOTOS));
+    grupo = foto.matches('.ampliable') ? [foto]
+      : [].slice.call((foto.closest('.hito, article') || document).querySelectorAll(FOTOS));
     var i = 0;
     grupo.forEach(function (f, n) { if (f.src === foto.src) i = n; });
     visor.querySelector('.anterior').hidden = visor.querySelector('.siguiente').hidden = grupo.length < 2;

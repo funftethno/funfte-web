@@ -638,6 +638,9 @@ a.saludo:hover { border-color: var(--dorado); }
   margin: 1em 0;
 }
 .contenido img.centrada { margin-left: auto; margin-right: auto; }
+/* Documento (por ejemplo, un acta): centrado y angosto; se toca para leerlo en grande */
+.contenido .documento { max-width: 440px; margin: 1.6em auto; }
+.contenido .documento img { width: 100%; height: auto; margin: 0; box-shadow: 0 4px 18px rgba(0,0,0,.18); }
 
 /* imagenes dentro de parrafos: flotan a la derecha como en el sitio original */
 .contenido p > img:first-child {
@@ -920,13 +923,12 @@ a.saludo:hover { border-color: var(--dorado); }
   object-fit: cover;
 }
 /* Visor de fotos (menu.js): la foto tocada en grande sobre fondo oscuro */
-.ficha-foto img, .carrusel-pista > img, .hito-fotos img, .galeria-principal { cursor: zoom-in; }
+.ficha-foto img, .carrusel-pista > img, .hito-fotos img, .galeria-principal, img.ampliable { cursor: zoom-in; }
 .visor { width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; margin: 0; padding: 0; border: 0; background: #0c0c0c; }
 .visor::backdrop { background: transparent; }
 body:has(.visor[open]) { overflow: hidden; }
 .visor figure { margin: 0; height: 100%; box-sizing: border-box; padding: 56px 16px 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
-.visor figure img { max-width: 100%; max-height: calc(100% - 64px); object-fit: contain; border-radius: 6px; }
-.visor figcaption { max-width: 800px; color: #eee; font-size: .95rem; text-align: center; }
+.visor figure img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
 .visor-cerrar { position: fixed; top: 12px; right: 12px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255,255,255,.92); color: var(--carbon); font-size: 1.8rem; line-height: 1; cursor: pointer; }
 
 /* Hito con 3 fotos o mas (galeria_hito): foto principal y carrusel de miniaturas */
