@@ -59,8 +59,11 @@ El contenido se extrajo una sola vez del sitio antiguo (WordPress), ya limpio y 
 
 | Rama | Quién sube | Dónde se ve |
 |---|---|---|
-| Tu rama personal (tu apellido en minúsculas) | Tú | `https://<rama>-funfte-web.funfteit.workers.dev/` |
-| `master` | Solo el owner, juntando las ramas ya probadas | Sitio oficial `https://funfte.cl` |
+| Tu rama personal (tu apellido en minúsculas: `delgado`, `molina`, `fceballos`) | Tú | `https://<rama>-funfte-web.funfteit.workers.dev/` |
+| `toledo` | El owner, cuando quiere ver un cambio antes de publicarlo | `https://toledo-funfte-web.funfteit.workers.dev/` |
+| `master` | Solo el owner: sus propios cambios y las ramas ya probadas que junta | Sitio oficial `https://funfte.cl` |
+
+**El owner** (cuenta de GitHub `ptoledor`) trabaja directo en `master` y publica con `git push origin master`, después de `generar.pl` y `revisar.pl`. Si quiere ver un cambio antes de publicarlo, lo sube primero a `toledo` y lo revisa en su vista previa. Los pasos de abajo son para los colaboradores.
 
 1. **Siempre antes de empezar: ponte en tu rama personal y actualízala** con lo último de `master`. No te saltes este paso aunque el cambio sea pequeño: otros suben cambios a diario. Cada colaborador tiene una rama con su apellido en minúsculas, creada por el owner (por ejemplo `delgado`):
 
@@ -93,7 +96,7 @@ El contenido se extrajo una sola vez del sitio antiguo (WordPress), ya limpio y 
 
    Si al actualizar tu rama `git merge` avisa de conflictos en páginas `index.html`, no los resuelvas a mano: quédate con cualquiera de las dos versiones, ejecuta `perl herramientas/generar.pl` y termina el merge.
 
-No hagas push directo ni force push a `master`.
+Si eres colaborador, no hagas push directo a `master`. Nadie hace force push a `master`.
 
 ### Usarlo con asistentes de IA
 Las reglas para asistentes de IA (Codex, Cursor, Copilot, Gemini, Claude Code, etc.) están en `AGENTS.md`. Si tu asistente no lo lee solo, pídele que lo lea antes de empezar. Si cambian las convenciones del sitio, actualiza `AGENTS.md`.

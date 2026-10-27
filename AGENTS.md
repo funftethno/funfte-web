@@ -19,7 +19,8 @@ perl herramientas/generar.pl
 
 - Si `git status` muestra cambios sin commit que no hiciste tú, pregunta qué hacer con ellos antes de seguir.
 - Si `git merge` tiene conflictos en páginas `index.html`, quédate con cualquiera de las dos versiones y vuelve a ejecutar `perl herramientas/generar.pl`. Si los conflictos están en `herramientas/` o `assets/`, muéstraselos a la persona y no los resuelvas por tu cuenta.
-- Si no sabes cuál es la rama personal, pregunta. No trabajes directo en `master`.
+- Las ramas personales de los colaboradores son `delgado`, `molina` y `fceballos`. Si no sabes cuál usar, pregunta. Los colaboradores no trabajan directo en `master`.
+- **Excepción: el owner** (cuenta de GitHub `ptoledor`) trabaja directo en `master` y publica con `git push origin master`, o en su rama `toledo` cuando quiere ver un cambio en la vista previa antes de publicarlo. Si te lo pide el owner, no le preguntes por la rama: usa `master`, salvo que diga que es para probar en `toledo`. En `master` el procedimiento queda en `git fetch origin`, `git status`, `git pull` y `generar.pl`.
 - Repite `git fetch origin` y `git merge origin/master` antes de avisar que tu rama está lista.
 
 ## Cómo está hecho el sitio
@@ -68,7 +69,7 @@ Flujo obligatorio, en este orden:
 2. **Se prueba en esa rama.** Cada push se publica en `https://<rama>-funfte-web.funfteit.workers.dev/` en uno o dos minutos, y GitHub Actions ejecuta `revisar.pl`. No sigas al paso 3 si la revisión falla o la vista previa se ve mal.
 3. **Cuando está probada, avisa al owner** (o abre un Pull Request de tu rama hacia `master`). El owner revisa la vista previa y junta la rama con `master`; Cloudflare publica en `https://funfte.cl` en uno o dos minutos.
 
-- **`master` está protegida**: nunca hagas push directo ni force push a `master`. Solo el owner junta ramas en `master`.
+- **`master` está protegida**: los colaboradores nunca hacen push directo a `master`, y nadie hace force push. Solo el owner sube a `master`, ya sea con sus propios cambios o juntando ramas. Después de publicar en `master`, adelanta `toledo` con `git push origin master:toledo` si no tiene commits propios pendientes. Las ramas de los colaboradores no se adelantan: cada uno pone la suya al día.
 - No borres las ramas personales: son fijas. Las ramas puntuales sí se borran cuando ya están en `master`.
 - No cambies `wrangler.jsonc`, `.assetsignore`, `_redirects`, `_headers` (cabeceras de caché y seguridad) ni `.github/workflows/` salvo que te lo pidan expresamente: controlan el despliegue.
 
