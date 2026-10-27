@@ -177,7 +177,7 @@ my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
 my @MENU = (
     ['Inicio', ''],
     ['La Quinta', 'la-quinta/', [['Historia','historia/','historia-estandarte-1911.jpg'], ['Cuartel','cuartel/','cuartel-recreacion.jpg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Brigada Juvenil','brigada-juvenil/'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
-    ['Dotación', 'dotacion/', [['Oficialidad','oficialidad/'], ['Oficialidad histórica','oficialidad/#oficialidad-historica'], ['Dotación completa','dotacion/']]],
+    ['Dotación', 'dotacion/', [['Oficialidad','oficialidad/'], ['Dotación completa','dotacion/']]],
     ['Contacto', 'contacto/'],
 );
 
