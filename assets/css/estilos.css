@@ -698,7 +698,38 @@ a.saludo:hover { border-color: var(--dorado); }
 .contenido .cia-enlaces { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; margin-top: auto; padding-top: 8px; }
 .contenido .cia-enlaces a { margin-top: 0; }
 
-/* Calendario de aniversarios (Acceso Quintino): vista para pantalla completa en el cuartel.
+/* Calendario de actividades (Acceso Quintino): filtros por categoría y vista (pantalla o lista) */
+.calendario-controles { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 16px; }
+.calendario-grupo { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.calendario-etiqueta { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--texto-suave); margin-right: 4px; }.calendario-grupo button {
+  font: inherit; font-size: .92rem; font-weight: 600; line-height: 1.2;
+  padding: 8px 14px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--borde); background: var(--fondo); color: var(--texto-suave);
+}
+.calendario-grupo button:hover { border-color: var(--rojo); color: var(--rojo); }
+.calendario-grupo button[aria-pressed="true"] { background: var(--rojo); border-color: var(--rojo); color: #fff; }
+.calendario-grupo button:focus-visible { outline: 2px solid var(--dorado); outline-offset: 2px; }
+.calendario-controles .boton { margin-left: auto; }
+.pantalla[hidden], .calendario-lista[hidden] { display: none; }
+.calendario-lista h2.calendario-mes { font-size: 1.15rem; margin: 28px 0 10px; color: var(--rojo); }
+.calendario-lista h2.calendario-mes:first-child { margin-top: 0; }
+.calendario-mes::first-letter { text-transform: uppercase; }
+.calendario-lista ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.calendario-lista li { display: flex; align-items: center; gap: 14px; padding: 10px 14px; border: 1px solid var(--borde); border-radius: var(--radio); background: var(--fondo); }
+.calendario-lista li.hoy { border-color: var(--dorado); box-shadow: inset 4px 0 0 var(--dorado); }
+.calendario-dia { display: flex; flex-direction: column; align-items: center; width: 44px; flex-shrink: 0; line-height: 1.1; }
+.calendario-dia strong { font-size: 1.4rem; }
+.calendario-dia span { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--texto-suave); }
+.calendario-escudo { width: 44px; height: 44px; object-fit: contain; flex-shrink: 0; margin: 0; }
+.calendario-lista p { margin: 0; }
+.calendario-nombre { font-weight: 600; line-height: 1.3; }
+.calendario-detalle { font-size: .9rem; color: var(--texto-suave); }
+.calendario-categoria { display: inline-block; padding: 0 8px; margin-right: 4px; border-radius: 999px; background: var(--fondo-suave); font-size: .8rem; font-weight: 600; }
+@media (max-width: 600px) {
+  .calendario-controles .boton { margin-left: 0; }
+}
+
+/* Pantalla del calendario: vista para pantalla completa en el cuartel.
    Las medidas usan --u, que en pantalla completa crece con el tamaño del televisor. */
 .pantalla {
   --u: 8px;

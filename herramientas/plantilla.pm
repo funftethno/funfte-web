@@ -95,7 +95,7 @@ sub rutas_paginas {
         fotos         => ['archivo/dotacion-con-fotos/', 'Dotación con fotos',  'Desarrollo'],
         historiaant   => ['archivo/historia-anterior/', 'Historia anterior', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
-        calendario    => ['acceso-quintino/calendario/', 'Calendario de aniversarios', 'Acceso Quintino'],
+        calendario    => ['acceso-quintino/calendario/', 'Calendario de actividades', 'Acceso Quintino'],
         enviado       => ['contacto/gracias/',          '¡Mensaje enviado!',  ''],
         material      => ['material-mayor/',           'Material Mayor',      'La Quinta'],
         bx5           => ['material-mayor/bx-5/',      'Unidad BX-5',         'La Quinta'],
@@ -131,7 +131,7 @@ my @ACCESOS = (
     ['SISPAR',                           'Plataforma de registro y control: administración y gestión interna de bomberos.', 'https://sispar.sisparnovenacbt.com/login.php', 'sisab'],
     ['Registro Nacional de Bomberos',    'Acceso RNB a los sistemas de la Junta Nacional de Bomberos.', 'https://www.bomberos.cl/sist/escritorio_virtual/', 'documento'],
     ['Central CBT',                      'Despachos de la Central de Alarmas del Cuerpo de Bomberos de Talcahuano, en su cuenta de X.', 'https://x.com/central_cbt', 'llama'],
-    ['Calendario de aniversarios',       'Aniversarios de las compañías, para mostrar en pantalla completa en el cuartel.', 'acceso-quintino/calendario/', 'torta'],
+    ['Calendario de actividades',        'Aniversarios y actividades de cada año, con filtros y vista de lista, para mostrar en pantalla completa en el cuartel.', 'acceso-quintino/calendario/', 'calendario'],
 );
 my @SITIOS = (
     ['Cuerpo de Bomberos de Talcahuano', 'Sitio oficial del Cuerpo de Bomberos de Talcahuano.', 'https://cbt.cl', 'web'],
@@ -279,7 +279,7 @@ sub acceso_personal {
 # (h4, «Fundada el ...» y escudo). La portada los incluye y menu.js muestra el saludo del dia.
 my %MESES = (enero => 1, febrero => 2, marzo => 3, abril => 4, mayo => 5, junio => 6, julio => 7,
              agosto => 8, septiembre => 9, octubre => 10, noviembre => 11, diciembre => 12);
-sub aniversarios {
+sub lista_aniversarios {
     my ($p) = @_;
     my (@lista, %visto);
     for my $archivo ('cbt', 'confederacion') {
@@ -296,14 +296,42 @@ sub aniversarios {
             my ($escudo) = $t =~ m{<img src="\.\./(assets/img/[^"]+)"};
             my ($enlace) = $t =~ m{<a href="(https://www\.instagram\.com/[^"]+)"};
             ($enlace) = $t =~ m{<a href="(https?://[^"]+)"} unless $enlace;
-            push @lista, { nombre => $nombre, dia => $dia, mes => $MESES{$mes}, anio => $anio,
+            push @lista, { nombre => $nombre, dia => $dia, mes => $MESES{$mes}, anio => $anio, categoria => $archivo,
                            escudo => $p . ($escudo // 'assets/img/escudo-desconocido.svg'), ($enlace ? (enlace => $enlace) : ()) };
         }
     }
     my @quinta = (1908, 1, 29);
     push @lista, { nombre => 'la Quinta', propia => 1, anio => $quinta[0], mes => $quinta[1], dia => $quinta[2],
-                   escudo => "${p}assets/img/escudo-quinta.png" };
-    return json([ sort { $a->{mes} <=> $b->{mes} || $a->{dia} <=> $b->{dia} } @lista ]);
+                   categoria => 'quinta', escudo => "${p}assets/img/escudo-quinta.png" };
+    return [ sort { $a->{mes} <=> $b->{mes} || $a->{dia} <=> $b->{dia} } @lista ];
+}
+sub aniversarios { json(lista_aniversarios($_[0])) }
+
+# Calendario de actividades (Acceso Quintino): los aniversarios de arriba, la fundacion del
+# Cuerpo (la misma de la 1ª Compañia, sacada de cbt.html) y estas actividades de cada año.
+# Fecha fija con mes y dia, o el ultimo <dia de la semana> del mes con «ultimo» (0 domingo ...
+# 6 sabado). Con «domingo» la fecha se corre al domingo siguiente (si no cae en domingo). Con
+# «anio» se cuenta como aniversario y muestra los años; «nota» sale junto a la fecha. Categorias:
+# quinta, cbt, confederacion u otros (son los filtros del calendario).
+my @ACTIVIDADES = (
+    { nombre => 'Brigada de Cadetes «Comandante Juan Guillermo Sosa Severino»', mes => 11, dia => 26, anio => 1994,
+      categoria => 'quinta', escudo => 'assets/img/brigada-juvenil-insignia.png' },
+    { nombre => 'Romería de la Quinta', mes => 10, ultimo => 5, categoria => 'quinta', escudo => 'assets/img/escudo-quinta.png' },
+    { nombre => 'Día del Bombero', mes => 6, dia => 30, categoria => 'otros', escudo => 'assets/img/escudo-desconocido.svg' },
+    { nombre => 'Armada de Chile: Captura de la fragata María Isabel', mes => 10, dia => 28, anio => 1818,
+      categoria => 'otros', escudo => 'assets/img/armada-de-chile.png' },
+    { nombre => 'Día del Carabinero', mes => 4, dia => 27, anio => 1927, categoria => 'otros', escudo => 'assets/img/carabineros-de-chile.png' },
+    { nombre => 'Talcahuano', mes => 11, dia => 5, domingo => 1, anio => 1764, categoria => 'otros', escudo => 'assets/img/escudo-talcahuano.png',
+      nota => 'se celebra el domingo siguiente al 5 de noviembre' },
+);
+sub actividades {
+    my ($p) = @_;
+    my @lista = @{ lista_aniversarios($p) };
+    my ($primera) = grep { $_->{categoria} eq 'cbt' && $_->{nombre} =~ /^1ª / } @lista;
+    push @lista, { nombre => 'Cuerpo de Bomberos de Talcahuano', categoria => 'cbt', escudo => "${p}assets/img/cbt-emblema.png",
+                   map { $_ => $primera->{$_} } qw(anio mes dia) } if $primera;
+    push @lista, map { +{ %$_, escudo => $p . $_->{escudo} } } @ACTIVIDADES;
+    return json(\@lista);
 }
 
 # Franja de datos bajo la portada. Los numeros se calculan al generar: los años desde
@@ -371,20 +399,35 @@ qq(<section class="portada">
 </section>);
 }
 
-# Calendario de aniversarios para la pantalla del cuartel (Acceso Quintino). calendario.js
-# lo arma con los mismos datos del saludo de la portada y lo actualiza solo cada minuto.
+# Calendario de actividades para la pantalla del cuartel (Acceso Quintino). calendario.js lo
+# arma con actividades() (filtros por categoria y vista de lista) y lo actualiza solo.
 sub calendario {
     my ($p) = @_;
-    my $aniversarios = aniversarios($p);
+    my $actividades = actividades($p);
     return qq(<section class="wrap bloque">
-<p class="intro">Aniversarios de las compañías del Cuerpo de Bomberos de Talcahuano y de la Confederación. Para mostrarlo en una pantalla del cuartel, presiona <strong>Pantalla completa</strong>; se actualiza solo cada día.</p>
-<p><button class="boton" type="button" id="pantalla-completa">Pantalla completa</button></p>
+<p class="intro">Aniversarios y actividades de cada año de la Quinta, del Cuerpo de Bomberos de Talcahuano y de la Confederación. Para mostrarlo en una pantalla del cuartel, presiona <strong>Pantalla completa</strong>; se actualiza solo cada día. Los filtros y la vista quedan en la dirección de la página, para guardarla así.</p>
+<div class="calendario-controles">
+<div class="calendario-grupo" role="group" aria-labelledby="etiqueta-filtrar">
+<span class="calendario-etiqueta" id="etiqueta-filtrar">Filtrar</span>
+<button type="button" aria-pressed="true" data-categoria="quinta">Quinta</button>
+<button type="button" aria-pressed="true" data-categoria="cbt">CBT</button>
+<button type="button" aria-pressed="true" data-categoria="confederacion">Confederación</button>
+<button type="button" aria-pressed="true" data-categoria="otros">Otros</button>
+</div>
+<div class="calendario-grupo" role="group" aria-labelledby="etiqueta-ver">
+<span class="calendario-etiqueta" id="etiqueta-ver">Ver</span>
+<button type="button" aria-pressed="true" data-vista="pantalla">Pantalla</button>
+<button type="button" aria-pressed="false" data-vista="lista">Lista</button>
+</div>
+<button class="boton" type="button" id="pantalla-completa">Pantalla completa</button>
+</div>
 </section>
 <section class="wrap bloque">
+<div class="calendario-lista" id="calendario-lista" hidden></div>
 <div class="pantalla" id="pantalla">
 <header class="pantalla-cabecera">
 <img src="${p}assets/img/escudo-quinta.png" alt="">
-<div><p class="pantalla-titulo">Aniversarios</p><p class="pantalla-fecha" id="pantalla-fecha"></p></div>
+<div><p class="pantalla-titulo">Actividades</p><p class="pantalla-fecha" id="pantalla-fecha"></p></div>
 <p class="pantalla-hora" id="pantalla-hora"></p>
 </header>
 <div class="pantalla-cuerpo">
@@ -393,7 +436,7 @@ sub calendario {
 </div>
 </div>
 </section>
-<script type="application/json" id="aniversarios">$aniversarios</script>
+<script type="application/json" id="actividades">$actividades</script>
 <script src="${p}assets/js/calendario.js$V_CAL" defer></script>);
 }
 
