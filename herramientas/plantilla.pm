@@ -44,6 +44,7 @@ my %DESCRIPCIONES = (
     laquinta      => 'Quiénes somos: la Quinta Compañía «Bomba Chile» del Cuerpo de Bomberos de Talcahuano, fundada en 1908 por inmigrantes alemanes.',
     historia      => 'La historia de la Quinta Compañía de Bomberos de Talcahuano en una línea de tiempo, desde su fundación en 1908 por la colonia alemana del puerto hasta hoy.',
     cuartel       => 'Nuestro cuartel en Villa Independencia, ingreso sur de Talcahuano: instalaciones, guardia nocturna y área de acción.',
+    brigada       => 'La Brigada de Cadetes «Comandante Juan Guillermo Sosa Severino», fundada en 1994 para formar a las futuras generaciones de voluntarios de la Quinta.',
     cbt           => 'El Cuerpo de Bomberos de Talcahuano y sus diez compañías: nombres, fundación, especialidad y sector de cada una.',
     confederacion => 'La Confederación de Compañías Chileno-Alemanas de Bomberos: directorio y las compañías confederadas de todo Chile.',
     dotacion      => 'Oficialidad 2026–2028 y nómina de voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
@@ -76,6 +77,7 @@ sub rutas_paginas {
         laquinta      => ['la-quinta/',                'La Quinta',           'La Quinta'],
         historia      => ['historia/',                 'Historia',            'La Quinta'],
         cuartel       => ['cuartel/',                  'Cuartel',             'La Quinta'],
+        brigada       => ['brigada-juvenil/',          'Brigada Juvenil',     'La Quinta'],
         cbt           => ['cuerpo-de-bomberos/',        'Cuerpo de Bomberos',  'La Quinta'],
         confederacion => ['confederacion/',            'Confederación',       'La Quinta'],
         dotacion      => ['dotacion/',                 'Dotación',            'Dotación'],
@@ -172,7 +174,7 @@ my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
 
 my @MENU = (
     ['Inicio', ''],
-    ['La Quinta', 'la-quinta/', [['Historia','historia/','historia-estandarte-1911.jpg'], ['Cuartel','cuartel/','cuartel-recreacion.jpg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
+    ['La Quinta', 'la-quinta/', [['Historia','historia/','historia-estandarte-1911.jpg'], ['Cuartel','cuartel/','cuartel-recreacion.jpg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Brigada Juvenil','brigada-juvenil/'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
     ['Dotación', 'dotacion/', [['Oficialidad','dotacion/#oficialidad'], ['Dotación completa','dotacion/#dotacion-completa']]],
     ['Contacto', 'contacto/'],
 );
@@ -336,7 +338,7 @@ sub datos_portada {
 sub inicio {
     my ($p) = @_;
     my $aniversarios = aniversarios($p);
-    my $portada = 'portada-compania.jpg';
+    my $portada = 'portada-compania-2026.jpg';
     my $escudo  = 'aguila-quinta.png';
     return
 qq(<section class="portada" style="background-image:url('${p}assets/img/$portada')">
