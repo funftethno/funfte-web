@@ -339,7 +339,7 @@ sub inicio {
     my ($p) = @_;
     my $aniversarios = aniversarios($p);
     # foto de portada en dos versiones: el celular baja un recorte vertical del centro del grupo
-    my ($portada, $portada_celular) = ('portada-compania-2026-escritorio.jpg', 'portada-compania-2026-celular-b.jpg');
+    my ($portada, $portada_celular) = ('portada-compania-2026-escritorio-b.jpg', 'portada-compania-2026-celular-b.jpg');
     my $escudo  = 'aguila-quinta.png';
     return
 qq(<section class="portada">
