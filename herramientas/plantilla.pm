@@ -312,9 +312,10 @@ sub aniversarios { json(lista_aniversarios($_[0])) }
 # Calendario de actividades (Acceso Quintino): los aniversarios de arriba, la fundacion del
 # Cuerpo (la misma de la 1ª Compañia, sacada de cbt.html) y estas actividades de cada año.
 # Fecha fija con mes y dia, o el ultimo <dia de la semana> del mes con «ultimo» (0 domingo ...
-# 6 sabado). Con «domingo» la fecha se corre al domingo siguiente (si no cae en domingo). Con
-# «anio» se cuenta como aniversario y muestra los años; «nota» sale junto a la fecha. Categorias:
-# quinta, cbt, confederacion u otros (son los filtros del calendario).
+# 6 sabado). Con «siguiente» la fecha se corre al primer <dia de la semana> desde mes y dia
+# (ese mismo dia si ya cae en el). Con «anio» se cuenta como aniversario y muestra los años;
+# «nota» sale junto a la fecha. Categorias: quinta, cbt, confederacion u otros (son los filtros
+# del calendario).
 my @ACTIVIDADES = (
     { nombre => 'Brigada de Cadetes «Comandante Juan Guillermo Sosa Severino»', mes => 11, dia => 26, anio => 1994,
       categoria => 'quinta', escudo => 'assets/img/brigada-juvenil-insignia.png' },
@@ -323,8 +324,10 @@ my @ACTIVIDADES = (
     { nombre => 'Armada de Chile: Captura de la fragata María Isabel', mes => 10, dia => 28, anio => 1818,
       categoria => 'otros', escudo => 'assets/img/armada-de-chile.png' },
     { nombre => 'Día del Carabinero', mes => 4, dia => 27, anio => 1927, categoria => 'otros', escudo => 'assets/img/carabineros-de-chile.png' },
-    { nombre => 'Talcahuano', mes => 11, dia => 5, domingo => 1, anio => 1764, categoria => 'otros', escudo => 'assets/img/escudo-talcahuano.png',
+    { nombre => 'Talcahuano', mes => 11, dia => 5, siguiente => 0, anio => 1764, categoria => 'otros', escudo => 'assets/img/escudo-talcahuano.png',
       nota => 'se celebra el domingo siguiente al 5 de noviembre' },
+    { nombre => 'Desafío Bomberos Concepción (CBC)', mes => 10, dia => 15, siguiente => 6, categoria => 'otros', escudo => 'assets/img/desafio-cbc.png',
+      nota => 'sábado y domingo, el primer fin de semana desde el 15 de octubre' },
 );
 sub actividades {
     my ($p) = @_;
@@ -411,10 +414,10 @@ sub calendario {
 <div class="calendario-controles">
 <div class="calendario-grupo" role="group" aria-labelledby="etiqueta-filtrar">
 <span class="calendario-etiqueta" id="etiqueta-filtrar">Filtrar</span>
-<button type="button" aria-pressed="true" data-categoria="quinta">Quinta</button>
-<button type="button" aria-pressed="true" data-categoria="cbt">CBT</button>
-<button type="button" aria-pressed="true" data-categoria="confederacion">Confederación</button>
-<button type="button" aria-pressed="true" data-categoria="otros">Otros</button>
+<button type="button" aria-pressed="false" data-categoria="quinta">Quinta</button>
+<button type="button" aria-pressed="false" data-categoria="cbt">CBT</button>
+<button type="button" aria-pressed="false" data-categoria="confederacion">Confederación</button>
+<button type="button" aria-pressed="false" data-categoria="otros">Otros</button>
 </div>
 <div class="calendario-grupo" role="group" aria-labelledby="etiqueta-ver">
 <span class="calendario-etiqueta" id="etiqueta-ver">Ver</span>

@@ -18,9 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
   var parametros = new URLSearchParams(location.search);
   var prueba = /^(\d{2})-(\d{2})$/.exec(parametros.get('fecha') || '');
 
-  // filtros y vista: de la direccion, o todas las categorias en pantalla
+  // filtros y vista, de la direccion. Sin filtros marcados se muestran todas las categorias
   var activas = (parametros.get('filtros') || '').split(',').filter(function (c) { return CATEGORIAS[c]; });
-  if (!activas.length) activas = Object.keys(CATEGORIAS);
   var vista = parametros.get('vista') === 'lista' ? 'lista' : 'pantalla';
 
   function hoy() {
@@ -49,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // fecha de la actividad en un año: dia fijo, o el ultimo <dia de la semana> del mes; con
-  // «domingo», corrida al domingo siguiente si no cae en domingo
+  // «siguiente», corrida al primer <dia de la semana> desde esa fecha (ella misma si ya cae)
   function fechaEn(c, anio) {
     var f;
     if (c.ultimo == null) {
@@ -58,14 +57,14 @@ document.addEventListener('DOMContentLoaded', function () {
       f = new Date(anio, c.mes, 0);
       f.setDate(f.getDate() - (f.getDay() - c.ultimo + 7) % 7);
     }
-    if (c.domingo) f.setDate(f.getDate() + (7 - f.getDay()) % 7);
+    if (c.siguiente != null) f.setDate(f.getDate() + (c.siguiente - f.getDay() + 7) % 7);
     return f;
   }
 
   // proxima fecha de cada actividad a partir de hoy (hoy incluido), solo las categorias activas
   function calcular(ahora) {
     var dia = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate());
-    return todas.filter(function (c) { return activas.indexOf(c.categoria) >= 0; }).map(function (c) {
+    return todas.filter(function (c) { return !activas.length || activas.indexOf(c.categoria) >= 0; }).map(function (c) {
       var fecha = fechaEn(c, dia.getFullYear());
       if (fecha < dia) fecha = fechaEn(c, dia.getFullYear() + 1);
       return { c: c, fecha: fecha, faltan: Math.round((fecha - dia) / 86400000),
@@ -191,9 +190,9 @@ document.addEventListener('DOMContentLoaded', function () {
     zonaLista.hidden = vista !== 'lista';
     if (completa) completa.hidden = vista !== 'pantalla' || !pantalla.requestFullscreen;
     var p = new URLSearchParams(location.search);
-    if (activas.length === Object.keys(CATEGORIAS).length) p.delete('filtros'); else p.set('filtros', activas.join(','));
+    if (activas.length) p.set('filtros', activas.join(',')); else p.delete('filtros');
     if (vista === 'pantalla') p.delete('vista'); else p.set('vista', vista);
-    var q = p.toString();
+    var q = p.toString().replace(/%2C/g, ',');
     history.replaceState(null, '', location.pathname + (q ? '?' + q : '') + location.hash);
     dibujar(true);
   }
@@ -204,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         var i = activas.indexOf(b.dataset.categoria);
         if (i < 0) activas.push(b.dataset.categoria);
-        else if (activas.length > 1) activas.splice(i, 1);   // siempre queda al menos una
+        else activas.splice(i, 1);
         activas = Object.keys(CATEGORIAS).filter(function (c) { return activas.indexOf(c) >= 0; });
       }
       aplicar();
