@@ -131,6 +131,7 @@ my @ACCESOS = (
     ['SISPAR',                           'Plataforma de registro y control: administración y gestión interna de bomberos.', 'https://sispar.sisparnovenacbt.com/login.php', 'sisab'],
     ['Registro Nacional de Bomberos',    'Acceso RNB a los sistemas de la Junta Nacional de Bomberos.', 'https://www.bomberos.cl/sist/escritorio_virtual/', 'documento'],
     ['Central CBT',                      'Despachos de la Central de Alarmas del Cuerpo de Bomberos de Talcahuano, en su cuenta de X.', 'https://x.com/central_cbt', 'llama'],
+    ['Estadísticas de voluntarios (SIB)', 'Sistema de Información Bomberil de Bomberos de Chile: voluntarios por región y cuerpo, género, edad y años de servicio.', 'https://app.bomberos.cl/sib/', 'grafico'],
     ['Calendario de actividades',        'Aniversarios y actividades de cada año, con filtros y vista de lista, para mostrar en pantalla completa en el cuartel.', 'acceso-quintino/calendario/', 'calendario'],
 );
 my @SITIOS = (
@@ -195,6 +196,7 @@ my %ICONOS = (
     torta    => 'M12 2c1 1.3 1.5 2.3 1.5 3a1.5 1.5 0 0 1-3 0c0-.7.5-1.7 1.5-3zm-1 5h2v3h5a2 2 0 0 1 2 2v2.5c-1 0-1.5-.8-2.5-.8s-1.5.8-2.5.8-1.5-.8-2.5-.8-1.5.8-2.5.8-1.5-.8-2.5-.8-1.5.8-2.5.8V12a2 2 0 0 1 2-2h5V7zm-7 9c1 0 1.5-.8 2.5-.8s1.5.8 2.5.8 1.5-.8 2.5-.8 1.5.8 2.5.8 1.5-.8 2.5-.8 1.5.8 2.5.8V22H4v-6z',
     candado  =>'M12 2a5 5 0 0 1 5 5v3h2v12H5V10h2V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v3h6V7a3 3 0 0 0-3-3zm0 9a2 2 0 0 0-1 3.7V19h2v-2.3A2 2 0 0 0 12 13z',
     grupo    => 'M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 2c-2.3 0-7 1.2-7 3.5V19h14v-2.5C15 14.2 10.3 13 8 13zm8 0-1 .1c1.2.8 2 2 2 3.4V19h6v-2.5c0-2.3-4.7-3.5-7-3.5z',
+    grafico  => 'M4 20h16v1.5H4zM5 10h3v9H5zM10.5 5h3v14h-3zM16 13h3v6h-3z',
     calendario => 'M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V10h14v10zM7 12h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm-8 4h2v2H7v-2zm4 0h2v2h-2v-2z',
     llama    => 'M12 12.9l-2.1 2.1a2.9 2.9 0 0 0-.9 2.1C9 18.7 10.3 20 12 20s3-1.3 3-2.9c0-.8-.3-1.5-.9-2.1L12 12.9zM16 6l-.4.6C14.4 8 12 7.2 12 5.3V2S4 6 4 13c0 2.9 1.6 5.5 3.9 6.9a4.9 4.9 0 0 1 .6-6.3l3.5-3.5 3.5 3.5a4.9 4.9 0 0 1 .6 6.3c1.9-1.2 3.3-3.1 3.7-5.3.7-3.5-1-6.8-3.8-8.6z',
     camion   => 'M1 4.5h14v1H1zM1 7h14v1H1zM2 5.5h1V7H2zM5.5 5.5h1V7h-1zM9 5.5h1V7H9zM12.5 5.5h1V7h-1zM16.5 7h2v1.5h-2zM1 9h14v8H1zM15 9h4l3.5 4.5V17H15zM16.3 10.2v3.3h4.4l-2.4-3.3zM2.5 18a2.5 2.5 0 1 1 5 0a2.5 2.5 0 1 1-5 0zM4.2 18a.8.8 0 1 0 1.6 0a.8.8 0 1 0-1.6 0zM15.5 18a2.5 2.5 0 1 1 5 0a2.5 2.5 0 1 1-5 0zM17.2 18a.8.8 0 1 0 1.6 0a.8.8 0 1 0-1.6 0zM3 8h1v1H3zM12 8h1v1h-1z',
@@ -317,7 +319,7 @@ my @ACTIVIDADES = (
     { nombre => 'Brigada de Cadetes «Comandante Juan Guillermo Sosa Severino»', mes => 11, dia => 26, anio => 1994,
       categoria => 'quinta', escudo => 'assets/img/brigada-juvenil-insignia.png' },
     { nombre => 'Romería de la Quinta', mes => 10, ultimo => 5, categoria => 'quinta', escudo => 'assets/img/escudo-quinta.png' },
-    { nombre => 'Día del Bombero', mes => 6, dia => 30, categoria => 'otros', escudo => 'assets/img/escudo-desconocido.svg' },
+    { nombre => 'Día del Bombero', mes => 6, dia => 30, categoria => 'otros', escudo => 'assets/img/bomberos-de-chile.png' },
     { nombre => 'Armada de Chile: Captura de la fragata María Isabel', mes => 10, dia => 28, anio => 1818,
       categoria => 'otros', escudo => 'assets/img/armada-de-chile.png' },
     { nombre => 'Día del Carabinero', mes => 4, dia => 27, anio => 1927, categoria => 'otros', escudo => 'assets/img/carabineros-de-chile.png' },
