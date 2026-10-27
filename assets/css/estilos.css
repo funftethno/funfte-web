@@ -623,6 +623,7 @@ a.saludo:hover { border-color: var(--dorado); }
   display: block;
   margin: 1em 0;
 }
+.contenido img.centrada { margin-left: auto; margin-right: auto; }
 
 /* imagenes dentro de parrafos: flotan a la derecha como en el sitio original */
 .contenido p > img:first-child {
