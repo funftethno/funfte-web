@@ -47,7 +47,8 @@ my %DESCRIPCIONES = (
     brigada       => 'La Brigada de Cadetes «Comandante Juan Guillermo Sosa Severino», fundada en 1994 para formar a las futuras generaciones de voluntarios de la Quinta.',
     cbt           => 'El Cuerpo de Bomberos de Talcahuano y sus diez compañías: nombres, fundación, especialidad y sector de cada una.',
     confederacion => 'La Confederación de Compañías Chileno-Alemanas de Bomberos: directorio y las compañías confederadas de todo Chile.',
-    dotacion      => 'Oficialidad 2026–2028 y nómina de voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
+    dotacion      => 'Nómina de voluntarios insignes, honorarios y activos de la Quinta Compañía de Bomberos de Talcahuano.',
+    oficialidad   => 'Oficialidad 2026–2028 de la Quinta Compañía de Bomberos de Talcahuano y su oficialidad histórica, desde la primera de 1908.',
     acceso        => 'Acceso Quintino: intranet y plataformas internas para voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
     material      => 'Material mayor de la Quinta: unidades B-5, RX-5 y MX-5 en servicio, además de sus vehículos históricos.',
     bx5           => 'Unidad BX-5: Iveco Magirus FF150E30W 4x4 de 2012, unidad mixta de incendio y rescate de la Quinta Compañía de Talcahuano.',
@@ -80,6 +81,7 @@ sub rutas_paginas {
         brigada       => ['brigada-juvenil/',          'Brigada Juvenil',     'La Quinta'],
         cbt           => ['cuerpo-de-bomberos/',        'Cuerpo de Bomberos',  'La Quinta'],
         confederacion => ['confederacion/',            'Confederación',       'La Quinta'],
+        oficialidad   => ['oficialidad/',              'Oficialidad',         'Dotación'],
         dotacion      => ['dotacion/',                 'Dotación',            'Dotación'],
         # Paginas fuera del menu: solo se llega a ellas desde el enlace ARCHIVO del pie. Las de
         # seccion Archivo estan retiradas; las de Desarrollo estan en preparacion.
@@ -175,7 +177,7 @@ my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
 my @MENU = (
     ['Inicio', ''],
     ['La Quinta', 'la-quinta/', [['Historia','historia/','historia-estandarte-1911.jpg'], ['Cuartel','cuartel/','cuartel-recreacion.jpg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Brigada Juvenil','brigada-juvenil/'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
-    ['Dotación', 'dotacion/', [['Oficialidad','dotacion/#oficialidad'], ['Dotación completa','dotacion/#dotacion-completa']]],
+    ['Dotación', 'dotacion/', [['Oficialidad','oficialidad/'], ['Oficialidad histórica','oficialidad/#oficialidad-historica'], ['Dotación completa','dotacion/']]],
     ['Contacto', 'contacto/'],
 );
 

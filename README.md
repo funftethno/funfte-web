@@ -105,7 +105,8 @@ Las reglas para asistentes de IA (Codex, Cursor, Copilot, Gemini, Claude Code, e
 ```
 index.html                 Portada
 la-quinta/ historia/ cuartel/ confederacion/
-dotacion/                  Oficialidad y Voluntarios
+oficialidad/               Oficialidad vigente e histórica
+dotacion/                  Voluntarios
 material-mayor/ (b-5/, bx-5/, harbor-28/)
 archivo/                   Páginas en desarrollo (Dotación con fotos) y retiradas (Historia anterior, Nuestro Trabajo, Capacitación, Guardia Nocturna, Redes Sociales, Directorio, Socios Colaboradores); enlace «Archivo» en el pie
 contacto/
