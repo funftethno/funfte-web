@@ -644,6 +644,12 @@ a.saludo:hover { border-color: var(--dorado); }
 /* dos documentos lado a lado (por ejemplo, el acta en castellano y en aleman); en celular, uno bajo otro */
 .contenido .documento.doble { max-width: 820px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
 @media (max-width: 600px) { .contenido .documento.doble { grid-template-columns: 1fr; max-width: 440px; } }
+/* Proceres (archivo/proceres): retrato o documento, nombre y cargo; se toca para verlo en grande */
+.contenido .proceres { list-style: none; padding: 0; margin: 1.6em 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 28px; }
+.contenido .proceres li { margin: 0; }
+.contenido .proceres img { width: 100%; height: auto; margin: 0 0 .7em; box-shadow: 0 4px 18px rgba(0,0,0,.18); }
+.contenido .proceres h3 { font-size: 1.15rem; margin: 0 0 .2em; }
+.contenido .proceres p { margin: 0; color: var(--texto-suave); font-size: .95rem; }
 
 /* imagenes dentro de parrafos: flotan a la derecha como en el sitio original */
 .contenido p > img:first-child {
