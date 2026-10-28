@@ -508,7 +508,9 @@ sub archivo {
     my %pg = rutas_paginas();
     my $lista = sub {
         my ($seccion) = @_;
-        my @paginas = sort { $a->{titulo} cmp $b->{titulo} } grep { $_->{seccion} eq $seccion } values %pg;
+        # por titulo; Dotacion con fotos va al final de la lista
+        my $ultima = sub { $_[0]{ruta} eq 'archivo/dotacion-con-fotos/' ? 1 : 0 };
+        my @paginas = sort { $ultima->($a) <=> $ultima->($b) || $a->{titulo} cmp $b->{titulo} } grep { $_->{seccion} eq $seccion } values %pg;
         return qq(<ul>\n) . join('', map { qq(<li><a href="$p$_->{ruta}">$_->{titulo}</a></li>\n) } @paginas) . qq(</ul>\n);
     };
     return qq(<article class="wrap contenido">\n)
