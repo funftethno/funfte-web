@@ -648,8 +648,8 @@ a.saludo:hover { border-color: var(--dorado); }
 .contenido .escudos { list-style: none; padding: 0; margin: 1.6em 0 2.4em; display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; }
 .contenido .escudos li { margin: 0; }
 .contenido .escudos img { height: 200px; width: auto; margin: 0; border-radius: 0; mix-blend-mode: multiply; }
-.contenido .escudos img.pendiente { height: 150px; }
-@media (max-width: 600px) { .contenido .escudos { gap: 16px; flex-wrap: nowrap; } .contenido .escudos img { height: 100px; } .contenido .escudos img.pendiente { height: 78px; } }
+.contenido .escudos img.antiguo { height: 250px; }   /* la corona y el ancla lo achican: un poco mas alto */
+@media (max-width: 600px) { .contenido .escudos { gap: 16px; flex-wrap: nowrap; } .contenido .escudos img { height: 100px; } .contenido .escudos img.antiguo { height: 125px; } }
 /* documento con la replica de su escudo a la derecha (Reliquias); en celular, el escudo debajo */
 .contenido .documento.con-escudo { max-width: 820px; display: grid; grid-template-columns: 3fr 1fr; gap: 32px; align-items: center; }
 .contenido .documento.con-escudo img + img { box-shadow: none; border-radius: 0; mix-blend-mode: multiply; }
