@@ -97,6 +97,7 @@ sub rutas_paginas {
         proceres      => ['archivo/proceres/',         'Próceres',            'Desarrollo'],
         reliquias     => ['archivo/reliquias/',        'Reliquias',           'Desarrollo'],
         estandarte    => ['archivo/estandarte/',       'Estandarte',          'Desarrollo'],
+        historicos    => ['archivo/voluntarios-historicos/', 'Voluntarios históricos', 'Desarrollo'],
         historiaant   => ['archivo/historia-anterior/', 'Historia anterior', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         calendario    => ['acceso-quintino/calendario/', 'Calendario de actividades', 'Acceso Quintino'],
