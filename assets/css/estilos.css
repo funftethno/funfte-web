@@ -648,11 +648,6 @@ a.saludo:hover { border-color: var(--dorado); }
 .contenido .documento.par { max-width: 900px; display: flex; gap: 20px; align-items: flex-start; }
 .contenido .documento.par img { min-width: 0; flex-basis: 0 !important; }
 @media (max-width: 600px) { .contenido .documento.par { flex-direction: column; max-width: 440px; } .contenido .documento.par img { flex: none !important; width: 100%; } }
-/* Decreto transcrito (Estandarte): en una hoja con borde, como un documento */
-.contenido .decreto { max-width: 720px; margin: 1.4em 0; padding: 28px 32px; border: 1px solid var(--borde); background: var(--fondo-suave); }
-.contenido .decreto .decreto-titulo { text-align: center; text-transform: uppercase; letter-spacing: .06em; }
-.contenido .decreto-firmas { display: flex; justify-content: space-around; gap: 24px; margin-top: 2em; text-align: center; }
-@media (max-width: 600px) { .contenido .decreto { padding: 18px 16px; } .contenido .decreto-firmas { flex-direction: column; } }
 /* Escudos de la Quinta en una tabla, del mas antiguo al mas nuevo (Reliquias) */
 .contenido .escudos-tabla td:first-child { width: 190px; text-align: center; vertical-align: middle; }
 .contenido .escudos-tabla td { vertical-align: middle; }
