@@ -51,6 +51,7 @@ my %DESCRIPCIONES = (
     oficialidad   => 'Oficialidad 2026–2027 de la Quinta Compañía de Bomberos de Talcahuano y su oficialidad histórica, desde la primera de 1908.',
     acceso        => 'Acceso Quintino: intranet y plataformas internas para voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
     material      => 'Material mayor de la Quinta: unidades B-5, RX-5 y MX-5 en servicio, además de sus vehículos históricos.',
+    emblemas      => 'Los escudos de la Quinta desde 1908, con sus emblemas conmemorativos y logos de transición.',
     bx5           => 'Unidad BX-5: Iveco Magirus FF150E30W 4x4 de 2012, unidad mixta de incendio y rescate de la Quinta Compañía de Talcahuano.',
     b5            => 'Unidad B-5: Iveco Magirus FF160E30 de 2017, unidad de control de incendios de la Quinta Compañía de Talcahuano.',
     mx5           => 'Unidad MX-5: Scania-Ziegler/Cela TLF 40/12 + ALP 330X de 2025, Scania P410. Plataforma aérea para rescate de difícil acceso y control de incendios en edificios.',
@@ -100,6 +101,7 @@ sub rutas_paginas {
         calendario    => ['acceso-quintino/calendario/', 'Calendario de actividades', 'Acceso Quintino'],
         enviado       => ['contacto/gracias/',          '¡Mensaje enviado!',  ''],
         material      => ['material-mayor/',           'Material Mayor',      'La Quinta'],
+        emblemas      => ['emblemas/',                 'Emblemas',            'La Quinta'],
         bx5           => ['material-mayor/bx-5/',      'Unidad BX-5',         'La Quinta'],
         b5            => ['material-mayor/b-5/',       'Unidad B-5',          'La Quinta'],
         mx5           => ['material-mayor/mx-5/',      'Unidad MX-5',         'La Quinta'],
@@ -179,7 +181,7 @@ my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
 
 my @MENU = (
     ['Inicio', ''],
-    ['La Quinta', 'la-quinta/', [['Historia','historia/','historia-estandarte-1911.jpg'], ['Cuartel','cuartel/','cuartel-recreacion.jpg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Brigada Juvenil','brigada-juvenil/'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
+    ['La Quinta', 'la-quinta/', [['Historia','historia/','historia-estandarte-1911.jpg'], ['Cuartel','cuartel/','cuartel-recreacion.jpg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Emblemas','emblemas/','emblema-escudo-aguila.png'], ['Brigada Juvenil','brigada-juvenil/'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
     ['Dotación', 'dotacion/', [['Oficialidad','oficialidad/'], ['Dotación completa','dotacion/']]],
     ['Contacto', 'contacto/'],
 );
