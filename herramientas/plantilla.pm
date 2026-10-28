@@ -96,6 +96,7 @@ sub rutas_paginas {
         fotos         => ['archivo/dotacion-con-fotos/', 'Dotación con fotos',  'Desarrollo'],
         proceres      => ['archivo/proceres/',         'Próceres',            'Desarrollo'],
         reliquias     => ['archivo/reliquias/',        'Reliquias',           'Desarrollo'],
+        estandarte    => ['archivo/estandarte/',       'Estandarte',          'Archivo'],
         historiaant   => ['archivo/historia-anterior/', 'Historia anterior', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         calendario    => ['acceso-quintino/calendario/', 'Calendario de actividades', 'Acceso Quintino'],

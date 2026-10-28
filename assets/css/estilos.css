@@ -644,6 +644,10 @@ a.saludo:hover { border-color: var(--dorado); }
 /* dos documentos lado a lado (por ejemplo, el acta en castellano y en aleman); en celular, uno bajo otro */
 .contenido .documento.doble { max-width: 820px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
 @media (max-width: 600px) { .contenido .documento.doble { grid-template-columns: 1fr; max-width: 440px; } }
+/* dos fotos del mismo alto, lado a lado: cada img lleva style="flex: <ancho por cada 470 de alto>" (por ejemplo el Estandarte); en celular, una bajo otra */
+.contenido .documento.par { max-width: 900px; display: flex; gap: 20px; align-items: flex-start; }
+.contenido .documento.par img { min-width: 0; flex-basis: 0 !important; }
+@media (max-width: 600px) { .contenido .documento.par { flex-direction: column; max-width: 440px; } .contenido .documento.par img { flex: none !important; width: 100%; } }
 /* Escudos de la Quinta en una tabla, del mas antiguo al mas nuevo (Reliquias) */
 .contenido .escudos-tabla td:first-child { width: 190px; text-align: center; vertical-align: middle; }
 .contenido .escudos-tabla td { vertical-align: middle; }
