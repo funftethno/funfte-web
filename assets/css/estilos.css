@@ -929,6 +929,7 @@ a.saludo:hover { border-color: var(--dorado); }
 .carrusel-boton.anterior { left: 8px; }
 .carrusel-boton.siguiente { right: 8px; }
 .carrusel-boton[hidden] { display: none; }
+.contenido .nota-galeria { margin-top: 4px; font-size: .9rem; color: var(--texto-suave); }   /* nombres de una foto del carrusel */
 /* Otras unidades: carrusel de tarjetas, de la mas nueva a la mas antigua, con la actual marcada */
 .carrusel-unidades .carrusel-pista { gap: 20px; padding: 6px 2px 10px; }
 .carrusel-unidades .tarjeta-maquina { flex: 0 0 calc((100% - 40px) / 3); scroll-snap-align: center; }
