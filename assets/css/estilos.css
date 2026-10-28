@@ -660,6 +660,9 @@ a.saludo:hover { border-color: var(--dorado); }
 .contenido .proceres img { width: 100%; height: auto; margin: 0 0 .7em; box-shadow: 0 4px 18px rgba(0,0,0,.18); }
 .contenido .proceres h3 { font-size: 1.15rem; margin: 0 0 .2em; }
 .contenido .proceres p { margin: 0; color: var(--texto-suave); font-size: .95rem; }
+/* fotografias de los proceres: carrusel de fotos verticales, cuatro por vista */
+.contenido .carrusel-retratos .carrusel-pista img { flex-basis: calc((100% - 36px) / 4); width: calc((100% - 36px) / 4); aspect-ratio: 3 / 4; object-position: top; }
+@media (max-width: 720px) { .contenido .carrusel-retratos .carrusel-pista img { flex-basis: 46%; width: 46%; } }
 
 /* imagenes dentro de parrafos: flotan a la derecha como en el sitio original */
 .contenido p > img:first-child {
