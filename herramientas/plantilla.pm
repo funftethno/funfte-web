@@ -96,7 +96,7 @@ sub rutas_paginas {
         fotos         => ['archivo/dotacion-con-fotos/', 'Dotación con fotos',  'Desarrollo'],
         proceres      => ['archivo/proceres/',         'Próceres',            'Desarrollo'],
         reliquias     => ['archivo/reliquias/',        'Reliquias',           'Desarrollo'],
-        estandarte    => ['archivo/estandarte/',       'Estandarte',          'Archivo'],
+        estandarte    => ['archivo/estandarte/',       'Estandarte',          'Desarrollo'],
         historiaant   => ['archivo/historia-anterior/', 'Historia anterior', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         calendario    => ['acceso-quintino/calendario/', 'Calendario de actividades', 'Acceso Quintino'],
@@ -512,7 +512,7 @@ sub archivo {
     };
     return qq(<article class="wrap contenido">\n)
         . qq(<h2>Desarrollo</h2>\n<p>Páginas en preparación, que todavía no forman parte del menú.</p>\n) . $lista->('Desarrollo')
-        . qq(<h2>Archivo</h2>\n<p>Páginas retiradas del sitio. Se conservan aquí como referencia.</p>\n) . $lista->('Archivo')
+        . qq(<h2>Web antigua</h2>\n<p>Páginas del sitio anterior, retiradas del menú. Se conservan aquí como referencia.</p>\n) . $lista->('Archivo')
         . "</article>";
 }
 

@@ -51,7 +51,7 @@ Para regenerar todas las páginas:
 perl herramientas/generar.pl
 ```
 
-Para retirar una página del sitio sin perderla, en `herramientas/plantilla.pm` cámbiale la ruta a `archivo/<nombre>/` y la sección a `Archivo`, quítala del menú y corrige las rutas relativas de su archivo en `herramientas/contenido/` (un `../` más). Aparece sola en la página Archivo. Borra la carpeta antigua antes de regenerar.
+Para retirar una página del sitio sin perderla, en `herramientas/plantilla.pm` cámbiale la ruta a `archivo/<nombre>/` y la sección a `Archivo`, quítala del menú y corrige las rutas relativas de su archivo en `herramientas/contenido/` (un `../` más). Aparece sola en la página Archivo, en la lista «Web antigua». Borra la carpeta antigua antes de regenerar.
 
 El contenido se extrajo una sola vez del sitio antiguo (WordPress), ya limpio y sin Noticias. El sitio no depende de funfte.cl antiguo ni guarda copia de él.
 
