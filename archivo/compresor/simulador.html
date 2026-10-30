@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#10171c"><title>Quinta · Simulador de compresor</title><style>:root{color-scheme:dark;--bg:#10171c;--panel:#192329;--line:#344047;--muted:#a3b2b9;--accent:#e9c16b;--green:#83d3aa}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f3f3eb;font:15px/1.55 system-ui,sans-serif}button,a,input{touch-action:manipulation}button{font:inherit;cursor:pointer;border:1px solid #49545a;background:#263239;color:#f5f4ed;padding:10px 15px;border-radius:6px}button:hover{border-color:var(--accent)}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}button:disabled{opacity:.45;cursor:not-allowed}header{display:flex;justify-content:space-between;align-items:center;padding:22px 5%;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:13px;color:inherit;text-decoration:none;font-size:13px;font-weight:800;letter-spacing:1.4px}.brand small{display:block;color:var(--muted);font-size:9px;margin-top:3px}.crest{display:grid;place-items:center;width:43px;height:49px;border:2px solid var(--accent);border-radius:8px 8px 19px 19px;font-size:27px;color:var(--accent)}main{max-width:1400px;margin:auto;padding:0 5%}.intro{display:flex;justify-content:space-between;align-items:center;padding:45px 0 30px;gap:30px}h1{font-size:clamp(36px,4.5vw,64px);line-height:1.05;letter-spacing:-2px;margin:12px 0 20px;font-weight:650}.intro p:not(.eyebrow){max-width:540px;color:var(--muted)}.eyebrow{font-size:10px;letter-spacing:2px;font-weight:750;color:var(--accent);margin:0 0 10px}.session{font-size:10px;letter-spacing:1px;white-space:nowrap;color:var(--muted)}.session strong{display:block;color:#f3f3eb;font:52px ui-monospace,monospace;margin:12px 0}.session small{letter-spacing:0}.live-dot{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:8px}.notice{border-left:3px solid var(--accent);background:#272720;padding:13px 18px;color:#c9c6af;font-size:12px}.scenarios{display:flex;gap:10px;margin:27px 0}.scenarios button{background:transparent;color:var(--muted)}.scenarios button span{margin-left:10px}.scenarios .active{background:var(--accent);border-color:var(--accent);color:#191d1d}.scenarios #reset{margin-left:auto}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:25px}.plant{border:1px solid var(--line);background:#151e24;border-radius:10px;padding:24px}.section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 20px}.section-title h2,.section-title h3{font-size:14px;margin:0}.section-title span{font-size:9px;color:var(--muted)}.compressor{border:1px solid #435058;border-radius:8px;padding:20px;display:flex;align-items:center;justify-content:space-between;gap:15px;background:linear-gradient(125deg,#25323a,#19232a)}h3{margin:0 0 10px;font-size:19px}.status{font-size:10px;letter-spacing:1px;color:var(--muted)}.running .status{color:var(--green)}.motor{display:flex;gap:5px;position:relative;background:#10191f;padding:12px 18px;border-radius:8px;height:94px;min-width:145px;align-items:center;justify-content:center}.motor i{width:7px;height:70px;background:#38454e;border-radius:4px}.motor span{position:absolute;background:#182329dc;text-align:center;width:100%;font:30px ui-monospace,monospace}.motor small{display:block;font:8px system-ui;letter-spacing:1px;color:var(--muted)}.motor-controls{display:grid;gap:9px}.motor-controls #start{background:var(--accent);color:#10171c;border-color:var(--accent)}.stop{color:#ffb9ad}.pipe{height:57px;display:flex;align-items:center;justify-content:center;position:relative}.pipe:before{content:'';position:absolute;width:8px;height:100%;background:#3a4a52}.pipe span{z-index:1;background:#151e24;padding:4px 12px;font-size:8px;letter-spacing:1px;color:var(--muted)}.banks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.bank,.line-card{border:1px solid var(--line);border-radius:8px;padding:14px;background:var(--panel)}.bank.open,.line-card.open{border-color:var(--green)}.card-top{display:flex;justify-content:space-between;font-size:10px;letter-spacing:1px;color:var(--muted)}.cylinder{height:75px;width:39px;border-radius:14px 14px 9px 9px;margin:16px auto 9px;background:linear-gradient(90deg,#47565e,#95a1a3 45%,#56636a);position:relative;border-top:6px solid var(--accent)}.cylinder:after{content:'5';position:absolute;top:18px;left:0;right:0;text-align:center;color:#263239;font-size:21px;font-weight:800}.gauge{position:relative;margin:10px auto;width:126px;height:78px;overflow:hidden}.gauge svg{width:126px;height:90px}.needle{transform-origin:63px 65px;transition:transform .15s linear}.numbers{text-align:center;font:21px ui-monospace,monospace}.numbers small{font:10px system-ui;color:var(--muted)}.secondary{text-align:center;color:var(--muted);font:11px ui-monospace,monospace;margin:4px 0 15px}.valve{width:100%;font-size:11px}.open .valve{background:#243f36;color:var(--green);border-color:#49715d}.lines{display:grid;grid-template-columns:1fr 1fr;gap:12px}.line-card .gauge{float:left;margin:10px 4px 12px -4px}.line-card .numbers{padding-top:23px}.line-card .secondary{margin-bottom:30px}.attach{width:100%;margin-top:8px;padding:6px;font-size:10px;background:transparent;color:var(--muted)}aside>div,aside>label,aside>details{display:block;border:1px solid var(--line);border-radius:8px;padding:20px;margin-bottom:14px}.lesson{background:#202a2d}.lesson h2{font-size:24px;line-height:1.2;margin:8px 0 14px}.lesson p,.lesson li{font-size:12px;color:var(--muted)}ol{padding-left:18px}.lesson li{padding:5px 0}#progress{font-size:11px;color:var(--green);border-top:1px solid var(--line);padding-top:13px}.readout{background:#172126}.readout>span{font-size:9px;letter-spacing:1px;color:var(--muted);display:block}.readout strong{display:block;font:44px ui-monospace,monospace;color:var(--accent);margin:8px 0}.readout strong small{font-size:18px}hr{border:0;border-top:1px solid var(--line);margin:18px 0}.readout p,details p{font-size:11px;color:var(--muted);margin-bottom:0}.fault-option{font-size:11px}.fault-option small{display:block;color:var(--muted);margin:10px 0 0 23px}.feedback{font-size:12px;background:#22382e;color:#c0e8cd}.feedback.alert{background:#442b26;color:#ffd4c3}summary{font-size:12px;cursor:pointer}footer{border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;padding:22px 0;margin-top:35px;font-size:9px;color:var(--muted);letter-spacing:1px}.running .motor i{animation:hum .12s infinite alternate}@keyframes hum{to{transform:translateY(1px)}}@media(prefers-reduced-motion:reduce){*,*:before{animation:none!important;transition:none!important}}@media(max-width:1050px){.workspace{grid-template-columns:1fr}aside{display:grid;grid-template-columns:1fr 1fr;gap:14px}aside>*{margin-bottom:0!important}.compressor{flex-wrap:wrap}.motor-controls{display:flex}.section-title span{max-width:50%;text-align:right}}@media(max-width:600px){header{padding:15px 4%}.brand{font-size:10px;letter-spacing:1px}header button{font-size:11px;padding:8px}.intro{align-items:flex-start}.session{white-space:normal;width:100px;font-size:8px}.session strong{font-size:30px}.session small{font-size:9px}.plant{padding:13px}.banks{gap:6px}.bank{padding:8px 4px}.banks .gauge{width:94px;height:62px}.banks .gauge svg{width:94px;height:67px}.numbers{font-size:17px}.scenarios{flex-wrap:wrap}.scenarios button{font-size:11px;flex:1;padding:10px 8px}.scenarios #reset{flex:0}.scenarios button span{margin-left:3px}.lines{gap:7px}.line-card{padding:10px}.line-card .gauge{float:none;margin:auto}.line-card .numbers{padding-top:0}.line-card .secondary{margin-bottom:12px}aside{grid-template-columns:1fr}footer{flex-direction:column}.compressor{gap:12px}.motor{min-width:115px}.motor-controls{width:100%}.motor-controls button{flex:1}}
+.scenarios{flex-wrap:wrap}.scenarios button{font-size:12px}.banks{grid-template-columns:repeat(4,minmax(0,1fr))}.bank .gauge{width:100px;height:65px}.bank .gauge svg{width:100px;height:71px}.bank .cylinder{background:linear-gradient(90deg,#98701c,#edca5d 45%,#ac8425);height:60px}.bank .numbers{font-size:17px}.bank{padding:10px 5px}.charge-controls{display:grid;grid-template-columns:1fr 1.5fr;gap:16px;margin-top:20px;padding:16px;border:1px solid var(--line);border-radius:8px}.charge-controls label{font-size:11px;color:var(--muted)}.charge-controls label:last-child{grid-column:1/-1}.charge-controls output{display:block;color:var(--accent);font:12px ui-monospace,monospace;margin:5px 0}.charge-controls input{width:100%;accent-color:var(--accent)}select{display:block;max-width:100%;background:#263239;color:#fff;padding:8px;margin-top:8px;border:1px solid #49545a;border-radius:5px}.thermal{display:grid;gap:5px;clear:both;margin:10px 0;font:12px ui-monospace,monospace}.thermal meter{width:100%;height:14px}.seal{font-size:10px;color:var(--green);margin:10px 0}.rating{color:var(--accent);font-weight:bold}.hose{margin:12px 0 0;color:var(--muted);font:10px ui-monospace,monospace}.line-card.danger{border:2px solid #f48a69;background:#38251f}.danger .seal,.danger .thermal{color:#ffb6a1}.venting:after{content:'≋ DESCARGA SIMULADA ≋';display:block;color:#f4d8c8;font-size:11px;text-align:center;padding:14px 0;animation:vent .3s 10 alternate}.disconnected .thermal,.disconnected .seal{visibility:hidden}.incident{margin-top:20px;border:2px solid #e88c6d;background:#3c2824;padding:22px;border-radius:8px}.incident[hidden]{display:none}.incident h2{font-size:26px;margin:8px 0}.incident p{font-size:13px}.incident small{display:block;color:#e7b9aa;margin:15px 0}.incident button{background:#e9c16b;color:#171d1e}.event-log{max-height:230px;overflow:auto;margin:12px 0 0;padding-left:17px;font-size:11px;color:var(--muted)}.event-log li{margin-bottom:8px}@keyframes vent{to{opacity:.35;transform:translateY(-3px)}}@media(max-width:650px){.banks{grid-template-columns:repeat(2,minmax(0,1fr))}.charge-controls{grid-template-columns:1fr}.charge-controls label:last-child{grid-column:auto}.scenarios button{flex-basis:40%}.incident{padding:15px}}select:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+.time-controls{display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}.time-controls label{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted)}.time-controls select{margin:0;font:inherit}.time-controls button{white-space:nowrap}@media(max-width:600px){.time-controls{width:100%;flex-wrap:wrap;justify-content:space-between}.time-controls button{flex:0 0 auto}.time-controls label{flex:1}.time-controls select{flex:1}}
+
+.circuit-path{margin-top:20px;border-left:3px solid var(--accent);padding:12px;background:#202a2d;color:var(--accent);font-size:12px}.circuit-readings{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.circuit-readings>div{padding:12px;background:#10191f;border:1px solid var(--line);border-radius:6px}.circuit-readings span{display:block;font-size:9px;color:var(--muted)}.circuit-readings strong{display:block;margin-top:8px;font:14px ui-monospace,monospace}.lines{grid-template-columns:1fr}.bottle-valve{margin-top:10px}.bottle-reading{clear:both;padding:10px;background:#10191f;border-radius:5px;font:12px ui-monospace,monospace;color:var(--accent)}@media(max-width:600px){.circuit-readings{grid-template-columns:1fr}}
+/* Spatial workshop: equipment at the back, rack and loading stand in front. */
+.intro{padding-top:28px}.intro h1{font-size:clamp(34px,4vw,54px)}.workshop-room{background:linear-gradient(#263036 0,#1d282e 38%,#172126 38%,#182126 100%);padding:20px;overflow:hidden}.workflow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}.workflow-step{font-size:10px;letter-spacing:.4px;padding:7px 9px;border:1px solid #465159;border-radius:4px;color:#8b9aa1;background:#172126}.workflow-step.complete{background:#244234;border-color:#719c7a;color:#bde0bc}.room-backwall{border-bottom:8px solid #3b464b;padding-bottom:14px;box-shadow:0 12px 15px #0004}.machine-zone .compressor{background:linear-gradient(145deg,#9c3930,#64251f);border:3px solid #342a29;box-shadow:4px 6px 0 #0f171c;border-radius:12px}.machine-zone .compressor .eyebrow{color:#f5d7af}.machine-zone .motor{background:linear-gradient(100deg,#13222b,#28434f);border:3px solid #152027}.machine-zone .motor i{background:#4b7787}.machine-zone .motor-controls button{font-size:12px}.machine-zone .circuit-readings{margin:18px 0}.cascade-zone{margin-top:22px}.cascade-zone .banks{grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;position:relative}.cascade-zone .bank{border:0;background:transparent;position:relative;padding:0 0 10px;display:flex;flex-direction:column;align-items:center}.cascade-zone .card-top{font-size:8px;flex-direction:column;text-align:center;gap:2px}.cascade-zone .bank .cylinder{height:110px;width:39px;border-radius:15px 15px 8px 8px;border-top:5px solid #323b3c;box-shadow:3px 4px 6px #0007;order:2;margin-top:7px}.cascade-zone .bank .cylinder:after{content:'45 L';font-size:10px;top:41px}.cascade-zone .bank .gauge{display:none}.cascade-zone .bank .numbers{font-size:11px;margin-top:7px;order:3}.cascade-zone .bank .secondary{font-size:9px;margin:4px 0 0;order:4}.cascade-zone .bank .valve{order:1;font-size:0;background:#1b2428;border:3px solid #637279;color:#b6c7ce;border-radius:50%;height:27px;width:27px;padding:0;position:relative;box-shadow:0 2px 3px #0008;margin-top:5px}.cascade-zone .bank .valve:before{content:'✣';font-size:23px;position:absolute;inset:-8px 0 0;text-align:center}.cascade-zone .bank.open .valve{border-color:#91c997;color:#c6edbb;background:#2a5436}.cascade-zone .bank.open .cylinder{box-shadow:0 0 12px #9dcd704c}.collector-pipe{height:7px;background:linear-gradient(#959c9c,#525a5d);margin:7px 12px 0;border-radius:5px}.room-floor{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;padding-top:30px;align-items:start;background:repeating-linear-gradient(0deg,transparent 0,transparent 79px,#71818a0d 80px)}.rack-zone{padding:15px 10px;border:4px solid #49565d;border-top:8px solid #647178;background:linear-gradient(90deg,#172026,#1e2a30);box-shadow:8px 10px 0 #080e133d}.rack-zone .section-title{flex-direction:column;gap:5px;align-items:flex-start}.rack-zone .section-title span{max-width:100%;text-align:left}.rack-bottles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 9px;position:relative}.rack-bottle{background:transparent;border:1px solid #3a484e;padding:10px 3px 8px;display:flex;flex-direction:column;align-items:center;min-width:0;box-shadow:0 6px 0 #536068;border-radius:0}.rack-bottle strong{font-size:10px;margin-top:9px;letter-spacing:1px}.rack-bottle>span:not(.era-art){font:10px ui-monospace,monospace;color:var(--muted);margin:2px 0}.rack-bottle small{font-size:8px;letter-spacing:.5px;color:var(--accent)}.rack-bottle:disabled{opacity:1}.rack-bottle.missing .era-art{opacity:.12}.rack-bottle.missing strong,.rack-bottle.missing small{color:#7e8d93}.rack-bottle.ready{border-color:#75a885;background:#254332}.rack-bottle.ready small{color:#b5e8bf}.rack-bottle:not(:disabled){cursor:grab}.rack-bottle:not(:disabled):hover{background:#304048}.era-art{display:block;width:58px;height:139px;position:relative;padding-top:17px;flex-shrink:0;filter:drop-shadow(3px 5px 3px #0008)}.era-neck{display:block;position:absolute;left:20px;top:2px;width:19px;height:20px;background:linear-gradient(90deg,#626b69,#cad3cd,#586665);border-radius:4px 4px 0 0}.era-neck:before{content:'';position:absolute;top:-2px;right:-8px;width:20px;height:6px;border-radius:3px;background:#1e292e;border:1px solid #8f9c9e}.era-body{display:flex;align-items:center;flex-direction:column;justify-content:center;height:122px;border-radius:19px 19px 12px 12px;background:repeating-linear-gradient(3deg,#0000 0,#0000 3px,#1f3c4321 4px),linear-gradient(90deg,#8b9491,#d2d5bf 45%,#7a8b87);border:1px solid #576663;position:relative;overflow:hidden}.era-body:before,.era-body:after{content:'';position:absolute;left:0;right:0;height:8px;background:#3f625c;top:20px}.era-body:after{top:auto;bottom:15px}.era-body b{font:700 11px ui-monospace,monospace;color:#172e31;background:#e1e0bd;padding:5px 4px;border-radius:2px}.era-body em{font:7px system-ui;color:#15373b;margin-top:7px;letter-spacing:1px}.rack-instruction{font-size:10px;color:var(--muted);margin-top:18px}.station-heading h3{font-size:12px;letter-spacing:1px;margin:0}.station-heading span{font-size:8px;color:var(--muted);letter-spacing:.5px}.stand-zone{height:250px;position:relative;margin:12px 0 0;background:radial-gradient(ellipse at 50% 90%,#78838a22,transparent 65%);border:1px dashed #63747c;border-radius:8px}.stand-frame{position:absolute;bottom:14px;left:calc(50% - 58px);width:116px;height:170px;border:9px solid #576971;border-top:0;transform:perspective(300px) rotateX(-5deg);box-shadow:4px 8px 5px #0005}.stand-frame:before{content:'';position:absolute;left:-17px;right:-17px;height:9px;bottom:-15px;background:#7e8d91;border-radius:2px}.stand-frame:after{content:'';position:absolute;left:-4px;right:-4px;height:12px;top:55px;background:#152329;box-shadow:0 65px 0 #152329}.stand-zone #stand-art{position:absolute;left:calc(50% - 34px);bottom:30px;z-index:1}.stand-zone .era-art{transform:scale(1.25);transform-origin:bottom center}.stand-zone #empty-stand{position:absolute;top:72px;left:0;right:0;text-align:center;font-size:10px;color:#748990;letter-spacing:2px}.stand-zone.occupied{border-color:#728574}.physical-valve{position:absolute;top:8px;left:10px;right:10px;font-size:10px;z-index:3;background:#233a3f}.physical-valve[aria-pressed=true]{background:#244c35;border-color:#83d3aa}.hose-art{position:absolute;width:100px;height:120px;border:7px solid #23292d;border-right-color:transparent;border-radius:70% 0 0 65%;right:0;bottom:58px;transform:rotate(-15deg);box-shadow:-2px 0 0 #899195;opacity:.3}.connected .hose-art{opacity:1;right:calc(50% - 70px);bottom:95px}.hot .era-body{box-shadow:inset 0 0 28px #f16b2a99}.burst .era-body{filter:sepia(1);opacity:.7}.stand-pressure{font:12px ui-monospace,monospace;text-align:center;padding:10px 0;color:var(--accent)}.station-actions{display:grid;gap:8px}.station-actions button{font-size:11px;padding:9px}.station-actions .attached{border-color:var(--green);background:#254536}.head-closeup{margin-top:14px;padding:10px;background:#172126;border:1px solid var(--line);border-radius:6px}.head-closeup summary{font-size:10px;color:var(--muted)}.head-closeup .lines{margin-top:12px}.head-closeup .line-card{padding:10px}.head-closeup .line-card .gauge{float:none;display:block;margin:auto}.head-closeup .line-card .numbers{padding-top:0}.head-closeup .line-card .secondary{margin-bottom:10px}.head-closeup .valve,.head-closeup .attach{font-size:10px;padding:8px}.workshop-guidance{margin:22px 0;background:#273f3b;border-left:3px solid var(--green);padding:14px;font-size:13px;color:#d8e8d7}.regulator-console{background:#1b272d;padding:15px;border:1px solid #445158;border-radius:6px}.regulator-console .charge-controls{padding:0;margin:0;border:0;display:block}.regulator-console label{display:block;margin:12px 0}.regulator-console .eyebrow{font-size:9px}.regulator-console input{display:block;margin-top:8px;width:100%}@media(max-width:700px){.room-floor{grid-template-columns:1fr}.rack-bottles{grid-template-columns:repeat(2,minmax(0,1fr))}.rack-zone .section-title{flex-direction:row}.era-art{width:48px;height:119px}.era-body{height:102px}.era-neck{left:15px}.rack-bottle>span:not(.era-art){font-size:9px}.station-zone{max-width:100%}.stand-zone{height:260px}.stand-zone .era-art{transform:scale(1.5)}.cascade-zone .banks{gap:4px}.cascade-zone .bank .cylinder{width:27px;height:86px}.cascade-zone .bank .numbers{font-size:9px}.cascade-zone .bank .secondary{font-size:8px}.cascade-zone .card-top{font-size:7px}.cascade-zone .bank .valve{width:24px;height:24px}.workshop-room{padding:12px}.workflow{gap:4px}.workflow-step{font-size:8px;padding:6px}.head-closeup .line-card .gauge{float:left}.head-closeup .line-card .numbers{padding-top:22px}}@media(max-width:390px){.rack-bottles{grid-template-columns:repeat(2,1fr)}.cascade-zone .banks{grid-template-columns:repeat(4,1fr)}.cascade-zone .bank .cylinder{height:100px;width:35px}}[hidden]{display:none!important}
+
+.start-game{display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin:18px 0}.start-link{display:inline-block;padding:12px 17px;background:var(--accent);color:#182127;font-size:13px;font-weight:bold;text-decoration:none;border-radius:5px}.start-game>span{font-size:11px;color:var(--muted);max-width:580px}.compressor-picture{display:block;width:min(100%,380px);height:auto;min-height:160px;flex:1 1 240px}.machine-zone .compressor{flex-wrap:wrap}.machine-zone .compressor>div:first-child{flex:1 1 180px}.machine-zone .motor-controls{flex:1 1 100%;display:flex}.machine-zone .motor-controls button{flex:1}#rack-title{scroll-margin-top:20px}
+
+.struggling{border-color:#edbb6a!important;box-shadow:0 0 0 2px #c8944055!important}.struggling .status{color:#ffe3a8}.sound-note{border:1px solid var(--line);border-radius:8px;padding:18px;margin-bottom:14px;font-size:12px}.sound-note p{font-size:11px;color:var(--muted);margin-bottom:0}
+/* v0.5 — one full-width room, matching the physical equipment order. */
+.workspace{display:block}.workspace>.workshop-room{width:100%;min-width:0}.room-backwall{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:28px;align-items:start}.cascade-zone{margin-top:0}.machine-zone{min-width:0}.machine-zone .compressor{padding:14px;gap:8px}.machine-zone .compressor-picture{min-height:130px;max-height:205px;flex-basis:100%;width:100%}.machine-zone .compressor h3{font-size:17px}.machine-zone .circuit-readings{gap:6px;margin-bottom:0}.machine-zone .circuit-readings strong{font-size:11px}.machine-zone .circuit-readings span{font-size:8px}.cascade-zone .bank .cylinder{height:190px;width:48px;margin-top:6px}.cascade-zone .bank .cylinder:after{top:85px}.cascade-zone .card-top{font-size:10px}.cascade-zone .bank .numbers{font-size:13px}.cascade-zone .bank .secondary{font-size:11px}.room-floor{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}.room-floor>section{min-width:0}.head-zone{border:1px solid #6e7e84;padding:15px;background:linear-gradient(145deg,#24333a,#162229);border-radius:8px;position:relative}.head-zone .section-title{flex-wrap:wrap;gap:6px}.head-zone .section-title span{font-size:8px;max-width:100%;text-align:left}.head-zone #head-tool{width:100%;font-size:11px;margin-bottom:15px}.head-zone .line-card{background:#172229;padding:12px}.head-zone .gauge{float:none!important;width:160px;height:100px;margin:5px auto 0!important}.head-zone .gauge svg{width:160px;height:114px}.head-zone .numbers{padding-top:0!important;font-size:20px}.head-zone .secondary{margin-bottom:12px}.head-zone .regulator-console{padding:12px;margin-top:15px}.head-zone .regulator-console .eyebrow{line-height:1.6}.station-zone{padding:15px 4px}.station-zone .stand-zone{height:390px;margin-top:15px}.station-zone .stand-frame{height:240px;width:150px;left:calc(50% - 75px);bottom:25px}.station-zone .stand-frame:after{top:75px;box-shadow:0 100px 0 #152329}.station-zone .stand-zone #stand-art{bottom:55px;left:calc(50% - 34px)}.station-zone .stand-zone .era-art{transform:scale(1.7)}.station-zone .stand-zone #empty-stand{top:165px}.station-zone .connected .hose-art{bottom:165px;right:calc(50% - 58px);transform:rotate(-12deg);height:155px}.rack-zone{margin-top:0;padding:14px}.rack-zone .section-title{flex-direction:column}.rack-bottles{grid-template-columns:repeat(2,minmax(0,1fr))}.rack-zone .era-art{height:164px;width:64px}.rack-zone .era-body{height:147px}.rack-zone .era-neck{left:23px}.rack-zone .era-body b{font-size:12px}.support-panels{display:block;margin-top:22px;border:1px solid var(--line);border-radius:8px;padding:16px;background:#172127}.support-panels>summary{font-size:14px;font-weight:600}.support-content{display:block;padding-top:16px}.support-content>div,.support-content>details{border:1px solid var(--line);padding:16px;border-radius:6px;margin:0 0 12px}.support-content .lesson h2{font-size:20px}.workshop-guidance{margin-bottom:0}.intro{padding:24px 0 16px}.intro h1{font-size:38px;margin:5px 0 10px}.intro h1 br{display:none}.intro p:not(.eyebrow){margin:5px 0}.session strong{font-size:34px;margin:5px 0}.notice{font-size:11px;padding:10px 14px}.start-game{margin:14px 0}.scenarios{margin:15px 0}
+/* Object outlines are the interactive targets; labels remain visible. */
+button.object-control{border:2px dashed #d8b875;background:#18262c;color:#e6c98b;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:10px;min-height:112px;width:100%;box-shadow:0 0 0 3px #d8b87512;transition:border-color .15s,background .15s}.object-control svg{display:block;flex-shrink:0;width:58px;height:58px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}.object-control .valve-wheel{transition:transform .2s}.object-control .object-label{display:block;font-size:11px;line-height:1.2;pointer-events:none}.object-control .object-state{font:8px/1.4 system-ui;letter-spacing:.3px;pointer-events:none}.object-control:hover:not(:disabled),.object-control:focus-visible{border-style:solid;border-color:#fff0bd;background:#344239;box-shadow:0 0 0 3px #d8b87544}.object-control[aria-pressed=true]{border-style:solid;border-color:#8cdda6;background:#203f32!important;color:#b9efb7!important}.object-control[aria-pressed=true] .valve-wheel{transform:rotate(45deg)}.object-control:disabled{opacity:.45}.head-zone .object-control{margin-top:12px}.head-zone .object-control[data-purge]{color:#b4dcf2;border-color:#7da8c0}.stand-zone .physical-valve.object-control{inset:12px auto auto calc(50% - 70px);width:140px;min-height:103px;padding:6px;z-index:4}.stand-zone .physical-valve svg{height:45px;width:45px}.stand-zone .physical-valve .object-label{font-size:10px}.cascade-zone .bank button.object-control{height:auto;min-height:102px;width:100%;max-width:90px;order:1;margin:8px 0 0;padding:4px 1px;border:2px dashed #d8b875;border-radius:8px;background:#18262c;font-size:10px;box-shadow:0 0 0 2px #d8b87510;color:#e6c98b}.cascade-zone .bank button.object-control:before{display:none}.cascade-zone .bank button.object-control svg{width:42px;height:42px;stroke-width:3.5}.cascade-zone .bank button.object-control .object-label{font-size:9px}.cascade-zone .bank button.object-control .object-state{font-size:7px;letter-spacing:0}.cascade-zone .bank.open button.object-control{border-style:solid;border-color:#8cdda6}.head-zone .valve{background:#18262c;color:#e6c98b}.line-card.open .object-control[aria-pressed=false]{background:#18262c;color:#e6c98b;border-color:#d8b875}
+@media(max-width:950px){main{padding:0 3%}.workshop-room{padding:14px}.room-backwall{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:15px}.room-floor{gap:12px}.cascade-zone .bank .cylinder{height:165px;width:35px}.cascade-zone .bank .numbers{font-size:10px}.cascade-zone .bank .secondary{font-size:9px}.cascade-zone .bank button.object-control svg{width:34px;height:34px}.cascade-zone .bank button.object-control .object-label{font-size:8px}.machine-zone .circuit-readings{grid-template-columns:1fr}.head-zone{padding:10px}.rack-zone{padding:10px}.rack-zone .era-art{width:48px;height:139px}.rack-zone .era-body{height:122px}.rack-zone .era-neck{left:15px}.rack-zone .era-body b{font-size:10px}.station-zone .stand-zone{height:350px}.room-floor .section-title span{font-size:8px}}@media(max-width:700px){.room-backwall{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:10px}.cascade-zone .banks{grid-template-columns:repeat(4,minmax(0,1fr))}.cascade-zone .bank .cylinder{height:92px;width:34px}.cascade-zone .bank .cylinder:after{top:38px}.cascade-zone .bank button.object-control{min-height:82px}.room-floor{grid-template-columns:minmax(0,1fr)}.head-zone{order:0}.station-zone{order:1}.rack-zone{order:2}.rack-bottles{grid-template-columns:repeat(2,minmax(0,1fr))}.station-zone .stand-zone{height:350px}.head-zone .line-card{display:grid;grid-template-columns:1fr 1fr;gap:8px}.head-zone .card-top,.head-zone .bottle-reading,.head-zone .thermal,.head-zone .seal,.head-zone .hose,.head-zone .attach:not(.object-control){grid-column:1/-1}.head-zone .numbers{align-self:center;padding-top:20px!important}.head-zone .gauge{grid-row:2/4}.head-zone .secondary{text-align:center}.head-zone .object-control{margin:0}.machine-zone .compressor-picture{min-height:100px}.machine-zone .compressor{padding:9px}.machine-zone .compressor h3{font-size:14px}.machine-zone .eyebrow{font-size:8px}.machine-zone .motor-controls{flex-direction:column}.machine-zone .compressor .status{font-size:8px}.room-backwall .section-title{display:block}.room-backwall .section-title h3{font-size:12px}.room-backwall .section-title span{font-size:7px}.room-backwall .pipe span{font-size:7px;letter-spacing:0}.station-zone .physical-valve.object-control{width:140px}.intro h1{font-size:28px}.intro .session{width:95px}.intro .session strong{font-size:28px}}@media(max-width:390px){.rack-bottles{grid-template-columns:repeat(2,minmax(0,1fr))}.room-backwall{grid-template-columns:1fr}.cascade-zone{order:0}.machine-zone{order:1}.cascade-zone .banks{grid-template-columns:repeat(8,minmax(0,1fr))}.cascade-zone .bank button.object-control .object-label{font-size:7px}.cascade-zone .bank .cylinder{width:24px}.cascade-zone .bank .numbers{font-size:8px}.cascade-zone .bank .secondary{font-size:7px}.cascade-zone .bank button.object-control svg{width:28px;height:28px}}
+
+.nozzle-area{position:relative;height:75px;margin:4px 0 12px;background:#111f26;border:1px solid #576b76;border-radius:6px;overflow:hidden}.air-jet{position:absolute;left:120px;top:12px;width:calc(100% - 120px);height:48px;opacity:var(--jet-strength,.8);pointer-events:none}.air-jet i{display:block;position:absolute;left:0;top:20px;height:2px;width:70%;background:linear-gradient(90deg,#b3e4ed,transparent);border-radius:50%;transform-origin:left center;animation:air-escape .55s linear infinite;filter:drop-shadow(0 0 2px #a8d6e9)}.air-jet i:nth-child(2){top:17px;animation-delay:-.11s;--spread:-13px}.air-jet i:nth-child(3){top:23px;animation-delay:-.25s;--spread:14px}.air-jet i:nth-child(4){top:19px;animation-delay:-.4s;--spread:-7px}.air-jet i:nth-child(5){top:21px;animation-delay:-.32s;--spread:7px}.leak-label{font:10px/1.5 ui-monospace,monospace;padding:10px;background:#492e20;border:1px solid #e7ae73;border-radius:5px;color:#ffe1b4}.air-leaking .nozzle-area{border-color:#e7ae73}.time-paused .air-jet i{animation-play-state:paused}@keyframes air-escape{0%{transform:translateX(0) translateY(0) scaleX(.2);opacity:0}20%{opacity:1}100%{transform:translateX(70%) translateY(var(--spread,0)) scaleX(1);opacity:0}}@media(prefers-reduced-motion:reduce){.air-jet i{animation:none!important;opacity:.7;transform:translateY(var(--spread,0))}}
+
+.stand-zone .bottle-air-jet{left:calc(50% + 15px);top:95px;width:140px;height:50px;transform:rotate(-28deg);transform-origin:left center;z-index:6}.stand-zone.bottle-leaking{border:2px solid #f6ac78;box-shadow:inset 0 0 30px #e0923620}.bottle-leak-alert{border:2px solid #f6ac78;color:#ffe1c4;background:#48261f;font-size:12px}.bottle-leaking .physical-valve{box-shadow:0 0 0 3px #f6ac7866}@media(max-width:950px){.stand-zone .bottle-air-jet{top:70px;width:min(140px,45%)}}
+
+.outflow-info{display:block;margin:8px 0 12px;font:10px/1.6 ui-monospace,monospace;color:#b9dfef}.outflow-info:after{content:' · referencia a 20 °C, abertura supuesta';color:var(--muted)}
+/* Complete cross head: inlet valve, forward-facing gauge, lower bleed, male outlet. */
+.pressure-psi,.pressure-bar{display:block}.pressure-psi{font-size:1em;color:#f3ead0}.pressure-bar{font-size:.8em;color:var(--muted);margin-top:5px}.pressure-psi small,.pressure-bar small{font:10px system-ui;color:inherit}.bottle-temperature{display:block;font-size:11px;color:var(--muted);margin-top:7px}.circuit-readings strong .pressure-psi{font-size:14px}.circuit-readings strong .pressure-bar{font-size:12px}.regulator-console output .pressure-psi{font-size:13px}.cascade-zone .bank .numbers{order:3;color:#f4e6a3;font-size:14px}.cascade-zone .bank .secondary{order:4;font-size:12px;color:#b1c0c6}.cascade-zone .bank .cylinder{overflow:hidden;background:linear-gradient(90deg,#534019,#8c7128 45%,#4f3d19);isolation:isolate}.pressure-fill{display:block;position:absolute;bottom:0;left:0;right:0;height:var(--pressure-fill,0%);background:linear-gradient(90deg,#b28a22,#f6d771 45%,#b5912e);transition:height .2s linear;z-index:0}.pressure-fill-edge{position:absolute;left:0;right:0;bottom:var(--pressure-fill,0%);height:2px;background:#ffe9a0;box-shadow:0 0 8px #ffe9a0;transition:bottom .2s linear;z-index:1}.cascade-zone .bank .cylinder:after{z-index:2;background:#26302099;color:#f3d780;left:2px;right:2px;padding:4px 0;border-radius:2px}.head-dock{height:255px;position:relative;border:1px dashed #5c727c;border-radius:6px;margin:12px 0;display:flex;align-items:center;justify-content:center;background:#14232a}.head-away-label{display:none;color:#9eafb6;font-size:11px;text-align:center}.head-dock.head-away .head-away-label{display:block}.head-assembly{position:relative;width:100%;max-width:360px;aspect-ratio:360/260;flex-shrink:0;filter:drop-shadow(3px 5px 4px #0006);z-index:3}.quad-body{display:block;width:100%;height:100%;overflow:visible}.quad-gauge{position:absolute;left:36.7%;top:0;width:31%;height:31%;pointer-events:none}.head-assembly .quad-gauge .gauge{position:relative!important;display:block;float:none!important;width:100%!important;height:100%!important;margin:0!important;overflow:hidden}.head-assembly .quad-gauge svg{width:100%!important;height:100%!important}.head-assembly button.object-control{position:absolute!important;min-height:0!important;height:35%!important;width:25%!important;padding:3px!important;margin:0!important;gap:1px!important;z-index:4;background:#17252dcf;border-width:2px;overflow:visible}.head-assembly .quad-passage{left:9%;top:43%}.head-assembly .quad-bleed{left:40%;top:75%;height:25%!important}.head-assembly button.object-control svg{height:50%;width:60%;max-height:42px;max-width:45px;flex-shrink:1}.head-assembly button.object-control .object-label{font-size:8px;line-height:1.1}.head-assembly button.object-control .object-state{font-size:6px;line-height:1.2;letter-spacing:0}.mounted-head{position:absolute;left:calc(50% - 226px);top:50px;width:240px;height:auto;z-index:8;pointer-events:none}.mounted-head .head-assembly{width:240px;max-width:none;pointer-events:auto}.head-zone .line-card .numbers{clear:both}.head-is-mounted .nozzle-area{opacity:.2}.station-zone .stand-zone{height:460px;overflow:visible}.station-zone .stand-zone #stand-art{bottom:55px}.station-zone .stand-zone .physical-valve.object-control{left:calc(50% + 28px);top:130px;width:110px;right:auto;min-height:100px}.station-zone .stand-zone .physical-valve .object-state{font-size:7px}.station-zone .connected .hose-art{left:-35px;right:auto;top:95px;bottom:auto;width:105px;height:120px;transform:rotate(-5deg);border-radius:50% 0 0 45%;z-index:2}.stand-zone .bottle-air-jet{top:165px;z-index:7}.station-zone .stand-pressure{font-size:18px}.station-zone .stand-pressure .pressure-bar{font-size:14px}.head-zone .bottle-reading .pressure-psi{font-size:13px}.head-zone .bottle-reading .pressure-bar{font-size:11px}.head-zone .regulator-console{margin-top:15px}@media(max-width:950px){.cascade-zone .bank .numbers{font-size:11px}.cascade-zone .bank .secondary{font-size:10px}.mounted-head{left:calc(50% - 200px);width:215px;top:62px}.mounted-head .head-assembly{width:215px}.station-zone .stand-zone .physical-valve.object-control{left:calc(50% + 20px);width:90px}.station-zone .stand-zone .physical-valve svg{height:35px;width:35px}}@media(max-width:700px){.head-zone .line-card{display:block}.head-dock{height:275px}.head-dock .head-assembly{width:340px;max-width:100%}.head-zone .line-card .numbers{padding-top:0!important}.station-zone .stand-zone{height:460px}.mounted-head{left:calc(50% - 226px);top:50px;width:240px}.mounted-head .head-assembly{width:240px}.station-zone .stand-zone .physical-valve.object-control{left:calc(50% + 28px);width:110px}.stand-zone .bottle-air-jet{top:165px}.head-assembly .quad-gauge .gauge{float:none!important}}@media(prefers-reduced-motion:reduce){.pressure-fill,.pressure-fill-edge{transition:none!important}}
+
+.head-assembly button.quad-bleed.object-control{height:25%!important}.head-zone .hose .pressure-psi{font-size:12px;margin-top:6px}.head-zone .hose .pressure-bar{font-size:10px}
+
+.machine-zone .compressor{position:relative;padding-top:60px}.compressor #sound{position:absolute;top:12px;right:12px;z-index:5;margin:0;padding:8px 12px;font-size:11px;line-height:1.4;background:#17252deb;border:1px solid #ddc08d;border-radius:6px;white-space:nowrap}.compressor #sound[aria-pressed=true]{background:#244735;border-color:#a3d1aa;color:#d6f4d4}
+
+.receiver-line{padding:12px 10px 10px;margin:0 0 10px;background:#102129;border:1px solid #648593;border-radius:8px}.receiver-caption{display:flex;align-items:center;justify-content:space-between;gap:12px}.receiver-caption>span{font:9px/1.5 system-ui;letter-spacing:1px;color:#b6d4dd;max-width:55%}.receiver-caption output{font:16px ui-monospace,monospace;text-align:right}.receiver-caption .pressure-bar{font-size:12px}.receiver-line .collector-pipe{position:relative;overflow:hidden;height:19px;margin:12px 0 7px;background:linear-gradient(#26414d,#10212b);border:2px solid #90aeb9;border-radius:8px;box-shadow:inset 0 0 4px #0008}.receiver-pressure-fill{position:absolute;right:0;top:0;bottom:0;width:100%;background:linear-gradient(#ffffff30,#00000018),var(--collector-pressure-color,#71848a);transition:background-color .18s linear;box-shadow:inset 0 1px 2px #ffffff30}.receiver-line>small{display:block;font-size:9px;line-height:1.4;color:#9fb9c3}@media(max-width:700px){.receiver-caption{align-items:flex-start;gap:6px}.receiver-caption>span{font-size:7px;letter-spacing:0}.receiver-caption output{font-size:12px}.receiver-caption .pressure-bar{font-size:10px}.receiver-line{padding:8px 6px}.receiver-line>small{font-size:8px}}@media(prefers-reduced-motion:reduce){.receiver-pressure-fill{transition:none!important}}
+
+.struggling .compressor-picture{animation:ariete-machine .16s linear infinite}.struggling #motor-status{color:#ffe3a0;font-weight:800;line-height:1.7}@keyframes ariete-machine{0%,100%{transform:translate(0,0)}35%{transform:translate(.8px,-.5px)}70%{transform:translate(-.7px,.5px)}}@media(prefers-reduced-motion:reduce){.struggling .compressor-picture{animation:none!important}}
+
+/* Pressure charge meter on each ERA bottle: a segmented instrument, not a fluid level. */
+.bottle-charge-track{display:block;position:absolute;right:3px;top:13px;bottom:13px;width:8px;background:#11232bc9;border:1px solid #36575f;border-radius:3px;overflow:hidden;z-index:3;pointer-events:none}.bottle-charge-fill{position:absolute;left:0;right:0;bottom:0;height:var(--bottle-charge,0%);background:repeating-linear-gradient(to top,#52c7cb 0,#52c7cb 7px,#1b3943 7px,#1b3943 9px);transition:height .2s linear}.bottle-charge-value{position:absolute;bottom:28px;left:0;right:4px;font:700 10px ui-monospace,monospace;color:#102d33;text-align:center;z-index:3;pointer-events:none}.era-art.charge-high .bottle-charge-fill{background:repeating-linear-gradient(to top,#65df98 0,#65df98 7px,#1a4234 7px,#1a4234 9px)}.era-art.charge-low .bottle-charge-fill{background:repeating-linear-gradient(to top,#e6b65f 0,#e6b65f 7px,#4a3e28 7px,#4a3e28 9px)}.era-art.charge-over .bottle-charge-fill{background:repeating-linear-gradient(to top,#f27658 0,#f27658 7px,#4d241d 7px,#4d241d 9px)}.era-art.charge-over .bottle-charge-value{color:#a12517;background:#ffe5d0}.stand-charge{display:block;font:12px/1.5 ui-monospace,monospace;color:var(--accent);margin-top:8px}.rack-zone .bottle-charge-value{font-size:10px}.rack-zone .era-body b{padding-right:8px;font-size:10px}.stand-zone .bottle-charge-track{width:7px;right:3px}.stand-zone .bottle-charge-value{font-size:9px}.rack-bottle.missing .bottle-charge-value{opacity:.4}@media(prefers-reduced-motion:reduce){.bottle-charge-fill{transition:none!important}}
+
+.head-zone:not(.air-leaking) .nozzle-area{display:none}
+
+.bottle-instructions{padding:14px;margin:0 0 18px;border:1px solid #6b8390;border-radius:8px;background:#172a34}.bottle-instructions h3{font:700 11px/1.5 system-ui;letter-spacing:.7px;color:#b8d3de;margin:0 0 9px}.bottle-instructions p{font-size:12px;line-height:1.6;color:#d1dce0;margin:0}.bottle-instructions.prepare-charge{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:#332f21}.bottle-instructions.prepare-charge h3{color:#ffe4a8}.bottle-instructions ol{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:9px}.bottle-instructions li{display:grid;grid-template-columns:23px 1fr;gap:2px 8px;align-items:start;font-size:11px;color:#c4c9bd;padding:8px;border:1px solid #605d4b;border-radius:5px}.finish-mark{display:grid;place-items:center;width:21px;height:21px;border:1px solid currentColor;border-radius:50%;font:11px ui-monospace,monospace;grid-row:1/3}.finish-status{font-size:9px;grid-column:2;color:inherit}.bottle-instructions .finish-current{border-color:var(--accent);color:#ffe5ae;background:#59503266}.bottle-instructions .finish-done{border-color:#709677;color:#b4deb5;background:#29453255}.bottle-instructions .finish-skipped{color:#a8b7b8;border-color:#607476}.bottle-instructions .finish-error{color:#ffc9b4;border-color:#d48264}.bottle-instructions>small{display:block;margin-top:10px;font-size:10px;line-height:1.5;color:#c8c4b0}.bottle-instructions.finish-error{border-color:#e28e70}
+/* Reserve the box height before and during the 80 % sequence so the stand never shifts. */
+.finish-status{display:block;min-height:1.4em;line-height:1.4}.bottle-instructions ol.finish-preview{opacity:.38}
+
+/* Connected pipework: all eight valve branches join the collector underneath. */
+.workshop-room{position:relative}.cascade-zone .banks{padding-bottom:22px}.receiver-line{margin:0 0 8px;position:relative}.receiver-line .collector-pipe{margin:0 0 14px}.receiver-caption{margin-bottom:7px}.circuit-lines{position:absolute;inset:0;width:100%;height:100%;z-index:6;pointer-events:none;overflow:hidden}.circuit-lines path{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}.pipe-outline{stroke:#0c171e;stroke-width:12}.pipe-steel,.bank-branch{stroke:var(--collector-pressure-color,#71848a);stroke-width:7;transition:stroke .18s linear}.hose-outline{stroke:#0b151c;stroke-width:14}.hose-highlight{stroke:var(--hose-pressure-color,#71848a);stroke-width:8;transition:stroke .18s linear}.head-assembly{z-index:7}.mounted-head{z-index:8}.receiver-line .receiver-pressure-fill{z-index:1}.regulator-console{position:relative}.regulator-console:before{content:'ENTRADA DEL COLECTOR';position:absolute;left:5px;top:40%;font-size:6px;writing-mode:vertical-rl;color:#89a6b0;transform:translateX(-100%)}.regulator-console:after{content:'SALIDA A MANGUERA';position:absolute;left:28px;top:-11px;font-size:6px;color:#a1c3cd;line-height:1.4}.cascade-zone .pipe:before{display:none}.receiver-line>small{padding-right:8px}
+/* Brass regulator, based on the equipment reference photo. */
+.head-zone .regulator-console{margin:0 0 25px;padding:14px 12px 16px;border:1px solid #667b82;background:linear-gradient(150deg,#293a42,#14242c);border-radius:8px}
+.regulator-console:before,.regulator-console:after{display:none}
+.regulator-console h3{font-size:15px;margin:0 0 5px;color:#e3e7d8}
+.regulator-route-label{font:8px/1.5 ui-monospace,monospace;color:#b2c4ca;margin:0 0 15px;letter-spacing:.3px}
+.regulator-body{position:relative;width:100%;aspect-ratio:36/19;margin:6px 0 26px;isolation:isolate}
+.regulator-hardware{display:block;width:100%;height:auto;filter:drop-shadow(2px 5px 3px #0005)}
+.regulator-needle{transform-origin:50px 50px;transition:transform .15s linear}
+.regulator-knob{position:absolute;left:39%;top:45%;width:22%;height:41.684%;border-radius:50%;border:2px solid #13191b;background:repeating-linear-gradient(76deg,#090d0f 0%,#151c20 11%,#455056 13%,#171f22 16%,#090d0f 21%);box-shadow:inset 0 3px 2px #a1abaa,inset 0 -5px 4px #000,5px 0 0 #ab914e,8px 0 0 #ebd18a,10px 4px 6px #0007;cursor:ns-resize;touch-action:none;user-select:none;outline-offset:7px;display:grid;place-items:center;transform:none;z-index:7}
+.regulator-knob-cap{display:grid;place-content:center;width:76%;height:76%;margin-right:0;border:2px solid #777f7d;border-radius:50%;background:radial-gradient(ellipse at 30% 25%,#30383a,#0d1214 75%);box-shadow:0 0 0 3px #0b1114;color:#e0e2d8;font:700 clamp(5px,.65vw,9px)/1.3 system-ui;text-align:center;pointer-events:none}
+.regulator-knob-cap small{font-size:.8em;letter-spacing:1px;margin-top:5px;color:#a9b4b6}
+.regulator-knob-marker{position:absolute;inset:3px;transform:rotate(var(--knob-turn,135deg));pointer-events:none}
+.regulator-knob-marker:after{content:'';position:absolute;width:4px;height:11%;top:0;left:calc(50% - 2px);border-radius:3px;background:#f1d288}
+.regulator-knob:focus-visible{outline:3px solid #f2d488}
+.regulator-knob:hover{filter:brightness(1.18)}
+.regulator-knob[aria-disabled=true]{opacity:.4;cursor:not-allowed}
+.regulator-port{position:absolute;width:4%;height:7%;pointer-events:none}
+.regulator-port.inlet{left:0;top:68.08%}
+.regulator-port.outlet{right:0;top:68.08%}
+.regulator-readings{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;position:relative;z-index:7}
+.regulator-instrument{text-align:center;min-width:0}
+.regulator-instrument>span{display:block;font-size:8px;font-weight:600;color:#b4c4c8;min-height:21px;letter-spacing:.3px}
+.regulator-instrument output{display:block;font:12px ui-monospace,monospace;background:#101e26;padding:8px 2px;border:1px solid #435960;border-radius:4px}
+.regulator-instrument .pressure-bar{font-size:10px}
+.regulator-instrument small{font-size:8px}
+.head-flow-control{margin:14px 0 0;padding:12px;background:#16272f;border:1px solid #556b75;border-radius:6px}
+.head-flow-control label{font-size:10px;color:var(--muted)}
+.head-flow-control output{display:block;margin-top:5px;color:var(--accent);font:11px ui-monospace,monospace}
+.head-flow-control input{display:block;width:100%;margin:10px 0 0;accent-color:var(--accent)}
+@media(max-width:950px){.regulator-instrument>span{font-size:7px}.head-zone .regulator-console{padding-left:9px;padding-right:9px}}
+@media(max-width:700px){.regulator-body{max-width:400px;margin-left:auto;margin-right:auto}.regulator-knob-cap{font-size:clamp(7px,2vw,12px)}.regulator-instrument>span{font-size:9px}.regulator-instrument output{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.regulator-needle{transition:none!important}}
+
+.regulator-console .charge-controls label{margin:0}.regulator-console .charge-controls input{margin:0 0 18px}.regulator-setting-label{display:block}
+
+/* Cascade pressure readings sit on each cylinder; valves connect below to the collector. */
+.cascade-zone .bank .cylinder{width:calc(100% - 4px);max-width:64px;height:170px;border-top:1px solid #9b833a;border-bottom:5px solid #323b3c;border-radius:12px 12px 18px 18px}
+.cascade-zone .bank .cylinder:after{display:none}
+.bank-pressure{position:absolute;top:50%;left:2px;right:2px;transform:translateY(-50%);z-index:3;padding:8px 1px;border:1px solid #dfc56e66;border-radius:4px;background:#152027eb;text-align:center;pointer-events:none}
+.cascade-zone .bank .bank-pressure .numbers{margin:0;padding:0;font:700 12px/1.2 ui-monospace,monospace;color:#fff0b3}
+.cascade-zone .bank .bank-pressure .secondary{margin:8px 0 0;font:10px/1.2 ui-monospace,monospace;color:#d0dce0}
+.cascade-zone .bank .bank-pressure small{display:block;margin-top:3px;font:8px/1.2 system-ui,sans-serif;color:inherit}
+.cascade-zone .bank button.object-control{order:3;margin-top:10px;position:relative;z-index:7}
+.cascade-zone .bank button.object-control:after{content:'';position:absolute;top:-12px;left:calc(50% - 4px);width:8px;height:10px;background:linear-gradient(90deg,#76602e,#d6c686,#76602e);border:1px solid #a9a181;pointer-events:none}
+@media(max-width:700px){.cascade-zone .banks{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:20px}.cascade-zone .bank .cylinder{height:145px}}
+
+/* Manual 0-Y-delta starter slider. */
+.machine-zone .motor-controls.starter-control{display:flex;align-items:center;gap:14px;width:100%;flex-basis:100%;margin:10px 0 4px;padding:12px;background:#202a2e;border:1px solid #647278;border-radius:6px}
+.starter-panel{width:142px;flex-shrink:0;padding:9px;background:#152329;border:1px solid #4b626b;border-radius:5px;text-align:center}
+.starter-panel label{display:flex;justify-content:space-between;align-items:center;font:700 11px/1.4 system-ui;letter-spacing:1px;color:#bbccd0}
+
+.starter-positions{display:flex;justify-content:space-between;padding:0 5px;margin:14px 0 5px;font:bold 16px/1.2 ui-monospace,monospace;color:#f1ead2}
+
+
+.starter-guidance{margin-top:12px;min-width:0}.starter-guidance p{font-size:11px;line-height:1.5;margin:0 0 8px;color:#e9ecdf}.starter-guidance output{display:block;font:bold 17px/1.4 ui-monospace,monospace;color:#f4d58a}.starter-guidance progress{display:block;width:100%;height:9px;margin:8px 0;accent-color:#e9c16b}.starter-guidance small{display:block;margin-top:8px;font-size:9px;line-height:1.5;color:#b5c3c7}
+.starter-title{font:700 10px/1.3 system-ui;letter-spacing:1px;color:#c1d0d0}.starter-dial{height:100px;width:112px;position:relative;margin:5px auto 3px;background:linear-gradient(135deg,#c6cec8,#657276);border:2px solid #424f53;border-radius:4px}.machine-zone .motor-controls .starter-knob{position:absolute;left:26px;top:31px;width:58px;height:58px;margin:0;padding:0;border:3px solid #273338;border-radius:50%;background:radial-gradient(circle at 35% 25%,#4d595b,#0e171b);box-shadow:0 3px 5px #0008;cursor:pointer}.starter-handle{position:absolute;left:19px;top:2px;width:14px;height:43px;border:1px solid #111b21;border-radius:5px;background:linear-gradient(90deg,#111b21,#647074,#151e24);transform-origin:50% 24px;transform:rotate(var(--starter-angle,-55deg));transition:transform .2s;box-shadow:2px 2px 3px #0008}.starter-handle:before{content:'';display:block;width:5px;height:8px;margin:3px auto;background:#f2d582;border-radius:2px}.starter-guidance{flex:1;margin:0}.starter-knob:disabled{cursor:wait}
+@media(min-width:701px) and (max-width:1000px){.machine-zone .motor-controls.starter-control{flex-direction:column}.starter-guidance{text-align:center}}
+@media(max-width:390px){.machine-zone .motor-controls.starter-control{gap:9px;padding:9px}.starter-panel{width:130px}.starter-guidance output{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.starter-handle{transition:none}}
+
+.head-pressure-trace{stroke:var(--head-pressure-color,#71848a);stroke-width:7;stroke-linecap:round;stroke-linejoin:round;transition:stroke .18s linear}.head-hose-trace{stroke:var(--hose-pressure-color,#71848a);stroke-width:8;stroke-linecap:round;transition:stroke .18s linear}
+@media(prefers-reduced-motion:reduce){.pipe-steel,.bank-branch,.hose-highlight,.head-pressure-trace,.head-hose-trace{transition:none!important}}
+
+/* Direct manipulation, including touch; existing buttons remain keyboard alternatives. */
+.rack-bottle:not(:disabled),#stand-art .era-art,.head-assembly{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
+.head-assembly button{cursor:pointer;touch-action:manipulation}
+.drag-in-progress,.drag-in-progress *{cursor:grabbing!important}
+.drag-source{opacity:.35}
+.drop-available{outline:2px dashed #e9c16b;outline-offset:4px}
+.drop-hover{outline:3px solid #83d3aa;outline-offset:4px;box-shadow:inset 0 0 25px #83d3aa25}
+.drop-blocked{outline-color:#f48a69;box-shadow:inset 0 0 25px #f48a6925}
+.workshop-drag-preview{position:fixed;left:0;top:0;pointer-events:none!important;z-index:1000;opacity:.9;filter:drop-shadow(5px 8px 7px #0009)}
+.workshop-drag-preview *{pointer-events:none!important}
+
+/* The open head exhausts from the male fitting at SVG coordinate (339,154). */
+.head-assembly .male-air-jet{left:94.1667%;top:calc(59.2308% - 20px);width:42%;height:48px;z-index:5;pointer-events:none}
+
+/* Head gauge is seated on the round instrument and reads the downstream node. */
+.head-assembly .quad-gauge{left:30.8333%;top:-5.7692%;width:40%;height:55.3846%;z-index:3}.head-pressure-dial{display:block;width:100%;height:100%;overflow:visible}.head-pressure-needle{transform-box:view-box;transform-origin:50px 50px;transition:transform .15s linear}.head-assembly .purge-air-jet{left:50.8333%;top:calc(94.2308% - 20px);width:35%;height:48px;transform:rotate(90deg);transform-origin:0 20px;z-index:6}
+@media(prefers-reduced-motion:reduce){.head-pressure-needle{transition:none!important}}
+
+.regulator-hardware .regulator-dial{display:initial;max-width:none;margin:0}.regulator-needle{transform-box:view-box}.regulator-console .charge-controls input{margin-bottom:8px}.regulator-route-label{margin-bottom:8px}
+
+/* Keep the loading head directly to the left of the stand, with its regulator above. */
+.cascade-and-regulator{display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-width:0}
+.cascade-and-regulator>.cascade-zone{width:100%;margin:0}
+.cascade-and-regulator>.regulator-console{width:min(100%,390px);margin:0;padding:12px;border:1px solid #667b82;background:linear-gradient(150deg,#293a42,#14242c);border-radius:8px}
+.room-backwall{align-items:start;column-gap:24px;row-gap:14px}
+@media(max-width:700px){.room-backwall{grid-template-columns:1fr}.cascade-and-regulator>.regulator-console{align-self:center}.room-backwall>.machine-zone{width:100%;order:1}}
+.room-floor{grid-template-areas:"head stand rack"}
+.room-floor>.head-zone{grid-area:head}
+.room-floor>.station-zone{grid-area:stand}
+.room-floor>.rack-zone{grid-area:rack}
+@media(max-width:700px){.room-floor{grid-template-areas:"head" "stand" "rack"}}
+
+/* One brief, non-graphic burst; the bottle remains visibly out of service. */
+.stand-zone.burst:before{content:'';position:absolute;left:50%;bottom:165px;width:120px;height:120px;border:5px solid #ffcc79;border-radius:50%;background:radial-gradient(circle,#fff2caaa,transparent 65%);transform:translate(-50%,50%);pointer-events:none;z-index:10;animation:bottle-burst-ring .65s ease-out both}
+.stand-zone.burst:after{content:'ESTALLIDO SIMULADO';position:absolute;left:8px;right:8px;top:112px;padding:7px 3px;text-align:center;background:#632e25;color:#ffe5c3;border:1px solid #f3a37b;border-radius:4px;font:700 10px/1.3 system-ui;letter-spacing:.5px;pointer-events:none;z-index:10}
+.stand-zone.burst #stand-art{animation:bottle-burst-jolt .5s ease-out both}
+@keyframes bottle-burst-ring{0%{opacity:1;transform:translate(-50%,50%) scale(.3)}100%{opacity:0;transform:translate(-50%,50%) scale(2.2)}}
+@keyframes bottle-burst-jolt{0%{transform:translate(0,0)}20%{transform:translate(-8px,-6px) rotate(-5deg)}45%{transform:translate(7px,2px) rotate(4deg)}70%{transform:translate(-3px,0) rotate(-2deg)}100%{transform:translate(0,0);opacity:.6}}
+@media(prefers-reduced-motion:reduce){.stand-zone.burst:before{animation:none;opacity:0}.stand-zone.burst #stand-art{animation:none;opacity:.6}}
+
+/* Useful pressure instrument mounted on the compressor itself. */
+.compressor-gauge-needle{transform-box:view-box;transform-origin:50px 50px;transition:transform .15s linear}
+@media(prefers-reduced-motion:reduce){.compressor-gauge-needle{transition:none!important}}
+
+/* Start timing: red before 2 s, green from 2 to under 3 s, red when late. */
+.starter-control[data-timing="waiting"],.starter-control[data-timing="late"]{--starter-timing-color:#ff978b}
+.starter-control[data-timing="ready"]{--starter-timing-color:#83d3aa}
+.starter-control[data-timing] .starter-dial{border-color:var(--starter-timing-color,#424f53)}
+.starter-control[data-timing] .starter-guidance output{color:var(--starter-timing-color,#f4d58a)}
+.starter-control[data-timing] .starter-guidance progress{accent-color:var(--starter-timing-color,#e9c16b)}
+.machine-zone .starter-control[data-timing] .starter-knob{border-color:var(--starter-timing-color,#273338);box-shadow:0 0 0 2px var(--starter-timing-color,transparent),0 3px 5px #0008}
+.starter-control[data-timing="late"] #starter-instruction{color:var(--starter-timing-color)}
+
+/* Touch targets select the rotary starter position directly. */
+.machine-zone .motor-controls .starter-position{position:absolute;width:24px;height:24px;min-width:0;padding:0;border:1px solid #41545c;border-radius:4px;background:#d0d8cf;color:#142b35;font:700 15px/1 system-ui;z-index:2}.starter-position.zero{left:0;top:28px}.starter-position.star{left:43px;top:0}.starter-position.delta{right:0;top:28px}.machine-zone .motor-controls .starter-position[aria-pressed=true]{opacity:1;background:#283d47;color:#ffe2a2;border-color:#f0cc7b}.machine-zone .motor-controls .starter-position:disabled:not([aria-pressed=true]){opacity:.55}.machine-zone .motor-controls .starter-position:not(:disabled):hover{background:#fff0c4;border-color:#ffe4a3}
+/* Valves are drawn objects; their names and states remain in ARIA and tooltips. */
+.object-control .object-label,.object-control .object-state{display:none!important}
+button.object-control{min-height:48px;padding:3px;gap:0;border-radius:50%}
+.cascade-zone .bank button.object-control{width:48px;max-width:100%;height:48px;min-height:48px;padding:3px;border-radius:50%;gap:0}
+.cascade-zone .bank button.object-control svg{width:100%;height:100%;max-width:38px;max-height:38px}
+.head-assembly button.object-control{width:18%!important;height:24.9231%!important;min-width:44px!important;min-height:44px!important;padding:3px!important;gap:0!important;border-radius:50%}
+.head-assembly .quad-passage{left:12.5%;top:48%}
+.head-assembly button.quad-bleed.object-control{left:41.5556%;top:75%;height:24.9231%!important}
+.head-assembly button.object-control svg{width:80%;height:80%;max-width:none;max-height:none}
+.station-zone .stand-zone .physical-valve.object-control{width:54px;height:54px;min-height:54px;padding:4px;border-radius:50%;gap:0}
+.station-zone .stand-zone .physical-valve.object-control svg{width:42px;height:42px}
+
+/* MSA composite cylinder: grey fibre, green bands and cream-backed black label. */
+.msa-cylinder .era-body{border-color:#536164;border-radius:42% 42% 35% 35% / 16% 16% 13% 13%;background:repeating-linear-gradient(78deg,#ffffff16 0,#ffffff16 1px,#26323621 1px,#26323621 3px),repeating-linear-gradient(101deg,transparent 0,transparent 3px,#f0f5ef17 3px,#f0f5ef17 4px),linear-gradient(90deg,#596568,#c0c7c3 46%,#677579)}
+.msa-cylinder .era-body:before{top:22%;height:3.5%;background:linear-gradient(90deg,#176e52,#42a77c,#176e52);border:0}
+.msa-cylinder .era-body:after{top:72%;bottom:auto;height:3.5%;background:linear-gradient(90deg,#176e52,#42a77c,#176e52)}
+.msa-cylinder .bottle-spec{position:absolute;top:28%;left:0;right:0;height:15%;padding-top:2px;background:#253634dc;border-top:1px solid #dc6b50;border-bottom:1px solid #e0dca8;color:#d8ded4;font:3px/1.4 ui-monospace,monospace;letter-spacing:0;text-align:center;pointer-events:none}
+.msa-cylinder .bottle-brand{position:absolute;top:49%;left:0;right:0;height:23%;display:flex;justify-content:center;align-items:center;z-index:2;background:linear-gradient(90deg,#c8c8a2,#f1f0c8 50%,#c7c8a3);border-top:2px solid #e5e5b8;border-bottom:2px solid #e5e5b8;pointer-events:none}
+.msa-cylinder .bottle-brand strong{display:block;margin:0 10px 0 2px;padding:1px 2px;background:#263c33;color:#f0f0ce;font:900 15px/.95 Arial,sans-serif;letter-spacing:-1.3px}
+.msa-cylinder .era-body b{position:absolute;top:78%;left:3px;right:13px;margin:0;padding:1px 0;background:#d5ddd0d9;border-radius:2px;color:#1b3038;text-align:center;font:700 9px/1.2 ui-monospace,monospace;z-index:2}
+.msa-cylinder .era-body em{display:none}
+.msa-cylinder .era-neck{background:linear-gradient(90deg,#111b1e,#344548,#0d1619);border-radius:5px 5px 0 0}
+.msa-cylinder .era-neck:before{background:#101a1c;border-color:#4c5e60;height:7px}
+.msa-valve-gauge{position:absolute;left:3px;top:3px;width:13px;height:13px;background:#ecebd2;border:2px solid #172a2b;border-radius:50%;z-index:1;box-shadow:0 0 0 1px #74817d}
+.msa-cylinder .bottle-charge-track{z-index:4}
+.msa-cylinder .bottle-charge-value{bottom:2%;left:3px;right:13px;background:#d8dfc9df;border-radius:2px;color:#15343b;font-size:8px;line-height:1.2;z-index:4}
+.rack-zone .msa-cylinder .bottle-brand strong{font-size:17px}
+@media(max-width:700px){.msa-cylinder .bottle-brand strong{font-size:14px}.msa-cylinder .era-body b{font-size:8px}}
+
+/* Compact head: the pressure reading lives in the instrument itself. */
+.head-zone .line-card{display:block}.head-zone .head-dock{margin-bottom:0}.head-assembly .quad-passage{left:10%}
+/* Flow chevrons: direction and relative speed of the simulated air, not a calibrated flow meter. */
+.flow-guide{fill:none;stroke:none}
+.flow-arrows{filter:drop-shadow(0 0 1.5px #061016)}
+.flow-arrows path{fill:none;stroke:#f2fbff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.head-flow-arrows path{stroke-width:4.5}
+.outflow-info.outflow-idle{visibility:hidden}
+
+/* Layout: compressor on top, regulator beside the cascade, then head, guidance and stand. */
+.room-backwall{display:flex;flex-direction:column;align-items:stretch;gap:24px}
+.cascade-and-regulator{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:24px;align-items:start}
+.cascade-and-regulator .regulator-console{margin:0}
+.room-floor{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:"head guide stand"}
+.room-floor>.bottle-instructions{grid-area:guide;margin:0}
+.station-actions .delivery-tally{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:10px;letter-spacing:1px;color:#b8d3de}
+#delivery-ticks{font-size:14px;color:#9fe0a6;letter-spacing:2px;text-align:right;overflow-wrap:anywhere}
+#deliver-bottle.delivery-ready{border-color:#8fd19a;background:#2c4a33;color:#e5f6e7}
+@media(max-width:900px){.cascade-and-regulator,.room-floor{grid-template-columns:1fr}.room-floor{grid-template-areas:"head" "guide" "stand"}}
+@media(min-width:901px){.machine-zone .compressor{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);grid-template-rows:auto 1fr;column-gap:24px;align-items:start}.machine-zone .compressor>div:first-child{grid-column:1;grid-row:1}.machine-zone .compressor>.motor-controls{grid-column:1;grid-row:2}.machine-zone .compressor>.compressor-picture{grid-column:2;grid-row:1/3;max-height:280px}}
+/* Regulator faces the cascade: inlet on the right, outlet on the left toward the head. */
+.regulator-port.inlet{left:auto;right:0}.regulator-port.outlet{right:auto;left:0}
+.room-backwall>.machine-zone{order:0}
+/* Stand without empty headroom: contents move up and the connected head plugs into the valve from the side. */
+.station-zone .stand-zone{height:345px}
+.station-zone .stand-zone .physical-valve.object-control{top:15px}
+.mounted-head,.mounted-head .head-assembly{width:170px}
+@media(max-width:700px){.mounted-head,.mounted-head .head-assembly{width:140px}}
+</style></head>
+<body>
+<header><a href="https://funfte.cl" target="_blank" rel="noopener" class="brand"><span class="crest">5</span><span>QUINTA COMPAÑÍA<small>ENTRENAMIENTO · PROTOTIPO</small></span></a></header>
+<main>
+<section class="intro"><div><p class="eyebrow">CUARTEL / SALA DE COMPRESORES</p><h1>Tu turno en <br>el cuartel.</h1><p>Carga la botella del atril y opera el equipo. Cada válvula y cada decisión cuentan.</p></div><div class="session"><span class="live-dot"></span> SIMULACIÓN INTERACTIVA <strong id="clock">00:00</strong><small>Tiempo simulado · velocidad ajustable</small></div></section>
+
+<noscript><p class="notice">Activa JavaScript para mover las botellas y operar el simulador.</p></noscript><nav class="scenarios" aria-label="Ejercicios"><button data-mode="bottles" class="active">01 <span>Cargar botellas</span></button><button data-mode="limit">02 <span>El límite del compresor</span></button><button data-mode="overpressure">03 <span>Sello · 2216 PSI</span></button><div class="time-controls" role="group" aria-label="Tiempo de simulación"><label for="time-speed">Velocidad<select id="time-speed"><option value="0.25">×0,25 · Muy lento</option><option value="0.5">×0,5 · Lento</option><option value="1" selected>×1 · Normal</option><option value="2">×2</option><option value="5">×5</option><option value="10">×10</option><option value="20">×20 · Muy rápido</option></select></label><button id="time-pause" aria-pressed="false">Ⅱ Pausar</button></div><button id="reset">↻ Reiniciar</button></nav>
+<section class="workspace">
+<div class="plant workshop-room"><svg id="circuit-lines" class="circuit-lines" aria-hidden="true" preserveAspectRatio="none"><g id="bank-connections"></g><path id="compressor-feed-outline" class="pipe-outline"/><path id="compressor-feed" class="pipe-steel"/><path id="collector-to-regulator-outline" class="pipe-outline"/><path id="collector-to-regulator" class="pipe-steel"/><path id="regulator-to-head-outline" class="hose-outline"/><path id="regulator-to-head" class="hose-highlight"/><g id="flow-arrows" class="flow-arrows"></g></svg>
+<div class="section-title"><h2>Sala de compresores</h2><span>INTERACTÚA CON EL EQUIPO</span></div>
+<div class="workflow"><span class="workflow-step">01 Conectar</span><span class="workflow-step">02 Abrir botella</span><span class="workflow-step">03 Cargar</span><span class="workflow-step">04 Entregar</span></div>
+<div class="room-backwall"><div class="machine-zone"><div class="compressor" id="compressor"><div><p class="eyebrow">COMPRESOR DE AIRE</p><h3>Comptrade CPT 300</h3><span class="status" id="motor-status">● DETENIDO</span></div><button id="sound" aria-pressed="true" title="Sonido activado por defecto; empieza con la primera interacción si el navegador lo requiere">♫ Silenciar</button><div class="motor-controls starter-control"><div class="starter-panel"><span class="starter-title">PARTIDOR</span><div class="starter-dial" role="group" aria-label="Posiciones del partidor"><button type="button" class="starter-position zero" data-starter-position="0" aria-label="Partidor: posición 0" aria-pressed="true">0</button><button type="button" class="starter-position star" data-starter-position="Y" aria-label="Partidor: posición Y" aria-pressed="false">Y</button><button type="button" class="starter-position delta" data-starter-position="Δ" aria-label="Partidor: posición triángulo" aria-pressed="false">Δ</button><button id="starter-knob" class="starter-knob" aria-label="Partidor en 0. Girar a Y." aria-describedby="starter-instruction" data-position="0"><span class="starter-handle" aria-hidden="true"></span></button></div></div><div class="starter-guidance"><p id="starter-instruction" role="status">Toca Y para comenzar el arranque.</p><output id="starter-timer" role="timer" aria-live="off">DETENIDO</output><progress id="starter-progress" max="3" value="0" aria-label="Tiempo transcurrido en Y" hidden></progress><small>Arranque: Y 2 s → Δ · Verde de 2 a menos de 3 s · Apagado: Y 1 s → 0 antes de 2 s<br>Segundos reales · el conteo se detiene al pausar.</small></div></div><svg class="compressor-picture" viewBox="0 0 430 220" role="img" aria-label="Compresor con motor rojo, bastidor, filtros azules y manómetro"><defs><linearGradient id="steel" x2="1"><stop stop-color="#38515b"/><stop offset=".5" stop-color="#98b5be"/><stop offset="1" stop-color="#243c46"/></linearGradient><linearGradient id="blue" x2="1"><stop stop-color="#07384f"/><stop offset=".5" stop-color="#1b90bb"/><stop offset="1" stop-color="#10516f"/></linearGradient></defs><ellipse cx="212" cy="204" rx="194" ry="12" fill="#071118" opacity=".5"/><path d="M30 192V54h350v138M30 190h350M59 190v14m295-14v14" fill="none" stroke="#849da2" stroke-width="8" stroke-linejoin="round"/><rect x="55" y="108" width="126" height="73" rx="17" fill="url(#steel)"/><g stroke="#182f3a" stroke-width="5"><path d="M72 115v58m14-59v60m14-60v60m14-60v60m14-60v60m14-59v58m14-57v56"/></g><circle cx="176" cy="145" r="40" fill="#132d37" stroke="#6d8d9a" stroke-width="4"/><circle cx="176" cy="145" r="28" fill="none" stroke="#345360" stroke-width="3"/><path d="m158 124 36 42m-42-4 47-36" stroke="#5b7e8b" stroke-width="8"/><rect x="83" y="67" width="105" height="38" rx="10" fill="#bd4336" stroke="#582622" stroke-width="4"/><rect x="98" y="59" width="28" height="9" rx="2" fill="#9eaaaa"/><text x="136" y="92" text-anchor="middle" fill="#f2d6af" font-size="12" font-family="sans-serif" font-weight="bold">CPT 300</text><path d="M204 165v-66h38" fill="none" stroke="#acb1a8" stroke-width="7"/><rect x="253" y="74" width="35" height="112" rx="8" fill="url(#blue)" stroke="#143c4d" stroke-width="3"/><rect x="307" y="43" width="37" height="143" rx="8" fill="url(#blue)" stroke="#143c4d" stroke-width="3"/><path d="M270 75V56h55M270 186v10m54-10v10" fill="none" stroke="#a0a79c" stroke-width="6"/><svg id="compressor-gauge" x="177" y="30" width="122" height="122" viewBox="0 0 100 100" role="img" aria-label="Manómetro de salida del compresor: 0 PSI, 0.0 bar"><circle cx="50" cy="50" r="48" fill="#a8bbbd" stroke="#344c57" stroke-width="3"/><circle cx="50" cy="50" r="44" fill="#f5efd7" stroke="#dce4d8" stroke-width="2"/><path d="M25.96 74.04L19.59 80.41" stroke="#3e4f55" stroke-width="1.3"/><text x="30.20" y="69.80" text-anchor="middle" dominant-baseline="middle" font-size="5.5" fill="#283e48">0</text><path d="M19.95 74.86L16.87 77.41" stroke="#3e4f55" stroke-width="0.6"/><path d="M17.74 71.92L14.44 74.17" stroke="#3e4f55" stroke-width="0.6"/><path d="M15.82 68.79L12.32 70.72" stroke="#3e4f55" stroke-width="0.6"/><path d="M14.21 65.49L10.54 67.08" stroke="#3e4f55" stroke-width="0.6"/><path d="M12.91 62.05L9.10 63.29" stroke="#3e4f55" stroke-width="0.6"/><path d="M11.94 58.51L8.04 59.38" stroke="#3e4f55" stroke-width="0.6"/><path d="M11.31 54.89L7.34 55.39" stroke="#3e4f55" stroke-width="0.6"/><path d="M11.02 51.23L7.02 51.35" stroke="#3e4f55" stroke-width="0.6"/><path d="M11.08 47.55L7.08 47.30" stroke="#3e4f55" stroke-width="0.6"/><path d="M16.42 44.68L7.53 43.27" stroke="#3e4f55" stroke-width="1.3"/><text x="22.34" y="45.62" text-anchor="middle" dominant-baseline="middle" font-size="5.5" fill="#283e48">1000</text><path d="M12.23 40.30L8.35 39.31" stroke="#3e4f55" stroke-width="0.6"/><path d="M13.31 36.79L9.54 35.43" stroke="#3e4f55" stroke-width="0.6"/><path d="M14.71 33.39L11.09 31.69" stroke="#3e4f55" stroke-width="0.6"/><path d="M16.43 30.15L12.99 28.11" stroke="#3e4f55" stroke-width="0.6"/><path d="M18.45 27.08L15.21 24.73" stroke="#3e4f55" stroke-width="0.6"/><path d="M20.75 24.21L17.75 21.56" stroke="#3e4f55" stroke-width="0.6"/><path d="M23.30 21.57L20.56 18.65" stroke="#3e4f55" stroke-width="0.6"/><path d="M26.10 19.18L23.64 16.02" stroke="#3e4f55" stroke-width="0.6"/><path d="M29.10 17.07L26.96 13.69" stroke="#3e4f55" stroke-width="0.6"/><path d="M34.56 19.71L30.48 11.69" stroke="#3e4f55" stroke-width="1.3"/><text x="37.29" y="25.05" text-anchor="middle" dominant-baseline="middle" font-size="5.5" fill="#283e48">2000</text><path d="M35.64 13.74L34.17 10.02" stroke="#3e4f55" stroke-width="0.6"/><path d="M39.12 12.55L38.00 8.71" stroke="#3e4f55" stroke-width="0.6"/><path d="M42.69 11.69L41.94 7.76" stroke="#3e4f55" stroke-width="0.6"/><path d="M46.33 11.17L45.95 7.19" stroke="#3e4f55" stroke-width="0.6"/><path d="M50.00 11.00L50.00 7.00" stroke="#3e4f55" stroke-width="0.6"/><path d="M53.67 11.17L54.05 7.19" stroke="#3e4f55" stroke-width="0.6"/><path d="M57.31 11.69L58.06 7.76" stroke="#3e4f55" stroke-width="0.6"/><path d="M60.88 12.55L62.00 8.71" stroke="#3e4f55" stroke-width="0.6"/><path d="M64.36 13.74L65.83 10.02" stroke="#3e4f55" stroke-width="0.6"/><path d="M65.44 19.71L69.52 11.69" stroke="#3e4f55" stroke-width="1.3"/><text x="62.71" y="25.05" text-anchor="middle" dominant-baseline="middle" font-size="5.5" fill="#283e48">3000</text><path d="M70.90 17.07L73.04 13.69" stroke="#3e4f55" stroke-width="0.6"/><path d="M73.90 19.18L76.36 16.02" stroke="#3e4f55" stroke-width="0.6"/><path d="M76.70 21.57L79.44 18.65" stroke="#3e4f55" stroke-width="0.6"/><path d="M79.25 24.21L82.25 21.56" stroke="#3e4f55" stroke-width="0.6"/><path d="M81.55 27.08L84.79 24.73" stroke="#3e4f55" stroke-width="0.6"/><path d="M83.57 30.15L87.01 28.11" stroke="#3e4f55" stroke-width="0.6"/><path d="M85.29 33.39L88.91 31.69" stroke="#3e4f55" stroke-width="0.6"/><path d="M86.69 36.79L90.46 35.43" stroke="#3e4f55" stroke-width="0.6"/><path d="M87.77 40.30L91.65 39.31" stroke="#3e4f55" stroke-width="0.6"/><path d="M83.58 44.68L92.47 43.27" stroke="#3e4f55" stroke-width="1.3"/><text x="77.66" y="45.62" text-anchor="middle" dominant-baseline="middle" font-size="5.5" fill="#283e48">4000</text><path d="M88.92 47.55L92.92 47.30" stroke="#3e4f55" stroke-width="0.6"/><path d="M88.98 51.23L92.98 51.35" stroke="#3e4f55" stroke-width="0.6"/><path d="M88.69 54.89L92.66 55.39" stroke="#3e4f55" stroke-width="0.6"/><path d="M88.06 58.51L91.96 59.38" stroke="#3e4f55" stroke-width="0.6"/><path d="M87.09 62.05L90.90 63.29" stroke="#3e4f55" stroke-width="0.6"/><path d="M85.79 65.49L89.46 67.08" stroke="#3e4f55" stroke-width="0.6"/><path d="M84.18 68.79L87.68 70.72" stroke="#3e4f55" stroke-width="0.6"/><path d="M82.26 71.92L85.56 74.17" stroke="#3e4f55" stroke-width="0.6"/><path d="M80.05 74.86L83.13 77.41" stroke="#3e4f55" stroke-width="0.6"/><path d="M74.04 74.04L80.41 80.41" stroke="#3e4f55" stroke-width="1.3"/><text x="69.80" y="69.80" text-anchor="middle" dominant-baseline="middle" font-size="5.5" fill="#283e48">5000</text><text x="50" y="35" text-anchor="middle" font-size="5.5" fill="#58696c">COMPRESOR</text><g id="compressor-gauge-needle" class="compressor-gauge-needle"><path d="M24 76L50 50L57 43" stroke="#b52f2c" stroke-width="2.1" stroke-linecap="round"/><circle cx="50" cy="50" r="3.5" fill="#293f49"/></g><text id="compressor-gauge-pressure" x="50" y="69" text-anchor="middle" font-size="9" font-weight="bold" fill="#132f3c">0 PSI</text><text id="compressor-gauge-bar" x="50" y="80" text-anchor="middle" font-size="7.5" fill="#35535e">0.0 bar</text></svg><path d="M346 91q57 16 22 74q-12 18 18 24" fill="none" stroke="#111a20" stroke-width="9"/><path d="M40 52h335" stroke="#bccac7" stroke-width="3"/><text x="212" y="217" text-anchor="middle" fill="#b2c3c8" font-size="10" letter-spacing="2" font-family="sans-serif">COMPRESOR · AIRE RESPIRABLE</text></svg></div>
+</div><div class="cascade-and-regulator"><section class="regulator-console" aria-labelledby="regulator-title"><h3 id="regulator-title">Regulador de presión</h3><p class="regulator-route-label">COLECTOR → REGULADOR → MANGUERA → CABEZAL</p><div class="regulator-body"><svg class="regulator-hardware" viewBox="0 0 360 190" aria-label="Regulador entre manómetros de entrada del colector y salida hacia la manguera"><defs><linearGradient id="reg-brass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ecd18a"/><stop offset=".35" stop-color="#bd954b"/><stop offset=".65" stop-color="#d9b86a"/><stop offset="1" stop-color="#685023"/></linearGradient><linearGradient id="reg-chrome" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#66797f"/><stop offset=".25" stop-color="#f1f3e7"/><stop offset=".5" stop-color="#8ea0a2"/><stop offset=".7" stop-color="#e5e8d9"/><stop offset="1" stop-color="#586b73"/></linearGradient></defs><ellipse cx="180" cy="172" rx="138" ry="9" fill="#0b141a" opacity=".5"/><path d="M4 136H356" stroke="#2b3a40" stroke-width="21"/><path d="M4 136H356" stroke="url(#reg-chrome)" stroke-width="14"/><path d="M69 124V136M291 124V136" stroke="url(#reg-brass)" stroke-width="16"/><rect x="108" y="111" width="144" height="49" rx="17" fill="url(#reg-brass)" stroke="#5e4922" stroke-width="2"/><path d="M126 119H235" stroke="#f0d28a" stroke-width="2" opacity=".7"/><svg class="regulator-dial" x="222" y="5" width="138" height="138" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="url(#reg-chrome)" stroke="#52666b" stroke-width="1.5"/><circle cx="50" cy="50" r="44" fill="#f5f0df" stroke="#7f8d8e" stroke-width="1"/><path d="M25.96 74.04L19.59 80.41" stroke="#344047" stroke-width="1"/><text x="30.20" y="69.80" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">0</text><path d="M18.97 73.63L15.79 76.05" stroke="#344047" stroke-width="0.5"/><path d="M16.08 69.25L12.60 71.22" stroke="#344047" stroke-width="0.5"/><path d="M13.80 64.52L10.09 66.01" stroke="#344047" stroke-width="0.5"/><path d="M12.18 59.53L8.30 60.51" stroke="#344047" stroke-width="0.5"/><path d="M16.21 53.81L7.27 54.81" stroke="#344047" stroke-width="1"/><text x="22.18" y="53.14" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">1000</text><path d="M11.01 49.12L7.01 49.04" stroke="#344047" stroke-width="0.5"/><path d="M11.48 43.90L7.53 43.27" stroke="#344047" stroke-width="0.5"/><path d="M12.65 38.78L8.82 37.63" stroke="#344047" stroke-width="0.5"/><path d="M14.49 33.87L10.85 32.22" stroke="#344047" stroke-width="0.5"/><path d="M21.21 31.91L13.59 27.12" stroke="#344047" stroke-width="1"/><text x="26.29" y="35.10" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">2000</text><path d="M20.06 25.01L16.99 22.44" stroke="#344047" stroke-width="0.5"/><path d="M23.69 21.21L20.99 18.26" stroke="#344047" stroke-width="0.5"/><path d="M27.79 17.94L25.51 14.65" stroke="#344047" stroke-width="0.5"/><path d="M32.29 15.25L30.48 11.69" stroke="#344047" stroke-width="0.5"/><path d="M38.77 17.91L35.80 9.41" stroke="#344047" stroke-width="1"/><text x="40.75" y="23.57" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">3000</text><path d="M42.18 11.79L41.37 7.87" stroke="#344047" stroke-width="0.5"/><path d="M47.38 11.09L47.11 7.10" stroke="#344047" stroke-width="0.5"/><path d="M52.62 11.09L52.89 7.10" stroke="#344047" stroke-width="0.5"/><path d="M57.82 11.79L58.63 7.87" stroke="#344047" stroke-width="0.5"/><path d="M61.23 17.91L64.20 9.41" stroke="#344047" stroke-width="1"/><text x="59.25" y="23.57" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">4000</text><path d="M67.71 15.25L69.52 11.69" stroke="#344047" stroke-width="0.5"/><path d="M72.21 17.94L74.49 14.65" stroke="#344047" stroke-width="0.5"/><path d="M76.31 21.21L79.01 18.26" stroke="#344047" stroke-width="0.5"/><path d="M79.94 25.01L83.01 22.44" stroke="#344047" stroke-width="0.5"/><path d="M78.79 31.91L86.41 27.12" stroke="#344047" stroke-width="1"/><text x="73.71" y="35.10" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">5000</text><path d="M85.51 33.87L89.15 32.22" stroke="#344047" stroke-width="0.5"/><path d="M87.35 38.78L91.18 37.63" stroke="#344047" stroke-width="0.5"/><path d="M88.52 43.90L92.47 43.27" stroke="#344047" stroke-width="0.5"/><path d="M88.99 49.12L92.99 49.04" stroke="#344047" stroke-width="0.5"/><path d="M83.79 53.81L92.73 54.81" stroke="#344047" stroke-width="1"/><text x="77.82" y="53.14" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">6000</text><path d="M87.82 59.53L91.70 60.51" stroke="#344047" stroke-width="0.5"/><path d="M86.20 64.52L89.91 66.01" stroke="#344047" stroke-width="0.5"/><path d="M83.92 69.25L87.40 71.22" stroke="#344047" stroke-width="0.5"/><path d="M81.03 73.63L84.21 76.05" stroke="#344047" stroke-width="0.5"/><path d="M74.04 74.04L80.41 80.41" stroke="#344047" stroke-width="1"/><text x="69.80" y="69.80" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">7000</text><text x="50" y="35" text-anchor="middle" font-size="5" fill="#526066">PSI</text><g id="regulator-in-needle" class="regulator-needle"><path d="M24 76L50 50L56 44" stroke="#b7342e" stroke-width="1.8"/><circle cx="50" cy="50" r="3" fill="#293c45"/></g><text x="50" y="59" text-anchor="middle" font-size="4.8" fill="#59676c">ENTRADA · COLECTOR</text><text id="regulator-input-pressure" x="50" y="71" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#172f3b">0 PSI</text><text id="regulator-input-bar" x="50" y="82" text-anchor="middle" font-size="6.8" fill="#3b545e">0.0 bar</text></svg><svg class="regulator-dial" x="0" y="5" width="138" height="138" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="url(#reg-chrome)" stroke="#52666b" stroke-width="1.5"/><circle cx="50" cy="50" r="44" fill="#f5f0df" stroke="#7f8d8e" stroke-width="1"/><path d="M25.96 74.04L19.59 80.41" stroke="#344047" stroke-width="1"/><text x="30.20" y="69.80" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">0</text><path d="M18.97 73.63L15.79 76.05" stroke="#344047" stroke-width="0.5"/><path d="M16.08 69.25L12.60 71.22" stroke="#344047" stroke-width="0.5"/><path d="M13.80 64.52L10.09 66.01" stroke="#344047" stroke-width="0.5"/><path d="M12.18 59.53L8.30 60.51" stroke="#344047" stroke-width="0.5"/><path d="M16.21 53.81L7.27 54.81" stroke="#344047" stroke-width="1"/><text x="22.18" y="53.14" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">1000</text><path d="M11.01 49.12L7.01 49.04" stroke="#344047" stroke-width="0.5"/><path d="M11.48 43.90L7.53 43.27" stroke="#344047" stroke-width="0.5"/><path d="M12.65 38.78L8.82 37.63" stroke="#344047" stroke-width="0.5"/><path d="M14.49 33.87L10.85 32.22" stroke="#344047" stroke-width="0.5"/><path d="M21.21 31.91L13.59 27.12" stroke="#344047" stroke-width="1"/><text x="26.29" y="35.10" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">2000</text><path d="M20.06 25.01L16.99 22.44" stroke="#344047" stroke-width="0.5"/><path d="M23.69 21.21L20.99 18.26" stroke="#344047" stroke-width="0.5"/><path d="M27.79 17.94L25.51 14.65" stroke="#344047" stroke-width="0.5"/><path d="M32.29 15.25L30.48 11.69" stroke="#344047" stroke-width="0.5"/><path d="M38.77 17.91L35.80 9.41" stroke="#344047" stroke-width="1"/><text x="40.75" y="23.57" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">3000</text><path d="M42.18 11.79L41.37 7.87" stroke="#344047" stroke-width="0.5"/><path d="M47.38 11.09L47.11 7.10" stroke="#344047" stroke-width="0.5"/><path d="M52.62 11.09L52.89 7.10" stroke="#344047" stroke-width="0.5"/><path d="M57.82 11.79L58.63 7.87" stroke="#344047" stroke-width="0.5"/><path d="M61.23 17.91L64.20 9.41" stroke="#344047" stroke-width="1"/><text x="59.25" y="23.57" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">4000</text><path d="M67.71 15.25L69.52 11.69" stroke="#344047" stroke-width="0.5"/><path d="M72.21 17.94L74.49 14.65" stroke="#344047" stroke-width="0.5"/><path d="M76.31 21.21L79.01 18.26" stroke="#344047" stroke-width="0.5"/><path d="M79.94 25.01L83.01 22.44" stroke="#344047" stroke-width="0.5"/><path d="M78.79 31.91L86.41 27.12" stroke="#344047" stroke-width="1"/><text x="73.71" y="35.10" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">5000</text><path d="M85.51 33.87L89.15 32.22" stroke="#344047" stroke-width="0.5"/><path d="M87.35 38.78L91.18 37.63" stroke="#344047" stroke-width="0.5"/><path d="M88.52 43.90L92.47 43.27" stroke="#344047" stroke-width="0.5"/><path d="M88.99 49.12L92.99 49.04" stroke="#344047" stroke-width="0.5"/><path d="M83.79 53.81L92.73 54.81" stroke="#344047" stroke-width="1"/><text x="77.82" y="53.14" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">6000</text><path d="M87.82 59.53L91.70 60.51" stroke="#344047" stroke-width="0.5"/><path d="M86.20 64.52L89.91 66.01" stroke="#344047" stroke-width="0.5"/><path d="M83.92 69.25L87.40 71.22" stroke="#344047" stroke-width="0.5"/><path d="M81.03 73.63L84.21 76.05" stroke="#344047" stroke-width="0.5"/><path d="M74.04 74.04L80.41 80.41" stroke="#344047" stroke-width="1"/><text x="69.80" y="69.80" text-anchor="middle" dominant-baseline="middle" font-size="5" fill="#344047">7000</text><text x="50" y="35" text-anchor="middle" font-size="5" fill="#526066">PSI</text><g id="regulator-out-needle" class="regulator-needle"><path d="M24 76L50 50L56 44" stroke="#b7342e" stroke-width="1.8"/><circle cx="50" cy="50" r="3" fill="#293c45"/></g><text x="50" y="59" text-anchor="middle" font-size="4.8" fill="#59676c">SALIDA · MANGUERA</text><text id="regulator-output-pressure" x="50" y="71" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#172f3b">0 PSI</text><text id="regulator-output-bar" x="50" y="82" text-anchor="middle" font-size="6.8" fill="#3b545e">0.0 bar</text></svg></svg><span id="regulator-inlet" class="regulator-port inlet" aria-hidden="true"></span><div id="regulator-knob" class="regulator-knob" role="slider" tabindex="0" aria-label="Perilla de regulación de salida, en bar" aria-valuemin="0" aria-valuemax="300" aria-valuenow="300"><span class="regulator-knob-marker"></span><span class="regulator-knob-cap">REGULAR<small>GIRAR</small></span></div><span id="regulator-outlet" class="regulator-port outlet" aria-hidden="true"></span></div><div class="charge-controls"><label><input type="range" id="regulator" min="0" max="300" step="1" aria-label="Regulación en bar"><span class="regulator-setting-label">Ajuste de salida</span><output id="reg-value"></output></label></div></section><div class="cascade-zone"><div class="section-title"><h3>Cascada · 8 × 45 L</h3><span>GIRA CADA VÁLVULA · COLOR = PRESIÓN, NO LÍQUIDO</span></div><div id="banks" class="banks"></div><div class="receiver-line"><div class="collector-pipe" id="receiver-pipe" role="img"><span class="receiver-pressure-fill"></span></div><div class="receiver-caption"><span>LÍNEA RECEPTORA · ANTES DEL REGULADOR</span><output id="receiver-pressure"></output></div><small id="receiver-state">Sin presión</small></div></div></div>
+</div>
+
+<div class="room-floor"><section class="head-zone" aria-labelledby="head-title"><div class="section-title"><h3 id="head-title">Cabezal cuádruple</h3><span>ARRASTRA EL CABEZAL HACIA LA BOTELLA</span></div><button id="head-tool">⛓ Tomar cabezal y conectar</button><p id="leak-label" class="leak-label" role="status" hidden>Fuga por boquilla sin botella</p><output id="head-outflow" class="outflow-info outflow-idle"></output><div id="lines" class="lines"></div></section><section id="bottle-instructions" class="bottle-instructions" aria-labelledby="bottle-instructions-title"><h3 id="bottle-instructions-title">INDICACIONES DE LA BOTELLA</h3><p id="bottle-instructions-copy" role="status" aria-live="polite">Coloca una botella en el atril para ver las indicaciones.</p><ol id="bottle-finish-steps" class="finish-preview" aria-hidden="true"></ol><small id="bottle-redirect-note"></small></section><section class="station-zone" aria-label="Atril de carga"><div id="stand-zone" class="stand-zone"><div class="stand-frame"></div><span id="empty-stand">ATRIL VACÍO</span><div id="stand-art" hidden></div><div id="mounted-head" class="mounted-head"></div><div id="bottle-air-jet" class="air-jet bottle-air-jet" hidden aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><button id="stand-bottle-valve" class="physical-valve" disabled>Abrir botella</button></div><div id="stand-pressure" class="stand-pressure"></div><p id="bottle-leak-alert" class="leak-label bottle-leak-alert" role="alert" hidden></p><output id="bottle-outflow" class="outflow-info" hidden></output><div class="station-actions"><div class="delivery-tally"><span>ENTREGAS</span><span id="delivery-ticks" role="status" aria-live="polite">Sin entregas</span></div><button id="deliver-bottle" type="button">✓ Entregar botella</button><button id="request-bottle" type="button">↻ Pedir otra botella</button></div>
+</section>
+</div>
+<div class="workshop-guidance" id="workshop-hint" role="status" aria-live="polite">Conecta el cabezal a la botella del atril.</div>
+<div id="incident" class="incident" role="region" aria-labelledby="incident-title" hidden><p class="eyebrow">INCIDENTE SIMULADO · ANÁLISIS</p><h2 id="incident-title" tabindex="-1"></h2><p id="incident-copy"></p><p id="incident-analysis"></p><p id="incident-lesson"></p><small>Estallido y descarga ilustrativos. El 110 % es un umbral de juego, no un límite real de rotura ni un margen permitido.</small><button id="retry">↻ Repetir y comparar</button></div>
+</div>
+<details class="support-panels"><summary>Instrucciones, misión y bitácora</summary><div class="support-content">
+<div class="lesson"><p class="eyebrow">TU MISIÓN</p><h2 id="mission-title"></h2><p id="mission-copy"></p><ol id="steps"></ol><div id="progress"></div></div>
+<div class="readout"><span>TECHO DEL COMPRESOR</span><strong>4351 <small>PSI</small></strong><span>300 bar</span><hr><p>4500 PSI ≈ 310 bar. Se usa provisionalmente el límite menor de <b>300 bar</b> hasta resolver las discrepancias del PDF con la placa y el manual.</p></div>
+<div class="sound-note"><b>Escucha el motor</b><p>Activa sonido. El golpeteo y las pulsaciones aparecen automáticamente al acercarse al límite con presión casi sin avance. Son una aproximación sintetizada, pendiente de contrastar con la grabación real.</p></div>
+<div class="feedback" id="feedback" role="status" aria-live="polite">Selecciona un banco para comenzar.</div>
+<details><summary>Circuito confirmado</summary><p>Compresor → colector común de los 8 cilindros (cada uno con su válvula) → regulador de presión → manguera → cabezal de carga (válvula de paso, manómetro, despiche y boquilla) → válvula de la botella → botella.</p><p>Sin válvula intermedia entre regulador y manguera. El modelo separa colector, manguera, cabezal y botella. El manómetro del cabezal lee el tramo posterior a su válvula; la presión interna de la botella se muestra aparte como ayuda didáctica.</p></details><details><summary>Modelo y límites didácticos</summary><p>Base: procedimiento del cuartel, 12 páginas. Cascada: 8 × 45 L, carga individual y máximo documental de 4300 PSI. El PDF contiene cifras incompatibles de PSI/bar; el modelo conserva una fuente provisional de 300 bar (4351 PSI), que no puede completar 4500 PSI.</p><p>La rotura del sello ocurre con un umbral artificial de escenario. No implica que exista sobrepresión admisible ni que el sello real actúe allí. El caudal es una aproximación didáctica.</p><p>El despiche vacía el cabezal y la boquilla aislados entre la válvula del cabezal y la válvula de botella. La manguera anterior al cabezal permanece conectada al regulador. Se supone un regulador sin alivio ni retorno: bajar su ajuste no descarga automáticamente la manguera. El partidor usa el ajuste de práctica solicitado: 2 s en Y para arrancar, con ventana verde de 2 a menos de 3 s; al llegar a 3 s indica demora en rojo. Para apagar espera 1 s en Y. El manual de origen indica 3 s para arrancar. Durante Y se representa el giro del motor sin entrega de aire; no se modela su dinámica eléctrica. No reproduce el despiche de agua/aceite del compresor. El volumen de las botellas (6,8 L), los volúmenes internos y el comportamiento real del regulador deben validarse.</p></details><details open><summary>Bitácora de decisiones</summary><ol id="log" class="event-log"></ol></details>
+</div></details>
+</section>
+<footer><span>QUINTA · APRENDER ANTES DE OPERAR</span><span>Prototipo 0.10 / Sin conexión con equipos reales</span></footer>
+</main><script>// Generated by npm run build; edit the source modules instead.
+(()=>{
+'use strict';
+// Ideal-gas orifice approximation for air. Absolute pressures; no real-gas calibration.
+const AIR_GAMMA=1.4;
+const AIR_R=287.05;
+const CRITICAL_PRESSURE_RATIO=(2/(AIR_GAMMA+1))**(AIR_GAMMA/(AIR_GAMMA-1));
+function airOutflow(upstreamAbsoluteBar,downstreamAbsoluteBar,temperatureK,areaMm2,dischargeCoefficient=.7){
+ const valid=[upstreamAbsoluteBar,downstreamAbsoluteBar,temperatureK,areaMm2,dischargeCoefficient].every(Number.isFinite);
+ const empty={massKgPerSecond:0,freeLitresPerSecond:0,regime:'stopped',pressureRatio:1};
+ if(!valid||upstreamAbsoluteBar<=downstreamAbsoluteBar||downstreamAbsoluteBar<=0||temperatureK<=0||areaMm2<=0||dischargeCoefficient<=0)return empty;
+ const ratio=downstreamAbsoluteBar/upstreamAbsoluteBar,gamma=AIR_GAMMA;
+ const choked=ratio<=CRITICAL_PRESSURE_RATIO;
+ const factor=choked?Math.sqrt(gamma)*(2/(gamma+1))**((gamma+1)/(2*(gamma-1))):Math.sqrt(Math.max(0,2*gamma/(gamma-1)*(ratio**(2/gamma)-ratio**((gamma+1)/gamma))));
+ const mass=Math.min(1,dischargeCoefficient)*areaMm2*1e-6*upstreamAbsoluteBar*1e5/Math.sqrt(AIR_R*temperatureK)*factor;
+ const referenceDensity=1e5/(AIR_R*293.15); // Free-air litres at 1 bar absolute, 20 °C.
+ return {massKgPerSecond:mass,freeLitresPerSecond:mass/referenceDensity*1000,regime:choked?'choked':'subsonic',pressureRatio:ratio};
+}
+
+
+// Current training settings requested by the user: 2 seconds in Y to start, 1 to stop.
+// The source manual says 3 seconds to start and 2 seconds to stop.
+// The UI advances this timer in real, active seconds, independently of game speed.
+const STARTER_TIMES=Object.freeze({starting:2,stopping:1});
+function createStarter(){return {position:'0',phase:'off',seconds:0};}
+function resetStarter(s){
+ s.starter=createStarter();s.running=false;s.struggling=false;s.loadSeconds=0;
+}
+function advanceStarter(s,dt){
+ if(s.paused||s.incident||s.trip||!Number.isFinite(dt)||dt<=0)return;
+ const limit=STARTER_TIMES[s.starter.phase];
+ if(limit)s.starter.seconds+=dt;
+}
+function starterTiming(starter){
+ const limit=STARTER_TIMES[starter.phase];
+ if(!limit)return 'idle';
+ if(starter.seconds+1e-9<limit)return 'waiting';
+ return starter.seconds+1e-9>=limit+1?'late':'ready';
+}
+function setStarterPosition(s,position){
+ const next=s.starter.phase==='off'?'Y':s.starter.phase==='starting'?'Δ':s.starter.phase==='running'?'Y':'0';
+ if(position===s.starter.position)return {changed:false,message:''};
+ if(position!==next)return {changed:false,message:`La siguiente posición es ${next}. Sigue la secuencia del partidor.`};
+ return turnStarter(s);
+}
+function turnStarter(s){
+ if(s.paused||s.incident||s.trip)return {changed:false,message:'Partidor bloqueado durante el incidente.'};
+ const starter=s.starter,limit=STARTER_TIMES[starter.phase];
+ if(limit&&starter.seconds+1e-9<limit)return {changed:false,message:`Espera ${(limit-starter.seconds).toFixed(1)} s en Y antes de volver a girar.`};
+ if(starter.phase==='off'){
+  starter.position='Y';starter.phase='starting';starter.seconds=0;s.running=false;
+  return {changed:true,message:'Partidor 0 → Y. Cuenta 2 segundos y toca Δ mientras el indicador está verde.'};
+ }
+ if(starter.phase==='starting'){
+  const late=starterTiming(starter)==='late',seconds=starter.seconds;
+  starter.position='Δ';starter.phase='running';starter.seconds=0;s.running=true;
+  return {changed:true,message:late?`Partidor Y → Δ con retraso: ${seconds.toFixed(1)} s en Y. Tiempo excedido; la ventana verde era de 2 a menos de 3 s.`:'Partidor Y → Δ tras 2 segundos. Compresor en marcha.'};
+ }
+ if(starter.phase==='running'){
+  starter.position='Y';starter.phase='stopping';starter.seconds=0;
+  s.running=false;s.struggling=false;s.loadSeconds=0;
+  return {changed:true,message:'Partidor Δ → Y. Cuenta 1 segundo y toca 0 mientras el indicador está verde, antes de llegar a 2 segundos.'};
+ }
+ const late=starterTiming(starter)==='late',seconds=starter.seconds;
+ if(late)s.events++;
+ resetStarter(s);
+ return {changed:true,message:late?`Partidor Y → 0 con retraso: ${seconds.toFixed(1)} s en Y. Tiempo excedido; la ventana verde era de 1 a menos de 2 s. Motor detenido; el circuito conserva su presión.`:'Partidor Y → 0 tras 1 segundo. Motor detenido; el circuito conserva su presión.'};
+}
+
+
+
+
+// Topología confirmada; gas y caudal calculados a temperatura ambiente constante.
+const PSI_PER_BAR=14.503773773;
+const psi=bar=>bar*PSI_PER_BAR;
+const config=Object.freeze({compressorBar:300,bankRatedPsi:5000,bankLitres:45,bottleLitres:6.8,collectorLitres:1,hoseLitres:.15,headLitres:.05,ambientC:20,ambientBar:1,nozzleAreaMm2:2,bottleValveAreaMm2:2,purgeAreaMm2:2,dischargeCoefficient:.7,sealDemoRatio:1.10});
+const isIncidentMode=mode=>mode==='overpressure';
+const node=(bar,volume)=>({bar,volume,tempC:20});
+// Net air through each link in free litres per second; positive follows the drawn direction.
+const noFlows=()=>({compressor:0,banks:Array(8).fill(0),collectorToHose:0,hoseToHead:0,headToBottle:0});
+function createState(mode='bottles'){
+ if(!['bottles','limit','overpressure'].includes(mode))mode='bottles';
+ const incident=isIncidentMode(mode);
+ return {mode,starter:createStarter(),collector:node(incident?280:mode==='limit'?298:0,config.collectorLitres),banks:Array.from({length:8},(_,i)=>({...node(mode==='limit'?298:Math.min(296,180+i*17),45),open:false})),lines:[{...node(incident?145:30,6.8),ratedPsi:2216,open:false,bottleOpen:false,connected:true,sealBroken:false,hose:node(0,.15),head:node(0,.05),purging:false,leaking:false,leakRate:0,airLost:0,bottleLeaking:false,bottleLeakRate:0,bottleAirLost:0,disconnectWarning:'',leakPressureBar:0,bottleLeakPressureBar:0,purgePressureBar:0,purgeRate:0}],regulatorBar:300,flow:incident?1:.25,running:false,struggling:false,struggleReason:'',compressorAcceptedFlow:0,loadSeconds:0,loadRate:0,trip:false,alarm:'',flows:noFlows(),elapsed:0,events:0,unsafeDisconnects:0,done:false,incident:null,log:[],peakC:20,peakPsi:0,paused:false,completed:[]};
+}
+function selectedPressure(s){return s.collector.bar;}
+function record(s,text){s.log.unshift({time:s.elapsed,text});s.log.length=Math.min(s.log.length,12);}
+function operateHeadPurge(s,index=0){
+ const l=s.lines[index];if(!l||s.paused||s.incident)return false;
+ l.purging=!l.purging;
+ if(!l.purging){l.purgeRate=0;l.purgePressureBar=0;}
+ record(s,l.purging?'Despiche abierto: descarga el tramo del cabezal y queda abierto hasta cerrarlo. Cierra paso y botella para aislarlo.':'Despiche del cabezal cerrado.');
+ return true;
+}
+// An open bleed on an isolated, empty head vents nothing, so it does not make detaching unsafe.
+function canDetach(s,l){return !l.open&&!l.bottleOpen&&l.head.bar<.1&&!l.sealBroken&&!s.incident;}
+function setBottle(s,rating){const l=s.lines[0];if(l.connected||s.incident||![2216,4500].includes(rating))return false;l.ratedPsi=rating;return true;}
+function detach(s){const l=s.lines[0];if(!l.connected||!canDetach(s,l))return false;
+ if(psi(l.bar)>=Math.min(l.ratedPsi,4300)*.96&&psi(l.bar)<=l.ratedPsi&&!s.completed.includes(l.ratedPsi))s.completed.push(l.ratedPsi);
+ l.connected=false;if(s.mode==='bottles')s.done=s.completed.includes(2216)&&s.completed.includes(4500);return true;}
+// Legacy tempC fields remain data-only; they do not change pressure or discharge.
+const temperature=()=>1;
+const gas=n=>(n.bar+1)*n.volume/temperature(n);
+function putGas(n,q){n.bar=Math.max(0,q*temperature(n)/n.volume-1);}
+// Pair equalization conserves gas and never crosses equilibrium in one transfer.
+function mix(a,b,factor){const qa=gas(a),qb=gas(b),pressure=(qa+qb)/(a.volume/temperature(a)+b.volume/temperature(b));const delta=(pressure*a.volume/temperature(a)-qa)*Math.max(0,Math.min(1,factor));putGas(a,qa+delta);putGas(b,qb-delta);return delta;}
+function fail(s,type,message){s.incident={type,line:0,message};s.flows=noFlows();resetStarter(s);s.paused=true;s.events++;s.alarm=message;s.lines.forEach(l=>{l.open=false;l.bottleOpen=false;});s.banks.forEach(b=>b.open=false);record(s,message);}
+function releaseAir(n,area,dt){
+ const available=Math.max(0,gas(n)-n.volume/temperature(n));
+ const flow=airOutflow(n.bar+config.ambientBar,config.ambientBar,config.ambientC+273.15,area,config.dischargeCoefficient);
+ const released=Math.min(available,flow.freeLitresPerSecond*dt);putGas(n,gas(n)-released);return released;
+}
+function tick(s,dt){
+ dt=Math.max(0,Math.min(dt,.25));if(s.paused)return s;s.elapsed+=dt;
+ const l=s.lines[0],openBanks=s.banks.filter(b=>b.open);const beforeDelivery=s.mode==='limit'&&openBanks.length?openBanks.reduce((sum,b)=>sum+b.bar,0)/openBanks.length:l.bar;
+ const bankGas=s.banks.map(gas),flows=noFlows();
+ // Every open bank communicates with the same upstream collector, including motor off.
+ const upstream=[s.collector,...s.banks.filter(b=>b.open)];
+ const total=upstream.reduce((sum,n)=>sum+gas(n),0),volume=upstream.reduce((sum,n)=>sum+n.volume,0);
+ const pressure=total/volume-1,factor=1-Math.exp(-8*dt);
+ for(const n of upstream)n.bar+=(pressure-n.bar)*factor;
+ s.compressorAcceptedFlow=0;
+ if(s.running&&!s.trip){const capacity=upstream.reduce((sum,n)=>sum+Math.max(0,300-n.bar)*n.volume,0);const added=Math.min(capacity,40*dt);s.compressorAcceptedFlow=dt>0?added/dt:0;
+  // Common manifold is charged, not an arbitrarily selected bottle or isolated bank.
+  const rise=added/volume;for(const n of upstream)n.bar=Math.min(300,n.bar+rise);
+
+ }
+ // Positive bank flow: collector into bank (charging); negative: bank feeding the collector.
+ flows.compressor=s.compressorAcceptedFlow;flows.banks=s.banks.map((b,i)=>dt>0?(gas(b)-bankGas[i])/dt:0);
+ // Regulator feeds the hose directly. No invented shutoff between them.
+ // Simplification: non-relieving, one-way regulator; lowering setpoint does not vent trapped gas.
+ const target=Math.min(s.collector.bar,s.regulatorBar);
+ if(l.hose.bar<target){const available=Math.max(0,gas(s.collector)-s.collector.volume);const amount=Math.min((target-l.hose.bar)*l.hose.volume*(1-Math.exp(-12*dt)),available);putGas(s.collector,gas(s.collector)-amount);putGas(l.hose,gas(l.hose)+amount);flows.collectorToHose=dt>0?amount/dt:0;}
+ if(l.open)flows.hoseToHead=dt>0?-mix(l.hose,l.head,1-Math.exp(-10*s.flow*dt))/dt:0;
+ // An unattached outlet is open to atmosphere; no hidden protective interlock.
+ const wasLeaking=l.leaking;let escaped=0;l.leakPressureBar=0;
+ if(!l.connected){l.leakPressureBar=l.head.bar;escaped=releaseAir(l.head,config.nozzleAreaMm2,dt);}
+ l.leakRate=dt>0?escaped/dt:0;l.airLost+=escaped;l.leaking=l.leakRate>.01;
+ if(l.leaking&&!wasLeaking)record(s,'Fuga por boquilla sin botella conectada: se pierde aire del circuito.');
+ l.purgeRate=0;l.purgePressureBar=0;
+ if(l.purging){l.purgePressureBar=l.head.bar;const released=releaseAir(l.head,config.purgeAreaMm2,dt);l.purgeRate=dt>0?released/dt:0;if(l.head.bar<=1e-8)l.head.bar=0;}
+
+ if(l.connected&&l.bottleOpen&&!l.sealBroken)flows.headToBottle=dt>0?-mix(l.head,l,1-Math.exp(-14*dt))/dt:0;
+ s.flows=flows;
+ // A bottle's own open valve vents independently of the supply head after disconnection.
+ let bottleEscaped=0;l.bottleLeakPressureBar=0;
+ if(!l.connected&&l.bottleOpen){l.bottleLeakPressureBar=l.bar;bottleEscaped=releaseAir(l,config.bottleValveAreaMm2,dt);}
+ l.bottleLeakRate=dt>0?bottleEscaped/dt:0;l.bottleAirLost+=bottleEscaped;l.bottleLeaking=l.bottleLeakRate>.01;
+ if(l.connected){s.peakPsi=Math.max(s.peakPsi,psi(l.bar));
+  if(psi(l.bar)>l.ratedPsi*config.sealDemoRatio+1e-7){const pressureBar=l.bar;l.sealBroken=true;fail(s,'seal','Estallido simulado: se superó el 110 % de la presión nominal. Botella fuera de servicio.');s.incident.pressureBar=pressureBar;l.bar=0;}
+ }
+ const banksNow=s.banks.filter(b=>b.open);
+ const delivery=s.mode==='limit'&&banksNow.length?banksNow.reduce((sum,b)=>sum+b.bar,0)/banksNow.length:l.bar;
+ const rate=dt>0?Math.max(0,(delivery-beforeDelivery)/dt):0;
+ s.loadRate+=(rate-s.loadRate)*(1-Math.exp(-3*dt));
+ // Detect compressor-side saturation in every scenario, including recirculation into
+ // the cascade and a closed outlet. No dependence on a mounted ERA bottle.
+ const entering=s.collector.bar>=296&&s.compressorAcceptedFlow<.5;
+ const recovering=s.collector.bar<294||s.compressorAcceptedFlow>2;
+ const limited=s.running&&!s.paused&&!s.trip&&(s.struggling?!recovering:entering);
+ s.loadSeconds=limited?s.loadSeconds+dt:0;
+ const wasStruggling=s.struggling;s.struggling=limited&&(wasStruggling||s.loadSeconds>=1);
+ s.struggleReason=s.struggling?(banksNow.length?'cascada al límite':l.connected&&l.open&&l.bottleOpen?(s.regulatorBar<296?'salida regulada sin demanda':'botella al límite de entrega'):'salida cerrada sin demanda'):'';
+ if(s.struggling&&!wasStruggling){s.alarm=`ARIETE SIMULADO · ${s.struggleReason}: el motor sigue encendido pero casi no entrega aire.`;record(s,s.alarm);if(s.mode==='limit'&&banksNow.length)s.done=true;}
+
+ return s;
+}
+
+
+
+function createWorkshopSession(mode='bottles'){
+ if(!['bottles','limit','overpressure'].includes(mode))mode='bottles';
+ const s=createState(mode);s.lines[0].connected=false;
+ s.workshop={placed:null,bottle:null,finishGuide:null,nextId:1,delivered:0};
+ mountNewBottle(s);
+ return s;
+}
+// The stand always holds one bottle. Arrivals alternate 2216 and 4500 PSI (only 2216 in the
+// overpressure drill); residual pressure varies per arrival, deterministically.
+function mountNewBottle(s){
+ const w=s.workshop,l=s.lines[0],n=w.nextId++,ratedPsi=s.mode==='overpressure'||n%2===1?2216:4500;
+ const bottle={id:`ERA-${String(n).padStart(2,'0')}`,ratedPsi};
+ Object.assign(l,{bar:s.mode==='overpressure'?145:20+(n-1)*7%30,tempC:20,ratedPsi,connected:false,bottleOpen:false,sealBroken:false,bottleLeaking:false,bottleLeakRate:0,bottleAirLost:0,disconnectWarning:''});
+ w.bottle=bottle;w.placed=bottle.id;w.finishGuide=null;
+ return bottle;
+}
+// The bottle only leaves after a correct disconnection: closed valves and a purged head.
+const UNSAFE_REMOVAL='El cabezal se desconectó sin despichar. Reconéctalo, despicha hasta cero y desconéctalo correctamente antes de retirar la botella.';
+// Swapping the bottle needs the same isolation as delivering it, without the pressure target.
+function requestProblem(s){
+ const l=s.lines[0];
+ if(s.paused||s.incident)return 'El ejercicio está detenido.';
+ if(l.connected)return 'Desconecta el cabezal antes de cambiar la botella.';
+ if(l.bottleOpen)return 'Cierra la válvula de la botella antes de cambiarla.';
+ if(l.disconnectWarning)return UNSAFE_REMOVAL;
+ return null;
+}
+function requestBottle(s){
+ if(requestProblem(s))return false;
+ const old=s.workshop.bottle,next=mountNewBottle(s);
+ record(s,`${old.id} retirada sin entregar. Llega ${next.id} · ${next.ratedPsi} PSI.`);
+ return true;
+}
+function attachHead(s){const l=s.lines[0];if(s.paused||!s.workshop.placed||l.connected||l.open||l.bottleOpen||l.head.bar>=.1||l.purging)return false;l.connected=true;l.disconnectWarning='';record(s,'Cabezal conectado a la botella del atril.');return true;}
+function canDisconnectHead(s){const l=s.lines[0];return l.connected&&!s.paused&&!s.incident&&!l.sealBroken;}
+function disconnectHead(s){const l=s.lines[0];if(!canDisconnectHead(s))return false;
+ const unsafe=!canDetach(s,l);l.connected=false;
+ if(unsafe){s.unsafeDisconnects++;s.events++;l.disconnectWarning=l.bottleOpen?'ALERTA: cabezal desconectado con la botella abierta. El aire sale de la botella. Cierra su válvula.':'ALERTA: cabezal desconectado sin aislar y despresurizar completamente. Se libera aire del circuito.';record(s,l.disconnectWarning);}
+ else{l.disconnectWarning='';record(s,'Cabezal desconectado tras cerrar válvulas y despresurizar boquilla.');}
+ return true;}
+
+// Delivery: a closed, disconnected bottle between 90 % and 100 % of its rating leaves the room.
+const DELIVERY_MIN_PERCENT=90;
+function chargePercent(l){return l.ratedPsi>0?psi(l.bar)/l.ratedPsi*100:0;}
+function deliveryProblem(s){
+ const l=s.lines[0];
+ if(s.paused||s.incident)return 'El ejercicio está detenido.';
+ if(l.connected)return 'Desconecta el cabezal antes de entregar la botella.';
+ if(l.bottleOpen)return 'Cierra la válvula de la botella antes de entregarla.';
+ if(l.disconnectWarning)return UNSAFE_REMOVAL;
+ if(l.sealBroken)return 'La botella quedó fuera de servicio y no se puede entregar.';
+ const percent=chargePercent(l);
+ if(percent>100+1e-9)return `Botella sobre su presión nominal (${Math.round(percent)} %): no se entrega.`;
+ if(percent<DELIVERY_MIN_PERCENT)return `Para entregar, la botella debe superar el ${DELIVERY_MIN_PERCENT} % (ahora ${Math.floor(percent)} %).`;
+ return null;
+}
+function deliverBottle(s){
+ if(deliveryProblem(s))return false;
+ const w=s.workshop,l=s.lines[0],old=w.bottle,percent=chargePercent(l),pressure=psi(l.bar);
+ w.delivered++;if(!s.completed.includes(l.ratedPsi))s.completed.push(l.ratedPsi);
+ // The goal is one delivered bottle of each rating.
+ s.done=s.mode==='bottles'&&s.completed.includes(2216)&&s.completed.includes(4500);
+ const next=mountNewBottle(s);
+ record(s,`✓ ${old.id} entregada al ${Math.round(percent)} % (${Math.round(pressure)} PSI). Llega ${next.id} · ${next.ratedPsi} PSI.`);
+ return true;
+}
+// Only the head is dragged; validate without changing anything so a cancelled drag leaves it in place.
+function workshopDropProblem(s,item,target){
+ const l=s.lines[0];
+ if(s.paused||s.incident)return 'El ejercicio está detenido.';
+ if(!item)return 'No hay un objeto para trasladar.';
+ if(item.kind==='head'){
+  if(item.from==='dock'&&target==='stand'){
+   if(l.connected)return 'El cabezal ya está conectado.';
+   if(l.open||l.bottleOpen)return 'Cierra las válvulas de cabezal y botella antes de conectar.';
+   if(l.purging)return 'Cierra el despiche del cabezal antes de conectar.';
+   if(l.head.bar>=.1)return 'Espera a que el cabezal quede despresurizado antes de conectar.';
+   return null;
+  }
+  if(item.from==='stand'&&target==='dock')return canDisconnectHead(s)?null:'No se puede desconectar el cabezal en este momento.';
+  return 'Lleva el cabezal a la botella o de vuelta a su soporte.';
+ }
+ return 'La botella se queda en el atril: usa Entregar o Pedir otra botella.';
+}
+function dropWorkshopItem(s,item,target){
+ const problem=workshopDropProblem(s,item,target);
+ if(problem)return {ok:false,message:problem};
+ const ok=target==='stand'?attachHead(s):disconnectHead(s);
+ return {ok,message:ok?(target==='dock'?s.lines[0].disconnectWarning:''):'No se pudo completar el traslado.'};
+}
+function workshopStatus(s){const l=s.lines[0];if(s.incident)return 'Incidente: revisa el análisis y reinicia.';if(l.bottleLeaking)return 'ALERTA: sale aire de la botella desconectada. Cierra la válvula de la botella en el atril para detener la fuga.';if(l.leaking)return 'Fuga de aire por la boquilla: no hay botella conectada. Cierra la válvula de paso del cabezal. La presión disponible está disminuyendo.';if(s.running&&s.struggling)return `Ariete simulado: ${s.struggleReason}. El motor sigue encendido y casi no entrega aire. Detén el compresor o revisa la salida.`;if(s.mode==='limit')return 'Recarga de cascada: selecciona un cilindro y enciende el compresor.';
+ if(!l.connected&&l.disconnectWarning&&!l.bottleOpen)return 'Desconexión incorrecta: reconecta el cabezal, despicha hasta cero y desconéctalo correctamente para poder retirar la botella.';
+ if(!l.connected)return deliveryProblem(s)?'Botella en el atril. Conecta el cabezal para cargarla o pide otra botella.':`Botella sobre el ${DELIVERY_MIN_PERCENT} %. Entrégala para sumar un ✓ y recibir otra.`;
+ if(l.purging)return l.head.bar<.1?'Despiche abierto y cabezal sin presión. Ciérralo antes de cargar o desconecta el cabezal.':'Despichando el cabezal. Espera a que el manómetro llegue a cero.';
+ if(!l.bottleOpen)return 'Cabezal conectado. Ajusta el regulador y abre la válvula de la botella para cargar.';
+ if(!l.open)return 'Botella abierta. Abre la válvula del cabezal y elige una fuente de aire.';
+ if(s.running&&s.struggling)return 'Motor al límite: presión casi sin avance. Escucha el golpeteo ilustrativo y revisa la carga.';
+ if(s.running)return 'Carga por compresor: espera y vigila la presión.';
+ if(!s.banks.some(b=>b.open))return 'Abre un cilindro de cascada o enciende el compresor.';
+ const gap=s.collector.bar-l.bar;
+ if(l.bar>=s.regulatorBar-2&&s.regulatorBar<s.collector.bar-2)return 'Ajuste de regulación alcanzado. Revisa el objetivo de la botella.';
+ if(Math.abs(gap)<2)return 'Presiones equilibradas. Cierra el cilindro de cascada abierto y selecciona otro con mayor presión.';
+ if(l.bar>=s.regulatorBar-2)return 'Presión regulada alcanzada. Revisa la capacidad antes de cambiar el ajuste.';
+ return 'Carga desde cascada. Observa cómo desciende su presión y sube la de la botella.';
+}
+
+// Every text the 80 % box can show; the page reserves room for the longest one.
+const GUIDE_TEXT=Object.freeze({"empty":"Coloca una botella en el atril para ver las indicaciones.","waiting":"Continúa observando la carga. Al 80 % se activarán estos pasos para finalizar.","prepare":"Prepárate para finalizar al alcanzar la presión objetivo. Llegar al 80 % no significa terminar la carga.","complete":"Secuencia completada. Entrega la botella si supera el 90 % o pide otra.","error":"Hubo una desconexión incorrecta. Revisa la alerta y corrige antes de continuar."});
+const GUIDE_NOTE=Object.freeze({"running":"Para recibir flujo, el cilindro de cascada debe estar por debajo del límite del compresor.","stopped":"El compresor está apagado: no hace falta redirigir su flujo (paso 2)."});
+const FINISH_STEP_LABELS=Object.freeze(['Cerrar la válvula de paso del colector (paso del cabezal).','Abrir un cilindro de la cascada para redirigir el flujo del compresor.','Cerrar la válvula de la botella.','Despichar el cabezal y esperar presión cero.','Desconectar el cabezal de la botella.']);
+function completionGuidance(s){
+ const w=s.workshop,l=s.lines[0];
+ if(!w.placed){w.finishGuide=null;return {ready:false,percent:0,steps:[],message:GUIDE_TEXT.empty};}
+ const percent=Math.max(0,psi(l.bar)/l.ratedPsi*100);
+ if(!w.finishGuide||w.finishGuide.id!==w.placed)w.finishGuide={id:w.placed,ready:false,seenConnected:false};
+ const cue=w.finishGuide;cue.seenConnected=cue.seenConnected||l.connected;
+ if(percent>=80&&!cue.ready){cue.ready=true;record(s,'80 % de presión nominal: prepararse para finalizar la carga.');}
+ if(!cue.ready)return {ready:false,percent,steps:[],message:GUIDE_TEXT.waiting};
+ const receiver=s.banks.some(b=>b.open&&b.bar<299);
+ const done=[!l.open,false,false,false,false];done[1]=done[0]&&(!s.running||receiver);done[2]=done[1]&&!l.bottleOpen;done[3]=done[2]&&l.head.bar<.1;done[4]=done[3]&&!l.connected&&cue.seenConnected&&!l.disconnectWarning;
+ const current=done.findIndex(v=>!v);
+ const steps=FINISH_STEP_LABELS.map((label,i)=>({label,state:i===4&&l.disconnectWarning?'error':i===1&&!s.running&&done[0]?'skipped':done[i]?'done':i===current?'current':'pending'}));
+ return {ready:true,percent,steps,message:l.disconnectWarning?GUIDE_TEXT.error:done[4]?GUIDE_TEXT.complete:GUIDE_TEXT.prepare,redirectNote:s.running?GUIDE_NOTE.running:GUIDE_NOTE.stopped};
+}
+
+
+// Pointer events support mouse, pen and touch with the same drop semantics.
+function installWorkshopDrag(root,{getSource,getTarget,targets,problem,onDrop,onMessage}){
+ const doc=root.ownerDocument,win=doc.defaultView;
+ let drag=null,suppressClick=false;
+ function highlight(target){
+  for(const zone of targets()){
+   zone.element.classList.toggle('drop-available',!!drag?.active&&!problem(drag.item,zone.name));
+   zone.element.classList.toggle('drop-hover',!!drag?.active&&target?.element===zone.element);
+   zone.element.classList.toggle('drop-blocked',!!drag?.active&&target?.element===zone.element&&!!problem(drag.item,zone.name));
+  }
+ }
+ function cancel(){
+  const previous=drag;drag=null;
+  if(previous){
+   if(previous.active)suppressClick=true;
+   previous.element.classList.remove('drag-source');previous.ghost?.remove();
+   if(root.hasPointerCapture(previous.pointer))root.releasePointerCapture(previous.pointer);
+  }
+  root.classList.remove('drag-in-progress');highlight(null);
+ }
+ function preview(source){
+  const box=source.getBoundingClientRect(),ghost=doc.createElement('div'),clone=source.cloneNode(true);
+  ghost.className='workshop-drag-preview';ghost.setAttribute('aria-hidden','true');ghost.inert=true;
+  clone.removeAttribute('id');clone.removeAttribute('draggable');
+  for(const child of clone.querySelectorAll('[id]'))child.removeAttribute('id');
+  // Preserve the object's rendered appearance even outside its original parent.
+  const originals=[source,...source.querySelectorAll('*')],copies=[clone,...clone.querySelectorAll('*')];
+  originals.forEach((element,i)=>{
+   const style=win.getComputedStyle(element);
+   for(const property of style)copies[i].style.setProperty(property,style.getPropertyValue(property));
+  });
+  const width=source.offsetWidth||box.width,height=source.offsetHeight||box.height;
+  Object.assign(clone.style,{position:'relative',left:'0',top:'0',right:'auto',bottom:'auto',margin:'0',transformOrigin:'top left',transform:`scale(${box.width/width},${box.height/height})`,width:width+'px',height:height+'px'});
+  Object.assign(ghost.style,{width:box.width+'px',height:box.height+'px'});
+  ghost.appendChild(clone);doc.body.appendChild(ghost);return ghost;
+ }
+ root.addEventListener('pointerdown',event=>{
+  if(drag||event.isPrimary===false||event.button!==0)return;
+  const source=getSource(event.target);if(!source)return;
+  drag={...source,pointer:event.pointerId,x:event.clientX,y:event.clientY,active:false};
+ });
+ root.addEventListener('pointermove',event=>{
+  if(!drag||drag.pointer!==event.pointerId)return;
+  if(!drag.active){
+   if(Math.hypot(event.clientX-drag.x,event.clientY-drag.y)<7)return;
+   drag.ghost=preview(drag.element);drag.active=true;drag.element.classList.add('drag-source');
+   root.classList.add('drag-in-progress');root.setPointerCapture(event.pointerId);
+  }
+  event.preventDefault();
+  drag.ghost.style.left=event.clientX+16+'px';drag.ghost.style.top=event.clientY+16+'px';
+  highlight(getTarget(doc.elementFromPoint(event.clientX,event.clientY)));
+ });
+ root.addEventListener('pointerup',event=>{
+  if(!drag||drag.pointer!==event.pointerId)return;
+  const current=drag,target=getTarget(doc.elementFromPoint(event.clientX,event.clientY));
+  if(current.active){event.preventDefault();suppressClick=true;win.setTimeout(()=>{suppressClick=false;},0);}
+  cancel();
+  if(!current.active)return;
+  if(!target){onMessage('Traslado cancelado: suelta el objeto sobre su destino.');return;}
+  const reason=problem(current.item,target.name);
+  if(reason){onMessage(reason);return;}
+  onDrop(current.item,target.name);
+ });
+ root.addEventListener('click',event=>{if(suppressClick){event.preventDefault();event.stopImmediatePropagation();}},true);
+ root.addEventListener('dragstart',event=>{if(getSource(event.target))event.preventDefault();});
+ root.addEventListener('pointercancel',event=>{if(drag?.pointer===event.pointerId)cancel();});
+ root.addEventListener('lostpointercapture',event=>{if(drag?.pointer===event.pointerId)cancel();});
+ // Pointer release outside the room before crossing the drag threshold must also reset it.
+ doc.addEventListener('pointerup',event=>{if(drag?.pointer===event.pointerId)cancel();if(suppressClick)win.setTimeout(()=>{suppressClick=false;},0);});
+ doc.addEventListener('keydown',event=>{if(event.key==='Escape'&&drag){cancel();onMessage('Traslado cancelado.');}});
+ return {cancel};
+}
+
+
+// Educational sound mapping, not a calibrated acoustic pressure/dB model.
+function airSoundProfile(pressureBar,flowRate){
+ const pressure=Number.isFinite(pressureBar)?Math.max(0,pressureBar):0;
+ const flow=Number.isFinite(flowRate)?Math.max(0,flowRate):0;
+ const strength=Math.sqrt(Math.min(1,pressure/300));
+ const gain=pressure>0&&flow>0?.065*strength*Math.pow(flow/(flow+8),.35):0;
+ return {gain,highpassHz:250+1200*strength,lowpassHz:1000+6500*strength};
+}
+
+// Mechanical starter sound, driven by real audio time rather than simulation speed.
+function createStarterAudioState(phase='off',now=0){return {phase,phaseSince:now,pickupSince:null};}
+function syncStarterAudioState(tracker,phase,now){
+ if(tracker.phase!==phase){
+  tracker.pickupSince=tracker.phase==='starting'&&phase==='running'?now:null;
+  tracker.phase=phase;tracker.phaseSince=now;
+ }
+ return {seconds:Math.max(0,now-tracker.phaseSince),pickupAge:tracker.pickupSince===null?Infinity:Math.max(0,now-tracker.pickupSince)};
+}
+function starterSoundProfile(phase,seconds=0,pickupAge=Infinity){
+ const time=Number.isFinite(seconds)?Math.max(0,seconds):0;
+ const silent={motorGain:0,motorHz:55,starterGain:0,starterHz:150,noiseGain:0,noiseLowpassHz:850};
+ if(phase==='starting'){
+  // Six slow compression strokes per second: rr-rr-rr, with a light geared whine.
+  const stroke=Math.pow((1+Math.cos(time*Math.PI*12))/2,3);
+  return {motorGain:.004+.026*stroke,motorHz:28+11*stroke,starterGain:.004+.008*stroke,starterHz:135+35*stroke,noiseGain:.002+.011*stroke,noiseLowpassHz:650+550*stroke};
+ }
+ if(phase==='stopping')return {...silent,motorGain:.011,motorHz:38};
+ if(phase==='running'){
+  const age=Number.isFinite(pickupAge)?Math.max(0,pickupAge):Infinity;
+  // A brief ignition/catch accelerates, then settles into the existing running sound.
+  const catchStrength=age<.9?Math.exp(-age*5)*(1-age/.9):0;
+  return {...silent,motorGain:.018+.025*catchStrength,motorHz:55+45*catchStrength,noiseGain:.014*catchStrength,noiseLowpassHz:1300};
+ }
+ return silent;
+}
+
+
+
+
+
+
+
+const $=s=>document.querySelector(s);
+let state=createWorkshopSession(),speed=1,timePaused=false,audio,motor,motorGain,noise,noiseGain,knock,knockGain,airChannels,nextKnock=0,enabled=true,pulseUntil=0;
+let starterWhine,starterWhineGain,starterNoiseGain,starterNoiseFilter,starterAudioState=createStarterAudioState();
+state.flow=1; // The loading-head valve is binary: closed or fully open.
+const missions={
+ bottles:['Carga con criterio','El atril siempre tiene una botella. Cárgala sobre el 90 % y entrégala: cada entrega suma un ✓ y llega otra. Entrega al menos una de 2216 PSI y una de 4500 PSI. El techo provisional de 300 bar impide alcanzar 4500 PSI.',['Conecta el cabezal a la botella del atril.','Ajusta el regulador antes de abrir cabezal y botella.','Abre botella y cabezal. Carga con compresor o cambia de banco al equilibrarse.','Cierra, despicha y desconecta. Sobre el 90 %, pulsa Entregar.','Si no quieres cargar esa botella, pulsa Pedir otra botella.']],
+ limit:['El límite de la cascada','Ocho bancos de 45 L según el PDF. La capacidad nominal de 5000 PSI no es el objetivo de carga del procedimiento (4300 PSI).',['Selecciona un solo banco.','Enciende, activa sonido y espera el golpeteo al aproximarse a 300 bar.','El motor sigue encendido: compara presiones y apaga tocando Y y, después de 1 s, 0.']],
+ overpressure:['Error de identificación · 2216 PSI','El cabezal lleva una botella de 2216 PSI. El regulador parte demasiado alto. Corrige el ajuste o explora la consecuencia del error.',['Lee la etiqueta de la botella.','Ajusta el regulador antes de abrir cabezal y botella.','Observa el aviso de sobrepresión.','Compara con la falla ilustrativa del sello.']],
+};
+const gauge=id=>`<div class="gauge" aria-hidden="true"><svg viewBox="0 0 126 90"><path d="M12 65a51 51 0 0 1 102 0" fill="none" stroke="#39474f" stroke-width="8"/><path d="M103 35a51 51 0 0 1 11 30" fill="none" stroke="#d5a36b" stroke-width="8"/><text x="10" y="83" fill="#9eacb3" font-size="8">0</text><text x="95" y="83" fill="#9eacb3" font-size="8">350</text><g class="needle" id="${id}"><path d="M63 65L17 65" stroke="#edcc83" stroke-width="2"/><circle cx="63" cy="65" r="5" fill="#edcc83"/></g></svg></div>`;
+const wheelIcon=`<svg class="valve-wheel" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="25"/><circle cx="32" cy="32" r="7"/><path d="M32 7v18m0 14v18M7 32h18m14 0h18M14 14l13 13m10 10 13 13m-36 0 13-13m10-10 13-13"/></svg>`;
+const bleedIcon=`<svg class="bleed-object" viewBox="0 0 80 64" aria-hidden="true"><path d="M12 50h38V26H24v24m0-24V15h26v11M37 15V7M20 7h34M50 37h14m-1-7 9-6m-8 15h12m-13 5 9 6"/><circle cx="37" cy="7" r="3"/></svg>`;
+function outlineControl(button,label,on,kind='wheel'){
+ if(!button.querySelector('svg'))button.innerHTML=(kind==='bleed'?bleedIcon:wheelIcon)+'<span class="object-label"></span><small class="object-state"></small>';
+ const text=button.querySelector('.object-label');if(text.textContent!==label)text.textContent=label;
+ const status=button.querySelector('.object-state'),value=kind==='bleed'?(on?'DESPICHANDO · PULSAR PARA CERRAR':'PULSAR PARA PURGAR'):(on?'ABIERTA · PULSAR PARA CERRAR':'CERRADA · PULSAR PARA ABRIR');if(status.textContent!==value)status.textContent=value;
+ button.classList.add('object-control');button.setAttribute('aria-pressed',String(on));button.setAttribute('aria-label',label+'. '+value.toLowerCase());button.title=label+' · '+value;
+}
+function pressureHTML(bar,label=''){
+ const value=Number.isFinite(bar)?Math.max(0,bar):0;
+ return `<span class="pressure-psi">${Math.round(psi(value)).toLocaleString('es-CL')} <small>PSI${label?' · '+label:''}</small></span><span class="pressure-bar">${value.toFixed(1)} <small>bar</small></span>`;
+}
+// Color follows actual gauge pressure; motor state and valve state do not clear trapped air.
+function linePressureColor(bar){
+ const pressure=Number.isFinite(bar)?Math.max(0,bar):0;
+ if(pressure<.1)return '#71848a';
+ const fraction=Math.min(1,pressure/config.compressorBar);
+ return 'hsl('+(50*(1-fraction)).toFixed(1)+' 95% '+(58-10*fraction).toFixed(1)+'%)';
+}
+function headPressureGauge(i){
+ const marks=Array.from({length:51},(_,n)=>{
+  const angle=(135+n*5.4)*Math.PI/180;
+  const point=r=>[(50+Math.cos(angle)*r).toFixed(2),(50+Math.sin(angle)*r).toFixed(2)];
+  const [x1,y1]=point(n%10===0?34:39),[x2,y2]=point(43),[tx,ty]=point(29);
+  return '<path d="M'+x1+' '+y1+'L'+x2+' '+y2+'" stroke="#283238" stroke-width="'+(n%10===0?1.4:.6)+'"/>'+(n%10===0?'<text x="'+tx+'" y="'+ty+'" text-anchor="middle" dominant-baseline="middle" fill="#26343b" font-size="6">'+n*100+'</text>':'');
+ }).join('');
+ return '<svg class="head-pressure-dial" viewBox="0 0 100 100" role="img" aria-label="Manómetro del cabezal en PSI y bar"><circle cx="50" cy="50" r="48" fill="#eae5cf" stroke="#aab9bc" stroke-width="4"/>'+marks+'<text x="50" y="35" text-anchor="middle" fill="#40525a" font-size="6">PSI</text><g id="ln-'+i+'" class="head-pressure-needle"><path d="M24 76L50 50L56 44" stroke="#ad2824" stroke-width="2"/><circle cx="50" cy="50" r="3.5" fill="#283840"/></g><text id="head-gauge-psi-'+i+'" x="50" y="69" text-anchor="middle" fill="#172c35" font-size="7" font-weight="bold">0 PSI</text><text id="head-gauge-bar-'+i+'" x="50" y="79" text-anchor="middle" fill="#364d57" font-size="6">0.0 bar</text></svg>';
+}
+function headAssembly(i){return `<div id="head-assembly" class="head-assembly"><svg class="quad-body" viewBox="0 0 360 260" role="img" aria-label="Cabezal completo de cuatro conexiones: entrada con válvula, manómetro, despiche y boquilla"><path d="M8 142h92v-8h62V94h42v40h24v8h75v-10h35v45h-35v-11h-75v8h-24v34h-42v-34h-62v-8H8Z" fill="#71848a" stroke="#d2dcda" stroke-width="3"/><path d="M15 145h72m29-7v32m8-32v32m10-32v32m143-26v22m12-22v22m20-29v34m10-34v34m10-34v34" stroke="#3c525b" stroke-width="4"/><rect x="162" y="93" width="42" height="18" rx="3" fill="#baa874" stroke="#e5d59d" stroke-width="2"/><circle cx="183" cy="57" r="48" fill="#dfdbc5" stroke="#91a5ab" stroke-width="6"/><path d="M170 207h26v17h-26z" fill="#b6a477" stroke="#e5d59d" stroke-width="2"/><path d="M182 225v20m-20 0h42" stroke="#8ca6ad" stroke-width="9" stroke-linecap="round"/><path class="head-pressure-trace" d="M124 154H338M183 154V109M183 154V208" fill="none"/><circle cx="339" cy="154" r="7" fill="#10232b" stroke="#d4c28c" stroke-width="3"/><text x="338" y="199" text-anchor="end" fill="#b9cbd0" font-size="10" font-family="sans-serif">MACHO → BOTELLA</text><path id="head-flow-passage" class="flow-guide" d="M124 154H330"/><path id="head-flow-purge" class="flow-guide" d="M183 160V206"/><g id="head-flow-arrows" class="flow-arrows head-flow-arrows"></g></svg><div class="quad-gauge">${headPressureGauge(i)}</div><button class="valve quad-passage" data-line="${i}"></button><button class="attach quad-bleed" data-purge="${i}"></button><div id="purge-air-jet" class="air-jet purge-air-jet" hidden aria-hidden="true"><i></i><i></i><i></i></div><div id="air-jet" class="air-jet male-air-jet" hidden aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></div>`;}
+function feedback(text,alert=false){$('#feedback').textContent=text;$('#feedback').classList.toggle('alert',alert);}
+function build(){
+ $('#mounted-head').replaceChildren();flowMarkup={};
+ $('#banks').innerHTML=state.banks.map((b,i)=>`<article class="bank" id="bank-${i}"><div class="card-top"><span>BANCO ${i+1}</span></div><div class="cylinder" role="img" id="bank-fill-${i}"><span class="pressure-fill"></span><span class="pressure-fill-edge"></span><div class="bank-pressure"><div class="numbers" id="bp-${i}"></div><div class="secondary" id="bs-${i}"></div></div></div>${gauge('bn-'+i)}<button class="valve" data-bank="${i}"></button></article>`).join('');
+ $('#lines').innerHTML=state.lines.map((l,i)=>`<article class="line-card" id="line-${i}"><div class="card-top"><span>CABEZAL DE CARGA</span><span class="rating">${l.ratedPsi} PSI</span></div><div class="head-dock" id="head-dock"><span class="head-away-label">Suelta aquí el cabezal<br>para desconectar</span>${headAssembly(i)}</div></article>`).join('');
+ const [title,copy,steps]=missions[state.mode];$('#mission-title').textContent=title;$('#mission-copy').textContent=copy;$('#steps').innerHTML=steps.map(t=>`<li>${t}</li>`).join('');
+ $('#regulator').value=state.regulatorBar;
+ $('#incident').hidden=true;$('#feedback').classList.remove('alert');buildStand();feedback('Conecta el cabezal a la botella del atril para comenzar.');render();reserveGuidanceSpace();
+}
+function render(){
+ const fmt=n=>Math.round(n).toLocaleString('es-CL');renderWorkshop();
+ state.banks.forEach((b,i)=>{const card=$('#bank-'+i);card.classList.toggle('open',b.open);$('#bn-'+i).style.transform=`rotate(${b.bar/350*180}deg)`;$('#bp-'+i).innerHTML=`${fmt(psi(b.bar))} <small>PSI</small>`;$('#bs-'+i).innerHTML=`${b.bar.toFixed(1)} <small>bar</small>`;const fill=$('#bank-fill-'+i),fraction=Math.max(0,Math.min(1,psi(b.bar)/config.bankRatedPsi));fill.style.setProperty('--pressure-fill',`${fraction*100}%`);fill.setAttribute('aria-label',`Cilindro ${i+1}: ${fmt(psi(b.bar))} PSI, ${b.bar.toFixed(1)} bar, ${(fraction*100).toFixed(0)} por ciento de capacidad nominal`);fill.title='Indicador didáctico de presión, no nivel de líquido';const btn=$(`[data-bank="${i}"]`);outlineControl(btn,`Válvula ${i+1}`,b.open);btn.disabled=state.paused;});
+ state.lines.forEach((l,i)=>{
+  const card=$('#line-'+i);card.classList.toggle('open',l.open);card.classList.toggle('danger',l.sealBroken||psi(l.bar)>l.ratedPsi);card.classList.toggle('disconnected',!l.connected);
+  $('#ln-'+i).style.transform=`rotate(${Math.max(0,Math.min(1,psi(l.head.bar)/5000))*270}deg)`;$('#head-gauge-psi-'+i).textContent=`${fmt(psi(l.head.bar))} PSI`;$('#head-gauge-bar-'+i).textContent=`${l.head.bar.toFixed(1)} bar`;
+  const button=$(`[data-line="${i}"]`);outlineControl(button,'Paso del cabezal',l.open);button.disabled=l.sealBroken||state.paused;
+  const purge=$(`[data-purge="${i}"]`);outlineControl(purge,'Despiche del cabezal',l.purging,'bleed');purge.disabled=state.paused;purge.title=l.open||l.bottleOpen?'El despiche descargará aire mientras haya una válvula abierta.':'Abrir o cerrar despiche del cabezal.';
+ });
+ const motorActive=state.starter.phase!=='off';
+ $('#compressor').classList.toggle('running',motorActive);$('#compressor').classList.toggle('struggling',state.running&&state.struggling);$('#motor-status').textContent=state.paused?'● EJERCICIO DETENIDO POR INCIDENTE':state.trip?'● LÍMITE OBSERVADO':state.running&&state.struggling?'● ARIETE · CASI SIN ENTREGA DE AIRE':state.running?'● EN MARCHA · Δ':state.starter.phase==='starting'?'● ARRANCANDO · Y':state.starter.phase==='stopping'?'● APAGANDO · Y':'● DETENIDO · 0';
+ renderStarter();
+ $('#regulator').disabled=state.paused;
+ $('#regulator-knob').setAttribute('aria-disabled',String(state.paused));$('#regulator-knob').setAttribute('aria-valuenow',String(state.regulatorBar));$('#regulator-knob').setAttribute('aria-valuetext',`${Math.round(psi(state.regulatorBar))} PSI, ${state.regulatorBar} bar de ajuste`);$('#regulator-knob').style.setProperty('--knob-turn',`${-135+state.regulatorBar/300*270}deg`);
+ $('#regulator-input-pressure').textContent=`${Math.round(psi(state.collector.bar)).toLocaleString('es-CL')} PSI`;$('#regulator-input-bar').textContent=`${state.collector.bar.toFixed(1)} bar`;$('#regulator-output-pressure').textContent=`${Math.round(psi(state.lines[0].hose.bar)).toLocaleString('es-CL')} PSI`;$('#regulator-output-bar').textContent=`${state.lines[0].hose.bar.toFixed(1)} bar`;
+ $('#regulator-in-needle').style.transform=`rotate(${Math.min(7000,psi(state.collector.bar))/7000*270}deg)`;$('#regulator-out-needle').style.transform=`rotate(${Math.min(7000,psi(state.lines[0].hose.bar))/7000*270}deg)`;
+ $('#reg-value').innerHTML=pressureHTML(state.regulatorBar);
+ $('#compressor-gauge-pressure').textContent=`${fmt(psi(state.collector.bar))} PSI`;$('#compressor-gauge-bar').textContent=`${state.collector.bar.toFixed(1)} bar`;$('#compressor-gauge-needle').style.transform=`rotate(${Math.max(0,Math.min(1,psi(state.collector.bar)/5000))*270}deg)`;$('#compressor-gauge').setAttribute('aria-label',`Manómetro de salida del compresor: ${fmt(psi(state.collector.bar))} PSI, ${state.collector.bar.toFixed(1)} bar`);$('.compressor-picture').setAttribute('aria-label',`Compresor con manómetro de salida: ${fmt(psi(state.collector.bar))} PSI, ${state.collector.bar.toFixed(1)} bar`);$('#receiver-pressure').innerHTML=pressureHTML(state.collector.bar);const pipe=$('#receiver-pipe');pipe.setAttribute('aria-label',`Línea receptora: ${fmt(psi(state.collector.bar))} PSI, ${state.collector.bar.toFixed(1)} bar`);$('#receiver-state').textContent=state.collector.bar<.1?'Sin presión':state.running?'Compresor presurizando la línea':state.banks.some(b=>b.open)?'Línea comunicada con la cascada':'Presión residual en la línea · cilindros aislados';
+ const t=Math.floor(state.elapsed);$('#clock').textContent=`${String(Math.floor(t/60)).padStart(2,'0')}:${String(t%60).padStart(2,'0')}`;
+ $('#progress').textContent=state.incident?'✕ Incidente: revisa el análisis y repite.':state.done?'✓ Objetivo del ejercicio completado.':isIncidentMode(state.mode)?`Pico: ${fmt(state.peakPsi)} PSI`:`Entregas ✓ ${state.workshop.delivered} · objetivo 2216 ${state.completed.includes(2216)?'✓':'○'} · 4500 ${state.completed.includes(4500)?'✓':'○'}`;
+ $('#log').replaceChildren(...state.log.map(e=>{const li=document.createElement('li');li.textContent=`${Math.floor(e.time)} s · ${e.text}`;return li;}));
+ if(state.incident){
+  $('#incident').hidden=false;$('#incident-title').textContent='Estallido simulado al 110 %';
+  $('#incident-copy').textContent='La presión superó en más de un 10 % la capacidad nominal. El juego representa un estallido y vaciado de la botella, que queda fuera de servicio. El 110 % es un umbral didáctico, no un límite real de rotura ni un margen permitido.';
+  $('#incident-analysis').textContent=`Cabezal ${state.incident.line+1} · pico ${fmt(state.peakPsi)} PSI. La simulación pausa y aísla todas las fuentes; no implica una protección automática del equipo real.`;
+  $('#incident-lesson').textContent='Para comparar: reinicia, identifica la presión nominal de la botella y ajusta el regulador antes de abrir cabezal y botella. La botella del incidente queda fuera de servicio.';
+ }
+}
+function bottleArt(label,cls=''){return `<span class="era-art msa-cylinder ${cls}" aria-hidden="true"><i class="era-neck"><span class="msa-valve-gauge"></span></i><i class="era-body"><span class="bottle-spec">COMPRESSED AIR<br>COMPOSITE CYLINDER</span><span class="bottle-brand"><strong>MSA</strong></span><b>${label}</b><em>AIRE</em><span class="bottle-charge-track"><span class="bottle-charge-fill"></span></span><span class="bottle-charge-value">0 %</span></i></span>`;}
+function renderBottleCharge(art,bar,ratedPsi){
+ const percent=ratedPsi>0?Math.max(0,psi(bar)/ratedPsi*100):0;
+ art.style.setProperty('--bottle-charge',`${Math.min(100,percent)}%`);
+ art.classList.toggle('charge-over',percent>100.1);art.classList.toggle('charge-high',percent>=95&&percent<=100.1);art.classList.toggle('charge-low',percent<20);
+ const value=art.querySelector('.bottle-charge-value');const label=`${Math.round(percent)} %`;if(value.textContent!==label)value.textContent=label;
+ art.title=`Presión de carga: ${label} de ${ratedPsi} PSI nominales. ${Math.round(psi(bar))} PSI / ${bar.toFixed(1)} bar.`;
+}
+function buildStand(){
+ $('#stand-art').innerHTML=bottleArt('ERA','on-stand');
+}
+// Size a text slot for the tallest message it may show at its current width, so nothing below jumps.
+function reserveTextHeight(el,texts){
+ const probe=el.cloneNode(false);probe.removeAttribute('id');probe.removeAttribute('role');probe.removeAttribute('aria-live');probe.setAttribute('aria-hidden','true');
+ Object.assign(probe.style,{position:'absolute',visibility:'hidden',width:el.clientWidth+'px',minHeight:'0'});
+ el.parentElement.appendChild(probe);let tallest=0;for(const text of texts){probe.textContent=text;tallest=Math.max(tallest,probe.offsetHeight);}probe.remove();
+ el.style.minHeight=tallest+'px';
+}
+let guidanceWidth=0;
+function reserveGuidanceSpace(){
+ const width=$('#bottle-instructions').clientWidth;if(!width||width===guidanceWidth)return;guidanceWidth=width;
+ reserveTextHeight($('#bottle-instructions-copy'),Object.values(GUIDE_TEXT));reserveTextHeight($('#bottle-redirect-note'),Object.values(GUIDE_NOTE));
+}
+if(window.ResizeObserver)new ResizeObserver(reserveGuidanceSpace).observe($('#bottle-instructions'));
+function renderCompletionGuidance(){
+ const guide=completionGuidance(state),box=$('#bottle-instructions');
+ box.classList.toggle('prepare-charge',guide.ready);box.classList.toggle('finish-error',!!state.lines[0].disconnectWarning);
+ const title=guide.ready?'80 % ALCANZADO · PREPÁRATE':'INDICACIONES DE LA BOTELLA';
+ if($('#bottle-instructions-title').textContent!==title)$('#bottle-instructions-title').textContent=title;
+ if($('#bottle-instructions-copy').textContent!==guide.message)$('#bottle-instructions-copy').textContent=guide.message;
+ // The list always keeps its place, dimmed before 80 %, so the bottle below never jumps.
+ const list=$('#bottle-finish-steps');list.classList.toggle('finish-preview',!guide.ready);list.setAttribute('aria-hidden',String(!guide.ready));
+ if(!list.children.length)list.innerHTML=FINISH_STEP_LABELS.map((label,i)=>`<li data-finish-step="${i}"><span class="finish-mark" aria-hidden="true"></span><span class="finish-label"></span><small class="finish-status"></small></li>`).join('');
+ const steps=guide.ready?guide.steps:FINISH_STEP_LABELS.map(label=>({label,state:'pending'}));
+ steps.forEach((step,i)=>{const li=list.children[i],className='finish-'+step.state,mark=step.state==='done'?'✓':step.state==='skipped'?'—':step.state==='error'?'!':String(i+1),status=step.state==='done'?'Hecho':step.state==='skipped'?'No aplica con motor apagado':step.state==='error'?'Revisar desconexión':step.state==='current'?'Siguiente acción':'';if(li.className!==className)li.className=className;for(const [selector,text] of [['.finish-label',step.label],['.finish-mark',mark],['.finish-status',status]]){const el=li.querySelector(selector);if(el.textContent!==text)el.textContent=text;}});
+ const note=$('#bottle-redirect-note'),noteText=guide.redirectNote||'';if(note.textContent!==noteText)note.textContent=noteText;
+}
+function renderStarter(){
+ const starter=state.starter,limit=STARTER_TIMES[starter.phase]||0,timing=starterTiming(starter),waiting=timing==='waiting';
+ $('.starter-control').dataset.timing=timing;
+ const blocked=state.paused||state.trip||timePaused||waiting;
+ const knob=$('#starter-knob'),next=starter.phase==='off'?'Y':starter.phase==='starting'?'Δ':starter.phase==='running'?'Y':'0';
+ document.querySelectorAll('[data-starter-position]').forEach(button=>{button.disabled=blocked||button.dataset.starterPosition!==next;button.setAttribute('aria-pressed',String(button.dataset.starterPosition===starter.position));});
+ knob.disabled=blocked;knob.dataset.position=starter.position;
+ knob.style.setProperty('--starter-angle',starter.position==='0'?'-55deg':starter.position==='Y'?'0deg':'55deg');
+ knob.setAttribute('aria-label','Partidor en '+starter.position+'. Girar a '+next+'.');
+ const copy=starter.phase==='off'?'Toca Y para comenzar el arranque.':starter.phase==='starting'?(waiting?'Arranque: espera 2 s en Y.':timing==='late'?'Tiempo excedido: permaneciste 3 s o más en Y. Toca Δ; el retraso quedará registrado.':'Verde: toca Δ antes de llegar a 3 s.'):starter.phase==='running'?'Para apagar, toca Y.':waiting?'Apagado: espera 1 s en Y.':timing==='late'?'Tiempo excedido: permaneciste 2 s o más en Y al apagar. Toca 0; el retraso quedará registrado.':'Verde: toca 0 antes de llegar a 2 s.';
+ if($('#starter-instruction').textContent!==copy)$('#starter-instruction').textContent=copy;
+ $('#starter-timer').textContent=limit?starter.seconds.toFixed(1)+' / '+limit+' s':starter.phase==='running'?'EN MARCHA':'DETENIDO';
+ $('#starter-progress').hidden=!limit;$('#starter-progress').max=limit||1;$('#starter-progress').value=Math.min(limit,starter.seconds);
+}
+function updateCircuitConnections(){
+ const root=$('.workshop-room'),svg=$('#circuit-lines'),pipe=$('#receiver-pipe'),assembly=$('#head-assembly'),regulator=$('.regulator-console');if(!root||!svg||!pipe||!assembly||!regulator)return;
+ const bounds=root.getBoundingClientRect(),width=root.clientWidth,height=root.clientHeight;if(!width||!height)return;
+ const rect=el=>{const r=el.getBoundingClientRect();return {left:r.left-bounds.left-root.clientLeft,top:r.top-bounds.top-root.clientTop,right:r.right-bounds.left-root.clientLeft,bottom:r.bottom-bounds.top-root.clientTop,width:r.width,height:r.height};};
+ const p=rect(pipe),h=rect(assembly),r=rect(regulator),head=rect($('.head-zone')),image=rect($('.compressor-picture')),machine=rect($('.machine-zone')),inputPort=rect($('#regulator-inlet')),outputPort=rect($('#regulator-outlet')),regBody=rect($('.regulator-body'));
+ const view=`0 0 ${width} ${height}`;if(svg.getAttribute('viewBox')!==view)svg.setAttribute('viewBox',view);
+ const pipeY=p.top+p.height/2,joins=[];
+ const branches=state.banks.map((bank,i)=>{const card=$('#bank-'+i),valve=$(`[data-bank="${i}"]`),lastCard=$('#bank-'+(state.banks.length-1));if(!card||!valve||!lastCard)return '';const c=rect(card),v=rect(valve),x=v.left+v.width/2,start=v.bottom-1;const upperRow=c.top<rect(lastCard).top-1;joins[i]=Math.max(p.left,Math.min(p.right,upperRow?c.right+3:x));const d=upperRow?`M ${x} ${start} V ${start+8} H ${c.right+3} V ${pipeY}`:`M ${x} ${start} V ${pipeY}`;return `<path class="pipe-outline" d="${d}"/><path class="bank-branch ${bank.open?'branch-open':''}" data-flow-bank="${i}" d="${d}"/>`;}).join('');
+ const group=$('#bank-connections');if(group.innerHTML!==branches)group.innerHTML=branches;
+ collectorGeometry={left:p.left,right:p.right,y:pipeY,joins};
+ const outer=Math.min(width-8,machine.right+8),bottom=Math.max(machine.bottom+8,pipeY+18),feed=`M ${image.left+image.width*.9} ${image.top+image.height*.86} H ${outer} V ${bottom} H ${p.right+8} V ${pipeY} H ${p.right}`;
+ // The regulator inlet faces the cascade. Beside it: straight across the gap; stacked above it: over the top.
+ const gutter=8,regY=inputPort.top+inputPort.height/2,inletPortX=inputPort.left+inputPort.width/2,beside=r.right<=p.left-8;
+ const hard=beside?`M ${p.left} ${pipeY} H ${(r.right+p.left)/2} V ${regY} H ${inletPortX}`:`M ${p.left} ${pipeY} H ${gutter} V ${r.top-12} H ${r.right+8} V ${regY} H ${inletPortX}`;
+ const inletX=h.left+h.width*(8/360),inletY=h.top+h.height*(154/260),hoseX=head.left+7,exitX=outputPort.left+outputPort.width/2,exitY=outputPort.top+outputPort.height/2;
+ // The outlet faces the head side, so the hose drops straight down to the head inlet.
+ const hose=`M ${exitX} ${exitY} H ${hoseX} V ${inletY+26} Q ${hoseX} ${inletY}, ${inletX} ${inletY}`;
+ for(const [id,path] of [['compressor-feed',feed],['collector-to-regulator',hard],['regulator-to-head',hose]])for(const name of [id,id+'-outline']){const el=$('#'+name);if(el.getAttribute('d')!==path)el.setAttribute('d',path);}
+ // Branches below the bank valves belong to the common collector, even with a valve closed.
+ root.style.setProperty('--collector-pressure-color',linePressureColor(state.collector.bar));
+ root.style.setProperty('--hose-pressure-color',linePressureColor(state.lines[0].hose.bar));
+ root.style.setProperty('--head-pressure-color',linePressureColor(state.lines[0].head.bar));
+}
+// Chevrons ride each pipe in the direction air actually moves; bigger flows move faster.
+const FLOW_MIN=.05,flowPhase={},shownFlows={},reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+let flowClock=performance.now(),flowMarkup={},collectorGeometry=null;
+// Straight collector stretch with the subset of the SVGPathElement API that chevrons() uses.
+const straight=(x1,x2,y)=>({getTotalLength:()=>Math.abs(x2-x1),getPointAtLength:t=>({x:x1+Math.sign(x2-x1)*t,y})});
+// Net air along each collector stretch, walking from the compressor end toward the regulator end.
+function collectorStretches(){
+ const g=collectorGeometry;if(!g)return [];
+ const inlets=[{x:g.right,flow:shownFlows.feed||0},...g.joins.map((x,i)=>({x,flow:shownFlows['bank'+i]||0})).filter(j=>Number.isFinite(j.x))].sort((a,b)=>b.x-a.x);
+ let carried=0;
+ return inlets.map((join,k)=>{carried+=join.flow;const next=k+1<inlets.length?inlets[k+1].x:g.left;return {path:straight(join.x,next,g.y),flow:carried};});
+}
+function chevrons(key,path,rate,gap,size){
+ if(!path||!(Math.abs(rate)>=FLOW_MIN))return '';
+ const length=path.getTotalLength();if(length<gap)return '';
+ const forward=rate>0,phase=flowPhase[key]||0,marks=[];
+ for(let k=0;k*gap<length;k++){
+  const at=(k+(forward?phase:1-phase))*gap;if(at<size||at>length-size)continue;
+  const p=path.getPointAtLength(at),a=path.getPointAtLength(Math.max(0,at-1)),b=path.getPointAtLength(Math.min(length,at+1));
+  const angle=Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI+(forward?0:180);
+  marks.push(`<path d="M${-size} ${-size}L0 0L${-size} ${size}" transform="translate(${p.x.toFixed(1)} ${p.y.toFixed(1)}) rotate(${angle.toFixed(0)})"/>`);
+ }
+ return marks.join('');
+}
+function updateFlowArrows(now){
+ const dt=Math.min(.1,Math.max(0,(now-flowClock)/1000));flowClock=now;
+ const l=state.lines[0],f=state.flows,moving=!timePaused&&!state.paused&&!document.hidden&&!reducedMotion.matches;
+ // Drawn directions: compressor → collector, bank → collector, collector → regulator → head → bottle, head → bleed.
+ const raw={feed:f.compressor,regulator:f.collectorToHose,hose:f.collectorToHose>=FLOW_MIN?f.collectorToHose:f.hoseToHead,passage:l.connected?f.headToBottle:l.leakRate,purge:l.purgeRate};
+ f.banks.forEach((v,i)=>{raw['bank'+i]=-v;});
+ raw.collector=Math.max(Math.abs(f.compressor),Math.abs(f.collectorToHose),...f.banks.map(Math.abs));
+ for(const [key,value] of Object.entries(raw)){
+  const shown=(shownFlows[key]||0)+(value-(shownFlows[key]||0))*(1-Math.exp(-6*dt));shownFlows[key]=shown;
+  if(moving)flowPhase[key]=((flowPhase[key]||0)+dt*(.6+.5*Math.log10(1+Math.abs(shown))))%1;
+ }
+ const groups={'#flow-arrows':[[['feed','#compressor-feed'],['regulator','#collector-to-regulator'],['hose','#regulator-to-head'],...f.banks.map((_,i)=>['bank'+i,`[data-flow-bank="${i}"]`])],22,4],'#head-flow-arrows':[[['passage','#head-flow-passage'],['purge','#head-flow-purge']],40,9]};
+ for(const [selector,[paths,gap,size]] of Object.entries(groups)){
+  let markup=paths.map(([key,path])=>chevrons(key,$(path),shownFlows[key],gap,size)).join('');const group=$(selector);
+  if(selector==='#flow-arrows')markup+=collectorStretches().map(stretch=>chevrons('collector',stretch.path,stretch.flow,gap,size)).join('');
+  if(group&&flowMarkup[selector]!==markup){group.innerHTML=markup;flowMarkup[selector]=markup;}
+ }
+}
+// Seat the connected head so its male fitting meets the bottle valve, whatever the layout width.
+function plugMountedHead(){
+ const mount=$('#mounted-head'),body=mount.querySelector('.quad-body'),neck=$('#stand-art .era-neck');if(!body||!neck||$('#stand-art').hidden)return;
+ const b=body.getBoundingClientRect(),n=neck.getBoundingClientRect();if(!b.width||!n.width)return;
+ const dx=n.left-(b.left+b.width*339/360),dy=n.top+n.height/2-(b.top+b.height*154/260);
+ if(Math.abs(dx)<.5&&Math.abs(dy)<.5)return;
+ mount.style.left=mount.offsetLeft+dx+'px';mount.style.top=mount.offsetTop+dy+'px';
+}
+function renderWorkshop(){
+ const w=state.workshop,l=state.lines[0],b=w.bottle;renderCompletionGuidance();
+ const hint=workshopStatus(state);if($('#workshop-hint').textContent!==hint)$('#workshop-hint').textContent=hint;
+ $('#bottle-air-jet').hidden=!l.bottleLeaking;$('#bottle-air-jet').style.setProperty('--jet-strength',String(Math.max(.25,Math.min(1,l.bottleLeakRate/80))));
+ $('#bottle-leak-alert').hidden=!w.placed||(!l.disconnectWarning&&!l.bottleLeaking);
+ const bottleWarning=l.bottleLeaking?'ALERTA · botella abierta sin cabezal: pierde aire. Cierra la válvula de la botella.':l.disconnectWarning?(l.bottleOpen?l.disconnectWarning:'Botella cerrada. Para retirarla, reconecta el cabezal, despicha hasta cero y desconéctalo correctamente.'):'';
+ if($('#bottle-leak-alert').textContent!==bottleWarning)$('#bottle-leak-alert').textContent=bottleWarning;
+ $('#stand-zone').classList.toggle('bottle-leaking',l.bottleLeaking);
+ // Keeps its space while idle: it sits above the stand on narrow screens.
+ $('#head-outflow').classList.toggle('outflow-idle',!l.leaking&&l.purgeRate<=.001);$('#head-outflow').textContent=`Escape estimado: ${(l.leakRate+l.purgeRate).toFixed(1)} L/s de aire libre · ambiente 1 bar absoluto`;$('#bottle-outflow').hidden=!l.bottleLeaking;$('#bottle-outflow').textContent=`Escape estimado: ${l.bottleLeakRate.toFixed(1)} L/s de aire libre · ambiente 1 bar absoluto`;$('#purge-air-jet').hidden=l.purgeRate<=.001;$('#purge-air-jet').style.setProperty('--jet-strength',String(Math.max(.2,Math.min(1,l.purgeRate/12))));$('#air-jet').hidden=!l.leaking;$('#leak-label').hidden=!l.leaking;
+ const leakText='FUGA · boquilla sin botella. Cierra la válvula de paso del cabezal.';if($('#leak-label').textContent!==leakText)$('#leak-label').textContent=leakText;
+ $('#air-jet').style.setProperty('--jet-strength',String(Math.max(.25,Math.min(1,l.leakRate/12))));
+ $('.head-zone').classList.toggle('air-leaking',l.leaking);$('.workshop-room').classList.toggle('time-paused',timePaused||document.hidden);
+ const assembly=$('#head-assembly'),target=l.connected?$('#mounted-head'):$('#head-dock');
+ if(assembly.parentElement!==target){const before=assembly.getBoundingClientRect();target.appendChild(assembly);if(l.connected)plugMountedHead();const after=assembly.getBoundingClientRect();if(assembly.animate&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&before.width&&after.width)assembly.animate([{transform:`translate(${before.left-after.left}px,${before.top-after.top}px) scale(${before.width/after.width})`,transformOrigin:'top left'},{transform:'none',transformOrigin:'top left'}],{duration:380,easing:'ease-in-out'});}
+ if(l.connected&&assembly.parentElement===target&&!(assembly.getAnimations&&assembly.getAnimations().length))plugMountedHead();
+ assembly.draggable=false;assembly.title=l.connected?'Arrastra el cabezal a su soporte para desconectar.':'Arrastra el cabezal sobre la botella para conectar.';
+ $('#head-dock').classList.toggle('head-away',l.connected);$('.head-zone').classList.toggle('head-is-mounted',l.connected);$('#mounted-head').classList.toggle('connected',l.connected);
+ $('#stand-zone').classList.toggle('occupied',!!b);$('#stand-zone').classList.toggle('connected',l.connected);$('#stand-zone').classList.toggle('burst',l.sealBroken);
+ $('#stand-art').hidden=!b;$('#stand-art').title='Botella del atril: entrégala sobre el 90 % o pide otra.';if(b)renderBottleCharge($('#stand-art .era-art'),l.bar,l.ratedPsi);$('#empty-stand').hidden=!!b;$('#stand-art .era-body b').textContent=b?String(l.ratedPsi):'ERA';
+ $('#stand-pressure').innerHTML=b?pressureHTML(l.bar)+`<span class="stand-charge">Carga: ${Math.round(psi(l.bar)/l.ratedPsi*100)} % de la presión nominal</span>`:'Coloca aquí una botella';
+ const deliveryBlock=deliveryProblem(state),ticks=w.delivered?`${'✓'.repeat(Math.min(w.delivered,8))}${w.delivered>8?' +'+(w.delivered-8):''} · ${w.delivered}`:'Sin entregas';
+ $('#deliver-bottle').disabled=!!deliveryBlock;$('#deliver-bottle').title=deliveryBlock||'Entregar la botella del atril.';$('#deliver-bottle').classList.toggle('delivery-ready',!deliveryBlock);if($('#delivery-ticks').textContent!==ticks)$('#delivery-ticks').textContent=ticks;
+ 
+ const requestBlock=requestProblem(state);$('#request-bottle').disabled=!!requestBlock;$('#request-bottle').title=requestBlock||'Retirar esta botella sin entregarla y recibir otra.';
+ $('#head-tool').classList.toggle('attached',l.connected);$('#head-tool').textContent=l.connected?'⛓ Cabezal conectado · desconectar':'⛓ Tomar cabezal y conectar';$('#head-tool').disabled=state.paused||!w.placed||(l.connected?!canDisconnectHead(state):l.bottleOpen||l.open||l.head.bar>=.1||l.purging);
+ $('#stand-bottle-valve').disabled=!w.placed||state.paused||l.sealBroken;outlineControl($('#stand-bottle-valve'),'Válvula de botella',l.bottleOpen);
+ document.querySelector('.rating').textContent=`${l.ratedPsi} PSI`;
+ const steps=[l.connected,l.bottleOpen,l.open&&(state.running||state.banks.some(b=>b.open)),!deliveryBlock];
+ document.querySelectorAll('.workflow-step').forEach((el,i)=>el.classList.toggle('complete',steps[i]));
+}
+$('#deliver-bottle').onclick=()=>{const problem=deliveryProblem(state);if(problem)feedback(problem,true);else if(deliverBottle(state))feedback(state.log[0].text);render();};
+$('#request-bottle').onclick=()=>{const problem=requestProblem(state);if(problem)feedback(problem,true);else if(requestBottle(state))feedback(state.log[0].text);render();};
+function useHead(){const l=state.lines[0];if(l.connected){if(disconnectHead(state)&&l.disconnectWarning)feedback(l.disconnectWarning,true);}else attachHead(state);render();}
+$('#head-tool').onclick=useHead;
+$('#stand-bottle-valve').onclick=()=>{const l=state.lines[0];if(state.workshop.placed&&!state.paused&&!l.sealBroken){l.bottleOpen=!l.bottleOpen;record(state,`Válvula de botella: ${l.bottleOpen?'abierta':'cerrada'}`);render();}};
+const workshopDrag=installWorkshopDrag($('.workshop-room'),{
+ getSource(target){
+  if(state.paused||state.incident)return null;
+  const assembly=target.closest('#head-assembly');
+  if(assembly){
+   if(target.closest('button,input'))return null;
+   return {element:assembly,item:{kind:'head',from:state.lines[0].connected?'stand':'dock'}};
+  }
+  return null;
+ },
+ targets:()=>[{name:'stand',element:$('#stand-zone')},{name:'dock',element:$('#head-dock')}],
+ getTarget(element){
+  if(!element)return null;
+  for(const [name,selector] of [['stand','#stand-zone'],['dock','#head-dock']]){
+   const zone=element.closest(selector);if(zone)return {name,element:zone};
+  }
+  return null;
+ },
+ problem:(item,target)=>workshopDropProblem(state,item,target),
+ onDrop(item,target){const result=dropWorkshopItem(state,item,target);if(result.message)feedback(result.message,!result.ok||!!state.lines[0].disconnectWarning);render();},
+ onMessage:message=>feedback(message)
+});
+function initAudio(){
+ if(!audio){
+  audio=new(window.AudioContext||window.webkitAudioContext)();
+  const output=audio.createDynamicsCompressor();output.threshold.value=-18;output.ratio.value=5;output.release.value=.12;output.connect(audio.destination);
+  motor=audio.createOscillator();motorGain=audio.createGain();const filter=audio.createBiquadFilter();filter.type='lowpass';filter.frequency.value=260;motor.type='sawtooth';motor.frequency.value=55;motorGain.gain.value=0;motor.connect(filter);filter.connect(motorGain);motorGain.connect(output);motor.start();
+  // Synthesized metallic knocks, not a sample or diagnosis of the real compressor.
+  knock=audio.createOscillator();knock.type='square';knock.frequency.value=230;knockGain=audio.createGain();knockGain.gain.value=0;knock.connect(knockGain);knockGain.connect(output);knock.start();
+  const buffer=audio.createBuffer(1,audio.sampleRate*2,audio.sampleRate),data=buffer.getChannelData(0);for(let i=0;i<data.length;i++)data[i]=Math.random()*2-1;
+  noise=audio.createBufferSource();noise.buffer=buffer;noise.loop=true;noiseGain=audio.createGain();noiseGain.gain.value=0;const hiss=audio.createBiquadFilter();hiss.type='highpass';hiss.frequency.value=700;noise.connect(hiss);hiss.connect(noiseGain);noiseGain.connect(output);
+  // Separate starter channels: the ariete scheduler must never cancel these gains.
+  starterWhine=audio.createOscillator();starterWhine.type='triangle';starterWhine.frequency.value=150;
+  starterWhineGain=audio.createGain();starterWhineGain.gain.value=0;starterWhine.connect(starterWhineGain);starterWhineGain.connect(output);starterWhine.start();
+  const starterHigh=audio.createBiquadFilter();starterHigh.type='highpass';starterHigh.frequency.value=180;
+  starterNoiseFilter=audio.createBiquadFilter();starterNoiseFilter.type='lowpass';starterNoiseFilter.frequency.value=850;
+  starterNoiseGain=audio.createGain();starterNoiseGain.gain.value=0;noise.connect(starterHigh);starterHigh.connect(starterNoiseFilter);starterNoiseFilter.connect(starterNoiseGain);starterNoiseGain.connect(output);
+  starterAudioState=createStarterAudioState(state.starter.phase,audio.currentTime);
+  airChannels={};for(const [name,position] of [['head',-.6],['bottle',.3],['purge',-.6],['seal',.3]]){
+   const high=audio.createBiquadFilter(),low=audio.createBiquadFilter(),gain=audio.createGain();high.type='highpass';low.type='lowpass';high.Q.value=.7;low.Q.value=.7;gain.gain.value=0;noise.connect(high);high.connect(low);low.connect(gain);
+   if(audio.createStereoPanner){const pan=audio.createStereoPanner();pan.pan.value=position;gain.connect(pan);pan.connect(output);}else gain.connect(output);
+   airChannels[name]={high,low,gain};
+  }noise.start();
+ }audio.resume().catch(()=>feedback('No se pudo activar el audio.'));
+}
+function stopKnocks(){
+ if(!audio)return;
+ for(const channel of [knockGain,noiseGain]){channel.gain.cancelScheduledValues(audio.currentTime);channel.gain.setTargetAtTime(0,audio.currentTime,.008);}nextKnock=0;
+}
+function scheduleKnocks(active){
+ if(!audio)return;
+ if(!active){stopKnocks();return;}
+ const current=audio.currentTime;if(nextKnock<current)nextKnock=current+.01;
+ while(nextKnock<current+.12){
+  const t=nextKnock;
+  knockGain.gain.setValueAtTime(.0001,t);knockGain.gain.linearRampToValueAtTime(.08,t+.003);knockGain.gain.exponentialRampToValueAtTime(.0001,t+.06);
+  noiseGain.gain.setValueAtTime(.0001,t);noiseGain.gain.linearRampToValueAtTime(.032,t+.002);noiseGain.gain.exponentialRampToValueAtTime(.0001,t+.045);
+  nextKnock+=1/6.5;
+ }
+}
+function playBottleBurst(){
+ if(!enabled||!audio||audio.state!=='running'||timePaused||document.hidden)return;
+ const now=audio.currentTime,boom=audio.createOscillator(),gain=audio.createGain();
+ boom.type='sine';boom.frequency.setValueAtTime(110,now);boom.frequency.exponentialRampToValueAtTime(32,now+.25);
+ gain.gain.setValueAtTime(.12,now);gain.gain.exponentialRampToValueAtTime(.001,now+.3);
+ boom.connect(gain);gain.connect(audio.destination);boom.start(now);boom.stop(now+.32);
+ boom.onended=()=>{boom.disconnect();gain.disconnect();};
+}
+function updateAudio(now){
+ if(!audio)return;
+ const audible=enabled&&!document.hidden&&!timePaused,load=state.running&&state.struggling,pulse=now<pulseUntil;
+ // Sound cadence stays in real time even when the exercise is accelerated.
+ const beat=(audio.currentTime*6.5)%1,knockEnvelope=Math.exp(-beat*12);
+ const timing=syncStarterAudioState(starterAudioState,state.starter.phase,audio.currentTime);
+ // Pausing or muting cancels an ignition flourish rather than replaying it on resume.
+ if(!audible){starterAudioState.pickupSince=null;timing.pickupAge=Infinity;}
+ const starterProfile=starterSoundProfile(state.starter.phase,timing.seconds,timing.pickupAge);
+ const engine=load?.026*(.6+.4*knockEnvelope)+Math.max(0,starterProfile.motorGain-.018):starterProfile.motorGain;
+ const l=state.lines[0],seal=pulse&&state.incident?.type==='seal',sealDecay=seal?Math.max(0,(pulseUntil-now)/3500):0;
+ const releases={head:[l.leakPressureBar,l.leakRate],bottle:[l.bottleLeakPressureBar,l.bottleLeakRate],purge:[l.purgePressureBar,l.purgeRate],seal:[(state.incident?.pressureBar||l.bar)*sealDecay,seal?60*sealDecay:0]};
+ motorGain.gain.setTargetAtTime(audible?engine:0,audio.currentTime,.018);
+ starterWhineGain.gain.setTargetAtTime(audible?starterProfile.starterGain:0,audio.currentTime,.012);
+ starterWhine.frequency.setTargetAtTime(starterProfile.starterHz,audio.currentTime,.015);
+ starterNoiseGain.gain.setTargetAtTime(audible?starterProfile.noiseGain:0,audio.currentTime,.012);
+ starterNoiseFilter.frequency.setTargetAtTime(starterProfile.noiseLowpassHz,audio.currentTime,.02);
+ scheduleKnocks(audible&&load);
+ for(const [name,channel] of Object.entries(airChannels)){
+  const [pressure,flow]=releases[name],profile=airSoundProfile(pressure,flow);
+  channel.gain.gain.setTargetAtTime(audible?profile.gain:0,audio.currentTime,.045);
+  channel.high.frequency.setTargetAtTime(profile.highpassHz,audio.currentTime,.06);channel.low.frequency.setTargetAtTime(profile.lowpassHz,audio.currentTime,.06);
+ }
+ motor.frequency.setTargetAtTime(starterProfile.motorHz-(load?6:0),audio.currentTime,.035);
+}
+function silenceStarterAudio(){
+ if(!audio)return;
+ starterAudioState.pickupSince=null;
+ for(const channel of [starterWhineGain,starterNoiseGain]){channel.gain.cancelScheduledValues(audio.currentTime);channel.gain.setTargetAtTime(0,audio.currentTime,.008);}
+}
+
+function unlockDefaultAudio(event){
+ if(event.type==='keydown'&&!['Enter',' '].includes(event.key))return;
+ if(!enabled||audio?.state==='running')return;
+ try{initAudio();}catch{feedback('Audio no disponible en este navegador.');}
+}
+for(const eventName of ['pointerdown','click','keydown'])document.addEventListener(eventName,unlockDefaultAudio,{capture:true,passive:true});
+$('#sound').onclick=()=>{enabled=!enabled;if(!enabled){stopKnocks();silenceStarterAudio();}try{if(enabled)initAudio();}catch{enabled=false;feedback('Audio no disponible.');}$('#sound').textContent=enabled?'♫ Silenciar':'♫ Activar sonido';$('#sound').setAttribute('aria-pressed',enabled);};
+function reset(mode=state.mode){workshopDrag.cancel();state=createWorkshopSession(mode);state.flow=1;pulseUntil=0;timePaused=false;$('#time-pause').textContent='Ⅱ Pausar';$('#time-pause').setAttribute('aria-pressed','false');document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));build();}
+$('#reset').onclick=()=>reset();$('#retry').onclick=()=>reset();document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>reset(b.dataset.mode));
+$('#banks').onclick=e=>{const b=e.target.closest('[data-bank]');if(!b||b.disabled)return;const bank=state.banks[+b.dataset.bank];if(!bank.open&&state.banks.some(x=>x.open))feedback('Más de un cilindro comunica con el colector: se igualarán las presiones. El procedimiento indica carga individual.',true);bank.open=!bank.open;record(state,`Banco ${+b.dataset.bank+1}: ${bank.open?'abierto':'cerrado'}`);render();};
+$('.workshop-room').onclick=e=>{
+ const b=e.target.closest('button');if(!b||b.disabled)return;
+ if(b.dataset.line!==undefined){const l=state.lines[+b.dataset.line];l.open=!l.open;record(state,`Línea ${+b.dataset.line+1}: ${l.open?'carga abierta':'carga cerrada'}`);}
+ if(b.dataset.purge!==undefined){const index=+b.dataset.purge,l=state.lines[index];if(operateHeadPurge(state,index)&&l.purging&&(l.open||l.bottleOpen))feedback('Despiche abierto con suministro o botella abiertos: continúa saliendo aire. Cierra las válvulas para aislar el cabezal.',true);}
+
+ render();};
+
+function adjustRegulator(value,log=false){if(state.paused)return;state.regulatorBar=Math.max(0,Math.min(config.compressorBar,Math.round(value)));$('#regulator').value=state.regulatorBar;render();if(log)record(state,`Regulador ajustado a ${Math.round(psi(state.regulatorBar))} PSI (${state.regulatorBar} bar).`);}
+$('#regulator').oninput=e=>adjustRegulator(+e.target.value);
+let regulatorDrag=null;
+$('#regulator-knob').onpointerdown=e=>{if(state.paused)return;e.preventDefault();regulatorDrag={pointer:e.pointerId,y:e.clientY,bar:state.regulatorBar};e.currentTarget.setPointerCapture(e.pointerId);};
+$('#regulator-knob').onpointermove=e=>{if(regulatorDrag?.pointer===e.pointerId)adjustRegulator(regulatorDrag.bar+regulatorDrag.y-e.clientY);};
+function finishRegulatorDrag(e){if(regulatorDrag?.pointer!==e.pointerId)return;regulatorDrag=null;record(state,`Perilla de regulación: ${state.regulatorBar} bar.`);}
+$('#regulator-knob').onpointerup=finishRegulatorDrag;$('#regulator-knob').onpointercancel=finishRegulatorDrag;$('#regulator-knob').onlostpointercapture=finishRegulatorDrag;
+$('#regulator-knob').onkeydown=e=>{const deltas={ArrowUp:1,ArrowRight:1,ArrowDown:-1,ArrowLeft:-1,PageUp:10,PageDown:-10};if(e.key in deltas){e.preventDefault();adjustRegulator(state.regulatorBar+deltas[e.key],true);}else if(e.key==='Home'||e.key==='End'){e.preventDefault();adjustRegulator(e.key==='Home'?0:300,true);}};
+$('#regulator').onchange=()=>record(state,`Regulador ajustado a ${Math.round(psi(state.regulatorBar))} PSI.`);
+function changeStarterPosition(position){
+ if(timePaused){render();return;}
+ const result=setStarterPosition(state,position);if(!result.changed){if(result.message)feedback(result.message);render();return;}
+ previous=performance.now();stopKnocks();pulseUntil=0;record(state,result.message);render();
+}
+document.querySelectorAll('[data-starter-position]').forEach(button=>button.onclick=()=>changeStarterPosition(button.dataset.starterPosition));
+$('#starter-knob').onclick=()=>changeStarterPosition(state.starter.phase==='off'?'Y':state.starter.phase==='starting'?'Δ':state.starter.phase==='running'?'Y':'0');
+$('#time-speed').onchange=e=>{speed=Number(e.target.value);record(state,`Velocidad de simulación: ×${speed}.`);render();};
+$('#time-pause').onclick=()=>{timePaused=!timePaused;if(timePaused){stopKnocks();silenceStarterAudio();}$('#time-pause').textContent=timePaused?'▶ Reanudar':'Ⅱ Pausar';$('#time-pause').setAttribute('aria-pressed',String(timePaused));record(state,timePaused?'Tiempo de simulación pausado.':'Tiempo de simulación reanudado.');render();};
+let previous=performance.now(),paint=0,pipePaint=0;
+function frame(now){const realElapsed=Math.max(0,(now-previous)/1000),elapsed=Math.min(realElapsed,.1)*speed;previous=now;const before=state.incident,trip=state.trip,struggling=state.struggling;let remaining=elapsed;
+ if(!document.hidden&&!timePaused)advanceStarter(state,realElapsed);
+ if(!document.hidden&&!timePaused)while(remaining>0){const dt=Math.min(.1,remaining);tick(state,dt);remaining-=dt;}
+ if(!before&&state.incident){pulseUntil=now+3500;if(state.incident.type==='seal')playBottleBurst();feedback(state.alarm,true);render();$('#incident-title').focus();}
+ if(!trip&&state.trip)feedback(state.alarm,true);
+ if(!struggling&&state.struggling)feedback(state.alarm,true);
+ updateAudio(now);
+ if(now-paint>120){render();paint=now;}if(now-pipePaint>32){updateCircuitConnections();updateFlowArrows(now);pipePaint=now;}requestAnimationFrame(frame);}
+document.addEventListener('visibilitychange',()=>{previous=performance.now();if(document.hidden){workshopDrag.cancel();stopKnocks();silenceStarterAudio();resetStarter(state);pulseUntil=0;if(audio){motorGain.gain.setTargetAtTime(0,audio.currentTime,.02);noiseGain.gain.setTargetAtTime(0,audio.currentTime,.02);knockGain.gain.setTargetAtTime(0,audio.currentTime,.02);for(const channel of Object.values(airChannels))channel.gain.gain.setTargetAtTime(0,audio.currentTime,.02);}feedback('Página oculta: partidor vuelto a 0. Repite el arranque para continuar.');render();}});
+build();requestAnimationFrame(frame);
+
+})();
+</script>
+</body></html>
