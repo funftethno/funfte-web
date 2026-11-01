@@ -52,7 +52,7 @@ my %DESCRIPCIONES = (
     acceso        => 'Acceso Quintino: intranet y plataformas internas para voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
     material      => 'Material mayor de la Quinta: unidades B-5, RX-5 y MX-5 en servicio, además de sus vehículos históricos.',
     insignias     => 'Las insignias de la Quinta desde 1908: sus escudos, emblemas conmemorativos y logos de transición.',
-    proceres      => 'Los fundadores de la Quinta Compañía de Bomberos de Talcahuano y los quintinos que marcaron su historia desde 1908.',
+    proceres      => 'Los fundadores de la Quinta Compañía de Bomberos de Talcahuano en 1908: retratos y primeros cargos de la compañía.',
     historicos    => 'Quintinos históricos: voluntarios de otras épocas que dejaron huella en la historia de la Quinta Compañía de Bomberos de Talcahuano.',
     estandarte    => 'El Estandarte de Fundación de la Quinta, en servicio desde 1911, y el estandarte «Fundadores», que lo reemplazó el 6 de septiembre de 2025.',
     reliquias     => 'Documentos y objetos que guardan la historia de la Quinta Compañía de Bomberos de Talcahuano.',
@@ -192,7 +192,7 @@ my @HISTORIA = (['Línea de tiempo', 'historia'], ['Fundadores', 'proceres'], ['
 
 my @MENU = (
     ['Inicio', ''],
-    ['La Quinta', 'la-quinta/', [['Historia','historia/','historia-formacion-estandarte-1911.jpg'], ['Cuartel','cuartel/','cuartel-recreacion.jpg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Insignias','insignias/','emblema-escudo-aguila.png'], ['Brigada Juvenil','brigada-juvenil/'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
+    ['La Quinta', 'la-quinta/', [['Historia','historia/','historia-formacion-estandarte-1911.jpg'], ['Cuartel','cuartel/','cuartel-recreacion.jpg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Brigada Juvenil','brigada-juvenil/'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
     ['Dotación', 'dotacion/', [['Oficialidad','oficialidad/'], ['Lista de compañía','dotacion/']]],
     ['Contacto', 'contacto/'],
 );
