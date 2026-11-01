@@ -52,6 +52,10 @@ my %DESCRIPCIONES = (
     acceso        => 'Acceso Quintino: intranet y plataformas internas para voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
     material      => 'Material mayor de la Quinta: unidades B-5, RX-5 y MX-5 en servicio, además de sus vehículos históricos.',
     insignias     => 'Las insignias de la Quinta desde 1908: sus escudos, emblemas conmemorativos y logos de transición.',
+    proceres      => 'Los fundadores de la Quinta Compañía de Bomberos de Talcahuano y los quintinos que marcaron su historia desde 1908.',
+    historicos    => 'Quintinos históricos: voluntarios de otras épocas que dejaron huella en la historia de la Quinta Compañía de Bomberos de Talcahuano.',
+    estandarte    => 'El Estandarte de Fundación de la Quinta, en servicio desde 1911, y el estandarte «Fundadores», que lo reemplazó el 6 de septiembre de 2025.',
+    reliquias     => 'Documentos y objetos que guardan la historia de la Quinta Compañía de Bomberos de Talcahuano.',
     bx5           => 'Unidad BX-5: Iveco Magirus FF150E30W 4x4 de 2012, unidad mixta de incendio y rescate de la Quinta Compañía de Talcahuano.',
     b5            => 'Unidad B-5: Iveco Magirus FF160E30 de 2017, unidad de control de incendios de la Quinta Compañía de Talcahuano.',
     mx5           => 'Unidad MX-5: Scania-Ziegler/Cela TLF 40/12 + ALP 330X de 2025, Scania P410. Plataforma aérea para rescate de difícil acceso y control de incendios en edificios.',
@@ -78,12 +82,16 @@ sub rutas_paginas {
         inicio        => ['',                          'Inicio',              ''],
         laquinta      => ['la-quinta/',                'La Quinta',           'La Quinta'],
         historia      => ['historia/',                 'Historia',            'La Quinta'],
+        proceres      => ['historia/fundadores/',      'Fundadores',          'La Quinta'],
+        historicos    => ['historia/voluntarios-historicos/', 'Voluntarios históricos', 'La Quinta'],
+        estandarte    => ['historia/estandarte/',      'Estandarte',          'La Quinta'],
+        reliquias     => ['historia/reliquias/',       'Reliquias',           'La Quinta'],
         cuartel       => ['cuartel/',                  'Nuestros cuarteles',  'La Quinta'],
         brigada       => ['brigada-juvenil/',          'Brigada Juvenil',     'La Quinta'],
         cbt           => ['cuerpo-de-bomberos/',        'Cuerpo de Bomberos',  'La Quinta'],
         confederacion => ['confederacion/',            'Confederación',       'La Quinta'],
         oficialidad   => ['oficialidad/',              'Oficialidad',         'Dotación'],
-        dotacion      => ['dotacion/',                 'Dotación',            'Dotación'],
+        dotacion      => ['dotacion/',                 'Lista de compañía',   'Dotación'],
         # Paginas fuera del menu: solo se llega a ellas desde el enlace ARCHIVO del pie. Las de
         # seccion Archivo estan retiradas; las de Desarrollo estan en preparacion.
         archivo       => ['archivo/',                  'Archivo',             ''],
@@ -94,10 +102,6 @@ sub rutas_paginas {
         directorio    => ['archivo/directorio/',       'Directorio',          'Archivo'],
         socios        => ['archivo/socios-colaboradores/', 'Socios Colaboradores', 'Archivo'],
         fotos         => ['archivo/dotacion-con-fotos/', 'Dotación con fotos',  'Desarrollo'],
-        proceres      => ['archivo/proceres/',         'Próceres',            'Desarrollo'],
-        reliquias     => ['archivo/reliquias/',        'Reliquias',           'Desarrollo'],
-        estandarte    => ['archivo/estandarte/',       'Estandarte',          'Desarrollo'],
-        historicos    => ['archivo/voluntarios-historicos/', 'Voluntarios históricos', 'Desarrollo'],
         oficialidadhist => ['archivo/oficialidad-historica/', 'Oficialidad histórica', 'Desarrollo'],
         historiaant   => ['archivo/historia-anterior/', 'Historia anterior', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
@@ -182,10 +186,14 @@ my @UNIDADES = (
 );
 my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
 
+# Menu lateral de Historia: sale a la izquierda en cada una de estas paginas, para pasar de una a otra
+my @HISTORIA = (['Línea de tiempo', 'historia'], ['Fundadores', 'proceres'], ['Quintinos históricos', 'historicos'],
+                ['Estandarte', 'estandarte'], ['Insignias', 'insignias'], ['Reliquias', 'reliquias']);
+
 my @MENU = (
     ['Inicio', ''],
     ['La Quinta', 'la-quinta/', [['Historia','historia/','historia-formacion-estandarte-1911.jpg'], ['Cuartel','cuartel/','cuartel-recreacion.jpg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Insignias','insignias/','emblema-escudo-aguila.png'], ['Brigada Juvenil','brigada-juvenil/'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
-    ['Dotación', 'dotacion/', [['Oficialidad','oficialidad/'], ['Dotación completa','dotacion/']]],
+    ['Dotación', 'dotacion/', [['Oficialidad','oficialidad/'], ['Lista de compañía','dotacion/']]],
     ['Contacto', 'contacto/'],
 );
 
@@ -520,18 +528,19 @@ sub archivo {
         . "</article>";
 }
 
-# Resumen de la dotacion en cifras: cuenta los nombres de cada lista "Voluntarios ..."
+# Resumen de la dotacion en cifras: cuenta los nombres de cada lista "Voluntarios ..." y la del cuartelero
 # de la pagina y la dotacion total, asi el resumen nunca queda desactualizado al agregar o
-# quitar voluntarios. contar_dotacion() da ademas el total sin confederados (la portada).
+# quitar voluntarios. contar_dotacion() da ademas el total sin confederados ni cuartelero (la portada).
 sub contar_dotacion {
     my ($html) = @_;
     my (@tipos, $total);
-    while ($html =~ m{<h3>Voluntarios (\w+)</h3>\s*<ol[^>]*>(.*?)</ol>}gs) {
+    while ($html =~ m{<h3>(?:Voluntarios )?(\w+)</h3>\s*<ol[^>]*>(.*?)</ol>}gs) {
         my ($tipo, $lista) = (ucfirst $1, $2);
         my $n = () = $lista =~ /<li\b/g;
         push @tipos, [$tipo, $n];
-        # los confederados son de otras compañías: no suman a la dotación de la Quinta
-        $total += $n unless $tipo eq 'Confederados';
+        # los confederados son de otras compañías y el cuartelero no es voluntario: no suman a los voluntarios
+        # de la portada (sí a la dotación total de Dotación)
+        $total += $n unless $tipo =~ /^(?:Confederados|Cuartelero)$/;
     }
     return ($total // 0, @tipos);
 }
@@ -793,6 +802,17 @@ sub galeria_hito {
         . qq(<button type="button" class="carrusel-boton siguiente" aria-label="Fotos siguientes" hidden>›</button>\n</div>\n</div>);
 }
 
+# El contenido con el menu lateral de Historia a la izquierda (en celular, arriba)
+sub con_lateral {
+    my ($p, $clave, $cuerpo) = @_;
+    my %pg = rutas_paginas();
+    my $items = join "\n", map {
+        my $actual = $_->[1] eq $clave ? ' aria-current="page"' : '';
+        qq(<li><a href="$p$pg{$_->[1]}{ruta}"$actual>$_->[0]</a></li>)
+    } @HISTORIA;
+    return $cuerpo =~ s{<article class="wrap contenido">(.*)</article>}{<div class="wrap con-lateral">\n<nav class="lateral" aria-label="Historia">\n<p>Historia</p>\n<ul>\n$items\n</ul>\n</nav>\n<article class="contenido">$1</article>\n</div>}sr;
+}
+
 sub pagina {
     my %a = @_;
     # la pagina 404 se sirve en cualquier direccion: usa rutas absolutas
@@ -815,6 +835,7 @@ sub pagina {
                                                                         =~ s/<!--UNIDADES_SERVICIO-->/grilla_maquinas($p, 'servicio')/er
                                                                         =~ s/<!--UNIDADES_HISTORICAS-->/grilla_maquinas($p, 'historica')/er
                                                                         =~ s{<div class="hito-fotos">\s*((?:<img[^>]*>\s*){3,})</div>}{galeria_hito($1)}ger) . qq(\n</article>);
+    $cuerpo = con_lateral($p, $a{clave}, $cuerpo) if grep { $_->[1] eq $a{clave} } @HISTORIA;
     # en la 404 ningun item del menu queda marcado como actual
     my $menu = menu($p, $a{clave} eq 'error404' ? '-' : $a{ruta}, $a{seccion});
     my $acceso_actual = $a{clave} eq 'acceso' ? ' aria-current="page"' : '';
