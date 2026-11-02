@@ -191,4 +191,11 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   });
+
+  // Menu de Historia en celular (una fila que se desliza de lado): deja a la vista el boton de la pagina actual
+  var lateral = document.querySelector('.lateral ul');
+  var actual = lateral && lateral.querySelector('[aria-current]');
+  if (actual && lateral.scrollWidth > lateral.clientWidth) {
+    lateral.scrollLeft = actual.offsetLeft - (lateral.clientWidth - actual.offsetWidth) / 2;
+  }
 });
