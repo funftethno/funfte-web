@@ -70,6 +70,7 @@ my %DESCRIPCIONES = (
     s170          => 'Renault Camiva S-170 «Panzer», 1990: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
     b110          => 'Renault Camiva B-110 «Lustrín», 1994: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
     s150          => 'Renault Camiva S-150 «El Guayo», 1999: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
+    capacitaciones => 'Capacitaciones de los voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
     contacto      => 'Contacto de la Quinta Compañía de Bomberos de Talcahuano: Río Maule 5383, Villa Independencia. Correo, formulario de contacto y mapa.',
     error404      => 'La página que buscas no existe o cambió de dirección.',
 );
@@ -103,6 +104,7 @@ sub rutas_paginas {
         socios        => ['archivo/socios-colaboradores/', 'Socios Colaboradores', 'Archivo'],
         fotos         => ['archivo/dotacion-con-fotos/', 'Dotación con fotos',  'Desarrollo'],
         oficialidadhist => ['archivo/oficialidad-historica/', 'Oficialidad histórica', 'Desarrollo'],
+        capacitaciones => ['archivo/capacitaciones/',  'Capacitaciones',      'Desarrollo'],
         historiaant   => ['archivo/historia-anterior/', 'Historia anterior', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         calendario    => ['acceso-quintino/calendario/', 'Calendario de actividades', 'Acceso Quintino'],
