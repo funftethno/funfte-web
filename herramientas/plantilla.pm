@@ -55,7 +55,7 @@ my %DESCRIPCIONES = (
     fundadores    => 'La fundación de la Quinta Compañía de Bomberos de Talcahuano el 29 de enero de 1908 y los alemanes y descendientes de alemanes que la fundaron.',
     historicos    => 'Quintinos históricos: voluntarios de otras épocas que dejaron huella en la historia de la Quinta Compañía de Bomberos de Talcahuano.',
     estandarte    => 'El Estandarte de Fundación de la Quinta, en servicio desde 1911, y el estandarte «Fundadores», que lo reemplazó el 6 de septiembre de 2025.',
-    reliquias     => 'Documentos y objetos que guardan la historia de la Quinta Compañía de Bomberos de Talcahuano.',
+    recuerdos     => 'Documentos y objetos que guardan la historia de la Quinta Compañía de Bomberos de Talcahuano.',
     bx5           => 'Unidad BX-5: Iveco Magirus FF150E30W 4x4 de 2012, unidad mixta de incendio y rescate de la Quinta Compañía de Talcahuano.',
     b5            => 'Unidad B-5: Iveco Magirus FF160E30 de 2017, unidad de control de incendios de la Quinta Compañía de Talcahuano.',
     mx5           => 'Unidad MX-5: Scania-Ziegler/Cela TLF 40/12 + ALP 330X de 2025, Scania P410. Plataforma aérea para rescate de difícil acceso y control de incendios en edificios.',
@@ -86,7 +86,7 @@ sub rutas_paginas {
         fundadores    => ['historia/fundadores/',      'Fundadores',          'La Quinta'],
         historicos    => ['historia/voluntarios-historicos/', 'Voluntarios históricos', 'La Quinta'],
         estandarte    => ['historia/estandarte/',      'Estandarte',          'La Quinta'],
-        reliquias     => ['historia/reliquias/',       'Reliquias',           'La Quinta'],
+        recuerdos     => ['historia/recuerdos/',       'Recuerdos',           'La Quinta'],
         cuartel       => ['cuartel/',                  'Nuestros cuarteles',  'La Quinta'],
         brigada       => ['brigada-juvenil/',          'Brigada Juvenil',     'La Quinta'],
         cbt           => ['cuerpo-de-bomberos/',        'Cuerpo de Bomberos',  'La Quinta'],
@@ -190,7 +190,7 @@ my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
 
 # Menu lateral de Historia: sale a la izquierda en cada una de estas paginas, para pasar de una a otra
 my @HISTORIA = (['Línea de tiempo', 'historia'], ['Fundadores', 'fundadores'], ['Quintinos históricos', 'historicos'],
-                ['Estandarte', 'estandarte'], ['Insignias', 'insignias'], ['Reliquias', 'reliquias']);
+                ['Estandarte', 'estandarte'], ['Insignias', 'insignias'], ['Recuerdos', 'recuerdos']);
 
 my @MENU = (
     ['Inicio', ''],
