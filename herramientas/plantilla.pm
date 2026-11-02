@@ -40,7 +40,7 @@ my @REDES = (['Instagram', 'https://www.instagram.com/funftetalcahuano/'],
 # Facebook). Las paginas sin descripcion propia usan $DESCRIPCION.
 my $DESCRIPCION = 'Quinta Compañía de Bomberos «Bomba Chile» de Talcahuano, fundada en 1908. Fünfte Deutsche Feuerwehrkompanie Talcahuano.';
 my %DESCRIPCIONES = (
-    inicio        => 'Sitio oficial de la Quinta Compañía de Bomberos «Bomba Chile» de Talcahuano, fundada el 29 de enero de 1908. Especialidad en agua y rescate integral.',
+    inicio        => 'Sitio oficial de la Quinta Compañía de Bomberos «Bomba Chile» de Talcahuano, fundada el 29 de enero de 1908. Especialidad en agua y rescate técnico.',
     laquinta      => 'Quiénes somos: la Quinta Compañía «Bomba Chile» del Cuerpo de Bomberos de Talcahuano, fundada en 1908 por inmigrantes alemanes.',
     historia      => 'La historia de la Quinta Compañía de Bomberos de Talcahuano en una línea de tiempo, desde su fundación en 1908 por la colonia alemana del puerto hasta hoy.',
     cuartel       => 'Los cuarteles de la Quinta: el primero en el Cuartel Central de Avenida Colón (1908–2001) y el actual en Villa Independencia, acceso sur de Talcahuano.',
@@ -70,7 +70,7 @@ my %DESCRIPCIONES = (
     s170          => 'Renault Camiva S-170 «Panzer», 1990: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
     b110          => 'Renault Camiva B-110 «Lustrín», 1994: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
     s150          => 'Renault Camiva S-150 «El Guayo», 1999: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
-    capacitaciones => 'Capacitaciones de los voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
+    capacitaciones => 'Capacitación y perfeccionamiento continuo en la Quinta Compañía de Bomberos de Talcahuano: Bombero I y II (NFPA 1001), PHTLS y formación internacional de sus voluntarios.',
     contacto      => 'Contacto de la Quinta Compañía de Bomberos de Talcahuano: Río Maule 5383, Villa Independencia. Correo, formulario de contacto y mapa.',
     error404      => 'La página que buscas no existe o cambió de dirección.',
 );
@@ -104,7 +104,7 @@ sub rutas_paginas {
         socios        => ['archivo/socios-colaboradores/', 'Socios Colaboradores', 'Archivo'],
         fotos         => ['archivo/dotacion-con-fotos/', 'Dotación con fotos',  'Desarrollo'],
         oficialidadhist => ['archivo/oficialidad-historica/', 'Oficialidad histórica', 'Desarrollo'],
-        capacitaciones => ['archivo/capacitaciones/',  'Capacitaciones',      'Desarrollo'],
+        capacitaciones => ['archivo/capacitaciones/',  'Capacitación y perfeccionamiento continuo', 'Desarrollo'],
         historiaant   => ['archivo/historia-anterior/', 'Historia anterior', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         calendario    => ['acceso-quintino/calendario/', 'Calendario de actividades', 'Acceso Quintino'],
@@ -375,7 +375,7 @@ sub datos_portada {
     my @datos = (
         ['calendario', $anios,       'Años de historia',     'historia/'],
         ['grupo',      $voluntarios, 'Voluntarios',          'dotacion/'],
-        ['llama',      'Agua y Rescate Integral', 'Especialidad', 'la-quinta/'],
+        ['llama',      'Agua y Rescate Técnico', 'Especialidad', 'la-quinta/'],
         ['camion',     $maquinas,    'Máquinas en servicio', 'material-mayor/'],
     );
     my $h = qq(<section class="datos-portada" aria-label="La Quinta en cifras">\n<ul class="wrap">\n);
@@ -399,7 +399,7 @@ qq(<section class="portada">
 <div class="wrap">
 <p class="antetitulo">Fünfte Deutsche Feuerwehrkompanie Talcahuano</p>
 <h1><span>Quinta Compañía de Bomberos</span> <span>«Bomba Chile» de Talcahuano</span></h1>
-<p class="bajada">Fundada el 29 de enero de 1908. Especialidad en agua y rescate integral al servicio de Talcahuano.</p>
+<p class="bajada">Fundada el 29 de enero de 1908. Especialidad en agua y rescate técnico al servicio de Talcahuano.</p>
 <div class="acciones"><a class="boton" href="${p}la-quinta/">Conoce la Quinta</a><a class="boton secundario" href="$REDES[0][1]" target="_blank" rel="noopener">Síguenos en Instagram</a></div>
 </div>
 </section>
