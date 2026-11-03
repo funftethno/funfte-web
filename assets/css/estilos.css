@@ -467,9 +467,13 @@ a.saludo:hover { border-color: var(--dorado); }
 .contenido .cargos { display: grid; grid-template-columns: minmax(0, max-content) 1fr; gap: 0 24px; max-width: 620px; margin: 0; }
 .contenido .cargos dt, .contenido .cargos dd { margin: 0; padding: 7px 0; border-bottom: 1px solid var(--borde); }
 .contenido .cargos dt { color: var(--texto-suave); font-size: .82rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; align-self: center; }
+.contenido .cargos.parejo { grid-template-columns: 15em 1fr; }   /* varias listas seguidas con la misma columna de cargos (Fundadores) */
+/* lista simple de nombres en columnas (primeros voluntarios en Fundadores) */
+.contenido .nombres { list-style: none; padding: 0; margin: 0 0 1.6em; columns: 3 180px; column-gap: 24px; }
+.contenido .nombres li { margin: 0; padding: 4px 0; break-inside: avoid; }
 @media (max-width: 480px) {
   .contenido .historica { padding: 4px 16px 18px; }
-  .contenido .cargos { grid-template-columns: 1fr; }
+  .contenido .cargos, .contenido .cargos.parejo { grid-template-columns: 1fr; }
   .contenido .cargos dt { border-bottom: 0; padding-bottom: 0; }
 }
 .contenido > :first-child { margin-top: 0; }
@@ -676,7 +680,7 @@ a.saludo:hover { border-color: var(--dorado); }
 .contenido .proceres img { width: 100%; height: auto; margin: 0 0 .7em; box-shadow: 0 4px 18px rgba(0,0,0,.18); }
 .contenido .proceres h3 { font-size: 1.15rem; margin: 0 0 .2em; }
 .contenido .proceres p { margin: 0; color: var(--texto-suave); font-size: .95rem; }
-.contenido .proceres.parejas img { aspect-ratio: 1; object-fit: cover; object-position: center 30%; }   /* fotos de distinto formato, del mismo alto */
+.contenido .proceres.parejas img { aspect-ratio: 1; object-fit: cover; object-position: center top; }   /* fotos de distinto formato, del mismo alto; se corta abajo para que la cabeza quede completa */
 /* fotografias de los proceres: carrusel de fotos verticales, cuatro por vista */
 .contenido .carrusel-retratos .carrusel-pista img { flex-basis: calc((100% - 36px) / 4); width: calc((100% - 36px) / 4); aspect-ratio: 3 / 4; object-position: top; }
 @media (max-width: 720px) { .contenido .carrusel-retratos .carrusel-pista img { flex-basis: 46%; width: 46%; } }
