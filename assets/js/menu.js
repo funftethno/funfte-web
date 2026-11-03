@@ -140,21 +140,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Visor de fotos: tocar una foto de una ficha o de Historia la muestra en grande, con
   // flechas para recorrer las demas fotos de la misma ficha o del mismo hito. Una imagen
-  // .ampliable (por ejemplo, un acta) se abre sola, sin las demas.
+  // .ampliable (por ejemplo, un acta) se abre sola, sin las demas. Si la foto trae data-nota
+  // (los nombres de una foto grupal), se muestra bajo la foto; las demas van sin texto.
   var FOTOS = '.ficha-foto img, .carrusel-pista > img, .hito-fotos img, .miniatura img';
   var visor = document.createElement('dialog');
   visor.className = 'visor';
-  visor.innerHTML = '<figure><img alt=""></figure>'
+  visor.innerHTML = '<figure><img alt=""><figcaption hidden></figcaption></figure>'
     + '<button type="button" class="visor-cerrar" aria-label="Cerrar">×</button>'
     + '<button type="button" class="carrusel-boton anterior" aria-label="Foto anterior">‹</button>'
     + '<button type="button" class="carrusel-boton siguiente" aria-label="Foto siguiente">›</button>';
   document.body.appendChild(visor);
   var grupo = [], actual = 0;
-  var grande = visor.querySelector('img');
+  var grande = visor.querySelector('img'), nota = visor.querySelector('figcaption');
   function mostrar(i) {
     actual = (i + grupo.length) % grupo.length;
     grande.src = grupo[actual].src;
     grande.alt = grupo[actual].alt;
+    nota.textContent = grupo[actual].dataset.nota || '';
+    nota.hidden = !nota.textContent;
   }
   document.addEventListener('click', function (e) {
     var foto = e.target.closest('.ficha-foto img, .carrusel-pista > img, .hito-fotos img, .galeria-principal, img.ampliable');

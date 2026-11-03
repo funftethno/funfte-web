@@ -1006,7 +1006,8 @@ a.saludo:hover { border-color: var(--dorado); }
 .visor::backdrop { background: transparent; }
 body:has(.visor[open]) { overflow: hidden; }
 .visor figure { margin: 0; height: 100%; box-sizing: border-box; padding: 56px 16px 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
-.visor figure img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+.visor figure img { max-width: 100%; max-height: 100%; min-height: 0; object-fit: contain; border-radius: 6px; }
+.visor figcaption { color: #eee; font-size: .95rem; text-align: center; max-width: 60em; }
 .visor-cerrar { position: fixed; top: 12px; right: 12px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255,255,255,.92); color: var(--carbon); font-size: 1.8rem; line-height: 1; cursor: pointer; }
 
 /* Hito con 3 fotos o mas (galeria_hito): foto principal y carrusel de miniaturas */
