@@ -943,6 +943,17 @@ a.saludo:hover { border-color: var(--dorado); }
 .tarjeta-maquina.actual { border-color: var(--rojo); box-shadow: 0 0 0 2px var(--rojo); }
 .contenido .carrusel-unidades .tarjeta-maquina img { flex: none; width: 100%; scroll-snap-align: none; }
 .carrusel-unidades .carrusel-boton { top: 26%; }
+/* Quintinos historicos (grilla_quintinos y ficha_quintino): tarjetas como las de las unidades,
+   con el retrato cuadrado (sin cortar la cabeza), el nombre, tres lineas de la reseña y «Leer más» */
+.contenido .tarjeta-quintino img { aspect-ratio: 1; object-position: center top; }
+.tarjeta-quintino .titulo strong { font-size: 1.35rem; }
+.tarjeta-quintino .leer { margin-top: auto; font-weight: 700; color: var(--rojo); }
+.tarjeta-quintino .leer::after { content: " ›"; }
+.contenido .ficha-quintino .ficha-foto img { aspect-ratio: auto; max-height: 80vh; object-fit: contain; background: none; box-shadow: 0 4px 18px rgba(0,0,0,.18); }
+.ficha-quintino .ficha-texto p { line-height: 1.7; }
+.carrusel-unidades .tarjeta-quintino { flex-basis: calc((100% - 60px) / 4); }
+.carrusel-unidades .tarjeta-quintino .titulo strong { font-size: 1.1rem; }
+@media (max-width: 720px) { .carrusel-unidades .tarjeta-quintino { flex-basis: 70%; } }
 @media (max-width: 720px) {
   .ficha-unidad { grid-template-columns: 1fr; gap: 20px; }
   .ficha-foto { order: -1; }

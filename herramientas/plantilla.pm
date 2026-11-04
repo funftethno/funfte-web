@@ -127,8 +127,53 @@ sub rutas_paginas {
         s150          => ['material-mayor/renault-camiva-s-150-1999/', 'Renault Camiva S-150 «El Guayo», 1999', 'La Quinta'],
         contacto      => ['contacto/',                 'Contacto',            'Contacto'],
     );
+    # una ficha por cada quintino historico (ver quintinos())
+    $p{$_->{clave}} = ["historia/voluntarios-historicos/$_->{archivo}/", $_->{nombre}, 'La Quinta'] for quintinos();
+    my %q = map { $_->{clave} => $_ } quintinos();
     return map { $_ => { ruta => $p{$_}[0], titulo => $p{$_}[1], seccion => $p{$_}[2],
-                         descripcion => $DESCRIPCIONES{$_} // $DESCRIPCION } } keys %p;
+                         descripcion => $DESCRIPCIONES{$_} // ($q{$_} ? descripcion_quintino($q{$_}) : $DESCRIPCION) } } keys %p;
+}
+
+# Nombre de archivo o carpeta desde un nombre: minusculas, sin tildes y con guiones
+sub nombre_archivo {
+    (my $s = lc NFD($_[0])) =~ s/\p{Mn}//g;
+    $s =~ s/[^a-z0-9]+/-/g;
+    $s =~ s/^-|-$//g;
+    return $s;
+}
+
+# Quintinos historicos: cada <li> de la lista de historicos.html (foto, <h3> con el nombre y
+# <p> con la reseña) es una tarjeta en esa pagina y una ficha propia en
+# historia/voluntarios-historicos/<nombre>/. Las fotos del carrusel «Fotografías» cuyo
+# data-nota nombra al quintino (nombre completo o sus dos primeras palabras) van tambien a
+# su ficha.
+my @QUINTINOS;
+sub quintinos {
+    return @QUINTINOS if @QUINTINOS;
+    my $html = leer_contenido('historicos');
+    my ($lista) = $html =~ m{<ul class="proceres[^"]*">(.*?)</ul>}s;
+    my @fotos = $html =~ m{<div class="carrusel-pista">(.*?)</div>}s ? ($1 =~ /(<img\b[^>]*>)/g) : ();
+    while (($lista // '') =~ m{<li>(.*?)</li>}sg) {
+        my $li = $1;
+        my ($foto) = $li =~ /(<img\b[^>]*>)/;
+        my ($nombre) = $li =~ m{<h3>(.*?)</h3>};
+        my ($texto) = $li =~ m{</h3>\s*(.*?)\s*$}s;
+        my $corto = join ' ', (split ' ', $nombre)[0, 1];
+        push @QUINTINOS, { clave => 'q-' . nombre_archivo($nombre), archivo => nombre_archivo($nombre), nombre => $nombre,
+                           foto => $foto, texto => $texto // '',
+                           fotos => [grep { /data-nota="([^"]*)"/ && ($1 =~ /\Q$nombre\E/ || $1 =~ /\Q$corto\E/) } @fotos] };
+    }
+    return @QUINTINOS;
+}
+my %QUINTINO = map { $_->{clave} => $_ } quintinos();
+
+# Descripcion para buscadores y al compartir: el nombre y el comienzo de la reseña
+sub descripcion_quintino {
+    my ($q) = @_;
+    (my $t = $q->{texto}) =~ s/<[^>]+>//g;
+    $t = "$q->{nombre}, quintino histórico de la Quinta Compañía de Bomberos de Talcahuano." . ($t ? " $t" : '');
+    $t =~ s/^(.{0,155})\s.*$/$1/s and $t =~ s/[\s.,;:]+$// and $t .= "…" if length $t > 160;
+    return $t;
 }
 
 my $WEBMAIL = 'https://mail.google.com/a/funfte.cl/';
@@ -662,16 +707,56 @@ sub ficha_unidad {
         . qq(<p><a href="${p}material-mayor/">Ver todo el material mayor</a></p>);
 }
 
+# Tarjeta de un quintino historico: foto, nombre, comienzo de la reseña y «Leer más»
+sub tarjeta_quintino {
+    my ($p, $q, $actual) = @_;
+    my %rutas = rutas_paginas();
+    (my $foto = $q->{foto} // qq(<img src="${p}assets/img/imagen-pendiente.svg" alt="">))
+        =~ s{src="(?:\.\./)*assets/}{src="${p}assets/};
+    $foto =~ s/\s(?:class|data-nota)="[^"]*"//g;
+    $foto =~ s/\salt="[^"]*"/ alt=""/;
+    (my $resumen = $q->{texto}) =~ s/<[^>]+>//g;
+    my $marca = $actual ? q( actual" aria-current="page) : '';
+    return qq(<a class="tarjeta-maquina tarjeta-quintino$marca" href="$p$rutas{$q->{clave}}{ruta}"><span class="foto">$foto</span><span class="cuerpo">)
+        . qq(<span class="titulo"><strong>$q->{nombre}</strong></span>)
+        . ($resumen ? qq(<span class="resumen">$resumen</span>) : '') . qq(<span class="leer">Leer más</span></span></a>);
+}
+
+# En historicos.html, la lista de quintinos pasa a ser una grilla de tarjetas
+sub grilla_quintinos {
+    my ($p) = @_;
+    return qq(<div class="grilla-maquinas grilla-quintinos">\n) . join('', map { tarjeta_quintino($p, $_) . "\n" } quintinos()) . '</div>';
+}
+
+# Ficha de un quintino historico: reseña a la izquierda y su foto a la derecha; sus otras
+# fotos en un carrusel y, al final, todos los quintinos en un carrusel centrado en el actual.
+sub ficha_quintino {
+    my ($p, $q) = @_;
+    my $rel = sub { $_[0] =~ s{src="(?:\.\./)*assets/}{src="${p}assets/}gr };
+    my $principal = $rel->($q->{foto} // qq(<img src="${p}assets/img/imagen-pendiente.svg" alt="Imagen pendiente de $q->{nombre}">));
+    $principal =~ s/\sclass="[^"]*"//;
+    $principal =~ s/loading="lazy"/loading="eager"/;
+    # en la tarjeta la reseña va sin punto final; en la ficha, con punto
+    (my $texto = $q->{texto} || '<p>Reseña pendiente.</p>') =~ s{([^.])</p>}{$1.</p>}g;
+    my $h = qq(<div class="ficha-unidad ficha-quintino">\n<div class="ficha-texto">\n$texto\n</div>\n<div class="ficha-foto">$principal</div>\n</div>\n);
+    my @fotos = map { $rel->($_) } @{ $q->{fotos} };
+    $h .= qq(<div class="carrusel carrusel-retratos">\n<div class="carrusel-pista">\n) . join("\n", @fotos) . qq(\n</div>\n)
+        . qq(<button type="button" class="carrusel-boton anterior" aria-label="Fotos anteriores" hidden>‹</button>)
+        . qq(<button type="button" class="carrusel-boton siguiente" aria-label="Fotos siguientes" hidden>›</button>\n</div>\n) if @fotos;
+    return $h . qq(<h2 class="otras">Otros quintinos históricos</h2>\n<div class="carrusel carrusel-unidades">\n<div class="carrusel-pista">\n)
+        . join('', map { tarjeta_quintino($p, $_, $_ == $q) . "\n" } quintinos()) . qq(</div>\n)
+        . qq(<button type="button" class="carrusel-boton anterior" aria-label="Quintinos anteriores" hidden>‹</button>)
+        . qq(<button type="button" class="carrusel-boton siguiente" aria-label="Quintinos siguientes" hidden>›</button>\n</div>\n)
+        . qq(<p><a href="${p}historia/voluntarios-historicos/">Ver todos los quintinos históricos</a></p>);
+}
+
 # Dotacion con fotos (Desarrollo): la misma nomina de dotacion.html en tarjetas con el numero de
 # antiguedad, el nombre y la foto de cada voluntario: assets/img/voluntario-<nombre>.jpg, en
 # minusculas, sin tildes y con guiones (por ejemplo voluntario-fernando-vera-torres.jpg); si aun
 # no hay, una silueta. La generacion y el numero de registro son privados: van cifrados en
 # contenido/privados.cifrado (ver cifrar_privados.pl) y privados.js los muestra con la contraseña.
 sub foto_voluntario {
-    my ($nombre) = @_;
-    (my $archivo = lc NFD($nombre)) =~ s/\p{Mn}//g;
-    $archivo =~ s/[^a-z0-9]+/-/g;
-    $archivo =~ s/^-|-$//g;
+    my $archivo = nombre_archivo($_[0]);
     return -e "$FindBin::Bin/../assets/img/voluntario-$archivo.jpg" ? "voluntario-$archivo.jpg" : 'voluntario-sin-foto.svg';
 }
 
@@ -723,7 +808,8 @@ sub dotacion_fotos {
 sub meta_compartir {
     my %a = @_;
     my $url = $SITIO . $a{ruta};
-    my ($foto) = ($a{contenido} // '') =~ m{assets/img/([^"']+\.(?:jpe?g|png))}i;
+    my $contenido = $a{contenido} || ($QUINTINO{$a{clave}} ? $QUINTINO{$a{clave}}{foto} // '' : '');
+    my ($foto) = $contenido =~ m{assets/img/([^"']+\.(?:jpe?g|png))}i;
     my $imagen = $SITIO . 'assets/img/' . ($foto // '2011-12-DSC0103-1030x688.jpg');
     my $titulo = $a{clave} eq 'inicio' ? $NOMBRE : $a{titulo_completo};
     return qq(
@@ -831,13 +917,17 @@ sub pagina {
                : $a{clave} eq 'fotos'       ? $cabecera . dotacion_fotos($p)
                : $a{clave} eq 'enviado'     ? $cabecera . gracias($p, 'Recibimos tu mensaje. Te responderemos a la brevedad por correo.')
                : $UNIDAD{$a{clave}}         ? $cabecera . qq(<article class="wrap contenido">\n) . ficha_unidad($p, $UNIDAD{$a{clave}}, $a{contenido}) . qq(\n</article>)
+               : $QUINTINO{$a{clave}}       ? $cabecera . qq(<article class="wrap contenido">\n) . ficha_quintino($p, $QUINTINO{$a{clave}}) . qq(\n</article>)
                : $cabecera . qq(<article class="wrap contenido">\n) . ($a{contenido} =~ s/<!--FORMULARIO_CONTACTO-->/formulario_contacto()/er
                                                                         =~ s/<!--CIFRAS_DOTACION-->/cifras_dotacion($a{contenido})/er
                                                                         =~ s/<!--SECCIONES-->/secciones($p, $a{ruta})/er
                                                                         =~ s/<!--UNIDADES_SERVICIO-->/grilla_maquinas($p, 'servicio')/er
                                                                         =~ s/<!--UNIDADES_HISTORICAS-->/grilla_maquinas($p, 'historica')/er
+                                                                        =~ s{<ul class="proceres parejas">.*?</ul>}{grilla_quintinos($p)}ser
                                                                         =~ s{<div class="hito-fotos">\s*((?:<img[^>]*>\s*){3,})</div>}{galeria_hito($1)}ger) . qq(\n</article>);
-    $cuerpo = con_lateral($p, $a{clave}, $cuerpo) if grep { $_->[1] eq $a{clave} } @HISTORIA;
+    # las fichas de los quintinos historicos llevan el menu de Historia, con Quintinos históricos marcado
+    my $lateral = $QUINTINO{$a{clave}} ? 'historicos' : $a{clave};
+    $cuerpo = con_lateral($p, $lateral, $cuerpo) if grep { $_->[1] eq $lateral } @HISTORIA;
     # en la 404 ningun item del menu queda marcado como actual
     my $menu = menu($p, $a{clave} eq 'error404' ? '-' : $a{ruta}, $a{seccion});
     my $acceso_actual = $a{clave} eq 'acceso' ? ' aria-current="page"' : '';
