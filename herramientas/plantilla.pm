@@ -53,6 +53,7 @@ my %DESCRIPCIONES = (
     material      => 'Material mayor de la Quinta: unidades B-5, RX-5 y MX-5 en servicio, además de sus vehículos históricos.',
     insignias     => 'Las insignias de la Quinta desde 1908: sus escudos, emblemas conmemorativos y logos de transición.',
     fundadores    => 'La fundación de la Quinta Compañía de Bomberos de Talcahuano el 29 de enero de 1908 y los alemanes y descendientes de alemanes que la fundaron.',
+    oficialidadhist => 'Oficialidad histórica de la Quinta Compañía de Bomberos de Talcahuano: Director, Secretario, Tesorero, Capitán, Tenientes y Ayudante de cada año desde la fundación en 1908.',
     historicos    => 'Quintinos históricos: voluntarios de otras épocas que dejaron huella en la historia de la Quinta Compañía de Bomberos de Talcahuano.',
     estandarte    => 'El Estandarte de Fundación de la Quinta, en servicio desde 1911, y el estandarte «Fundadores», que lo reemplazó el 6 de septiembre de 2025.',
     recuerdos     => 'Documentos y objetos que guardan la historia de la Quinta Compañía de Bomberos de Talcahuano.',
@@ -103,7 +104,7 @@ sub rutas_paginas {
         directorio    => ['archivo/directorio/',       'Directorio',          'Archivo'],
         socios        => ['archivo/socios-colaboradores/', 'Socios Colaboradores', 'Archivo'],
         fotos         => ['archivo/dotacion-con-fotos/', 'Dotación con fotos',  'Desarrollo'],
-        oficialidadhist => ['archivo/oficialidad-historica/', 'Oficialidad histórica', 'Desarrollo'],
+        oficialidadhist => ['historia/oficialidad-historica/', 'Oficialidad histórica', 'La Quinta'],
         capacitaciones => ['archivo/capacitaciones/',  'Capacitación y perfeccionamiento continuo', 'Desarrollo'],
         historiaant   => ['archivo/historia-anterior/', 'Historia anterior', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
@@ -234,7 +235,7 @@ my @UNIDADES = (
 my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
 
 # Menu lateral de Historia: sale a la izquierda en cada una de estas paginas, para pasar de una a otra
-my @HISTORIA = (['Línea de tiempo', 'historia'], ['Fundadores', 'fundadores'], ['Quintinos históricos', 'historicos'],
+my @HISTORIA = (['Línea de tiempo', 'historia'], ['Fundadores', 'fundadores'], ['Quintinos históricos', 'historicos'], ['Oficialidad histórica', 'oficialidadhist'],
                 ['Estandarte', 'estandarte'], ['Insignias', 'insignias'], ['Recuerdos', 'recuerdos']);
 
 my @MENU = (
