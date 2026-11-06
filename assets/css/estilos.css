@@ -1264,3 +1264,9 @@ body:has(.visor[open]) { overflow: hidden; }
 .contenido .preguntas dt { font-weight: 700; margin-top: 1.1em; color: var(--carbon); }
 .contenido .preguntas dt:first-child { margin-top: 0; }
 .contenido .preguntas dd { margin: .3em 0 0; padding-left: 14px; border-left: 3px solid var(--rojo); }
+.contenido .preguntas dd.sin-borde { border-left: 0; padding-left: 0; }
+/* Partes del compresor: fotos del mismo alto con su nombre debajo */
+.contenido .partes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: .8em 0 0; }
+.contenido .parte img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; margin: 0; border-radius: 8px; }
+.contenido .parte p { margin: 6px 0 0; font-size: .82rem; font-weight: 600; line-height: 1.3; text-align: center; color: var(--carbon); }
+@media (max-width: 700px) { .contenido .partes { grid-template-columns: 1fr 1fr; } }
