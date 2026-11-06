@@ -106,6 +106,7 @@ sub rutas_paginas {
         fotos         => ['archivo/dotacion-con-fotos/', 'Dotación con fotos',  'Desarrollo'],
         oficialidadhist => ['historia/oficialidad-historica/', 'Oficialidad histórica', 'La Quinta'],
         capacitaciones => ['archivo/capacitaciones/',  'Capacitación y perfeccionamiento continuo', 'Desarrollo'],
+        compresor     => ['archivo/compresor/',        'Simulador de compresor', 'Desarrollo'],
         historiaant   => ['archivo/historia-anterior/', 'Historia anterior', 'Archivo'],
         acceso        => ['acceso-quintino/',          'Acceso Quintino',     ''],
         calendario    => ['acceso-quintino/calendario/', 'Calendario de actividades', 'Acceso Quintino'],
