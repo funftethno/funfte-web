@@ -9,7 +9,7 @@
 <link rel="icon" href="../../favicon.ico?v=ced1385c">
 <link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/icono-192.png">
 <link rel="apple-touch-icon" href="../../assets/img/icono-180.png">
-<link rel="stylesheet" href="../../assets/css/estilos.css?v=38492038">
+<link rel="stylesheet" href="../../assets/css/estilos.css?v=040051bf">
 <script src="../../assets/js/menu.js?v=df6b40e0" defer></script>
 </head>
 <body>
@@ -49,20 +49,30 @@ archivo/compresor/simulador.html, copia de simular.html del repo ptoledor/simula
 para actualizarlo, copia de nuevo ese archivo. -->
 <p class="intro">Simulador de carga de botellas ERA con el compresor Comptrade CPT 300 y la cascada de ocho cilindros del cuartel, para practicar el procedimiento de operación.</p>
 <h2>Preguntas que hay que tener claras</h2>
-<p>Antes de practicar con el simulador, repasa estas preguntas: son las que más se hacen sobre el compresor y las botellas.</p>
+<p>Antes de practicar con el simulador, repasa estas preguntas: son las que más se hacen sobre el compresor y las botellas. Las respuestas del compresor salen del Procedimiento de Operaciones Compresor y Cascada de la compañía (agosto de 2022).</p>
 <h3>Del compresor</h3>
-<ol>
-<li>¿Qué filtros tiene el compresor, de qué es cada uno y cómo se despichan?</li>
-</ol>
+<dl class="preguntas">
+<dt>¿Qué filtros tiene el compresor, de qué es cada uno y cómo se despichan?</dt>
+<dd>Al comprimir, el aire suelta agua y arrastra aceite. El compresor los retiene en separadores entre etapas y en el filtro final, que deja el aire respirable antes de que salga a la cascada o al cabezal. Tiene tres despiches: aceite/agua, aceite y aire (salida del filtro). Antes de partir deben estar cerrados; al apagar, con el motor parado y las llaves de la cascada cerradas, se despichan en ese orden (agua/aceite arriba y abajo, y el aire de la salida del filtro), con antiparras, guantes, protección auditiva y un paño para recibir el condensado. El compresor queda con unos 50 PSI.</dd>
+</dl>
 <h3>De las botellas</h3>
-<ol>
-<li>¿Qué tipos de botellas existen según su material (acero y fibra)?</li>
-<li>¿Qué presión de carga tienen las botellas (4500 y 2216 PSI) y a cuántos bar equivale cada una?</li>
-<li>¿Qué marcas de botellas hay (Scott, MSA y Dräger)?</li>
-<li>¿Dónde está la válvula de seguridad?</li>
-</ol>
+<dl class="preguntas">
+<dt>¿Qué tipos de botellas existen según su material?</dt>
+<dd>De acero, más pesadas, y de fibra (material compuesto: un cuerpo de aluminio envuelto en fibra de carbono o de vidrio), más livianas. Las de fibra tienen una vida útil limitada, que va indicada en su etiqueta (normalmente 15 años).</dd>
+<dt>¿Qué presión de carga tienen las botellas y a cuántos bar equivale?</dt>
+<dd>Las que se cargan en el cuartel son de norma estadounidense: 2216 PSI (unos 153 bar, se habla de 150) y 4500 PSI (unos 310 bar, se habla de 300). Las de norma europea vienen en bar (200 o 300) y las de buceo suelen ser de 3000 PSI (unos 207 bar): hay que convertir antes de cargarlas. 1 bar son 14,5 PSI.</dd>
+<dt>¿Qué marcas de botellas hay?</dt>
+<dd>Scott y MSA, estadounidenses, con presiones en PSI, y Dräger, alemana, que puede venir en bar. Antes de cargar, lee siempre la presión de servicio grabada o rotulada en la botella.</dd>
+<dt>¿Dónde está la válvula de seguridad?</dt>
+<dd>Es un sello de seguridad (disco de ruptura) en el cuerpo de la válvula de la botella, al costado. Si la presión sube demasiado (por sobrellenado o por calor), el disco se rompe y descarga el aire para que la botella no reviente. Una botella con el sello roto o dañado queda fuera de servicio.</dd>
+</dl>
 <img class="ampliable centrada" src="../../assets/img/compresor-botellas-era.svg" alt="Dibujo de una botella ERA de acero y una de fibra, con el detalle de su válvula: el volante arriba para abrir y cerrar, la salida a un costado y, al otro costado del cuerpo de la válvula, el sello de seguridad o disco de ruptura, marcado en rojo" loading="lazy">
-<p>El sello de seguridad (disco de ruptura) va en el cuerpo de la válvula de la botella, al costado. Si la presión sube demasiado (por sobrellenado o por calor), el disco se rompe y descarga el aire para que la botella no reviente. Una botella con el sello roto o dañado queda fuera de servicio.</p>
+<dl class="preguntas">
+<dt>¿A qué presión se rompe el sello de seguridad?</dt>
+<dd>Cerca de la presión de prueba de la botella, que en norma estadounidense es 5/3 de su presión de servicio: unos 3700 PSI (255 bar) en una botella de 2216 PSI y unos 7500 PSI (517 bar) en una de 4500 PSI. Por eso cargar una botella de 2216 con el regulador a 4500 rompe el sello. El valor exacto va grabado en la válvula o en el disco.</dd>
+<dt>¿Cada cuánto hay que hacerles prueba hidrostática a las botellas?</dt>
+<dd>Por norma, cada 5 años, tanto las de acero como las de fibra (en norma estadounidense, DOT; la europea también pide 5 años). Algunas botellas de fibra más antiguas, fabricadas con permiso especial (DOT-SP), piden cada 3 años. La fecha de la última prueba va estampada en el cuello o en la etiqueta: una botella vencida no se carga.</dd>
+</dl>
 <h2>Simulador</h2>
 <p>Se abre a pantalla completa. Funciona mejor en un computador o una tablet.</p>
 <p><a class="boton" href="simulador.html">Abrir el simulador</a></p>
