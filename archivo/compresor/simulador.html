@@ -465,7 +465,7 @@ function requestBottle(s){
  record(s,`${old.id} retirada sin entregar. Llega ${next.id} · ${next.ratedPsi} PSI.`);
  return true;
 }
-function attachHead(s){const l=s.lines[0];if(s.paused||!s.workshop.placed||l.connected||l.open||l.bottleOpen||l.head.bar>=.1||l.purging)return false;l.connected=true;l.disconnectWarning='';record(s,'Cabezal conectado a la botella del atril.');return true;}
+function attachHead(s){const l=s.lines[0];if(s.paused||!s.workshop.placed||l.connected||l.open||l.bottleOpen||l.head.bar>=.1)return false;l.connected=true;l.disconnectWarning='';record(s,'Cabezal conectado a la botella del atril.');return true;}
 function canDisconnectHead(s){const l=s.lines[0];return l.connected&&!s.paused&&!s.incident&&!l.sealBroken;}
 // Como en el equipo real, el cabezal no sale de la botella con presión: hay que cerrar válvulas y despichar hasta cero.
 function disconnectProblem(s){const l=s.lines[0];
@@ -514,7 +514,6 @@ function workshopDropProblem(s,item,target){
   if(item.from==='dock'&&target==='stand'){
    if(l.connected)return 'El cabezal ya está conectado.';
    if(l.open||l.bottleOpen)return 'Cierra las válvulas de cabezal y botella antes de conectar.';
-   if(l.purging)return 'Cierra el despiche del cabezal antes de conectar.';
    if(l.head.bar>=.1)return 'Espera a que el cabezal quede despresurizado antes de conectar.';
    return null;
   }
@@ -906,7 +905,7 @@ function renderWorkshop(){
  $('#deliver-bottle').disabled=!!deliveryBlock;$('#deliver-bottle').title=deliveryBlock||'Entregar la botella del atril.';$('#deliver-bottle').classList.toggle('delivery-ready',!deliveryBlock);if($('#delivery-ticks').textContent!==ticks)$('#delivery-ticks').textContent=ticks;
  
  const requestBlock=requestProblem(state);$('#request-bottle').disabled=!!requestBlock;$('#request-bottle').title=requestBlock||'Retirar esta botella sin entregarla y recibir otra.';
- $('#head-tool').classList.toggle('attached',l.connected);$('#head-tool').textContent=l.connected?'⛓ Cabezal conectado · desconectar':'⛓ Tomar cabezal y conectar';$('#head-tool').disabled=state.paused||!w.placed||(l.connected?!canDisconnectHead(state):l.bottleOpen||l.open||l.head.bar>=.1||l.purging);
+ $('#head-tool').classList.toggle('attached',l.connected);$('#head-tool').textContent=l.connected?'⛓ Cabezal conectado · desconectar':'⛓ Tomar cabezal y conectar';$('#head-tool').disabled=state.paused||!w.placed||(l.connected?!canDisconnectHead(state):l.bottleOpen||l.open||l.head.bar>=.1);
  $('#stand-bottle-valve').disabled=!w.placed||state.paused||l.sealBroken;outlineControl($('#stand-bottle-valve'),'Válvula de botella',l.bottleOpen);
  document.querySelector('.rating').textContent=`${l.ratedPsi} PSI`;
  const steps=[l.connected,l.bottleOpen,l.open&&(state.running||state.banks.some(b=>b.open)),!deliveryBlock];
