@@ -1252,3 +1252,10 @@ body:has(.visor[open]) { overflow: hidden; }
 .contenido .oficialidad-anual tbody td:nth-child(2), .contenido .oficialidad-anual tbody td:nth-child(5),
 .contenido .oficialidad-anual tbody tr:nth-child(even) td:nth-child(2), .contenido .oficialidad-anual tbody tr:nth-child(even) td:nth-child(5) { background: #fbeaea; font-weight: 600; }
 .contenido .oficialidad-anual thead th:nth-child(2), .contenido .oficialidad-anual thead th:nth-child(5) { background: var(--rojo); }
+/* Recuerdos: objetos en vitrina, como en un museo: marco de madera oscura con la placa del nombre en la base */
+.contenido .vitrinas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 1.2em 0; align-items: stretch; }
+.contenido .vitrina { margin: 0; display: flex; flex-direction: column; background: #24170e; border-radius: 6px; padding: 5px 5px 0; box-shadow: 0 8px 22px rgba(0, 0, 0, .28); }
+.contenido .vitrina img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; margin: 0; border-radius: 3px; border: 0; box-shadow: none; }
+.contenido .vitrina .placa { flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 0; padding: 10px 8px 11px; text-align: center; color: #eee3cf; font-size: .7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; line-height: 1.4; }
+.contenido .vitrina .placa span { display: block; margin-top: 2px; font-family: var(--fuente-titulos); font-size: .85rem; font-style: italic; font-weight: 400; letter-spacing: .02em; text-transform: none; color: #c9b48f; }
+@media (max-width: 700px) { .contenido .vitrinas { grid-template-columns: 1fr 1fr; gap: 10px; } }
