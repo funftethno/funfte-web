@@ -467,7 +467,14 @@ function requestBottle(s){
 }
 function attachHead(s){const l=s.lines[0];if(s.paused||!s.workshop.placed||l.connected||l.open||l.bottleOpen||l.head.bar>=.1||l.purging)return false;l.connected=true;l.disconnectWarning='';record(s,'Cabezal conectado a la botella del atril.');return true;}
 function canDisconnectHead(s){const l=s.lines[0];return l.connected&&!s.paused&&!s.incident&&!l.sealBroken;}
-function disconnectHead(s){const l=s.lines[0];if(!canDisconnectHead(s))return false;
+// Como en el equipo real, el cabezal no sale de la botella con presión: hay que cerrar válvulas y despichar hasta cero.
+function disconnectProblem(s){const l=s.lines[0];
+ if(!canDisconnectHead(s))return 'No se puede desconectar el cabezal en este momento.';
+ if(l.bottleOpen)return 'Cierra la válvula de la botella antes de desconectar el cabezal.';
+ if(l.open)return 'Cierra la válvula de paso del cabezal antes de desconectarlo.';
+ if(l.head.bar>=.1)return 'El cabezal tiene presión: despicha hasta que el manómetro marque cero antes de desconectarlo.';
+ return null;}
+function disconnectHead(s){const l=s.lines[0];if(disconnectProblem(s))return false;
  const unsafe=!canDetach(s,l);l.connected=false;
  if(unsafe){s.unsafeDisconnects++;s.events++;l.disconnectWarning=l.bottleOpen?'ALERTA: cabezal desconectado con la botella abierta. El aire sale de la botella. Cierra su válvula.':'ALERTA: cabezal desconectado sin aislar y despresurizar completamente. Se libera aire del circuito.';record(s,l.disconnectWarning);}
  else{l.disconnectWarning='';record(s,'Cabezal desconectado tras cerrar válvulas y despresurizar boquilla.');}
@@ -511,7 +518,7 @@ function workshopDropProblem(s,item,target){
    if(l.head.bar>=.1)return 'Espera a que el cabezal quede despresurizado antes de conectar.';
    return null;
   }
-  if(item.from==='stand'&&target==='dock')return canDisconnectHead(s)?null:'No se puede desconectar el cabezal en este momento.';
+  if(item.from==='stand'&&target==='dock')return disconnectProblem(s);
   return 'Lleva el cabezal a la botella o de vuelta a su soporte.';
  }
  return 'La botella se queda en el atril: usa Entregar o Pedir otra botella.';
@@ -907,7 +914,7 @@ function renderWorkshop(){
 }
 $('#deliver-bottle').onclick=()=>{const problem=deliveryProblem(state);if(problem)feedback(problem,true);else if(deliverBottle(state))feedback(state.log[0].text);render();};
 $('#request-bottle').onclick=()=>{const problem=requestProblem(state);if(problem)feedback(problem,true);else if(requestBottle(state))feedback(state.log[0].text);render();};
-function useHead(){const l=state.lines[0];if(l.connected){if(disconnectHead(state)&&l.disconnectWarning)feedback(l.disconnectWarning,true);}else attachHead(state);render();}
+function useHead(){const l=state.lines[0];if(l.connected){const problem=disconnectProblem(state);if(problem)feedback(problem,true);else disconnectHead(state);}else attachHead(state);render();}
 $('#head-tool').onclick=useHead;
 $('#stand-bottle-valve').onclick=()=>{const l=state.lines[0];if(state.workshop.placed&&!state.paused&&!l.sealBroken){l.bottleOpen=!l.bottleOpen;record(state,`Válvula de botella: ${l.bottleOpen?'abierta':'cerrada'}`);render();}};
 const workshopDrag=installWorkshopDrag($('.workshop-room'),{

@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 580" font-family="Helvetica, Arial, sans-serif">
+  <title>Botellas ERA de acero y de fibra, con su válvula y el sello de seguridad</title>
+  <defs>
+    <linearGradient id="acero" x1="0" x2="1">
+      <stop offset="0" stop-color="#6d7378"/><stop offset=".35" stop-color="#c9ced1"/><stop offset=".6" stop-color="#9aa1a5"/><stop offset="1" stop-color="#555b60"/>
+    </linearGradient>
+    <linearGradient id="fibra" x1="0" x2="1">
+      <stop offset="0" stop-color="#1c1d1f"/><stop offset=".35" stop-color="#4a4c50"/><stop offset=".6" stop-color="#2c2d30"/><stop offset="1" stop-color="#121314"/>
+    </linearGradient>
+    <linearGradient id="bronce" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a6a2c"/><stop offset=".4" stop-color="#e2c27a"/><stop offset="1" stop-color="#7a5a22"/>
+    </linearGradient>
+    <pattern id="trama" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#ffffff" stroke-opacity=".08" stroke-width="4"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="580" fill="#f6f4f0"/>
+
+  <!-- Botella de acero -->
+  <g transform="translate(110 0)">
+    <rect x="-55" y="150" width="110" height="330" rx="48" fill="url(#acero)"/>
+    <path d="M-55 200 Q-55 150 0 140 Q55 150 55 200 Z" fill="url(#acero)"/>
+    <rect x="-14" y="118" width="28" height="26" fill="#7d8387"/>
+    <g id="valvula-a">
+      <rect x="-26" y="78" width="52" height="44" rx="6" fill="url(#bronce)"/>
+      <rect x="26" y="88" width="24" height="18" rx="3" fill="url(#bronce)"/>
+      <circle cx="-34" cy="100" r="9" fill="#b11e24" stroke="#5a0d10" stroke-width="2"/>
+      <ellipse cx="0" cy="70" rx="34" ry="9" fill="#2a2b2e"/>
+      <rect x="-34" y="58" width="68" height="12" rx="4" fill="#2a2b2e"/>
+    </g>
+    <rect x="-55" y="270" width="110" height="70" fill="#ffffff" fill-opacity=".12"/>
+    <text x="0" y="312" text-anchor="middle" font-size="15" font-weight="700" fill="#2a2b2e">ACERO</text>
+    <text x="0" y="520" text-anchor="middle" font-size="18" font-weight="700" fill="#24282b">Botella de acero</text>
+    <text x="0" y="542" text-anchor="middle" font-size="14" fill="#5b6166">Más pesada</text>
+  </g>
+
+  <!-- Botella de fibra -->
+  <g transform="translate(330 0)">
+    <rect x="-58" y="150" width="116" height="330" rx="56" fill="url(#fibra)"/>
+    <rect x="-58" y="150" width="116" height="330" rx="56" fill="url(#trama)"/>
+    <path d="M-58 210 Q-58 150 0 140 Q58 150 58 210 Z" fill="url(#fibra)"/>
+    <rect x="-14" y="118" width="28" height="26" fill="#3a3b3e"/>
+    <rect x="-26" y="78" width="52" height="44" rx="6" fill="url(#bronce)"/>
+    <rect x="26" y="88" width="24" height="18" rx="3" fill="url(#bronce)"/>
+    <circle cx="-34" cy="100" r="9" fill="#b11e24" stroke="#5a0d10" stroke-width="2"/>
+    <ellipse cx="0" cy="70" rx="34" ry="9" fill="#2a2b2e"/>
+    <rect x="-34" y="58" width="68" height="12" rx="4" fill="#2a2b2e"/>
+    <rect x="-58" y="270" width="116" height="70" fill="#f2c230"/>
+    <text x="0" y="312" text-anchor="middle" font-size="15" font-weight="700" fill="#1c1d1f">FIBRA</text>
+    <text x="0" y="520" text-anchor="middle" font-size="18" font-weight="700" fill="#24282b">Botella de fibra</text>
+    <text x="0" y="542" text-anchor="middle" font-size="14" fill="#5b6166">Material compuesto, más liviana</text>
+  </g>
+
+  <!-- Detalle de la válvula -->
+  <g transform="translate(590 230)">
+    <circle r="135" fill="#ffffff" stroke="#d9d4cb" stroke-width="2"/>
+    <rect x="-22" y="40" width="44" height="60" fill="#7d8387"/>
+    <rect x="-55" y="-20" width="110" height="66" rx="10" fill="url(#bronce)" stroke="#6b5020" stroke-width="2"/>
+    <rect x="55" y="-6" width="44" height="34" rx="5" fill="url(#bronce)" stroke="#6b5020" stroke-width="2"/>
+    <rect x="-46" y="-48" width="92" height="22" rx="6" fill="#2a2b2e"/>
+    <rect x="-8" y="-28" width="16" height="10" fill="#6b5020"/>
+    <circle cx="-72" cy="13" r="18" fill="#b11e24" stroke="#5a0d10" stroke-width="3"/>
+    <circle cx="-72" cy="13" r="7" fill="#e9e3d6"/>
+    <rect x="-58" y="5" width="6" height="16" fill="#6b5020"/>
+  </g>
+  <line x1="245" y1="100" x2="455" y2="215" stroke="#b11e24" stroke-width="2" stroke-dasharray="5 4"/>
+  <circle cx="296" cy="100" r="14" fill="none" stroke="#b11e24" stroke-width="2.5"/>
+
+  <!-- Rotulos del detalle -->
+  <g font-size="14" fill="#24282b">
+    <line x1="518" y1="243" x2="490" y2="330" stroke="#b11e24" stroke-width="2"/>
+    <circle cx="518" cy="243" r="4" fill="#b11e24"/>
+    <text x="490" y="352" text-anchor="middle" font-weight="700" fill="#b11e24">Sello de seguridad</text>
+    <text x="490" y="370" text-anchor="middle" fill="#5b6166">(disco de ruptura)</text>
+    <line x1="590" y1="171" x2="590" y2="122" stroke="#24282b" stroke-width="1.5"/>
+    <text x="590" y="114" text-anchor="middle">Volante (abrir / cerrar)</text>
+    <line x1="668" y1="241" x2="712" y2="330" stroke="#24282b" stroke-width="1.5"/>
+    <text x="712" y="350" text-anchor="middle">Salida (conexión</text>
+    <text x="712" y="367" text-anchor="middle">al cabezal o regulador)</text>
+    <text x="590" y="400" text-anchor="middle" font-weight="700">Válvula de la botella</text>
+  </g>
+</svg>
