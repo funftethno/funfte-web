@@ -1027,7 +1027,9 @@ a.saludo:hover { border-color: var(--dorado); }
   object-fit: cover;
 }
 /* Visor de fotos (menu.js): la foto tocada en grande sobre fondo oscuro */
-.ficha-foto img, .carrusel-pista > img, .hito-fotos img, .galeria-principal, img.ampliable { cursor: zoom-in; }
+.ficha-quintino .ficha-foto img, .carrusel-pista > img, .hito-fotos img, .galeria-principal, img.ampliable { cursor: zoom-in; }
+.ficha-foto img.con-bocina { cursor: pointer; }
+.ficha-foto img.con-bocina:focus-visible { outline: 2px solid var(--dorado); outline-offset: 2px; }
 .visor { width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; margin: 0; padding: 0; border: 0; background: #0c0c0c; }
 .visor::backdrop { background: transparent; }
 body:has(.visor[open]) { overflow: hidden; }

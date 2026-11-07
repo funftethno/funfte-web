@@ -142,7 +142,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // flechas para recorrer las demas fotos de la misma ficha o del mismo hito. Una imagen
   // .ampliable (por ejemplo, un acta) se abre sola, sin las demas. Si la foto trae data-nota
   // (los nombres de una foto grupal), se muestra bajo la foto; las demas van sin texto.
-  var FOTOS = '.ficha-foto img, .carrusel-pista > img, .hito-fotos img, .miniatura img';
+  // La foto principal de una unidad (la de estudio) no se amplia: si la unidad tiene bocina, la toca.
+  var FOTOS = '.ficha-quintino .ficha-foto img, .carrusel-pista > img, .hito-fotos img, .miniatura img';
   var visor = document.createElement('dialog');
   visor.className = 'visor';
   visor.innerHTML = '<figure><img alt=""><figcaption hidden></figcaption></figure>'
@@ -160,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
     nota.hidden = !nota.textContent;
   }
   document.addEventListener('click', function (e) {
-    var foto = e.target.closest('.ficha-foto img, .carrusel-pista > img, .hito-fotos img, .galeria-principal, img.ampliable');
+    var foto = e.target.closest('.ficha-quintino .ficha-foto img, .carrusel-pista > img, .hito-fotos img, .galeria-principal, img.ampliable');
     if (!foto || visor.open) return;
     grupo = foto.matches('.ampliable') ? [foto]
       : [].slice.call((foto.closest('.hito, article') || document).querySelectorAll(FOTOS));
@@ -214,6 +215,19 @@ document.addEventListener('DOMContentLoaded', function () {
       audio.play().catch(detener);
     });
   });
+  // Tocar la foto principal de la unidad hace sonar su bocina (o su martin horn)
+  var bocina = document.querySelector('.sonido[data-sonido*="bocina"]') || document.querySelector('.sonido[data-sonido*="martin-horn"]');
+  var fotoUnidad = document.querySelector('.ficha-unidad:not(.ficha-quintino) .ficha-foto img');
+  if (bocina && fotoUnidad) {
+    fotoUnidad.classList.add('con-bocina');
+    fotoUnidad.setAttribute('role', 'button');
+    fotoUnidad.setAttribute('tabindex', '0');
+    fotoUnidad.title = bocina.textContent;
+    fotoUnidad.addEventListener('click', function () { bocina.click(); });
+    fotoUnidad.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); bocina.click(); }
+    });
+  }
 
   // Menu de Historia en celular (una fila que se desliza de lado): deja a la vista el boton de la pagina actual
   var lateral = document.querySelector('.lateral ul');
