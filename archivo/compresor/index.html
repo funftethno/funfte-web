@@ -46,50 +46,87 @@
 <article class="wrap contenido">
 <!-- Simulador de carga de botellas ERA (compresor Comp Trade CTP 300 y cascada). El simulador es
 archivo/compresor/simulador.html, copia de simular.html del repo ptoledor/simulador-compresor:
-para actualizarlo, copia de nuevo ese archivo. -->
+para actualizarlo, copia de nuevo ese archivo. Las preguntas salen del Procedimiento de Operaciones
+Compresor y Cascada (agosto de 2022) y de la capacitación del 6 de noviembre de 2026
+(capacitacion/materia-compresor.html en ese mismo repo). -->
 <p class="intro">Simulador de carga de botellas ERA con el compresor Comp Trade CTP 300 y la cascada de ocho cilindros del cuartel, para practicar el procedimiento de operación.</p>
 <h2>Preguntas que hay que tener claras</h2>
-<p>Antes de practicar con el simulador, repasa estas preguntas: son las que más se hacen sobre el compresor y las botellas. Las respuestas del compresor salen del Procedimiento de Operaciones Compresor y Cascada de la compañía (agosto de 2022).</p>
+<p>Antes de practicar con el simulador, repasa estas preguntas: son las que más se hacen sobre el compresor y las botellas. Las respuestas salen del Procedimiento de Operaciones Compresor y Cascada de la compañía (agosto de 2022) y de la capacitación de compresor y cascada del 6 de noviembre de 2026. Ante cualquier diferencia, manda el procedimiento y lo que diga el instructor.</p>
 <h3>Del compresor</h3>
 <dl class="preguntas">
+<dt>¿Qué marca y modelo es el compresor, y cuánta presión levanta?</dt>
+<dd>Es un Comp Trade CTP 300, con motor eléctrico trifásico de 380 volt y tres cabezales (es un compresor de tres cabezas). Comp Trade es una marca austríaca (Comp Trade GmbH, de Oberwaltersdorf) que fabrica compresores de alta presión y de aire respirable para bomberos. Levanta unos 300 bar: su manómetro interno debe llegar a 4250 PSI (300 bar) antes de abrir la cascada, los cilindros de la cascada se cargan hasta 4300 PSI y las botellas de 4500 PSI (unos 310 bar) se terminan de cargar directo con el compresor. El modelo y los datos del equipo están en su placa: es el primer lugar donde mirar si hay dudas.</dd>
 <dt>¿Cuáles son las partes del compresor?</dt>
-<dd>Según el procedimiento de la compañía:
+<dd>Según el procedimiento de la compañía y la capacitación:
 <ul>
 <li>Luces de fase eléctrica (380 volt): deben estar encendidas las tres para usar el compresor.</li>
-<li>Partidor: la llave de encendido, que pasa por Y y luego por Δ.</li>
+<li>Partidor: la llave de encendido, que pasa por estrella (Y) y luego por triángulo (Δ).</li>
 <li>Horómetro: cuenta las horas de trabajo, que se anotan en el libro del compresor.</li>
-<li>Nivel de aceite, en el costado: debe estar a la mitad o un poco más.</li>
+<li>Nivel de aceite, en el costado, y la tapa de arriba para rellenar.</li>
 <li>Manómetro del compresor, de doble escala (PSI y bar).</li>
-<li>Válvulas de despiche: aceite/agua, aceite y aire (salida del filtro).</li>
+<li>Aspiración con filtro de papel. Como el aire entra siempre por el mismo punto, el filtro se ensucia ahí: se gira para aprovechar el resto y después se cambia.</li>
+<li>Dos correas, que mueven el compresor, y los enfriadores, que bajan la temperatura del aire entre etapas.</li>
+<li>Los tres filtros con sus válvulas de despiche, y las válvulas de seguridad.</li>
 <li>Manguera de llenado hacia la cascada o para carga directa.</li>
 <li>Cascada: ocho cilindros amarillos de 45 litros, cada uno con su llave.</li>
-<li>Regulador de presión con manómetros dobles a la salida de la cascada (el izquierdo marca la presión del compresor y el derecho la del cilindro en uso), con una perilla negra para fijar la presión de carga, y la manguera con el cabezal de carga y su despiche.</li>
+<li>Regulador de presión con manómetros dobles a la salida de la cascada (el izquierdo marca la presión del compresor y el derecho la del cilindro en uso), con una perilla negra para fijar la presión de carga, y la manguera con el conector de cilindro y su despiche. En la clase se insiste en el nombre: los cabezales son las cabezas del compresor; lo que va en la botella es el conector de cilindro (en el simulador se llama «cabezal»).</li>
 </ul></dd>
+<dt>¿Cómo se enciende y cómo se apaga?</dt>
+<dd>Se enciende en estrella, se cuenta «uno, dos, tres» en voz alta y en segundos reales, y recién ahí se pasa a triángulo. Se apaga desde triángulo, contando «uno, dos», y a cero.</dd>
+<dt>¿Qué haces si se cae una fase mientras trabajas?</dt>
+<dd>Con las tres luces de fase encendidas el equipo está operativo; si falta una, no parte. Si se cae una fase trabajando: apagar, desconectar, anotar en el libro y avisar al teniente, en ese orden y las cuatro cosas. Una vez se cambiaron las fases desde afuera y el compresor funcionó al revés: ante cualquier anomalía se para y se informa al tiro, porque el daño siempre va a ser menor.</dd>
+<dt>Encuentras el compresor desenchufado. ¿Lo enchufas?</dt>
+<dd>No. Está desenchufado por algo: desenchufar es la forma de avisar «aquí pasó algo». Pregunta, revisa el libro y, si nadie te da una respuesta, se queda desenchufado.</dd>
 <dt>¿Qué EPP se debe usar al operarlo?</dt>
-<dd>Antiparras, guantes y orejeras de protección auditiva, y tener a mano un paño para limpiar al despichar.</dd>
+<dd>Antiparras, guantes y orejeras de protección auditiva, y tener a mano un paño para limpiar al despichar. El equipo trabaja en torno a los 85 dB durante toda la carga, y la pérdida de audición no se recupera. Se trabaja con altas presiones: un chorro puede volar un ojo o un diente, y si revienta un cilindro o una colectora el accidente es grave. Mientras operas, nada de teléfono, y nadie te distrae ni te apura; si alguien te habla, paras.</dd>
+<dt>¿Qué hay que revisar del aceite?</dt>
+<dd>El compresor usa aceite sintético. Antes de partirlo se revisa el nivel en el visor del costado: sirve entre unos 2 mm bajo la mitad y unos 2 mm sobre la mitad. Que en frío esté un poco bajo la mitad es normal, porque al funcionar el aceite se calienta y baja un poco más. Nunca se llena hasta arriba ni a tres cuartos: al calentarse se expande y gasifica, y genera sobrepresión sobre los pistones. Una vez alguien lo llenó de más, el aceite impregnó todo el circuito y la compañía estuvo un año sin compresor.</dd>
+<dt>¿Por qué no se carga con los carros andando dentro del cuartel?</dt>
+<dd>Porque el compresor aspira el aire del cuartel y cargaría los gases de escape en las botellas. Antes de cargar se ventila: el portón se deja abierto a la mitad o a tres cuartos, y no se carga con carros funcionando adentro.</dd>
 <dt>¿Cuántos litros carga por minuto?</dt>
 <dd>Unos 300 litros de aire por minuto, como indica el número del modelo (CTP 300). Cargar directo una botella de 30 minutos (unos 1270 litros de aire) toma unos 4 a 5 minutos, y una de 60 minutos (unos 2500 litros), unos 8 a 9. Desde la cascada es más rápido.</dd>
 <dt>¿Qué filtros tiene el compresor, de qué es cada uno y cómo se despichan?</dt>
-<dd>Al comprimir, el aire suelta agua y arrastra aceite. El compresor tiene tres filtros, cada uno con su despiche:
+<dd>Al comprimir, el aire suelta agua y arrastra aceite. El compresor tiene tres filtros, en este orden, cada uno con su despiche:
 <ol>
-<li>Filtro de aceite/agua: el separador negro, con su manómetro arriba. Se despicha abajo.</li>
-<li>Filtro de aceite: el separador cónico. Se despicha abajo, con la válvula de su punta.</li>
-<li>Filtro de aire: el filtro azul, el último antes de la salida, que deja el aire respirable. Se despicha con la perilla de su base.</li>
+<li>Filtro de aceite y agua: el separador negro, con su manómetro arriba. Saca el condensado grueso. Se despicha abajo.</li>
+<li>Filtro de grasas y aceites ambientales: el separador cónico. No saca el aceite del compresor, sino el que trae el aire del ambiente; es el que bota un residuo blanquecino y espumoso. Se despicha abajo, con la válvula de su punta.</li>
+<li>Filtro de humedad, de carbón activado: el filtro azul, el último antes de la salida. Saca la humedad que queda y hace de barrera bacteriológica. Se despicha con la perilla de su base.</li>
 </ol>
-Antes de partir, los tres despiches deben estar cerrados. Al apagar, con el motor parado y las llaves de la cascada cerradas, se despichan en ese orden (aceite/agua, aceite y aire), con antiparras, guantes, protección auditiva y un paño para recibir el condensado. El compresor queda con unos 50 PSI.</dd>
+Antes de partir, los tres despiches deben estar cerrados. Lo primero que se despicha es la línea, hasta que no salga nada. Al apagar, con el motor parado y las llaves de la cascada cerradas, se despichan los filtros en ese orden. El compresor queda con unos 50 PSI. El líquido que sale es ácido: sale color café con leche, quema y pica la piel, y en los ojos es peor. Por eso se despicha con antiparras, guantes, protección auditiva y un paño, y con el chorro siempre hacia el frente, nunca hacia el cuerpo.</dd>
 <dd class="sin-borde"><div class="partes">
 <div class="parte"><img class="ampliable" src="../../assets/img/compresor-vista-general.jpg" width="476" height="357" alt="Compresor de la Quinta visto de frente: el motor eléctrico abajo, el separador negro con su manómetro arriba y el filtro azul a la derecha, con la cascada amarilla al fondo" loading="lazy"><p>Vista general: separador negro y filtro azul</p></div>
-<div class="parte"><img class="ampliable" src="../../assets/img/compresor-despiche-aceite-agua.jpg" width="321" height="428" alt="Separador negro del compresor con su manómetro arriba y la válvula de despiche abajo, con la manguera celeste de purga" loading="lazy"><p>1. Filtro de aceite/agua (separador negro) y su despiche</p></div>
-<div class="parte"><img class="ampliable" src="../../assets/img/compresor-despiche-aceite.jpg" width="319" height="425" alt="Válvula de despiche bajo el separador cónico del compresor, con la manguera celeste de purga" loading="lazy"><p>2. Filtro de aceite (separador cónico) y su despiche</p></div>
-<div class="parte"><img class="ampliable" src="../../assets/img/compresor-despiche-aire.jpg" width="316" height="422" alt="Perilla metálica del despiche de aire junto a la base del filtro azul del compresor" loading="lazy"><p>3. Filtro de aire (filtro azul) y su despiche</p></div>
+<div class="parte"><img class="ampliable" src="../../assets/img/compresor-despiche-aceite-agua.jpg" width="321" height="428" alt="Separador negro del compresor con su manómetro arriba y la válvula de despiche abajo, con la manguera celeste de purga" loading="lazy"><p>1. Filtro de aceite y agua (separador negro) y su despiche</p></div>
+<div class="parte"><img class="ampliable" src="../../assets/img/compresor-despiche-aceite.jpg" width="319" height="425" alt="Válvula de despiche bajo el separador cónico del compresor, con la manguera celeste de purga" loading="lazy"><p>2. Filtro de grasas y aceites ambientales (separador cónico) y su despiche</p></div>
+<div class="parte"><img class="ampliable" src="../../assets/img/compresor-despiche-aire.jpg" width="316" height="422" alt="Perilla metálica del despiche de aire junto a la base del filtro azul del compresor" loading="lazy"><p>3. Filtro de humedad, de carbón activado (filtro azul), y su despiche</p></div>
 </div></dd>
-<dt>¿Qué marca y modelo es el compresor, y cuánta presión levanta?</dt>
-<dd>Es un Comp Trade CTP 300. Comp Trade es una marca austríaca (Comp Trade GmbH, de Oberwaltersdorf) que fabrica compresores de alta presión y de aire respirable para bomberos. Levanta unos 300 bar: su manómetro interno debe llegar a 4250 PSI (300 bar) antes de abrir la cascada, los cilindros de la cascada se cargan hasta 4300 PSI y las botellas de 4500 PSI (unos 310 bar) se terminan de cargar directo con el compresor.</dd>
+<dt>¿Cada cuánto se despicha durante la carga?</dt>
+<dd>La regla del procedimiento es cada 5 minutos. En la práctica se despicha al conectar y al terminar cada cilindro, mirando lo que sale para decidir: si viene condensado, se despicha más seguido. Si el cilindro llega casi lleno (unos 3000 PSI), basta con una vez; si llega bajo, se despicha al inicio y de nuevo antes de terminar.</dd>
+<dt>¿Por qué el aire no puede ir completamente seco?</dt>
+<dd>Porque el aire seco y helado reseca y quema las vías aéreas de quien lo respira. Se le saca la humedad, pero no toda: tiene que conservar un porcentaje, y eso es lo que define el grado D del aire respirable.</dd>
 <dt>¿Se puede cargar cuando está lloviendo?</dt>
-<dd>El procedimiento no lo prohíbe, pero hay que tener cuidado con la humedad. El compresor aspira el aire del ambiente: con lluvia ese aire trae más agua, que se condensa al comprimirlo. Hay más condensado en los separadores (despicha más seguido), el filtro final se satura antes y, si pasa humedad, el aire de las botellas queda húmedo, lo que puede congelar o dañar el regulador del ERA y oxidar las botellas de acero por dentro. La toma de aire no debe mojarse ni aspirar gotas ni gases de escape. Ante la duda, consulta al oficial de guardia.</dd>
+<dd>El procedimiento no lo prohíbe, pero hay que tener cuidado con la humedad. El compresor aspira el aire del ambiente: con lluvia, y en general en invierno, ese aire trae más agua, que se condensa al comprimirlo. Hay más condensado en los separadores (despicha más seguido) y el filtro de humedad se satura antes. Si entra humedad a las botellas, se oxidan por dentro y el bombero termina respirando aire viejo: huele fuerte, pica la garganta y sabe a mohoso. La toma de aire no debe mojarse ni aspirar gotas ni gases de escape. Ante la duda, consulta al oficial de guardia.</dd>
+<dt>¿Qué pasa si desconectas con presión?</dt>
+<dd>Salta el o-ring: da lo mismo si es un cilindro de la cascada o el nipple del equipo. Antes de desconectar se cierran las válvulas y se despicha hasta que el manómetro marque cero. Así ya se han dañado dos conectores en la compañía, uno en el hilo y otro en el despiche.</dd>
+<dt>¿Qué conectores de carga tiene y qué cuidados piden?</dt>
+<dd>Dos sistemas: el europeo (DIN) y el americano. No son intercambiables, porque uno tiene el hilo en pulgadas y el otro en milímetros. En el americano la misma perilla abre, cierra y despicha, y como se usa poco tiende a ponerse dura o quedarse pegada: no se fuerza, sino que se apaga, se despicha todo y recién ahí se resuelve. Al conectar, tres precauciones: que el hilo entre derecho y completo, la válvula cerrada antes de conectar y el apriete justo, porque apretar de más también rompe.</dd>
+<dt>¿En qué orden se carga?</dt>
+<dd>De la cascada se abre primero el cilindro que tiene más aire: la carga termina más rápido y quedan más cilindros disponibles para después. De las botellas se cargan primero las de menor volumen, las de 30 minutos, que son las que más usa la compañía: con el mismo aire quedan más equipos listos para salir. Si se gasta la cascada en las grandes, se baja muy rápido. Al terminar, conviene dejar las botellas separadas por marca y duración (30, 45 y 60 minutos).</dd>
+<dt>¿Qué se anota en el libro del compresor?</dt>
+<dd>Cada carga se registra con:
+<ul>
+<li>Fecha.</li>
+<li>Hora de inicio y de término, del reloj, y cuánto duró la carga.</li>
+<li>Horómetro de inicio y de término, y su diferencia.</li>
+<li>Quién operó y quién cargó.</li>
+<li>Cantidad de cilindros, separados por compañía.</li>
+<li>Novedades; si no hay, se escribe SN.</li>
+</ul>
+Un tip: sacarle una foto con el teléfono al reloj y al horómetro, al inicio y al término, y llenar el libro con las fotos.</dd>
 </dl>
 <h3>De las botellas</h3>
 <dl class="preguntas">
+<dt>¿Cuánto dura una botella?</dt>
+<dd>Varía. Los minutos nominales son el máximo, en condiciones ideales: lo que dura de verdad depende del estado físico y psicológico de quien respira. Un bombero estresado o agotado consume más aire, y con trabajo pesado se pueden consumir 60 a 100 litros por minuto, así que una botella «de 30 minutos» puede durar 15 o 20. Por eso, de dos que llegan a la emergencia, el equipo se lo pone el que llegó en el carro, no el que llegó corriendo y ya viene agitado.</dd>
 <dt>¿Qué tipos de botellas existen según su material?</dt>
 <dd>De acero, más pesadas, y de fibra (material compuesto: un cuerpo de aluminio envuelto en fibra de carbono o de vidrio), más livianas. Las de fibra tienen una vida útil limitada, que va indicada en su etiqueta (normalmente 15 años).</dd>
 <dt>¿De cuántos litros son las botellas y cuánto aire cabe dentro?</dt>
@@ -100,7 +137,9 @@ Antes de partir, los tres despiches deben estar cerrados. Al apagar, con el moto
 <li>45 minutos de 4500 PSI: unos 6,8 litros y unos 1870 litros de aire (66 pies cúbicos).</li>
 <li>60 minutos de 4500 PSI: unos 9 litros y unos 2500 litros de aire (88 pies cúbicos).</li>
 </ul>
-El volumen interior va grabado en la botella. Los minutos son nominales: con trabajo pesado se consume más (60 a 100 litros por minuto) y una botella «de 30 minutos» puede durar 15 o 20.</dd>
+El volumen interior va grabado en la botella.</dd>
+<dt>¿Cada cuánto hay que renovar el aire de una botella?</dt>
+<dd>Cada unos 6 meses, según el fabricante. Renovarlo no es botarlo: la botella se ocupa en una cancha de consumo o en cualquier ejercicio y se vuelve a cargar. Hay que ir rotando: si siempre se sacan, cargan y devuelven las de arriba, las de abajo se quedan con aire viejo. La de abajo sube. Lo mismo vale para la cascada.</dd>
 <dt>¿Qué dice la etiqueta de los cilindros?</dt>
 <dd>La etiqueta y lo estampado en el cuello indican, entre otras cosas:
 <ul>
@@ -113,7 +152,7 @@ El volumen interior va grabado en la botella. Los minutos son nominales: con tra
 <li>Advertencias: cargar solo con aire respirable, no pasar la presión de servicio y no usarla si está golpeada, quemada o con la fibra dañada.</li>
 </ul></dd>
 <dt>¿Qué presión de carga tienen las botellas y a cuántos bar equivale?</dt>
-<dd>Las que se cargan en el cuartel son de norma estadounidense: 2216 PSI (unos 153 bar, se habla de 150) y 4500 PSI (unos 310 bar, se habla de 300). Las de norma europea vienen en bar (200 o 300) y las de buceo suelen ser de 3000 PSI (unos 207 bar): hay que convertir antes de cargarlas. 1 bar son 14,5 PSI.</dd>
+<dd>Las que se cargan en el cuartel son de norma estadounidense: 2216 PSI (unos 153 bar, se habla de 150) y 4500 PSI (unos 310 bar, se habla de 300). Las de norma europea vienen en bar (200 o 300) y las de buceo suelen ser de 3000 PSI (unos 207 bar): hay que convertir antes de cargarlas. 1 bar son 14,5 PSI. Recién cargado, el aire está caliente y una botella o un cilindro de la cascada puede marcar sobre lo nominal; al enfriarse baja.</dd>
 <dt>¿Qué marcas de botellas hay?</dt>
 <dd>Scott y MSA, estadounidenses, con presiones en PSI, y Dräger, alemana, que puede venir en bar. Antes de cargar, lee siempre la presión de servicio grabada o rotulada en la botella.</dd>
 <dt>¿Dónde está la válvula de seguridad?</dt>
