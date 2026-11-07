@@ -326,6 +326,21 @@ a:hover { color: var(--rojo-oscuro); }
 .boton.secundario { background: transparent; border-color: rgba(255,255,255,.7); }
 .boton.secundario:hover { background: rgba(255,255,255,.12); }
 
+/* Sonidos de una unidad en su ficha (menu.js los reproduce) */
+.sonidos { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 4px 0 20px; }
+.sonidos-titulo { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--texto-suave); margin-right: 4px; }
+.sonido {
+  font: inherit; font-size: .92rem; font-weight: 600; line-height: 1.2;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px 8px 12px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--borde); background: var(--fondo); color: var(--texto);
+}
+.sonido::before { content: ""; width: 0; height: 0; border-style: solid; border-width: 6px 0 6px 10px; border-color: transparent transparent transparent var(--rojo); }
+.sonido:hover { border-color: var(--rojo); color: var(--rojo); }
+.sonido[aria-pressed="true"] { background: var(--rojo); border-color: var(--rojo); color: #fff; }
+.sonido[aria-pressed="true"]::before { width: 10px; height: 10px; border: 0; background: #fff; }
+.sonido:focus-visible { outline: 2px solid var(--dorado); outline-offset: 2px; }
+
 .bloque { padding-top: 64px; }
 .bloque:last-of-type { padding-bottom: 72px; }
 

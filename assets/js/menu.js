@@ -195,6 +195,26 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Sonidos de una unidad (encendido, bocina, martin horn): un toque suena, otro lo detiene
+  var sonando = null, audio = null;
+  function detener() {
+    if (audio) audio.pause();
+    if (sonando) sonando.setAttribute('aria-pressed', 'false');
+    sonando = null;
+  }
+  document.querySelectorAll('.sonido[data-sonido]').forEach(function (boton) {
+    boton.addEventListener('click', function () {
+      var mismo = sonando === boton;
+      detener();
+      if (mismo) return;
+      audio = new Audio(boton.getAttribute('data-sonido'));
+      audio.addEventListener('ended', detener);
+      sonando = boton;
+      boton.setAttribute('aria-pressed', 'true');
+      audio.play().catch(detener);
+    });
+  });
+
   // Menu de Historia en celular (una fila que se desliza de lado): deja a la vista el boton de la pagina actual
   var lateral = document.querySelector('.lateral ul');
   var actual = lateral && lateral.querySelector('[aria-current]');
