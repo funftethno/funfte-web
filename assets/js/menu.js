@@ -215,10 +215,10 @@ document.addEventListener('DOMContentLoaded', function () {
       audio.play().catch(detener);
     });
   });
-  // Oficialidad historica, vista Tabla: la tabla se desliza de lado dentro de su marco, lo que impide que el
+  // Oficialidad historica: la tabla se desliza de lado dentro de su marco, lo que impide que el
   // encabezado se pegue arriba con CSS; al bajar por la pagina se corre hacia abajo para quedar bajo la
   // cabecera del sitio (y bajo la fila de botones en celular) hasta llegar al final de la tabla
-  var marcoTabla = document.querySelector('.vista-tabla.tabla-ancha');
+  var marcoTabla = document.querySelector('.tabla-ancha');
   var celdasEncabezado = marcoTabla ? marcoTabla.querySelectorAll('thead th') : [];
   if (celdasEncabezado.length) {
     var cabeceraSitio = document.querySelector('.cabecera');
@@ -237,7 +237,6 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     window.addEventListener('scroll', pegarEncabezado, { passive: true });
     window.addEventListener('resize', pegarEncabezado);
-    document.querySelectorAll('.vista-radio').forEach(function (r) { r.addEventListener('change', pegarEncabezado); });
     pegarEncabezado();
   }
   // Tocar la foto principal de la unidad hace sonar su bocina (o su martin horn)

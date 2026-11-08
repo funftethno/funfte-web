@@ -1244,31 +1244,6 @@ body:has(.visor[open]) { overflow: hidden; }
 .contenido .oficialidad-anual tbody td { background: #fff; color: var(--texto); font-weight: 400; border: 0; border-bottom: 1px solid var(--borde); }
 .contenido .oficialidad-anual tbody tr:nth-child(even) td { background: #faf9f7; }
 
-/* Oficialidad historica: decadas plegables, una tarjeta por cargo; Director y Capitan con franja roja */
-.contenido .decada, .contenido .tabla-completa { border: 1px solid var(--borde); border-radius: 12px; margin: 10px 0; background: #fff; }
-.contenido .decada > summary, .contenido .tabla-completa > summary { cursor: pointer; padding: 12px 16px; font-family: var(--fuente-titulos); font-size: 1.15rem; color: var(--rojo); }
-.contenido .decada[open] > summary { border-bottom: 1px solid var(--borde); }
-.contenido .anio { padding: 14px 12px 4px; border-bottom: 1px solid var(--borde); }
-.contenido .anio:last-child { border-bottom: 0; }
-.contenido .anio h4 { margin: 0 0 8px; font-size: 1.3rem; color: var(--carbon); text-align: center; }
-.contenido .anio .oficiales.fila { margin-bottom: 8px; }
-.contenido .anio .oficiales li { padding: 8px 10px; font-size: .9rem; }
-.contenido .anio .oficiales li.mando { border-top: 5px solid var(--rojo); background: #fff; }
-.contenido .tabla-completa .tabla-ancha { margin: 0; border: 0; border-top: 1px solid var(--borde); border-radius: 0; }
-.contenido .anio .oficiales.fila li { flex: 1 1 130px; min-width: 0; padding: 8px 8px; font-size: .84rem; }
-.contenido .anio .oficiales.fila:first-of-type li { flex: 0 1 200px; }
-.contenido .anio .oficiales.fila + .oficiales.fila { flex-wrap: nowrap; }
-.contenido .anio .oficiales li.mando { border-left-color: var(--borde); background: #fbeaea; }
-@media (max-width: 700px) { .contenido .anio .oficiales.fila + .oficiales.fila { flex-wrap: wrap; } .contenido .anio .oficiales.fila li { flex: 0 1 calc(50% - 4px); } }
-/* Oficialidad historica: cambio entre tarjetas y tabla, sin JavaScript */
-.contenido .vista-radio { position: absolute; opacity: 0; pointer-events: none; }
-.contenido .vista-botones { display: flex; gap: 0; margin: 0 0 12px; }
-.contenido .vista-botones label { cursor: pointer; padding: 8px 18px; border: 1px solid var(--rojo); color: var(--rojo); font-weight: 600; background: #fff; }
-.contenido .vista-botones label:first-child { border-radius: 999px 0 0 999px; }
-.contenido .vista-botones label:last-child { border-radius: 0 999px 999px 0; border-left: 0; }
-#vista-tarjetas:checked ~ .vista-botones label[for="vista-tarjetas"], #vista-tabla:checked ~ .vista-botones label[for="vista-tabla"] { background: var(--rojo); color: #fff; }
-#vista-tarjetas:focus-visible ~ .vista-botones label[for="vista-tarjetas"], #vista-tabla:focus-visible ~ .vista-botones label[for="vista-tabla"] { outline: 2px solid var(--carbon); outline-offset: 2px; }
-#vista-tarjetas:checked ~ .vista-tabla, #vista-tabla:checked ~ .vista-tarjetas { display: none; }
 /* en la tabla, Director y Capitan pintados */
 .contenido .oficialidad-anual tbody td:nth-child(2), .contenido .oficialidad-anual tbody td:nth-child(5),
 .contenido .oficialidad-anual tbody tr:nth-child(even) td:nth-child(2), .contenido .oficialidad-anual tbody tr:nth-child(even) td:nth-child(5) { background: #fbeaea; font-weight: 600; }

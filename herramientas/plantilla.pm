@@ -595,31 +595,6 @@ sub contar_dotacion {
 }
 
 # En Dotacion el total cuenta a toda la nomina, confederados incluidos, y va a la derecha.
-# Oficialidad historica: arma tarjetas por año, agrupadas por década, desde la tabla del contenido
-sub oficialidad_anual {
-    my ($html) = @_;
-    my @cargos = ('Director', 'Secretario', 'Tesorero', 'Capitán', 'Teniente 1°', 'Teniente 2°', 'Teniente 3°', 'Teniente 4°', 'Ayudante');
-    my (%dec, @decadas);
-    while ($html =~ m{<tr><th scope="row">(\d{4})</th>(.*?)</tr>}g) {
-        my ($anio, $resto) = ($1, $2);
-        my @n = $resto =~ m{<td>(.*?)</td>}g;
-        my %c; @c{@cargos} = @n;
-        my $carta = sub { my ($k, $clase) = @_; length($c{$k} // '') ? qq(<li$clase><span>$k</span>$c{$k}</li>\n) : '' };
-        my $fila1 = join '', $carta->('Director', ' class="mando"'), $carta->('Secretario', ''), $carta->('Tesorero', '');
-        my $fila2 = join '', $carta->('Capitán', ' class="mando"'), $carta->('Teniente 1°', ''), map { $carta->($_, '') } 'Teniente 2°', 'Teniente 3°', 'Teniente 4°', 'Ayudante';
-        my $d = int($anio / 10) * 10;
-        push @decadas, $d unless $dec{$d};
-        $dec{$d} .= qq(<section class="anio"><h4>$anio</h4>\n<ul class="oficiales fila">\n$fila1</ul>\n<ul class="oficiales fila">\n$fila2</ul>\n</section>\n);
-    }
-    my $sal = '';
-    my $i = 0;
-    for my $d (@decadas) {
-        my $ab = $i++ == 0 ? ' open' : '';
-        $sal .= qq(<details class="decada"$ab><summary>Años $d</summary>\n$dec{$d}</details>\n);
-    }
-    return $sal;
-}
-
 sub cifras_dotacion {
     my (undef, @tipos) = contar_dotacion($_[0]);
     my $total = 0;
@@ -989,7 +964,6 @@ sub pagina {
                : $QUINTINO{$a{clave}}       ? $cabecera . qq(<article class="wrap contenido">\n) . ficha_quintino($p, $QUINTINO{$a{clave}}) . qq(\n</article>)
                : $cabecera . qq(<article class="wrap contenido">\n) . ($a{contenido} =~ s/<!--FORMULARIO_CONTACTO-->/formulario_contacto()/er
                                                                         =~ s/<!--CIFRAS_DOTACION-->/cifras_dotacion($a{contenido})/er
-                                                                        =~ s/<!--OFICIALIDAD_ANUAL-->/oficialidad_anual($a{contenido})/er
                                                                         =~ s/<!--SECCIONES-->/secciones($p, $a{ruta})/er
                                                                         =~ s/<!--UNIDADES_SERVICIO-->/grilla_maquinas($p, 'servicio')/er
                                                                         =~ s/<!--UNIDADES_HISTORICAS-->/grilla_maquinas($p, 'historica')/er
