@@ -215,6 +215,31 @@ document.addEventListener('DOMContentLoaded', function () {
       audio.play().catch(detener);
     });
   });
+  // Oficialidad historica, vista Tabla: la tabla se desliza de lado dentro de su marco, lo que impide que el
+  // encabezado se pegue arriba con CSS; al bajar por la pagina se corre hacia abajo para quedar bajo la
+  // cabecera del sitio (y bajo la fila de botones en celular) hasta llegar al final de la tabla
+  var marcoTabla = document.querySelector('.vista-tabla.tabla-ancha');
+  var celdasEncabezado = marcoTabla ? marcoTabla.querySelectorAll('thead th') : [];
+  if (celdasEncabezado.length) {
+    var cabeceraSitio = document.querySelector('.cabecera');
+    var filaLateral = document.querySelector('.lateral');
+    var pegarEncabezado = function () {
+      var tope = cabeceraSitio ? cabeceraSitio.getBoundingClientRect().bottom : 0;
+      if (filaLateral && getComputedStyle(filaLateral).position === 'sticky') {
+        tope = Math.max(tope, filaLateral.getBoundingClientRect().bottom);
+      }
+      var marco = marcoTabla.getBoundingClientRect();
+      var alto = celdasEncabezado[0].offsetHeight;
+      // 2 px menos para que no quede una rendija entre la cabecera y el encabezado
+      var bajar = Math.min(Math.max(tope - 2 - marco.top, 0), Math.max(marco.height - 2 * alto, 0));
+      var mover = bajar ? 'translateY(' + bajar + 'px)' : '';
+      celdasEncabezado.forEach(function (celda) { celda.style.transform = mover; });
+    };
+    window.addEventListener('scroll', pegarEncabezado, { passive: true });
+    window.addEventListener('resize', pegarEncabezado);
+    document.querySelectorAll('.vista-radio').forEach(function (r) { r.addEventListener('change', pegarEncabezado); });
+    pegarEncabezado();
+  }
   // Tocar la foto principal de la unidad hace sonar su bocina (o su martin horn)
   var bocina = document.querySelector('.sonido[data-sonido*="bocina"]') || document.querySelector('.sonido[data-sonido*="martin-horn"]');
   var fotoUnidad = document.querySelector('.ficha-unidad:not(.ficha-quintino) .ficha-foto img');
