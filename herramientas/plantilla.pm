@@ -94,8 +94,8 @@ sub rutas_paginas {
         brigada       => ['brigada-juvenil/',          'Brigada Juvenil',     'La Quinta'],
         cbt           => ['cuerpo-de-bomberos/',        'Cuerpo de Bomberos',  'La Quinta'],
         confederacion => ['confederacion/',            'Confederación',       'La Quinta'],
-        oficialidad   => ['oficialidad/',              'Oficialidad',         'Dotación'],
-        dotacion      => ['dotacion/',                 'Lista de compañía',   'Dotación'],
+        oficialidad   => ['oficialidad/',              'Oficialidad',         'Voluntarios'],
+        dotacion      => ['dotacion/',                 'Lista de compañía',   'Voluntarios'],
         # Paginas fuera del menu: solo se llega a ellas desde el enlace ARCHIVO del pie. Las de
         # seccion Archivo estan retiradas; las de Desarrollo estan en preparacion.
         archivo       => ['archivo/',                  'Archivo',             ''],
@@ -244,7 +244,7 @@ my @HISTORIA = (['Línea de tiempo', 'historia'], ['Emergencias', 'emergencias']
 my @MENU = (
     ['Inicio', ''],
     ['La Quinta', 'la-quinta/', [['Historia','historia/','historia-formacion-estandarte-1911.jpg'], ['Cuartel','cuartel/','cuartel-recreacion.jpg'], ['Material Mayor','material-mayor/','material-mayor-unidades.jpg'], ['Brigada Juvenil','brigada-juvenil/'], ['Cuerpo de Bomberos','cuerpo-de-bomberos/'], ['Confederación','confederacion/']]],
-    ['Dotación', 'dotacion/', [['Oficialidad','oficialidad/'], ['Lista de compañía','dotacion/']]],
+    ['Voluntarios', 'dotacion/', [['Oficialidad','oficialidad/'], ['Lista de compañía','dotacion/']]],
     ['Contacto', 'contacto/'],
 );
 
@@ -615,7 +615,7 @@ sub cifras_dotacion {
 # solo en la tarjeta, sin mostrarla en la pagina. %SECCIONES_EXTRA agrega al comienzo paginas que no estan
 # en ese submenu, con una foto elegida si su contenido no tiene.
 my %SECCIONES_EXTRA = (
-    'la-quinta/' => [['Dotación', 'dotacion/', 'dotacion-voluntarios-carros.jpg']],
+    'la-quinta/' => [['Voluntarios', 'dotacion/', 'dotacion-voluntarios-carros.jpg']],
 );
 sub secciones {
     my ($p, $ruta) = @_;
