@@ -174,7 +174,7 @@ a:hover { color: var(--rojo-oscuro); }
 .boton-acceso:hover, .boton-acceso[aria-current] { background: var(--rojo-oscuro); color: #fff; }
 .boton-acceso svg { width: 18px; height: 18px; fill: currentColor; }
 
-/* Prueba: Acceso Quintino como emblema Feuerwehr con un candado encima */
+/* Boton Acceso Quintino: Feuerwehr-Signet del DFV con un candado encima */
 .boton-acceso.boton-emblema, .boton-acceso.boton-emblema:hover, .boton-acceso.boton-emblema[aria-current] {
   position: relative;
   background: none;
