@@ -183,7 +183,6 @@ sub descripcion_quintino {
 my $WEBMAIL = 'https://mail.google.com/a/funfte.cl/';
 my $COOPERADORES = 'https://5thno.cooperadores.cl/enrolamiento';
 my $SOAP    = 'https://soapbomberos.cl/donacion/5-cia-talcahuano';
-my $AULA    = 'https://aula.anb.cl/moodle/login/index.php';
 my $ANB     = 'https://www.anb.cl';
 
 # Pagina "Acceso Quintino": [titulo, detalle, enlace, icono] (sin enlace = pronto).
@@ -337,7 +336,7 @@ sub acceso_personal {
 <div class="grilla-tarjetas">
 );
     $h .= tarjeta($p, $_->[3], $_->[0], $_->[1], $_->[2], 'Ingresar') for @ACCESOS;
-    $h .= qq(</div>\n</section>\n<section class="wrap bloque">\n<h2 class="titulo-seccion">Academia Nacional de Bomberos</h2>\n<div class="grilla-tarjetas tres">\n) . tarjetas_anb($p);
+    $h .= qq(</div>\n</section>\n<section class="wrap bloque">\n<h2 class="titulo-seccion">Academia Nacional de Bomberos</h2>\n<div class="grilla-tarjetas">\n) . tarjetas_anb($p);
     $h .= qq(</div>\n</section>\n<section class="wrap bloque">\n<h2 class="titulo-seccion">Sitios de interés</h2>\n<div class="grilla-tarjetas tres">\n);
     $h .= tarjeta($p, $_->[3], $_->[0], $_->[1], $_->[2], 'Visitar') for @SITIOS;
     # Origen del emblema del boton Acceso Quintino (Feuerwehr-Signet, marca del DFV)
@@ -516,11 +515,9 @@ sub calendario {
 sub tarjetas_anb {
     my ($p) = @_;
     return tarjeta($p, 'convoca', 'Convocatorias para Bomberos', 'Cursos abiertos y fechas de postulación de la Academia Nacional de Bomberos.', "$ANB/convocatorias-para-bomberos", 'Ver convocatorias')
-  . tarjeta($p, 'web', 'Aula Virtual ANB', 'Plataforma de cursos en línea. Ingresa con tu usuario del Registro Nacional de Bomberos.', $AULA, 'Entrar al aula virtual')
   . tarjeta($p, 'birrete', 'Malla curricular', 'Malla curricular 2025–2028 de la Academia Nacional de Bomberos (PDF).', "$ANB/documentos_sitio/43775_Malla_curricular_2025_2028.pdf", 'Ver malla')
   . tarjeta($p, 'documento', 'Material académico', 'Manuales y material de apoyo para los cursos de la Academia.', "$ANB/material-academico", 'Ver material')
-  . tarjeta($p, 'libro', 'Guías de autoinstrucción', 'Guías para estudiar de forma autónoma antes de cada curso.', "$ANB/guias-de-autoinstruccion", 'Ver guías')
-  . tarjeta($p, 'documento', 'Artículos técnicos', 'Publicaciones técnicas para la actualización de conocimientos.', "$ANB/articulos-tecnicos", 'Ver artículos');
+  . tarjeta($p, 'libro', 'Guías de autoinstrucción', 'Guías para estudiar de forma autónoma antes de cada curso.', "$ANB/guias-de-autoinstruccion", 'Ver guías');
 }
 
 # Formulario de Contacto. El sitio es estatico: FormSubmit (formsubmit.co) recibe
