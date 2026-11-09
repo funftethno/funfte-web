@@ -188,7 +188,7 @@ a:hover { color: var(--rojo-oscuro); }
   border-radius: 50%; /* el borde rojo va en la imagen: 4 px a este tamaño, como la cabecera */
   transition: transform .15s ease;
 }
-.boton-emblema:hover img, .boton-emblema[aria-current] img { transform: scale(1.06); }
+.boton-emblema:hover img { transform: scale(1.06); }
 .boton-emblema .candadito {
   position: absolute;
   top: -6px;
