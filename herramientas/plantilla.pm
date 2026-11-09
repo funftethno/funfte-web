@@ -52,6 +52,7 @@ my %DESCRIPCIONES = (
     acceso        => 'Acceso Quintino: intranet y plataformas internas para voluntarios de la Quinta Compañía de Bomberos de Talcahuano.',
     material      => 'Material mayor de la Quinta: unidades B-5, RX-5 y MX-5 en servicio, además de sus vehículos históricos.',
     insignias     => 'Las insignias de la Quinta desde 1908: sus escudos, emblemas conmemorativos y logos de transición.',
+    emergencias   => 'Emergencias memorables de la Quinta Compañía de Bomberos de Talcahuano: los terremotos de 1939, 1960 y 2010, el incendio de San Vicente, los incendios forestales de 2017 y el tornado de 2019.',
     fundadores    => 'La fundación de la Quinta Compañía de Bomberos de Talcahuano el 29 de enero de 1908 y los alemanes y descendientes de alemanes que la fundaron.',
     oficialidadhist => 'Oficialidad histórica de la Quinta Compañía de Bomberos de Talcahuano: Director, Secretario, Tesorero, Capitán, Tenientes y Ayudante de cada año desde la fundación en 1908.',
     historicos    => 'Quintinos históricos: voluntarios de otras épocas que dejaron huella en la historia de la Quinta Compañía de Bomberos de Talcahuano.',
@@ -84,6 +85,7 @@ sub rutas_paginas {
         inicio        => ['',                          'Inicio',              ''],
         laquinta      => ['la-quinta/',                'La Quinta',           'La Quinta'],
         historia      => ['historia/',                 'Historia',            'La Quinta'],
+        emergencias   => ['historia/emergencias/',     'Emergencias',         'La Quinta'],
         fundadores    => ['historia/fundadores/',      'Fundadores',          'La Quinta'],
         historicos    => ['historia/voluntarios-historicos/', 'Voluntarios históricos', 'La Quinta'],
         estandarte    => ['historia/estandarte/',      'Estandarte',          'La Quinta'],
@@ -236,7 +238,7 @@ my @UNIDADES = (
 my %UNIDAD = map { $_->{clave} => $_ } @UNIDADES;
 
 # Menu lateral de Historia: sale a la izquierda en cada una de estas paginas, para pasar de una a otra
-my @HISTORIA = (['Línea de tiempo', 'historia'], ['Fundadores', 'fundadores'], ['Quintinos históricos', 'historicos'], ['Oficialidad histórica', 'oficialidadhist'],
+my @HISTORIA = (['Línea de tiempo', 'historia'], ['Emergencias', 'emergencias'], ['Fundadores', 'fundadores'], ['Quintinos históricos', 'historicos'], ['Oficialidad histórica', 'oficialidadhist'],
                 ['Estandarte', 'estandarte'], ['Insignias', 'insignias'], ['Recuerdos', 'recuerdos']);
 
 my @MENU = (
