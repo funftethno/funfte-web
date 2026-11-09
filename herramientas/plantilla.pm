@@ -1009,7 +1009,7 @@ sub pagina {
 <ul class="menu" id="menu-principal">
 $menu</ul>
 </nav>
-<a class="boton-acceso boton-emblema" href="${p}acceso-quintino/" title="Acceso Quintino"$acceso_actual><img src="${p}assets/img/emblema-feuerwehr.png" alt="" width="256" height="256"><span class="candadito">$candado</span><span class="texto-oculto">Acceso Quintino</span></a>
+<a class="boton-acceso boton-emblema" href="${p}acceso-quintino/" title="Acceso Quintino"$acceso_actual><img src="${p}assets/img/emblema-feuerwehr.png" alt="" width="256" height="256"><span class="candadito"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="arco" d="M8 11V7a4 4 0 0 1 8 0v8"/><path class="cuerpo" fill-rule="evenodd" d="M5 10h14v12H5zm7 3a2 2 0 0 0-1 3.7V19h2v-2.3A2 2 0 0 0 12 13z"/></svg></span><span class="texto-oculto">Acceso Quintino</span></a>
 <button class="abrir-menu" aria-expanded="false" aria-controls="menu-principal">Menú</button>
 </div>
 </header>
