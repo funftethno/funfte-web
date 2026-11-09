@@ -185,7 +185,10 @@ a:hover { color: var(--rojo-oscuro); }
   display: block;
   width: 48px;
   height: 48px;
+  box-sizing: border-box;
+  border: 4px solid var(--rojo); /* el mismo grosor del borde de la cabecera */
   border-radius: 50%;
+  background: #fff;
   transition: transform .15s ease, box-shadow .15s ease;
 }
 .boton-emblema:hover img, .boton-emblema[aria-current] img { transform: scale(1.06); box-shadow: 0 0 0 3px rgba(255,255,255,.35); }

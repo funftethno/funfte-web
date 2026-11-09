@@ -340,8 +340,8 @@ sub acceso_personal {
     $h .= qq(</div>\n</section>\n<section class="wrap bloque">\n<h2 class="titulo-seccion">Academia Nacional de Bomberos</h2>\n<div class="grilla-tarjetas tres">\n) . tarjetas_anb($p);
     $h .= qq(</div>\n</section>\n<section class="wrap bloque">\n<h2 class="titulo-seccion">Sitios de interés</h2>\n<div class="grilla-tarjetas tres">\n);
     $h .= tarjeta($p, $_->[3], $_->[0], $_->[1], $_->[2], 'Visitar') for @SITIOS;
-    # Credito del emblema del boton Acceso Quintino (CC BY-SA 4.0 pide atribucion)
-    return $h . qq(</div>\n<p class="credito-emblema">Emblema Feuerwehr del botón Acceso Quintino: <a href="https://commons.wikimedia.org/wiki/File:Feuerwehr-Emblem.jpg" target="_blank" rel="noopener">Doris Antony, Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</p>\n</section>);
+    # Origen del emblema del boton Acceso Quintino (Feuerwehr-Signet, marca del DFV)
+    return $h . qq(</div>\n<p class="credito-emblema">El botón Acceso Quintino usa el <a href="https://www.feuerwehrverband.de/service/feuerwehr-signet/" target="_blank" rel="noopener">Feuerwehr-Signet</a> del Deutscher Feuerwehrverband (Bernd Rösel, 1973).</p>\n</section>);
 }
 
 # Aniversarios de las companias del Cuerpo y de la Confederacion, sacados de sus tarjetas
@@ -1009,7 +1009,7 @@ sub pagina {
 <ul class="menu" id="menu-principal">
 $menu</ul>
 </nav>
-<a class="boton-acceso boton-emblema" href="${p}acceso-quintino/" title="Acceso Quintino"$acceso_actual><img src="${p}assets/img/emblema-feuerwehr.png" alt="" width="128" height="128"><span class="candadito">$candado</span><span class="texto-oculto">Acceso Quintino</span></a>
+<a class="boton-acceso boton-emblema" href="${p}acceso-quintino/" title="Acceso Quintino"$acceso_actual><img src="${p}assets/img/emblema-feuerwehr.png" alt="" width="256" height="256"><span class="candadito">$candado</span><span class="texto-oculto">Acceso Quintino</span></a>
 <button class="abrir-menu" aria-expanded="false" aria-controls="menu-principal">Menú</button>
 </div>
 </header>
