@@ -211,7 +211,8 @@ a:hover { color: var(--rojo-oscuro); }
   transition: transform .2s ease;
 }
 .boton-emblema:hover .candadito .arco,
-.boton-emblema:focus-visible .candadito .arco { transform: translateY(-4px); }
+.boton-emblema:focus-visible .candadito .arco,
+.boton-emblema[aria-current] .candadito .arco { transform: translateY(-4px); } /* en Acceso Quintino queda abierto */
 .texto-oculto {
   position: absolute;
   width: 1px;
