@@ -1112,47 +1112,45 @@ body:has(.visor[open]) { overflow: hidden; }
 .intranet {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
-  background: var(--carbon);
-  color: #fff;
+  background: var(--fondo-suave);
+  color: var(--texto);
+  border: 1px solid var(--borde);
   border-radius: var(--radio);
   border-top: 6px solid var(--rojo);
   overflow: hidden;
 }
 .intranet-texto { padding: 36px 36px 32px; }
-.intranet-texto svg { width: 48px; height: 48px; fill: var(--dorado); }
+.intranet-texto svg { width: 48px; height: 48px; fill: var(--rojo); }
 .intranet-texto h2 { font-family: var(--fuente-titulos); font-size: 1.9rem; margin: 10px 0 10px; }
 .intranet-texto p { margin: 0 0 12px; opacity: .85; }
 .intranet-texto .aviso {
   display: inline-block;
   opacity: 1;
-  color: var(--dorado);
+  color: var(--rojo);
   font-weight: 600;
   font-size: .92rem;
-  border: 1px dashed var(--dorado);
+  border: 1px dashed var(--rojo);
   border-radius: 999px;
   padding: 4px 14px;
   margin-top: 6px;
 }
-.intranet-form { background: #fff; color: var(--texto); padding: 32px 36px; }
-.intranet-form fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.intranet-form legend { font-weight: 700; font-size: 1.15rem; margin-bottom: 14px; padding: 0; }
-.intranet-form label { font-size: .9rem; font-weight: 600; margin-bottom: 4px; }
-.intranet-form input {
-  font: inherit;
-  padding: 10px 12px;
-  border: 1px solid var(--borde);
-  border-radius: 6px;
-  margin-bottom: 14px;
-  background: var(--fondo-suave);
+.intranet-pronto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+  padding: 24px 28px;
+  border: 2px dashed rgba(0,0,0,.18);
+  border-radius: var(--radio);
+  color: var(--texto-suave);
 }
-.intranet-form .boton { align-self: flex-start; cursor: pointer; font: inherit; font-weight: 600; }
-.intranet-form fieldset:disabled input,
-.intranet-form fieldset:disabled .boton { opacity: .55; cursor: not-allowed; }
-.intranet-ayuda { font-size: .85rem; color: var(--texto-suave); margin: 14px 0 0; }
+.intranet-pronto p { margin: 0 0 10px; }
+.intranet-pronto p:last-child { margin-bottom: 0; }
 
 @media (max-width: 760px) {
   .intranet { grid-template-columns: 1fr; }
-  .intranet-texto, .intranet-form { padding: 24px 20px; }
+  .intranet-texto { padding: 24px 20px; }
+  .intranet-pronto { margin: 0 20px 20px; padding: 18px 20px; }
 }
 
 /* Formulario de postulacion */

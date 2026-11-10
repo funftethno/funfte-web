@@ -310,25 +310,19 @@ sub menu {
 
 sub acceso_personal {
     my ($p) = @_;
-    # La intranet aun no tiene servidor: el formulario queda deshabilitado hasta conectarlo.
+    # La intranet aun no existe: un espacio reservado sin formulario (nada de campos de RUT o
+    # contraseña que no funcionan). Cuando exista, aqui va el enlace a su ingreso.
     my $h = qq(<section class="wrap bloque">
 <div class="intranet">
 <div class="intranet-texto">
 ) . icono('candado') . qq(
 <h2>Intranet Quintina</h2>
-<p class="aviso">En construcción</p>
+<p class="aviso">Próximamente</p>
 </div>
-<form class="intranet-form" action="#" onsubmit="return false" aria-describedby="intranet-aviso">
-<fieldset disabled>
-<legend>Ingresar a la intranet</legend>
-<label for="usuario">RUT o correo \@funfte.cl</label>
-<input id="usuario" name="usuario" type="text" autocomplete="username" placeholder="12.345.678-9">
-<label for="clave">Contraseña</label>
-<input id="clave" name="clave" type="password" autocomplete="current-password">
-<button class="boton" type="submit">Ingresar</button>
-<p id="intranet-aviso" class="intranet-ayuda">¿Problemas para ingresar? Escribe a <a href="mailto:correo\@funfte.cl">correo\@funfte.cl</a>.</p>
-</fieldset>
-</form>
+<div class="intranet-pronto">
+<p>Aquí estará el ingreso a la intranet de la compañía, con usuario para cada voluntario.</p>
+<p>Mientras tanto, usa los accesos de abajo.</p>
+</div>
 </div>
 </section>
 <section class="wrap bloque">
