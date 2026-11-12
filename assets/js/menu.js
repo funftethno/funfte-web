@@ -138,6 +138,18 @@ document.addEventListener('DOMContentLoaded', function () {
     flechas();
   });
 
+  // Modelos 3D (Recuerdos): el boton trae en data-modelo-3d la ruta de su modulo, que se carga
+  // recien al tocarlo (three.js pesa unos 650 KB y solo hace falta ahi).
+  document.querySelectorAll('[data-modelo-3d]').forEach(function (boton) {
+    boton.addEventListener('click', function () {
+      boton.disabled = true;
+      import(new URL(boton.getAttribute('data-modelo-3d'), location.href).href)
+        .then(function (modulo) { modulo.abrir(); })
+        .catch(function () { boton.textContent = 'No se pudo cargar el modelo 3D'; })
+        .finally(function () { boton.disabled = false; });
+    });
+  });
+
   // Visor de fotos: tocar una foto de una ficha o de Historia la muestra en grande, con
   // flechas para recorrer las demas fotos de la misma ficha o del mismo hito. Una imagen
   // .ampliable (por ejemplo, un acta) se abre sola, sin las demas. Si la foto trae data-nota
