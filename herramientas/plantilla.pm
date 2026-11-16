@@ -73,6 +73,7 @@ my %DESCRIPCIONES = (
     b110          => 'Renault Camiva B-110 «Lustrín», 1994: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
     s150          => 'Renault Camiva S-150 «El Guayo», 1999: fotografía del material mayor histórico de la Quinta Compañía de Bomberos de Talcahuano.',
     capacitaciones => 'Capacitación y perfeccionamiento continuo en la Quinta Compañía de Bomberos de Talcahuano: Bombero I y II (NFPA 1001), PHTLS y formación internacional de sus voluntarios.',
+    cooperador    => 'Hazte socio cooperador de la Quinta Compañía de Bomberos de Talcahuano: con tu aporte mensual ayudas a mantener sus máquinas, equipos y capacitación.',
     contacto      => 'Contacto de la Quinta Compañía de Bomberos de Talcahuano: Río Maule 5383, Villa Independencia. Correo, formulario de contacto y mapa.',
     error404      => 'La página que buscas no existe o cambió de dirección.',
 );
@@ -129,6 +130,7 @@ sub rutas_paginas {
         s170          => ['material-mayor/renault-camiva-s-170-1990/', 'Renault Camiva S-170 «Panzer», 1990', 'La Quinta'],
         b110          => ['material-mayor/renault-camiva-b-110-1994/', 'Renault Camiva B-110 «Lustrín», 1994', 'La Quinta'],
         s150          => ['material-mayor/renault-camiva-s-150-1999/', 'Renault Camiva S-150 «El Guayo», 1999', 'La Quinta'],
+        cooperador    => ['socio-cooperador/',         'Hazte socio cooperador', ''],
         contacto      => ['contacto/',                 'Contacto',            'Contacto'],
     );
     # una ficha por cada quintino historico (ver quintinos())

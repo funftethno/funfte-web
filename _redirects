@@ -1,3 +1,7 @@
 # Rutas del sitio antiguo (WordPress en /sitio/) -> portada nueva
 /sitio    /  301
 /sitio/*  /  301
+
+# Dirección del código QR del afiche de socios cooperadores (también con guion bajo)
+/socio_cooperador   /socio-cooperador/  301
+/socio_cooperador/  /socio-cooperador/  301
